@@ -53,6 +53,9 @@
     Override with a custom 1200x630 PNG at <artifact>/og.png when the piece earns it.
   - {{ARTIFACT_URL}} full canonical, e.g. https://slides.ogarocious.com/steal-this/
   - {{DATE_PUBLISHED}} ISO date, YYYY-MM-DD
+  - Mobile drawer supports optional grouping: add data-group="Category" to any
+    <section> and the mobile menu will group sections by that attribute. If NO
+    section has data-group, drawer stays flat.
 -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -111,6 +114,22 @@
   .text-dimmed { color: rgba(245, 238, 224, 0.72); }
   .text-muted  { color: rgba(245, 238, 224, 0.55); }
 
+  /* Scroll progress bar. Fixed top of viewport, above the header (z-51 > z-50). */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #d4552b;
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 51;
+    pointer-events: none;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
   .glass {
     background: rgba(26, 20, 16, 0.55);
     backdrop-filter: blur(20px) saturate(180%);
@@ -122,7 +141,6 @@
       0 12px 32px rgba(0, 0, 0, 0.45);
   }
   .glass:hover { border-color: rgba(212, 85, 43, 0.28); }
-  /* Tech pillar glass variant: slate teal border. Layered after .glass so it wins. */
   .glass.glass-tech { border-color: rgba(123, 164, 165, 0.32); }
   .glass.glass-tech:hover { border-color: rgba(123, 164, 165, 0.52); }
 
@@ -154,7 +172,6 @@
   .nav-active .nav-dot { background: #d4552b; }
   .nav-active .nav-label { color: #f5eee0; }
 
-  /* kbd chips: technical/keyboard elements, live in the Tech pillar */
   .kbd {
     font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
     padding: 2px 6px; border-radius: 4px;
@@ -162,15 +179,36 @@
     background: rgba(123, 164, 165, 0.07); color: #f5eee0;
   }
 
+  /* Menu button: icon + label pill. Swaps hamburger/close via .is-open */
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07);
+    color: #f5eee0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(212, 85, 43, 0.42);
+    background: rgba(212, 85, 43, 0.08);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+
   .accent-rule {
     display: inline-block; width: 40px; height: 2px;
     background: #d4552b; border-radius: 1px; margin-bottom: 1.75rem;
   }
-  /* Tech pillar variant: for Process, Anatomy, other technical sections */
   .accent-rule-tech { background: #7ba4a5; }
 
-  /* Vertical timeline. Each step is its own 3-col grid so left/right placement actually works.
-     Tech pillar colored (slate teal) since Process IS the technical pipeline. */
   .timeline { position: relative; }
   .timeline::before {
     content: ""; position: absolute; left: 50%; top: 24px; bottom: 24px; width: 1px;
@@ -216,18 +254,46 @@
 
   @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
 
+  /* Mobile drawer (native <dialog>) */
   dialog.menu {
     background: rgba(15, 11, 8, 0.96);
     color: #f5eee0;
     border: 1px solid rgba(212, 85, 43, 0.20);
-    padding: 5rem 2rem 2rem;
+    padding: 5rem 1.75rem 2rem;
     width: 100%; max-width: 100%; height: 100vh; max-height: 100vh;
     margin: 0;
   }
   dialog.menu::backdrop { background: rgba(10, 7, 5, 0.8); backdrop-filter: blur(8px); }
+  .drawer-item {
+    display: block;
+    padding: 0.6rem 0;
+    color: #f5eee0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.3;
+    border-bottom: 1px solid rgba(212, 85, 43, 0.08);
+  }
+  .drawer-item:hover, .drawer-item:focus-visible { color: #d4552b; }
+  .drawer-group {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    padding-top: 1.5rem;
+    padding-bottom: 0.35rem;
+    margin-top: 1.25rem;
+    border-top: 1px solid rgba(123, 164, 165, 0.15);
+  }
+  .drawer-group:first-child {
+    border-top: none; padding-top: 0; margin-top: 0;
+  }
 </style>
 </head>
 <body class="text-ivory-50 font-sans antialiased">
+
+<!-- Scroll progress bar -->
+<div id="progressBar" class="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
 
 <header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-espresso-900/70 border-b border-terracotta-500/10">
   <div class="max-w-[1400px] mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
@@ -237,10 +303,18 @@
       <span class="text-dimmed text-xs hidden md:inline">· {{TITLE}}</span>
     </a>
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
-      <span id="counter" class="tabular-nums text-slate-300" aria-live="polite">1 of 8</span>
+      <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
       <span class="hidden md:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
-      <button id="menuBtn" class="md:hidden text-ivory-50 border border-terracotta-500/20 rounded px-2 py-1" aria-label="Open menu" aria-haspopup="dialog">Menu</button>
+      <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
+        <svg class="menu-hamburger" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 3h12M1 7h12M1 11h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="menu-close" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span id="menuLabel">MENU</span>
+      </button>
     </div>
   </div>
 </header>
@@ -258,15 +332,16 @@
 </nav>
 
 <dialog id="mobileMenu" class="menu" aria-label="Sections">
-  <ul id="mobileNavList" class="space-y-5 text-lg"></ul>
+  <ul id="mobileNavList" class="space-y-0"></ul>
 </dialog>
 
 <main class="md:pl-[280px] snap-y-scroll">
 
-  <!-- COVER · solid ivory headline + ember glow. Never gradient text. -->
+  <!-- COVER · solid ivory + ember glow. Never gradient text.
+       Add data-group="X" to any section to enable mobile drawer grouping. -->
   <section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
     <div class="ember-glow" aria-hidden="true"></div>
-    <h1 class="font-display font-extrabold text-5xl sm:text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
+    <h1 class="font-display font-extrabold text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
       {{HEADLINE_LINE_1}}<br/>
       <span class="italic font-medium">{{HEADLINE_LINE_2}}</span>
     </h1>
@@ -288,7 +363,7 @@
     <p class="font-display italic text-2xl md:text-3xl text-dimmed max-w-3xl mb-8 leading-snug">
       {{WHY_PULL_QUOTE}}
     </p>
-    <h2 class="font-display font-bold text-5xl md:text-7xl leading-tight tracking-tight max-w-3xl mb-10 text-shadow-warm">
+    <h2 class="font-display font-bold text-4xl md:text-7xl leading-tight tracking-tight max-w-3xl mb-10 text-shadow-warm">
       {{WHY_HEADLINE}}
     </h2>
     <div class="grid md:grid-cols-2 gap-10 max-w-4xl text-body leading-relaxed">
@@ -297,9 +372,9 @@
     </div>
   </section>
 
-  <!-- PRINCIPLES · title carries. Numbers earned on real ordered list. -->
+  <!-- PRINCIPLES · title carries. Diamond markers, not numeric spans. -->
   <section id="principles" data-title="{{PRINCIPLES_NAV_TITLE}}" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
-    <h2 class="font-display font-bold text-5xl md:text-6xl mb-12 tracking-tight text-shadow-warm">{{PRINCIPLES_HEADLINE}}</h2>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-12 tracking-tight text-shadow-warm">{{PRINCIPLES_HEADLINE}}</h2>
     <ol class="space-y-8 max-w-3xl">
       <li class="grid grid-cols-[auto_1fr] gap-6">
         <span class="text-terracotta-500 text-lg pt-1.5" aria-hidden="true">◆</span>
@@ -332,10 +407,11 @@
     </ol>
   </section>
 
-  <!-- PROCESS · vertical timeline with terracotta spine. NOT a 4-card grid. -->
+  <!-- PROCESS · vertical timeline with terracotta spine. NOT a 4-card grid.
+       Timeline uses slate teal (Tech pillar) since Process IS the technical pipeline. -->
   <section id="process" data-title="{{PROCESS_NAV_TITLE}}" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
-    <h2 class="font-display font-bold text-5xl md:text-6xl mb-4 tracking-tight text-shadow-warm">{{PROCESS_HEADLINE}}</h2>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">{{PROCESS_HEADLINE}}</h2>
     <p class="text-dimmed mb-14 max-w-2xl">{{PROCESS_LEAD}}</p>
 
     <div class="timeline max-w-4xl mx-auto w-full">
@@ -374,10 +450,10 @@
     </div>
   </section>
 
-  <!-- ANATOMY · inline lead-in, code block -->
+  <!-- ANATOMY · inline lead-in, code block, tech-pillar accent -->
   <section id="anatomy" data-title="{{ANATOMY_NAV_TITLE}}" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
-    <h2 class="font-display font-bold text-5xl md:text-6xl mb-6 tracking-tight text-shadow-warm">{{ANATOMY_HEADLINE}}</h2>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-6 tracking-tight text-shadow-warm">{{ANATOMY_HEADLINE}}</h2>
     <p class="text-body mb-8 max-w-2xl">{{ANATOMY_LEAD}}</p>
     <div class="max-w-3xl glass rounded-lg p-6 font-mono text-sm text-body leading-relaxed overflow-x-auto">
 <pre class="whitespace-pre">&lt;section id="<span class="text-terracotta-400">slug</span>" data-title="<span class="text-slate-300">Nav label</span>"&gt;
@@ -392,7 +468,7 @@
   <!-- BREATHER · full-bleed pull quote -->
   <section id="quote" data-title="{{QUOTE_NAV_TITLE}}" class="snap-slide min-h-screen flex items-center px-6 md:px-20 border-t border-terracotta-500/10">
     <div class="max-w-3xl">
-      <p class="font-display italic font-medium text-4xl md:text-6xl leading-tight text-ivory-50 text-shadow-warm">
+      <p class="font-display italic font-medium text-5xl md:text-6xl leading-tight text-ivory-50 text-shadow-warm">
         "{{QUOTE_TEXT}}"
       </p>
       <p class="mt-6 text-sm text-muted font-mono">{{QUOTE_ATTRIBUTION}}</p>
@@ -402,7 +478,7 @@
   <!-- TAKEAWAYS · accent rule marker (no eyebrow chip) -->
   <section id="takeaways" data-title="{{TAKEAWAYS_NAV_TITLE}}" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule" aria-hidden="true"></span>
-    <h2 class="font-display font-bold text-5xl md:text-6xl mb-10 tracking-tight text-shadow-warm">{{TAKEAWAYS_HEADLINE}}</h2>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-10 tracking-tight text-shadow-warm">{{TAKEAWAYS_HEADLINE}}</h2>
     <ul class="space-y-4 max-w-3xl text-lg text-body">
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> {{TAKEAWAY_1}}</li>
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> {{TAKEAWAY_2}}</li>
@@ -414,7 +490,7 @@
   <!-- CTA · solid ivory + ember glow. Never gradient text. -->
   <section id="cta" data-title="{{CTA_NAV_TITLE}}" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
     <div class="ember-glow ember-glow-cta" aria-hidden="true"></div>
-    <h2 class="font-display font-extrabold text-5xl sm:text-6xl md:text-8xl tracking-tight leading-none mb-8 text-ivory-50 text-shadow-warm relative">
+    <h2 class="font-display font-extrabold text-6xl md:text-8xl tracking-tight leading-none mb-8 text-ivory-50 text-shadow-warm relative">
       {{CTA_LINE_1}}<br/>
       <span class="italic font-bold">{{CTA_LINE_2}}</span>
     </h2>
@@ -434,12 +510,15 @@
   const mobileNavList = document.getElementById('mobileNavList');
   const counter = document.getElementById('counter');
   const menuBtn = document.getElementById('menuBtn');
+  const menuLabel = document.getElementById('menuLabel');
   const mobileMenu = document.getElementById('mobileMenu');
+  const progressBar = document.getElementById('progressBar');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const hasGroups = sections.some(s => s.dataset.group);
 
   sections.forEach((s) => {
     const title = s.dataset.title || s.id;
-
     const desktopItem = document.createElement('li');
     desktopItem.dataset.target = s.id;
     desktopItem.innerHTML = `
@@ -448,11 +527,33 @@
         <span class="nav-label text-dimmed group-hover:text-ivory-50 text-sm">${title}</span>
       </a>`;
     navList.appendChild(desktopItem);
-
-    const mobileItem = document.createElement('li');
-    mobileItem.innerHTML = `<a href="#${s.id}" class="block text-ivory-50 hover:text-terracotta-500">${title}</a>`;
-    mobileNavList.appendChild(mobileItem);
   });
+
+  if (hasGroups) {
+    const groups = new Map();
+    sections.forEach(s => {
+      const g = s.dataset.group || 'More';
+      if (!groups.has(g)) groups.set(g, []);
+      groups.get(g).push(s);
+    });
+    groups.forEach((sects, name) => {
+      const heading = document.createElement('li');
+      heading.className = 'drawer-group';
+      heading.textContent = name;
+      mobileNavList.appendChild(heading);
+      sects.forEach(s => {
+        const item = document.createElement('li');
+        item.innerHTML = `<a href="#${s.id}" class="drawer-item">${s.dataset.title || s.id}</a>`;
+        mobileNavList.appendChild(item);
+      });
+    });
+  } else {
+    sections.forEach(s => {
+      const item = document.createElement('li');
+      item.innerHTML = `<a href="#${s.id}" class="drawer-item">${s.dataset.title || s.id}</a>`;
+      mobileNavList.appendChild(item);
+    });
+  }
 
   const navItems = [...navList.children];
   const navLinks = navItems.map(n => n.querySelector('a'));
@@ -474,10 +575,41 @@
   }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
   sections.forEach(s => io.observe(s));
 
-  menuBtn?.addEventListener('click', () => mobileMenu.showModal());
+  // Scroll progress bar (rAF-throttled, transform-only)
+  let ticking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progressBar.style.transform = `scaleX(${pct})`;
+    progressBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  updateProgress();
+
+  // Mobile menu toggle + icon/label swap
+  function openMenu() {
+    mobileMenu.showModal();
+    menuBtn.classList.add('is-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuLabel.textContent = 'CLOSE';
+  }
+  function closeMenu() {
+    mobileMenu.close();
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuLabel.textContent = 'MENU';
+  }
+  menuBtn?.addEventListener('click', () => mobileMenu.open ? closeMenu() : openMenu());
   mobileMenu.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') mobileMenu.close();
-    if (e.target === mobileMenu) mobileMenu.close();
+    if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu();
+  });
+  mobileMenu.addEventListener('close', () => {
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuLabel.textContent = 'MENU';
   });
 
   const currentIndex = () => {

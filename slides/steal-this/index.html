@@ -78,8 +78,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* Body: espresso gradient + subtle grain baked in as background layer (not overlay).
-     Grain scrolls with the page for organic-paper feel, not screen artifact. */
   body {
     background-color: #0f0b08;
     background-image:
@@ -89,7 +87,6 @@
     min-height: 100vh;
   }
 
-  /* Reduced motion respect. Wraps smooth-scroll and heavy transitions. */
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
     .glass, .timeline-step, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
@@ -98,12 +95,27 @@
   .snap-y-scroll { scroll-snap-type: y proximity; }
   .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
 
-  /* Warm ivory text hierarchy from theme.ts */
   .text-body   { color: rgba(245, 238, 224, 0.90); }
   .text-dimmed { color: rgba(245, 238, 224, 0.72); }
   .text-muted  { color: rgba(245, 238, 224, 0.55); }
 
-  /* Diaspora glass (used sparingly, one component only) */
+  /* Scroll progress bar. Fixed at top of viewport, above the header (z-51 > z-50).
+     Uses transform:scaleX (composited, no layout thrash). */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #d4552b;
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 51;
+    pointer-events: none;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
   .glass {
     background: rgba(26, 20, 16, 0.55);
     backdrop-filter: blur(20px) saturate(180%);
@@ -115,11 +127,9 @@
       0 12px 32px rgba(0, 0, 0, 0.45);
   }
   .glass:hover { border-color: rgba(212, 85, 43, 0.28); }
-  /* Tech pillar glass variant: slate teal border. Layered after .glass so it wins. */
   .glass.glass-tech { border-color: rgba(123, 164, 165, 0.32); }
   .glass.glass-tech:hover { border-color: rgba(123, 164, 165, 0.52); }
 
-  /* Ember glow: warm radial behind hero moments. Replaces gradient text with proper depth. */
   .ember-glow {
     position: absolute;
     inset: 0;
@@ -131,7 +141,6 @@
     background: radial-gradient(ellipse 800px 500px at 78% 60%, rgba(212, 85, 43, 0.20), rgba(184, 132, 61, 0.08) 42%, transparent 70%);
   }
 
-  /* Display text warmth via legit text-shadow (works on solid fill, not clipped by background-clip) */
   .text-shadow-warm {
     text-shadow:
       0 1px 2px rgba(0, 0, 0, 0.55),
@@ -139,19 +148,16 @@
       0 2px 8px rgba(0, 0, 0, 0.35);
   }
 
-  /* Focus ring uses outline (Windows High Contrast Mode respects outline, not box-shadow) */
   :focus-visible {
     outline: 2px solid #d4552b;
     outline-offset: 3px;
     border-radius: 2px;
   }
 
-  /* Sidebar nav: active section highlight. Color only. No width animation (layout thrash), no glow. */
   .nav-dot { transition: background-color 180ms ease; }
   .nav-active .nav-dot { background: #d4552b; }
   .nav-active .nav-label { color: #f5eee0; }
 
-  /* kbd chips: technical/keyboard elements, live in the Tech pillar */
   .kbd {
     font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
     padding: 2px 6px; border-radius: 4px;
@@ -159,16 +165,36 @@
     background: rgba(123, 164, 165, 0.07); color: #f5eee0;
   }
 
-  /* Terracotta accent rule, used sparingly to mark a section */
+  /* Menu button: icon + label pill, mono type. Swaps hamburger/close via .is-open */
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07);
+    color: #f5eee0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(212, 85, 43, 0.42);
+    background: rgba(212, 85, 43, 0.08);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+
   .accent-rule {
     display: inline-block; width: 40px; height: 2px;
     background: #d4552b; border-radius: 1px; margin-bottom: 1.75rem;
   }
-  /* Tech pillar variant: for Process, Anatomy, other technical sections */
   .accent-rule-tech { background: #7ba4a5; }
 
-  /* Vertical timeline. Each step is its own 3-col grid so left/right placement actually works.
-     Tech pillar colored (slate teal) since Process IS the technical pipeline. */
   .timeline { position: relative; }
   .timeline::before {
     content: ""; position: absolute; left: 50%; top: 24px; bottom: 24px; width: 1px;
@@ -205,7 +231,6 @@
     .timeline-step[data-align="right"] .timeline-content { grid-column: 2; text-align: left; justify-self: stretch; max-width: none; }
   }
 
-  /* CTA button. Neutral shadow for depth, not a colored glow. */
   .cta-btn-primary {
     background: #d4552b; color: #0f0b08; font-weight: 600;
     padding: 0.85rem 1.4rem; border-radius: 6px;
@@ -215,19 +240,47 @@
 
   @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
 
-  /* Native dialog for mobile menu */
+  /* Mobile drawer (native <dialog>) */
   dialog.menu {
     background: rgba(15, 11, 8, 0.96);
     color: #f5eee0;
     border: 1px solid rgba(212, 85, 43, 0.20);
-    padding: 5rem 2rem 2rem;
+    padding: 5rem 1.75rem 2rem;
     width: 100%; max-width: 100%; height: 100vh; max-height: 100vh;
     margin: 0;
   }
   dialog.menu::backdrop { background: rgba(10, 7, 5, 0.8); backdrop-filter: blur(8px); }
+  .drawer-item {
+    display: block;
+    padding: 0.6rem 0;
+    color: #f5eee0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.3;
+    border-bottom: 1px solid rgba(212, 85, 43, 0.08);
+  }
+  .drawer-item:hover, .drawer-item:focus-visible { color: #d4552b; }
+  /* Group headings only rendered when at least one section has data-group */
+  .drawer-group {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    padding-top: 1.5rem;
+    padding-bottom: 0.35rem;
+    margin-top: 1.25rem;
+    border-top: 1px solid rgba(123, 164, 165, 0.15);
+  }
+  .drawer-group:first-child {
+    border-top: none; padding-top: 0; margin-top: 0;
+  }
 </style>
 </head>
 <body class="text-ivory-50 font-sans antialiased">
+
+<!-- Scroll progress bar (fills left→right as you scroll) -->
+<div id="progressBar" class="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
 
 <!-- ── TOP BAR ─────────────────────────────────────── -->
 <header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-espresso-900/70 border-b border-terracotta-500/10">
@@ -238,10 +291,19 @@
       <span class="text-dimmed text-xs hidden md:inline">· Steal This</span>
     </a>
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
-      <span id="counter" class="tabular-nums text-slate-300" aria-live="polite">1 of 8</span>
+      <!-- Counter hidden on mobile (progress bar now shows position). Desktop keeps precise "N of M." -->
+      <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
       <span class="hidden md:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
-      <button id="menuBtn" class="md:hidden text-ivory-50 border border-terracotta-500/20 rounded px-2 py-1" aria-label="Open menu" aria-haspopup="dialog">Menu</button>
+      <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
+        <svg class="menu-hamburger" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 3h12M1 7h12M1 11h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="menu-close" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span id="menuLabel">MENU</span>
+      </button>
     </div>
   </div>
 </header>
@@ -261,7 +323,7 @@
 
 <!-- ── MOBILE MENU (native dialog) ────────────────── -->
 <dialog id="mobileMenu" class="menu" aria-label="Sections">
-  <ul id="mobileNavList" class="space-y-5 text-lg"></ul>
+  <ul id="mobileNavList" class="space-y-0"></ul>
 </dialog>
 
 <!-- ── MAIN ─────────────────────────────────────── -->
@@ -270,7 +332,7 @@
   <!-- 01 · Cover ────────────────────────────────── -->
   <section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
     <div class="ember-glow" aria-hidden="true"></div>
-    <h1 class="font-display font-extrabold text-5xl sm:text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
+    <h1 class="font-display font-extrabold text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
       Steal this.<br/>
       <span class="italic font-medium">Make it yours.</span>
     </h1>
@@ -287,12 +349,12 @@
     </div>
   </section>
 
-  <!-- 02 · Why — opens with a pull statement, no eyebrow ── -->
+  <!-- 02 · Why -->
   <section id="why" data-title="Why it exists" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <p class="font-display italic text-2xl md:text-3xl text-dimmed max-w-3xl mb-8 leading-snug">
       Ideas move faster than slide decks.
     </p>
-    <h2 class="font-display font-bold text-5xl md:text-7xl leading-tight tracking-tight max-w-3xl mb-10 text-shadow-warm">
+    <h2 class="font-display font-bold text-4xl md:text-7xl leading-tight tracking-tight max-w-3xl mb-10 text-shadow-warm">
       So we don't make slide decks.
     </h2>
     <div class="grid md:grid-cols-2 gap-10 max-w-4xl text-body leading-relaxed">
@@ -301,9 +363,9 @@
     </div>
   </section>
 
-  <!-- 03 · Principles — title carries, numbers earned on ordered list ── -->
+  <!-- 03 · Principles -->
   <section id="principles" data-title="Principles" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
-    <h2 class="font-display font-bold text-5xl md:text-6xl mb-12 tracking-tight text-shadow-warm">Four rules.</h2>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-12 tracking-tight text-shadow-warm">Four rules.</h2>
     <ol class="space-y-8 max-w-3xl">
       <li class="grid grid-cols-[auto_1fr] gap-6">
         <span class="text-terracotta-500 text-lg pt-1.5" aria-hidden="true">◆</span>
@@ -336,10 +398,10 @@
     </ol>
   </section>
 
-  <!-- 04 · Process — the ONE section where numbers are earned. Rebuilt as vertical timeline. ── -->
+  <!-- 04 · Process -->
   <section id="process" data-title="The pipeline" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
-    <h2 class="font-display font-bold text-5xl md:text-6xl mb-4 tracking-tight text-shadow-warm">The pipeline.</h2>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">The pipeline.</h2>
     <p class="text-dimmed mb-14 max-w-2xl">Slack to live URL in about sixty seconds. Four real steps, not four decorative cards.</p>
 
     <div class="timeline max-w-4xl mx-auto w-full">
@@ -381,10 +443,10 @@
     </div>
   </section>
 
-  <!-- 05 · Anatomy — inline lead-in, no eyebrow chip ── -->
+  <!-- 05 · Anatomy -->
   <section id="anatomy" data-title="Anatomy" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
-    <h2 class="font-display font-bold text-5xl md:text-6xl mb-6 tracking-tight text-shadow-warm">What Claude fills in.</h2>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-6 tracking-tight text-shadow-warm">What Claude fills in.</h2>
     <p class="text-body mb-8 max-w-2xl">The section shape:</p>
     <div class="max-w-3xl glass rounded-lg p-6 font-mono text-sm text-body leading-relaxed overflow-x-auto">
 <pre class="whitespace-pre">&lt;section id="<span class="text-terracotta-400">slug</span>" data-title="<span class="text-slate-300">Nav label</span>"&gt;
@@ -395,20 +457,20 @@
     <p class="mt-6 text-sm text-dimmed max-w-2xl">Nav rebuilds itself from <code class="text-slate-300">data-title</code>. Add or remove sections; JS untouched.</p>
   </section>
 
-  <!-- 06 · Breather (quote) — full-bleed, no eyebrow ── -->
+  <!-- 06 · Breather (quote) -->
   <section id="quote" data-title="Breather" class="snap-slide min-h-screen flex items-center px-6 md:px-20 border-t border-terracotta-500/10">
     <div class="max-w-3xl">
-      <p class="font-display italic font-medium text-4xl md:text-6xl leading-tight text-ivory-50 text-shadow-warm">
+      <p class="font-display italic font-medium text-5xl md:text-6xl leading-tight text-ivory-50 text-shadow-warm">
         "The best interface is a URL you can send someone."
       </p>
       <p class="mt-6 text-sm text-muted font-mono">an artifact, probably</p>
     </div>
   </section>
 
-  <!-- 07 · Takeaways — accent rule marker, no eyebrow chip ── -->
+  <!-- 07 · Takeaways -->
   <section id="takeaways" data-title="Takeaways" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule" aria-hidden="true"></span>
-    <h2 class="font-display font-bold text-5xl md:text-6xl mb-10 tracking-tight text-shadow-warm">Steal these bits.</h2>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-10 tracking-tight text-shadow-warm">Steal these bits.</h2>
     <ul class="space-y-4 max-w-3xl text-lg text-body">
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> Wildcard subdomain plus Cloudflare Pages beats per-project deploys.</li>
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> IntersectionObserver with <code class="text-slate-300">scroll-snap</code> covers most of the decky feel.</li>
@@ -417,10 +479,10 @@
     </ul>
   </section>
 
-  <!-- 08 · Fin (CTA) — solid ivory, ember glow behind, no eyebrow ── -->
+  <!-- 08 · Fin (CTA) -->
   <section id="cta" data-title="Fin" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
     <div class="ember-glow ember-glow-cta" aria-hidden="true"></div>
-    <h2 class="font-display font-extrabold text-5xl sm:text-6xl md:text-8xl tracking-tight leading-none mb-8 text-ivory-50 text-shadow-warm relative">
+    <h2 class="font-display font-extrabold text-6xl md:text-8xl tracking-tight leading-none mb-8 text-ivory-50 text-shadow-warm relative">
       Take it.<br/>
       <span class="italic font-bold">Ship yours.</span>
     </h2>
@@ -440,13 +502,17 @@
   const mobileNavList = document.getElementById('mobileNavList');
   const counter = document.getElementById('counter');
   const menuBtn = document.getElementById('menuBtn');
+  const menuLabel = document.getElementById('menuLabel');
   const mobileMenu = document.getElementById('mobileMenu');
+  const progressBar = document.getElementById('progressBar');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  // Build nav from sections. Titles only; positional counter lives in the header.
+  // Desktop sidebar always flat. Mobile drawer supports optional grouping
+  // via data-group on sections. If any section has one, drawer groups by it.
+  const hasGroups = sections.some(s => s.dataset.group);
+
   sections.forEach((s) => {
     const title = s.dataset.title || s.id;
-
     const desktopItem = document.createElement('li');
     desktopItem.dataset.target = s.id;
     desktopItem.innerHTML = `
@@ -455,11 +521,34 @@
         <span class="nav-label text-dimmed group-hover:text-ivory-50 text-sm">${title}</span>
       </a>`;
     navList.appendChild(desktopItem);
-
-    const mobileItem = document.createElement('li');
-    mobileItem.innerHTML = `<a href="#${s.id}" class="block text-ivory-50 hover:text-terracotta-500">${title}</a>`;
-    mobileNavList.appendChild(mobileItem);
   });
+
+  // Mobile drawer: flat or grouped
+  if (hasGroups) {
+    const groups = new Map();
+    sections.forEach(s => {
+      const g = s.dataset.group || 'More';
+      if (!groups.has(g)) groups.set(g, []);
+      groups.get(g).push(s);
+    });
+    groups.forEach((sects, name) => {
+      const heading = document.createElement('li');
+      heading.className = 'drawer-group';
+      heading.textContent = name;
+      mobileNavList.appendChild(heading);
+      sects.forEach(s => {
+        const item = document.createElement('li');
+        item.innerHTML = `<a href="#${s.id}" class="drawer-item">${s.dataset.title || s.id}</a>`;
+        mobileNavList.appendChild(item);
+      });
+    });
+  } else {
+    sections.forEach(s => {
+      const item = document.createElement('li');
+      item.innerHTML = `<a href="#${s.id}" class="drawer-item">${s.dataset.title || s.id}</a>`;
+      mobileNavList.appendChild(item);
+    });
+  }
 
   const navItems = [...navList.children];
   const navLinks = navItems.map(n => n.querySelector('a'));
@@ -482,14 +571,44 @@
   }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
   sections.forEach(s => io.observe(s));
 
-  // Native dialog for mobile menu (focus trap + inert bg + Escape close, all free)
-  menuBtn?.addEventListener('click', () => mobileMenu.showModal());
+  // Scroll progress bar. Throttled with rAF, transform-only (composited, no layout).
+  let ticking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progressBar.style.transform = `scaleX(${pct})`;
+    progressBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  updateProgress();
+
+  // Mobile menu button: toggle dialog + swap icon/label
+  function openMenu() {
+    mobileMenu.showModal();
+    menuBtn.classList.add('is-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuLabel.textContent = 'CLOSE';
+  }
+  function closeMenu() {
+    mobileMenu.close();
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuLabel.textContent = 'MENU';
+  }
+  menuBtn?.addEventListener('click', () => mobileMenu.open ? closeMenu() : openMenu());
   mobileMenu.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') mobileMenu.close();
-    if (e.target === mobileMenu) mobileMenu.close();
+    if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu();
+  });
+  mobileMenu.addEventListener('close', () => {
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuLabel.textContent = 'MENU';
   });
 
-  // Keyboard nav (respects reduced-motion for scroll behavior)
+  // Keyboard nav (respects reduced-motion)
   const currentIndex = () => {
     const y = window.scrollY + window.innerHeight * 0.5;
     for (let i = sections.length - 1; i >= 0; i--) {
