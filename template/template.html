@@ -341,8 +341,9 @@
   }
   .prompt-hint.is-copied { color: #d4552b; }
   .prompt-block {
+    position: relative;
     cursor: pointer;
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem 3rem 1.25rem 1.5rem;
     border-radius: 8px;
     outline: none;
   }
@@ -359,6 +360,26 @@
     color: rgba(245, 238, 224, 0.88);
     white-space: pre-wrap; word-break: break-word;
     margin: 0;
+  }
+  .prompt-copy-icon {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.95rem;
+    width: 16px; height: 16px;
+    color: rgba(245, 238, 224, 0.42);
+    transition: color 200ms ease;
+    pointer-events: none;
+  }
+  .prompt-block:hover .prompt-copy-icon,
+  .prompt-block:focus-visible .prompt-copy-icon { color: #7ba4a5; }
+  .prompt-copy-icon.copy-done { display: none; color: #d4552b; }
+  .prompt-block.is-copied .prompt-copy-icon.copy-idle { display: none; }
+  .prompt-block.is-copied .prompt-copy-icon.copy-done { display: inline-block; }
+  .prompt-label-alt {
+    color: rgba(245, 238, 224, 0.55);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.06em;
   }
 </style>
 </head>
@@ -574,7 +595,17 @@
         <span class="prompt-label">{{PROMPT_1_LABEL}}</span>
         <span class="prompt-hint" data-hint-original="{{PROMPT_1_HINT}}">{{PROMPT_1_HINT}}</span>
       </div>
-      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy {{PROMPT_1_LABEL}} to clipboard"><pre class="prompt-code">{{PROMPT_1_BODY}}</pre></div>
+      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy {{PROMPT_1_LABEL}} to clipboard"><svg class="prompt-copy-icon copy-idle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="prompt-copy-icon copy-done" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><pre class="prompt-code">{{PROMPT_1_BODY}}</pre></div>
+    </div>
+
+    <!-- Optional third prompt as an ALTERNATIVE to Prompt 1 (e.g., install command).
+         Delete this whole <div class="prompt-wrap"> block if not needed. -->
+    <div class="prompt-wrap max-w-3xl w-full mt-3">
+      <div class="prompt-labels">
+        <span class="prompt-label prompt-label-alt">{{PROMPT_1_ALT_LABEL}}</span>
+        <span class="prompt-hint" data-hint-original="{{PROMPT_1_ALT_HINT}}">{{PROMPT_1_ALT_HINT}}</span>
+      </div>
+      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy alternative prompt to clipboard"><svg class="prompt-copy-icon copy-idle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="prompt-copy-icon copy-done" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><pre class="prompt-code">{{PROMPT_1_ALT_BODY}}</pre></div>
     </div>
 
     <div class="prompt-wrap max-w-3xl w-full mt-8">
@@ -582,7 +613,7 @@
         <span class="prompt-label">{{PROMPT_2_LABEL}}</span>
         <span class="prompt-hint" data-hint-original="{{PROMPT_2_HINT}}">{{PROMPT_2_HINT}}</span>
       </div>
-      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy {{PROMPT_2_LABEL}} to clipboard"><pre class="prompt-code">{{PROMPT_2_BODY}}</pre></div>
+      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy {{PROMPT_2_LABEL}} to clipboard"><svg class="prompt-copy-icon copy-idle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="prompt-copy-icon copy-done" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><pre class="prompt-code">{{PROMPT_2_BODY}}</pre></div>
     </div>
   </section>
 

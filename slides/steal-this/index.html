@@ -333,8 +333,9 @@
   }
   .prompt-hint.is-copied { color: #d4552b; }
   .prompt-block {
+    position: relative;
     cursor: pointer;
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem 3rem 1.25rem 1.5rem;
     border-radius: 8px;
     outline: none;
   }
@@ -351,6 +352,28 @@
     color: rgba(245, 238, 224, 0.88);
     white-space: pre-wrap; word-break: break-word;
     margin: 0;
+  }
+  /* Copy icon in the top-right of the block. Swaps to a check on copy. */
+  .prompt-copy-icon {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.95rem;
+    width: 16px; height: 16px;
+    color: rgba(245, 238, 224, 0.42);
+    transition: color 200ms ease;
+    pointer-events: none;
+  }
+  .prompt-block:hover .prompt-copy-icon,
+  .prompt-block:focus-visible .prompt-copy-icon { color: #7ba4a5; }
+  .prompt-copy-icon.copy-done { display: none; color: #d4552b; }
+  .prompt-block.is-copied .prompt-copy-icon.copy-idle { display: none; }
+  .prompt-block.is-copied .prompt-copy-icon.copy-done { display: inline-block; }
+  /* Alt label style for a secondary/alternative prompt (e.g., install command). */
+  .prompt-label-alt {
+    color: rgba(245, 238, 224, 0.55);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.06em;
   }
 </style>
 </head>
@@ -569,7 +592,7 @@
         <span class="prompt-label">Grill Me</span>
         <span class="prompt-hint" data-hint-original="paste first · click to copy">paste first · click to copy</span>
       </div>
-      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy Grill Me prompt to clipboard"><pre class="prompt-code">Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy Grill Me prompt to clipboard"><svg class="prompt-copy-icon copy-idle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="prompt-copy-icon copy-done" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><pre class="prompt-code">Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 
 Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering. For each question, also solicit any pretext, subtext, or context I should surface; the reasons behind my answer often matter as much as the answer.
 
@@ -582,12 +605,22 @@ Ask for permission before generating any solutions, artifacts, or code. Grilling
 Do not act on it until I confirm we have reached a shared understanding.</pre></div>
     </div>
 
+    <div class="prompt-wrap max-w-3xl w-full mt-3">
+      <div class="prompt-labels">
+        <span class="prompt-label prompt-label-alt">or · install as a Claude Code skill</span>
+        <span class="prompt-hint" data-hint-original="Claude Code only · click to copy">Claude Code only · click to copy</span>
+      </div>
+      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy install commands to clipboard"><svg class="prompt-copy-icon copy-idle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="prompt-copy-icon copy-done" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><pre class="prompt-code">/plugin marketplace add ogarocious/grilling
+/plugin install grilling@grilling
+/reload-plugins</pre></div>
+    </div>
+
     <div class="prompt-wrap max-w-3xl w-full mt-8">
       <div class="prompt-labels">
         <span class="prompt-label">Template</span>
         <span class="prompt-hint" data-hint-original="paste second · click to copy">paste second · click to copy</span>
       </div>
-      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy template prompt to clipboard"><pre class="prompt-code">Fetch the template at https://raw.githubusercontent.com/ogarocious/artifacts-hub/main/template/template.html and fill every {{PLACEHOLDER}} slot based on what you learned from grilling. Output the completed HTML file. Save it as slides/&lt;slug&gt;/index.html in your fork of the artifacts-hub repo.</pre></div>
+      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy template prompt to clipboard"><svg class="prompt-copy-icon copy-idle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="prompt-copy-icon copy-done" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><pre class="prompt-code">Fetch the template at https://raw.githubusercontent.com/ogarocious/artifacts-hub/main/template/template.html and fill every {{PLACEHOLDER}} slot based on what you learned from grilling. Output the completed HTML file. Save it as slides/&lt;slug&gt;/index.html in your fork of the artifacts-hub repo.</pre></div>
     </div>
   </section>
 
