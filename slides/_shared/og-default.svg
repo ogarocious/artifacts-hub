@@ -1,0 +1,39 @@
+<!--
+  Ogarocious brand-default OG image. 1200×630 (standard OG dimensions).
+  NOTE: convert to PNG before shipping. Some unfurlers (LinkedIn, older iOS) reject SVG for og:image.
+  Quick convert: `rsvg-convert og-default.svg -w 1200 -h 630 -o og-default.png`
+  or via ImageMagick: `magick og-default.svg -resize 1200x630 og-default.png`
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="ember" cx="24%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#d4552b" stop-opacity="0.22"/>
+      <stop offset="45%" stop-color="#d4552b" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#d4552b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0705"/>
+      <stop offset="50%" stop-color="#0f0b08"/>
+      <stop offset="100%" stop-color="#0a0705"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#ember)"/>
+
+  <!-- Brand mark: terracotta dot -->
+  <g transform="translate(96, 96)">
+    <circle cx="18" cy="18" r="12" fill="#d4552b"/>
+    <text x="46" y="26" font-family="Rubik, system-ui, sans-serif" font-weight="700" font-size="22" fill="#f5eee0" letter-spacing="-0.01em">Ogarocious</text>
+  </g>
+
+  <!-- Headline -->
+  <text x="96" y="380" font-family="Rubik, system-ui, sans-serif" font-weight="800" font-size="128" fill="#f5eee0" letter-spacing="-0.04em">Steal this.</text>
+  <text x="96" y="500" font-family="Rubik, system-ui, sans-serif" font-weight="500" font-style="italic" font-size="128" fill="#f5eee0" letter-spacing="-0.04em">Make it yours.</text>
+
+  <!-- Footer tag -->
+  <g transform="translate(96, 570)">
+    <rect width="6" height="6" fill="#7ba4a5" rx="1"/>
+    <text x="20" y="9" font-family="JetBrains Mono, monospace" font-size="14" fill="rgba(245,238,224,0.72)">slides.ogarocious.com</text>
+  </g>
+</svg>

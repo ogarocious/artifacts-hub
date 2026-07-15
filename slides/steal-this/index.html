@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Steal This · Ogarocious</title>
+<meta name="description" content="A single-file scrollable artifact template. Ogarocious." />
+<link rel="canonical" href="https://slides.ogarocious.com/steal-this/" />
+<meta name="theme-color" content="#0f0b08" />
+
+<!-- Open Graph (Facebook, LinkedIn, Slack, iMessage) -->
+<meta property="og:site_name" content="Ogarocious" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://slides.ogarocious.com/steal-this/" />
+<meta property="og:title" content="Steal This · Ogarocious" />
+<meta property="og:description" content="A single-file scrollable artifact template. Ogarocious." />
+<meta property="og:image" content="https://slides.ogarocious.com/_shared/og-default.png" />
+<meta property="og:image:alt" content="Steal this. Make it yours. Ogarocious." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Steal This · Ogarocious" />
+<meta name="twitter:description" content="A single-file scrollable artifact template. Ogarocious." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/_shared/og-default.png" />
+
+<!-- Icons -->
+<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png" />
+
+<!-- Structured data (Article schema for rich results) -->
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Steal This",
+  "description": "A single-file scrollable artifact template. Ogarocious.",
+  "url": "https://slides.ogarocious.com/steal-this/",
+  "image": "https://slides.ogarocious.com/_shared/og-default.png",
+  "author": { "@type": "Person", "name": "Charles Ogar", "url": "https://ogarocious.com" },
+  "publisher": { "@type": "Organization", "name": "Ogarocious", "url": "https://ogarocious.com" },
+  "datePublished": "2026-07-14"
+}</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // Diaspora Modern brand tokens. Source: ogarocious_portfolio/app/frontend/src/theme/theme.ts
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: { 950: '#0a0705', 900: '#0f0b08', 800: '#1a1410', 700: '#1f1b15', 600: '#312d23' },
+          ivory: { 50: '#f5eee0', 100: '#d8d1c2', 200: '#b5ae9f', 300: '#8f8878' },
+          terracotta: {
+            50: '#fbeee6', 100: '#f4d5c0', 200: '#ebb99a', 300: '#e19c74',
+            400: '#da7f4e', 500: '#d4552b', 600: '#b84421', 700: '#952f0f',
+            800: '#732208', 900: '#4f1500',
+          },
+          slate: {
+            50: '#eaefef', 100: '#cddad9', 200: '#adbfbf', 300: '#8ba5a5',
+            400: '#7ba4a5', 500: '#669090', 600: '#4e7676', 700: '#3b5d5d',
+            800: '#2a4545', 900: '#1b2e2e',
+          },
+          ochre: { 50: '#faf1e0', 400: '#c99647', 500: '#b8843d', 600: '#996d31' },
+          sage:  { 50: '#e8eee9', 400: '#5f7d64', 500: '#4a6b4e', 600: '#3a563c' },
+          coral: { 50: '#fdeae4', 400: '#eb6f4f', 500: '#e85d3c', 600: '#c94826' },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Body: espresso gradient + subtle grain baked in as background layer (not overlay).
+     Grain scrolls with the page for organic-paper feel, not screen artifact. */
+  body {
+    background-color: #0f0b08;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.83  0 0 0 0 0.33  0 0 0 0 0.17  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      linear-gradient(180deg, #0a0705 0%, #0f0b08 50%, #0a0705 100%);
+    background-blend-mode: soft-light, normal;
+    min-height: 100vh;
+  }
+
+  /* Reduced motion respect. Wraps smooth-scroll and heavy transitions. */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .timeline-step, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+
+  /* Warm ivory text hierarchy from theme.ts */
+  .text-body   { color: rgba(245, 238, 224, 0.90); }
+  .text-dimmed { color: rgba(245, 238, 224, 0.72); }
+  .text-muted  { color: rgba(245, 238, 224, 0.55); }
+
+  /* Diaspora glass (used sparingly, one component only) */
+  .glass {
+    background: rgba(26, 20, 16, 0.55);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(212, 85, 43, 0.14);
+    box-shadow:
+      0 1px 0 rgba(245, 238, 224, 0.04) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(212, 85, 43, 0.28); }
+  /* Tech pillar glass variant: slate teal border. Layered after .glass so it wins. */
+  .glass.glass-tech { border-color: rgba(123, 164, 165, 0.32); }
+  .glass.glass-tech:hover { border-color: rgba(123, 164, 165, 0.52); }
+
+  /* Ember glow: warm radial behind hero moments. Replaces gradient text with proper depth. */
+  .ember-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 560px at 22% 42%, rgba(212, 85, 43, 0.22), rgba(212, 85, 43, 0.06) 45%, transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ember-glow-cta {
+    background: radial-gradient(ellipse 800px 500px at 78% 60%, rgba(212, 85, 43, 0.20), rgba(184, 132, 61, 0.08) 42%, transparent 70%);
+  }
+
+  /* Display text warmth via legit text-shadow (works on solid fill, not clipped by background-clip) */
+  .text-shadow-warm {
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 8px 30px rgba(212, 85, 43, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Focus ring uses outline (Windows High Contrast Mode respects outline, not box-shadow) */
+  :focus-visible {
+    outline: 2px solid #d4552b;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Sidebar nav: active section highlight. Color only. No width animation (layout thrash), no glow. */
+  .nav-dot { transition: background-color 180ms ease; }
+  .nav-active .nav-dot { background: #d4552b; }
+  .nav-active .nav-label { color: #f5eee0; }
+
+  /* kbd chips: technical/keyboard elements, live in the Tech pillar */
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07); color: #f5eee0;
+  }
+
+  /* Terracotta accent rule, used sparingly to mark a section */
+  .accent-rule {
+    display: inline-block; width: 40px; height: 2px;
+    background: #d4552b; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+  /* Tech pillar variant: for Process, Anatomy, other technical sections */
+  .accent-rule-tech { background: #7ba4a5; }
+
+  /* Vertical timeline. Each step is its own 3-col grid so left/right placement actually works.
+     Tech pillar colored (slate teal) since Process IS the technical pipeline. */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ""; position: absolute; left: 50%; top: 24px; bottom: 24px; width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(123,164,165,0.55) 15%, rgba(123,164,165,0.55) 85%, transparent);
+    transform: translateX(-0.5px);
+  }
+  .timeline-step {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: start;
+    padding-block: 1.5rem;
+  }
+  .timeline-marker {
+    grid-column: 2;
+    align-self: start;
+    margin-top: 0.4rem;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #0f0b08; border: 2px solid #7ba4a5;
+    box-shadow: 0 0 0 4px rgba(123, 164, 165, 0.14);
+  }
+  .timeline-step[data-align="left"]  .timeline-content { grid-column: 1; text-align: right; justify-self: end; }
+  .timeline-step[data-align="right"] .timeline-content { grid-column: 3; text-align: left;  justify-self: start; }
+  .timeline-content { max-width: 22rem; }
+  .timeline-num {
+    font-family: "JetBrains Mono", monospace; font-size: 12px; color: #7ba4a5;
+    letter-spacing: 0.08em; display: block; margin-bottom: 0.4rem;
+  }
+  @media (max-width: 768px) {
+    .timeline::before { left: 13px; }
+    .timeline-step { grid-template-columns: 28px 1fr; gap: 1rem; }
+    .timeline-marker { grid-column: 1; margin-top: 0.5rem; }
+    .timeline-step[data-align="left"]  .timeline-content,
+    .timeline-step[data-align="right"] .timeline-content { grid-column: 2; text-align: left; justify-self: stretch; max-width: none; }
+  }
+
+  /* CTA button. Neutral shadow for depth, not a colored glow. */
+  .cta-btn-primary {
+    background: #d4552b; color: #0f0b08; font-weight: 600;
+    padding: 0.85rem 1.4rem; border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  }
+  .cta-btn-primary:hover { background: #da7f4e; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); }
+
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  /* Native dialog for mobile menu */
+  dialog.menu {
+    background: rgba(15, 11, 8, 0.96);
+    color: #f5eee0;
+    border: 1px solid rgba(212, 85, 43, 0.20);
+    padding: 5rem 2rem 2rem;
+    width: 100%; max-width: 100%; height: 100vh; max-height: 100vh;
+    margin: 0;
+  }
+  dialog.menu::backdrop { background: rgba(10, 7, 5, 0.8); backdrop-filter: blur(8px); }
+</style>
+</head>
+<body class="text-ivory-50 font-sans antialiased">
+
+<!-- ── TOP BAR ─────────────────────────────────────── -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-espresso-900/70 border-b border-terracotta-500/10">
+  <div class="max-w-[1400px] mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-2 group">
+      <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500 group-hover:shadow-[0_0_18px_rgba(212,85,43,0.7)] transition"></span>
+      <span class="font-display font-bold text-lg tracking-tight">Ogarocious</span>
+      <span class="text-dimmed text-xs hidden md:inline">· Steal This</span>
+    </a>
+    <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
+      <span id="counter" class="tabular-nums text-slate-300" aria-live="polite">1 of 8</span>
+      <span class="hidden md:inline">·</span>
+      <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+      <button id="menuBtn" class="md:hidden text-ivory-50 border border-terracotta-500/20 rounded px-2 py-1" aria-label="Open menu" aria-haspopup="dialog">Menu</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── SIDE NAV (desktop) ─────────────────────────── -->
+<nav id="sideNav" class="fixed top-0 left-0 h-screen w-[280px] hidden md:flex flex-col justify-between pt-20 pb-8 px-8 z-40 border-r border-terracotta-500/10 bg-espresso-900/60 backdrop-blur" aria-label="Sections">
+  <div>
+    <p class="text-[11px] text-slate-300 mb-4 font-medium">Sections</p>
+    <ul id="navList" class="space-y-3 text-sm"></ul>
+  </div>
+  <div class="text-[11px] text-muted leading-relaxed">
+    <p class="mb-2 font-medium text-dimmed">Ogarocious</p>
+    <p class="italic text-slate-300">Liberation Through Creation</p>
+    <p class="mt-3">Single HTML file. View source. Steal freely.</p>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU (native dialog) ────────────────── -->
+<dialog id="mobileMenu" class="menu" aria-label="Sections">
+  <ul id="mobileNavList" class="space-y-5 text-lg"></ul>
+</dialog>
+
+<!-- ── MAIN ─────────────────────────────────────── -->
+<main class="md:pl-[280px] snap-y-scroll">
+
+  <!-- 01 · Cover ────────────────────────────────── -->
+  <section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
+    <div class="ember-glow" aria-hidden="true"></div>
+    <h1 class="font-display font-extrabold text-5xl sm:text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
+      Steal this.<br/>
+      <span class="italic font-medium">Make it yours.</span>
+    </h1>
+    <p class="mt-8 max-w-xl text-body text-lg leading-relaxed relative">
+      One HTML file, one URL, one idea. Ship self-contained artifacts to any subdomain in seconds.
+    </p>
+    <div class="mt-12 flex flex-wrap gap-3 text-xs relative">
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Tailwind CDN</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">No build step</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Cloudflare-ready</span>
+    </div>
+    <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
+      <span class="kbd">Space</span> to advance
+    </div>
+  </section>
+
+  <!-- 02 · Why — opens with a pull statement, no eyebrow ── -->
+  <section id="why" data-title="Why it exists" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <p class="font-display italic text-2xl md:text-3xl text-dimmed max-w-3xl mb-8 leading-snug">
+      Ideas move faster than slide decks.
+    </p>
+    <h2 class="font-display font-bold text-5xl md:text-7xl leading-tight tracking-tight max-w-3xl mb-10 text-shadow-warm">
+      So we don't make slide decks.
+    </h2>
+    <div class="grid md:grid-cols-2 gap-10 max-w-4xl text-body leading-relaxed">
+      <p>Google Slides is a filing cabinet. Figma is a design tool. Notion is a wiki. None of them let you ship an <em>artifact</em>: a self-contained, linkable, brandable thing you throw on the internet in one click.</p>
+      <p>This template is the atomic unit. One HTML file, one URL, one idea. Generate it in seconds, replace it in seconds, forget about it forever.</p>
+    </div>
+  </section>
+
+  <!-- 03 · Principles — title carries, numbers earned on ordered list ── -->
+  <section id="principles" data-title="Principles" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <h2 class="font-display font-bold text-5xl md:text-6xl mb-12 tracking-tight text-shadow-warm">Four rules.</h2>
+    <ol class="space-y-8 max-w-3xl">
+      <li class="grid grid-cols-[auto_1fr] gap-6">
+        <span class="text-terracotta-500 text-lg pt-1.5" aria-hidden="true">◆</span>
+        <div>
+          <h3 class="font-display font-semibold text-2xl mb-1">Single file, always</h3>
+          <p class="text-body">No bundler, no framework, no runtime dependencies beyond a CDN. If it breaks in five years, one file to fix.</p>
+        </div>
+      </li>
+      <li class="grid grid-cols-[auto_1fr] gap-6">
+        <span class="text-terracotta-500 text-lg pt-1.5" aria-hidden="true">◆</span>
+        <div>
+          <h3 class="font-display font-semibold text-2xl mb-1">Content is the design</h3>
+          <p class="text-body">Type does most of the work. Terracotta accent. Rubik for structure, mono for detail. Nothing else.</p>
+        </div>
+      </li>
+      <li class="grid grid-cols-[auto_1fr] gap-6">
+        <span class="text-terracotta-500 text-lg pt-1.5" aria-hidden="true">◆</span>
+        <div>
+          <h3 class="font-display font-semibold text-2xl mb-1">Scroll <em>and</em> snap</h3>
+          <p class="text-body">Feels like a deck on desktop with keyboard nav. Feels like a landing page on mobile. Same file, no branch.</p>
+        </div>
+      </li>
+      <li class="grid grid-cols-[auto_1fr] gap-6">
+        <span class="text-terracotta-500 text-lg pt-1.5" aria-hidden="true">◆</span>
+        <div>
+          <h3 class="font-display font-semibold text-2xl mb-1">Deployable in one push</h3>
+          <p class="text-body">Drop into Cloudflare Pages. Wildcard routes <code class="text-slate-300">*.ogarocious.com</code> to the right artifact.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 04 · Process — the ONE section where numbers are earned. Rebuilt as vertical timeline. ── -->
+  <section id="process" data-title="The pipeline" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-5xl md:text-6xl mb-4 tracking-tight text-shadow-warm">The pipeline.</h2>
+    <p class="text-dimmed mb-14 max-w-2xl">Slack to live URL in about sixty seconds. Four real steps, not four decorative cards.</p>
+
+    <div class="timeline max-w-4xl mx-auto w-full">
+      <div class="timeline-step" data-align="left">
+        <div class="timeline-marker" aria-hidden="true"></div>
+        <div class="timeline-content">
+          <span class="timeline-num">TRIGGER</span>
+          <h3 class="font-display font-semibold text-xl mb-1">/artifact</h3>
+          <p class="text-sm text-body">Slash command in Slack. Describe the piece in one sentence.</p>
+        </div>
+      </div>
+
+      <div class="timeline-step" data-align="right">
+        <div class="timeline-marker" aria-hidden="true"></div>
+        <div class="timeline-content">
+          <span class="timeline-num">BUILD</span>
+          <h3 class="font-display font-semibold text-xl mb-1">n8n calls Claude</h3>
+          <p class="text-sm text-body">Workflow feeds template plus brief to Claude. Filled HTML comes back.</p>
+        </div>
+      </div>
+
+      <div class="timeline-step" data-align="left">
+        <div class="timeline-marker" aria-hidden="true"></div>
+        <div class="timeline-content">
+          <span class="timeline-num">PUBLISH</span>
+          <h3 class="font-display font-semibold text-xl mb-1">git push</h3>
+          <p class="text-sm text-body">Commit to <code class="text-slate-300">artifacts-hub</code>. Cloudflare Pages picks it up.</p>
+        </div>
+      </div>
+
+      <div class="timeline-step" data-align="right">
+        <div class="timeline-marker" aria-hidden="true"></div>
+        <div class="timeline-content">
+          <span class="timeline-num">NOTIFY</span>
+          <h3 class="font-display font-semibold text-xl mb-1">Yemoja DMs URL</h3>
+          <p class="text-sm text-body">Live at <code class="text-slate-300">slides.ogarocious.com/&lt;slug&gt;</code>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · Anatomy — inline lead-in, no eyebrow chip ── -->
+  <section id="anatomy" data-title="Anatomy" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-5xl md:text-6xl mb-6 tracking-tight text-shadow-warm">What Claude fills in.</h2>
+    <p class="text-body mb-8 max-w-2xl">The section shape:</p>
+    <div class="max-w-3xl glass rounded-lg p-6 font-mono text-sm text-body leading-relaxed overflow-x-auto">
+<pre class="whitespace-pre">&lt;section id="<span class="text-terracotta-400">slug</span>" data-title="<span class="text-slate-300">Nav label</span>"&gt;
+  &lt;h2&gt;<span class="text-muted">## big display headline</span>&lt;/h2&gt;
+  &lt;div&gt;<span class="text-muted">## body: prose, list, grid, code, quote</span>&lt;/div&gt;
+&lt;/section&gt;</pre>
+    </div>
+    <p class="mt-6 text-sm text-dimmed max-w-2xl">Nav rebuilds itself from <code class="text-slate-300">data-title</code>. Add or remove sections; JS untouched.</p>
+  </section>
+
+  <!-- 06 · Breather (quote) — full-bleed, no eyebrow ── -->
+  <section id="quote" data-title="Breather" class="snap-slide min-h-screen flex items-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <div class="max-w-3xl">
+      <p class="font-display italic font-medium text-4xl md:text-6xl leading-tight text-ivory-50 text-shadow-warm">
+        "The best interface is a URL you can send someone."
+      </p>
+      <p class="mt-6 text-sm text-muted font-mono">an artifact, probably</p>
+    </div>
+  </section>
+
+  <!-- 07 · Takeaways — accent rule marker, no eyebrow chip ── -->
+  <section id="takeaways" data-title="Takeaways" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-5xl md:text-6xl mb-10 tracking-tight text-shadow-warm">Steal these bits.</h2>
+    <ul class="space-y-4 max-w-3xl text-lg text-body">
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> Wildcard subdomain plus Cloudflare Pages beats per-project deploys.</li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> IntersectionObserver with <code class="text-slate-300">scroll-snap</code> covers most of the decky feel.</li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> One template, many artifacts. The template is the product.</li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> Keyboard nav belongs on marketing pages, not just docs.</li>
+    </ul>
+  </section>
+
+  <!-- 08 · Fin (CTA) — solid ivory, ember glow behind, no eyebrow ── -->
+  <section id="cta" data-title="Fin" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
+    <div class="ember-glow ember-glow-cta" aria-hidden="true"></div>
+    <h2 class="font-display font-extrabold text-5xl sm:text-6xl md:text-8xl tracking-tight leading-none mb-8 text-ivory-50 text-shadow-warm relative">
+      Take it.<br/>
+      <span class="italic font-bold">Ship yours.</span>
+    </h2>
+    <div class="flex flex-wrap gap-4 mt-4 relative">
+      <a href="view-source:" class="cta-btn-primary cta-btn">View source</a>
+      <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
+    </div>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation</p>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  const sections = [...document.querySelectorAll('main > section')];
+  const navList = document.getElementById('navList');
+  const mobileNavList = document.getElementById('mobileNavList');
+  const counter = document.getElementById('counter');
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Build nav from sections. Titles only; positional counter lives in the header.
+  sections.forEach((s) => {
+    const title = s.dataset.title || s.id;
+
+    const desktopItem = document.createElement('li');
+    desktopItem.dataset.target = s.id;
+    desktopItem.innerHTML = `
+      <a href="#${s.id}" class="flex items-center gap-3 group">
+        <span class="nav-dot w-2 h-2 rounded-full bg-slate-400/40 group-hover:bg-terracotta-500"></span>
+        <span class="nav-label text-dimmed group-hover:text-ivory-50 text-sm">${title}</span>
+      </a>`;
+    navList.appendChild(desktopItem);
+
+    const mobileItem = document.createElement('li');
+    mobileItem.innerHTML = `<a href="#${s.id}" class="block text-ivory-50 hover:text-terracotta-500">${title}</a>`;
+    mobileNavList.appendChild(mobileItem);
+  });
+
+  const navItems = [...navList.children];
+  const navLinks = navItems.map(n => n.querySelector('a'));
+
+  // Active section via IntersectionObserver. Syncs aria-current AND visual class.
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target);
+        navItems.forEach((n, i) => {
+          n.classList.toggle('nav-active', i === idx);
+          if (navLinks[i]) {
+            if (i === idx) navLinks[i].setAttribute('aria-current', 'location');
+            else navLinks[i].removeAttribute('aria-current');
+          }
+        });
+        counter.textContent = `${idx + 1} of ${sections.length}`;
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => io.observe(s));
+
+  // Native dialog for mobile menu (focus trap + inert bg + Escape close, all free)
+  menuBtn?.addEventListener('click', () => mobileMenu.showModal());
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') mobileMenu.close();
+    if (e.target === mobileMenu) mobileMenu.close();
+  });
+
+  // Keyboard nav (respects reduced-motion for scroll behavior)
+  const currentIndex = () => {
+    const y = window.scrollY + window.innerHeight * 0.5;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= y) return i;
+    }
+    return 0;
+  };
+  const go = (dir) => {
+    const i = currentIndex();
+    const next = Math.max(0, Math.min(sections.length - 1, i + dir));
+    sections[next].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+  };
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (mobileMenu.open) return;
+    if (e.key === ' ' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+    if (e.key === 'End')  { e.preventDefault(); sections[sections.length-1].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+  });
+})();
+</script>
+</body>
+</html>
