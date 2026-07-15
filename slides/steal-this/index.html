@@ -240,39 +240,75 @@
 
   @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
 
-  /* Mobile drawer (native <dialog>) */
-  dialog.menu {
-    background: rgba(15, 11, 8, 0.96);
-    color: #f5eee0;
-    border: 1px solid rgba(212, 85, 43, 0.20);
-    padding: 5rem 1.75rem 2rem;
-    width: 100%; max-width: 100%; height: 100vh; max-height: 100vh;
-    margin: 0;
+  /* Mobile drawer: fixed panel BELOW the header (top: 56px = header height).
+     Header stays visible and interactive; MENU button toggles OPEN/CLOSE.
+     Not a native <dialog> because showModal() would inert the header. */
+  .drawer {
+    position: fixed;
+    top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45; /* below header (50) so header stays clickable */
+    background: rgba(10, 7, 5, 0.72);
+    backdrop-filter: blur(4px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
-  dialog.menu::backdrop { background: rgba(10, 7, 5, 0.8); backdrop-filter: blur(8px); }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(15, 11, 8, 0.985);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  /* Left vertical rail. Applied to the <ul>. */
+  .drawer-list {
+    border-left: 1px solid rgba(123, 164, 165, 0.28);
+    padding-left: 1rem;
+    margin: 0;
+    list-style: none;
+  }
   .drawer-item {
     display: block;
-    padding: 0.6rem 0;
+    padding: 0.85rem 0.9rem;
+    margin-left: -0.5rem;
     color: #f5eee0;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
     line-height: 1.3;
-    border-bottom: 1px solid rgba(212, 85, 43, 0.08);
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
   }
-  .drawer-item:hover, .drawer-item:focus-visible { color: #d4552b; }
-  /* Group headings only rendered when at least one section has data-group */
+  .drawer-item:hover { color: #d4552b; }
+  .drawer-item.is-active {
+    background: rgba(212, 85, 43, 0.14);
+    color: #d4552b;
+  }
+  /* Drawer focus ring — softer, scoped, no aggressive outline */
+  .drawer-item:focus-visible {
+    outline: none;
+    background: rgba(212, 85, 43, 0.10);
+    color: #d4552b;
+  }
+  /* Group heading (only rendered when a section has data-group) */
   .drawer-group {
     font-family: "JetBrains Mono", ui-monospace, monospace;
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     color: #7ba4a5;
-    padding-top: 1.5rem;
-    padding-bottom: 0.35rem;
-    margin-top: 1.25rem;
+    padding: 1.75rem 0 0.4rem;
+    margin-top: 0.75rem;
     border-top: 1px solid rgba(123, 164, 165, 0.15);
+    list-style: none;
   }
-  .drawer-group:first-child {
+  .drawer-list > .drawer-group:first-child {
     border-top: none; padding-top: 0; margin-top: 0;
   }
 </style>
@@ -288,7 +324,7 @@
     <a href="#cover" class="flex items-center gap-2 group">
       <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500 group-hover:shadow-[0_0_18px_rgba(212,85,43,0.7)] transition"></span>
       <span class="font-display font-bold text-lg tracking-tight">Ogarocious</span>
-      <span class="text-dimmed text-xs hidden md:inline">· Steal This</span>
+      <span class="text-dimmed text-xs">· Steal This</span>
     </a>
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
       <!-- Counter hidden on mobile (progress bar now shows position). Desktop keeps precise "N of M." -->
@@ -321,10 +357,13 @@
   </div>
 </nav>
 
-<!-- ── MOBILE MENU (native dialog) ────────────────── -->
-<dialog id="mobileMenu" class="menu" aria-label="Sections">
-  <ul id="mobileNavList" class="space-y-0"></ul>
-</dialog>
+<!-- ── MOBILE DRAWER (sheet below header) ─────────── -->
+<div id="mobileMenu" class="drawer" role="dialog" aria-modal="true" aria-label="Sections" hidden>
+  <div class="drawer-panel">
+    <p class="drawer-label">Sections</p>
+    <ul id="mobileNavList" class="drawer-list"></ul>
+  </div>
+</div>
 
 <!-- ── MAIN ─────────────────────────────────────── -->
 <main class="md:pl-[280px] snap-y-scroll">
@@ -510,6 +549,7 @@
   // Desktop sidebar always flat. Mobile drawer supports optional grouping
   // via data-group on sections. If any section has one, drawer groups by it.
   const hasGroups = sections.some(s => s.dataset.group);
+  const drawerLinks = new Array(sections.length); // parallel to sections for active-state sync
 
   sections.forEach((s) => {
     const title = s.dataset.title || s.id;
@@ -523,7 +563,17 @@
     navList.appendChild(desktopItem);
   });
 
-  // Mobile drawer: flat or grouped
+  // Mobile drawer: flat or grouped. Preserves parallel drawerLinks[] for active tracking.
+  const buildDrawerLink = (s) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${s.id}`;
+    a.className = 'drawer-item';
+    a.textContent = s.dataset.title || s.id;
+    li.appendChild(a);
+    return { li, a };
+  };
+
   if (hasGroups) {
     const groups = new Map();
     sections.forEach(s => {
@@ -537,23 +587,23 @@
       heading.textContent = name;
       mobileNavList.appendChild(heading);
       sects.forEach(s => {
-        const item = document.createElement('li');
-        item.innerHTML = `<a href="#${s.id}" class="drawer-item">${s.dataset.title || s.id}</a>`;
-        mobileNavList.appendChild(item);
+        const { li, a } = buildDrawerLink(s);
+        mobileNavList.appendChild(li);
+        drawerLinks[sections.indexOf(s)] = a;
       });
     });
   } else {
-    sections.forEach(s => {
-      const item = document.createElement('li');
-      item.innerHTML = `<a href="#${s.id}" class="drawer-item">${s.dataset.title || s.id}</a>`;
-      mobileNavList.appendChild(item);
+    sections.forEach((s, i) => {
+      const { li, a } = buildDrawerLink(s);
+      mobileNavList.appendChild(li);
+      drawerLinks[i] = a;
     });
   }
 
   const navItems = [...navList.children];
   const navLinks = navItems.map(n => n.querySelector('a'));
 
-  // Active section via IntersectionObserver. Syncs aria-current AND visual class.
+  // Active section via IntersectionObserver. Syncs aria-current + nav-active + drawer-item.is-active.
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -564,6 +614,9 @@
             if (i === idx) navLinks[i].setAttribute('aria-current', 'location');
             else navLinks[i].removeAttribute('aria-current');
           }
+        });
+        drawerLinks.forEach((link, i) => {
+          if (link) link.classList.toggle('is-active', i === idx);
         });
         counter.textContent = `${idx + 1} of ${sections.length}`;
       }
@@ -585,30 +638,32 @@
   }, { passive: true });
   updateProgress();
 
-  // Mobile menu button: toggle dialog + swap icon/label
+  // Mobile drawer toggle. Drawer sits BELOW the header (fixed div, not a modal dialog),
+  // so header stays visible and MENU button remains clickable to close.
+  const isMenuOpen = () => !mobileMenu.hidden;
   function openMenu() {
-    mobileMenu.showModal();
+    mobileMenu.hidden = false;
+    document.body.style.overflow = 'hidden';
     menuBtn.classList.add('is-open');
     menuBtn.setAttribute('aria-expanded', 'true');
     menuLabel.textContent = 'CLOSE';
   }
   function closeMenu() {
-    mobileMenu.close();
+    mobileMenu.hidden = true;
+    document.body.style.overflow = '';
     menuBtn.classList.remove('is-open');
     menuBtn.setAttribute('aria-expanded', 'false');
     menuLabel.textContent = 'MENU';
   }
-  menuBtn?.addEventListener('click', () => mobileMenu.open ? closeMenu() : openMenu());
+  menuBtn?.addEventListener('click', () => isMenuOpen() ? closeMenu() : openMenu());
   mobileMenu.addEventListener('click', (e) => {
     if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu();
   });
-  mobileMenu.addEventListener('close', () => {
-    menuBtn.classList.remove('is-open');
-    menuBtn.setAttribute('aria-expanded', 'false');
-    menuLabel.textContent = 'MENU';
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) closeMenu();
   });
 
-  // Keyboard nav (respects reduced-motion)
+  // Keyboard nav (respects reduced-motion, skipped when drawer is open)
   const currentIndex = () => {
     const y = window.scrollY + window.innerHeight * 0.5;
     for (let i = sections.length - 1; i >= 0; i--) {
@@ -623,7 +678,7 @@
   };
   window.addEventListener('keydown', (e) => {
     if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
-    if (mobileMenu.open) return;
+    if (isMenuOpen()) return;
     if (e.key === ' ' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(1); }
     if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
     if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
