@@ -4,135 +4,175 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Slides · Ogarocious</title>
-<meta name="description" content="Scrollable single-file slide artifacts. Ogarocious." />
+<meta name="description" content="Scrollable single-file slide artifacts. Each one is its own URL." />
 <link rel="canonical" href="https://slides.ogarocious.com/" />
-<meta name="theme-color" content="#0f0b08" />
+<meta name="theme-color" content="#1f1b15" />
 
+<!-- Open Graph -->
 <meta property="og:site_name" content="Ogarocious" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://slides.ogarocious.com/" />
 <meta property="og:title" content="Slides · Ogarocious" />
-<meta property="og:description" content="Scrollable single-file slide artifacts. Ogarocious." />
+<meta property="og:description" content="Scrollable single-file slide artifacts. Each one is its own URL." />
 <meta property="og:image" content="https://slides.ogarocious.com/_shared/og-default.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Slides · Ogarocious" />
-<meta name="twitter:description" content="Scrollable single-file slide artifacts. Ogarocious." />
+<meta name="twitter:description" content="Scrollable single-file slide artifacts. Each one is its own URL." />
 <meta name="twitter:image" content="https://slides.ogarocious.com/_shared/og-default.png" />
 
 <link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png" />
 
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // Diaspora Modern brand tokens (matches slides/steal-this/index.html)
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: { 950: '#0a0705', 900: '#0f0b08', 800: '#1a1410', 700: '#1f1b15', 600: '#312d23' },
+          ivory: { 50: '#f5eee0', 100: '#d8d1c2', 200: '#b5ae9f', 300: '#8f8878' },
+          terracotta: {
+            50: '#fbeee6', 100: '#f4d5c0', 200: '#ebb99a', 300: '#e19c74',
+            400: '#da7f4e', 500: '#d4552b', 600: '#b84421', 700: '#952f0f',
+            800: '#732208', 900: '#4f1500',
+          },
+          slate: {
+            50: '#eaefef', 100: '#cddad9', 200: '#adbfbf', 300: '#8ba5a5',
+            400: '#7ba4a5', 500: '#669090', 600: '#4e7676', 700: '#3b5d5d',
+            800: '#2a4545', 900: '#1b2e2e',
+          },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: "Rubik", system-ui, sans-serif;
-    color: #f5eee0;
-    background-color: #0f0b08;
+    background-color: #1f1b15;
     background-image:
       url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.83  0 0 0 0 0.33  0 0 0 0 0.17  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
-      linear-gradient(180deg, #0a0705 0%, #0f0b08 50%, #0a0705 100%);
+      linear-gradient(180deg, #0f0b08 0%, #1f1b15 50%, #0f0b08 100%);
     background-blend-mode: soft-light, normal;
     min-height: 100vh;
-    line-height: 1.5;
   }
-  main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 6rem 1.5rem 4rem;
-    position: relative;
+
+  .text-body   { color: rgba(245, 238, 224, 0.90); }
+  .text-dimmed { color: rgba(245, 238, 224, 0.72); }
+  .text-muted  { color: rgba(245, 238, 224, 0.55); }
+
+  /* Full-viewport ember glow (fixed atmosphere, not confined to any container) */
+  .page-ember {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 900px 700px at 22% 32%, rgba(212, 85, 43, 0.22), rgba(212, 85, 43, 0.05) 45%, transparent 72%),
+      radial-gradient(ellipse 700px 500px at 82% 78%, rgba(184, 132, 61, 0.14), rgba(184, 132, 61, 0.03) 45%, transparent 72%);
   }
-  .ember {
-    position: absolute; inset: 0; pointer-events: none; z-index: 0;
-    background: radial-gradient(ellipse 700px 500px at 30% 30%, rgba(212, 85, 43, 0.16), rgba(212, 85, 43, 0.04) 45%, transparent 70%);
+
+  .text-shadow-warm {
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 8px 30px rgba(212, 85, 43, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.35);
   }
-  .mark { display: inline-flex; align-items: center; gap: 0.6rem; margin-bottom: 3rem; position: relative; }
-  .mark-dot { width: 10px; height: 10px; border-radius: 50%; background: #d4552b; }
-  .mark-text { font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; }
-  h1 {
-    font-weight: 800; font-size: clamp(2.5rem, 6vw, 4.5rem);
-    letter-spacing: -0.04em; line-height: 1; margin-bottom: 1.5rem;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.55), 0 8px 30px rgba(212, 85, 43, 0.18);
-    position: relative;
+
+  :focus-visible {
+    outline: 2px solid #d4552b;
+    outline-offset: 3px;
+    border-radius: 2px;
   }
-  h1 em { font-style: italic; font-weight: 500; }
-  .lead {
-    color: rgba(245, 238, 224, 0.72);
-    font-size: 1.1rem;
-    max-width: 40ch;
-    margin-bottom: 4rem;
-    position: relative;
-  }
-  .list-heading {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    color: #7ba4a5;
-    margin-bottom: 1.25rem;
-    position: relative;
-  }
-  ul { list-style: none; position: relative; }
-  li { margin-bottom: 1.5rem; }
-  a.artifact {
-    display: block;
-    text-decoration: none;
-    color: #f5eee0;
-    padding: 1.25rem 1.5rem;
+
+  /* Glass card, same as artifact */
+  .glass {
     background: rgba(26, 20, 16, 0.55);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(212, 85, 43, 0.14);
-    border-radius: 8px;
+    box-shadow:
+      0 1px 0 rgba(245, 238, 224, 0.04) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
     transition: transform 220ms ease, border-color 220ms ease;
   }
-  a.artifact:hover { border-color: rgba(212, 85, 43, 0.34); transform: translateY(-2px); }
-  .artifact-title { font-weight: 600; font-size: 1.15rem; margin-bottom: 0.2rem; }
-  .artifact-desc { color: rgba(245, 238, 224, 0.72); font-size: 0.9rem; }
-  footer {
-    margin-top: 5rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(212, 85, 43, 0.12);
-    font-size: 0.8rem;
-    color: rgba(245, 238, 224, 0.55);
-    font-family: "JetBrains Mono", monospace;
-    position: relative;
+  .glass:hover, .glass:focus-visible {
+    border-color: rgba(212, 85, 43, 0.34);
+    transform: translateY(-2px);
   }
-  footer a { color: rgba(245, 238, 224, 0.72); text-decoration: none; }
-  footer a:hover { color: #f5eee0; }
-  :focus-visible { outline: 2px solid #d4552b; outline-offset: 3px; border-radius: 2px; }
+
+  .accent-rule {
+    display: inline-block; width: 40px; height: 2px;
+    background: #d4552b; border-radius: 1px;
+  }
+
+  .mono-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+  }
 </style>
 </head>
-<body>
-  <main>
-    <div class="ember" aria-hidden="true"></div>
-    <div class="mark">
-      <span class="mark-dot" aria-hidden="true"></span>
-      <span class="mark-text">Ogarocious</span>
-    </div>
+<body class="text-ivory-50 font-sans antialiased">
 
-    <h1>Slides.<br/><em>Take one.</em></h1>
-    <p class="lead">Scrollable single-file slide artifacts. Each one is its own URL.</p>
+<!-- Full-viewport ember atmosphere (behind all content) -->
+<div class="page-ember" aria-hidden="true"></div>
 
-    <p class="list-heading">Published</p>
-    <ul>
-      <li>
-        <a class="artifact" href="/steal-this/">
-          <div class="artifact-title">Steal this. Make it yours.</div>
-          <div class="artifact-desc">A single-file scrollable artifact template.</div>
-        </a>
-      </li>
-    </ul>
+<!-- Top bar (fixed, matches artifact pattern) -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-espresso-700/70 border-b border-terracotta-500/10">
+  <div class="max-w-[1400px] mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500 group-hover:shadow-[0_0_18px_rgba(212,85,43,0.7)] transition"></span>
+      <span class="font-display font-bold text-lg tracking-tight">Ogarocious</span>
+      <span class="text-dimmed text-xs">· Slides</span>
+    </a>
+    <a href="https://ogarocious.com" class="text-xs text-dimmed hover:text-ivory-50 transition font-mono">ogarocious.com</a>
+  </div>
+</header>
 
-    <footer>
-      Ogarocious · Liberation Through Creation<br/>
-      <a href="https://ogarocious.com">ogarocious.com</a>
-    </footer>
-  </main>
+<!-- Main -->
+<main class="max-w-3xl mx-auto px-6 md:px-10 pt-32 pb-20 relative">
+  <h1 class="font-display font-extrabold text-6xl md:text-8xl leading-[0.95] tracking-tight text-ivory-50 text-shadow-warm mb-6">
+    Slides.<br/>
+    <span class="italic font-medium">Take one.</span>
+  </h1>
+  <p class="text-body text-lg md:text-xl leading-relaxed max-w-xl mb-20">
+    Scrollable single-file slide artifacts. Each one is its own URL.
+  </p>
+
+  <div class="flex items-center gap-3 mb-6">
+    <span class="accent-rule" aria-hidden="true"></span>
+    <span class="mono-label">Published</span>
+  </div>
+
+  <ul class="space-y-4">
+    <li>
+      <a href="/steal-this/" class="glass block rounded-lg p-6 md:p-7">
+        <h2 class="font-display font-bold text-2xl md:text-3xl mb-1.5 text-ivory-50">Steal this. Make it yours.</h2>
+        <p class="text-body text-sm md:text-base">A single-file scrollable artifact template. View source, steal freely.</p>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="mt-24 pt-8 border-t border-terracotta-500/10 text-xs text-muted font-mono">
+    <p class="mb-1">Ogarocious · Liberation Through Creation</p>
+    <p><a href="https://ogarocious.com" class="hover:text-ivory-50 transition">ogarocious.com</a></p>
+  </footer>
+</main>
+
 </body>
 </html>
