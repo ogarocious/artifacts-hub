@@ -3,33 +3,38 @@
   NOTE: convert to PNG before shipping. Some unfurlers (LinkedIn, older iOS) reject SVG for og:image.
   Quick convert: `rsvg-convert og-default.svg -w 1200 -h 630 -o og-default.png`
   or via ImageMagick: `magick og-default.svg -resize 1200x630 og-default.png`
+
+  Vertical layout (630 tall):
+    - Brand mark: y=96 area (baseline ~126)
+    - Hero: baselines at y=310 and y=430 (visual center ~370, near optical center of usable space)
+    - Footer: y=570
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <radialGradient id="ember" cx="24%" cy="42%" r="55%">
-      <stop offset="0%" stop-color="#d4552b" stop-opacity="0.22"/>
-      <stop offset="45%" stop-color="#d4552b" stop-opacity="0.06"/>
+    <radialGradient id="ember" cx="24%" cy="52%" r="60%">
+      <stop offset="0%" stop-color="#d4552b" stop-opacity="0.24"/>
+      <stop offset="45%" stop-color="#d4552b" stop-opacity="0.07"/>
       <stop offset="100%" stop-color="#d4552b" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0a0705"/>
-      <stop offset="50%" stop-color="#0f0b08"/>
-      <stop offset="100%" stop-color="#0a0705"/>
+      <stop offset="0%" stop-color="#0f0b08"/>
+      <stop offset="50%" stop-color="#1f1b15"/>
+      <stop offset="100%" stop-color="#0f0b08"/>
     </linearGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect width="1200" height="630" fill="url(#ember)"/>
 
-  <!-- Brand mark: terracotta dot -->
+  <!-- Brand mark: terracotta dot + wordmark -->
   <g transform="translate(96, 96)">
     <circle cx="18" cy="18" r="12" fill="#d4552b"/>
     <text x="46" y="26" font-family="Rubik, system-ui, sans-serif" font-weight="700" font-size="22" fill="#f5eee0" letter-spacing="-0.01em">Ogarocious</text>
   </g>
 
-  <!-- Headline -->
-  <text x="96" y="380" font-family="Rubik, system-ui, sans-serif" font-weight="800" font-size="128" fill="#f5eee0" letter-spacing="-0.04em">Steal this.</text>
-  <text x="96" y="500" font-family="Rubik, system-ui, sans-serif" font-weight="500" font-style="italic" font-size="128" fill="#f5eee0" letter-spacing="-0.04em">Make it yours.</text>
+  <!-- Headline (centered vertically in the usable space between brand mark and footer) -->
+  <text x="96" y="310" font-family="Rubik, system-ui, sans-serif" font-weight="800" font-size="128" fill="#f5eee0" letter-spacing="-0.04em">Steal this.</text>
+  <text x="96" y="430" font-family="Rubik, system-ui, sans-serif" font-weight="500" font-style="italic" font-size="128" fill="#f5eee0" letter-spacing="-0.04em">Make it yours.</text>
 
   <!-- Footer tag -->
   <g transform="translate(96, 570)">
