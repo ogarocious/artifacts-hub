@@ -312,6 +312,46 @@
   .drawer-list > .drawer-group:first-child {
     border-top: none; padding-top: 0; margin-top: 0;
   }
+
+  /* Copyable prompt blocks. Click anywhere in the block to copy.
+     Uses .glass.glass-tech as base for slate-teal-bordered card. */
+  .prompt-wrap { margin-inline: auto; }
+  .prompt-labels {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.6rem; padding-inline: 0.25rem;
+  }
+  .prompt-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.14em; color: #7ba4a5;
+    text-transform: uppercase;
+  }
+  .prompt-hint {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.10em;
+    color: rgba(245, 238, 224, 0.55);
+    transition: color 200ms ease;
+  }
+  .prompt-hint.is-copied { color: #d4552b; }
+  .prompt-block {
+    cursor: pointer;
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    outline: none;
+  }
+  .prompt-block.glass.glass-tech:hover,
+  .prompt-block.glass.glass-tech:focus-visible {
+    border-color: rgba(212, 85, 43, 0.42);
+  }
+  .prompt-block.is-copied.glass.glass-tech {
+    border-color: rgba(212, 85, 43, 0.60);
+  }
+  .prompt-code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 13px; line-height: 1.55;
+    color: rgba(245, 238, 224, 0.88);
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0;
+  }
 </style>
 </head>
 <body class="text-ivory-50 font-sans antialiased">
@@ -512,14 +552,46 @@
     <span class="accent-rule" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-10 tracking-tight text-shadow-warm">Steal these bits.</h2>
     <ul class="space-y-4 max-w-3xl text-lg text-body">
-      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> Wildcard subdomain plus Cloudflare Pages beats per-project deploys.</li>
-      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> IntersectionObserver with <code class="text-slate-300">scroll-snap</code> covers most of the decky feel.</li>
-      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> One template, many artifacts. The template is the product.</li>
-      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span> Keyboard nav belongs on marketing pages, not just docs.</li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Wildcard subdomain plus Cloudflare Pages beats per-project deploys.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>IntersectionObserver with <code class="text-slate-300">scroll-snap</code> covers most of the decky feel.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>One template, many artifacts. The template is the product.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Keyboard nav belongs on marketing pages, not just docs.</span></li>
     </ul>
   </section>
 
-  <!-- 08 · Fin (CTA) -->
+  <!-- 08 · Take these two — copyable prompts (Grill Me + Template). Workflow pair. -->
+  <section id="prompts" data-title="Take these two" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Take these two.</h2>
+    <p class="text-dimmed mb-10 max-w-2xl">Copy both. Paste into Claude. Answer the questions it asks. Get your artifact back.</p>
+
+    <div class="prompt-wrap max-w-3xl w-full">
+      <div class="prompt-labels">
+        <span class="prompt-label">Grill Me</span>
+        <span class="prompt-hint" data-hint-original="paste first · click to copy">paste first · click to copy</span>
+      </div>
+      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy Grill Me prompt to clipboard"><pre class="prompt-code">Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+
+Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering. For each question, also solicit any pretext, subtext, or context I should surface; the reasons behind my answer often matter as much as the answer.
+
+When a question has discrete options, letter them alphabetically (A, B, C, ...). For each option, explain what it means and its trade-off. State which option you recommend and why.
+
+If a *fact* can be found by exploring the environment (filesystem, tools, etc.), look it up rather than asking me. The *decisions*, though, are mine; put each one to me and wait for my answer.
+
+Ask for permission before generating any solutions, artifacts, or code. Grilling produces shared understanding; solutions come only after I explicitly authorize them.
+
+Do not act on it until I confirm we have reached a shared understanding.</pre></div>
+    </div>
+
+    <div class="prompt-wrap max-w-3xl w-full mt-8">
+      <div class="prompt-labels">
+        <span class="prompt-label">Template</span>
+        <span class="prompt-hint" data-hint-original="paste second · click to copy">paste second · click to copy</span>
+      </div>
+      <div class="prompt-block glass glass-tech" role="button" tabindex="0" aria-label="Copy template prompt to clipboard"><pre class="prompt-code">Fetch the template at https://raw.githubusercontent.com/ogarocious/artifacts-hub/main/template/template.html and fill every {{PLACEHOLDER}} slot based on what you learned from grilling. Output the completed HTML file. Save it as slides/&lt;slug&gt;/index.html in your fork of the artifacts-hub repo.</pre></div>
+    </div>
+  </section>
+
+  <!-- 09 · Fin (CTA) -->
   <section id="cta" data-title="Fin" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
     <div class="ember-glow ember-glow-cta" aria-hidden="true"></div>
     <h2 class="font-display font-extrabold text-6xl md:text-8xl tracking-tight leading-none mb-8 text-ivory-50 text-shadow-warm relative">
@@ -684,6 +756,43 @@
     if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
     if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
     if (e.key === 'End')  { e.preventDefault(); sections[sections.length-1].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+  });
+
+  // Click-to-copy for prompt blocks. Whole block is the button; hint text flashes.
+  document.querySelectorAll('.prompt-block').forEach(block => {
+    const code = block.querySelector('.prompt-code');
+    const hint = block.parentElement.querySelector('.prompt-hint');
+    let resetTimer = null;
+    const doCopy = async () => {
+      const text = code.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        // Fallback: select the text so user can Cmd-C manually
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      block.classList.add('is-copied');
+      if (hint) {
+        hint.textContent = 'COPIED ✓';
+        hint.classList.add('is-copied');
+      }
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => {
+        block.classList.remove('is-copied');
+        if (hint) {
+          hint.textContent = hint.dataset.hintOriginal || '';
+          hint.classList.remove('is-copied');
+        }
+      }, 1500);
+    };
+    block.addEventListener('click', doCopy);
+    block.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doCopy(); }
+    });
   });
 })();
 </script>

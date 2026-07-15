@@ -6,20 +6,22 @@
 name: artifacts-hub
 region: nyc
 
+# Custom domains at app level. DO validates the CNAME (already added in Hostinger)
+# and provisions Let's Encrypt SSL automatically. When adding future subdomains
+# (proposals, mockups), add here AND to ingress rules below to route by host.
+domains:
+  - domain: slides.ogarocious.com
+    type: PRIMARY
+
 static_sites:
   - name: slides
     source_dir: /slides
-    environment_slug: html   # tells DO to skip buildpack language detection
-    build_command: ""        # explicit no-build
-    output_dir: /            # serve source_dir contents as-is
+    environment_slug: html
+    build_command: ""
+    output_dir: /
     github:
       repo: ogarocious/artifacts-hub
       branch: main
       deploy_on_push: true
-    # Path-based routing: /steal-this/ resolves to slides/steal-this/index.html
     catchall_document: index.html
     index_document: index.html
-    # Custom domain (add via DO dashboard after first deploy, then Hostinger CNAME)
-    # domains:
-    #   - domain: slides.ogarocious.com
-    #     type: PRIMARY
