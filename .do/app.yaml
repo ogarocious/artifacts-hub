@@ -9,12 +9,16 @@ region: nyc
 static_sites:
   - name: slides
     source_dir: /slides
+    environment_slug: html   # tells DO to skip buildpack language detection
+    build_command: ""        # explicit no-build
+    output_dir: /            # serve source_dir contents as-is
     github:
       repo: ogarocious/artifacts-hub
       branch: main
       deploy_on_push: true
     # Path-based routing: /steal-this/ resolves to slides/steal-this/index.html
     catchall_document: index.html
+    index_document: index.html
     # Custom domain (add via DO dashboard after first deploy, then Hostinger CNAME)
     # domains:
     #   - domain: slides.ogarocious.com
