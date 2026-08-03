@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>OG source · 1200x630</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #000; }
+  .og {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    background-color: #1f1b15;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.83  0 0 0 0 0.33  0 0 0 0 0.17  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      linear-gradient(180deg, #0f0b08 0%, #1f1b15 50%, #0f0b08 100%);
+    background-blend-mode: soft-light, normal;
+    color: #f5eee0;
+    font-family: 'Rubik', system-ui, sans-serif;
+    padding: 60px 72px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .og::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 560px at 22% 42%, rgba(212, 85, 43, 0.28), rgba(212, 85, 43, 0.08) 45%, transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .og > * { position: relative; z-index: 1; }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+  }
+  .brand-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #d4552b;
+    box-shadow: 0 0 24px rgba(212, 85, 43, 0.6);
+  }
+
+  .middle { flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 12px; }
+  .accent-rule {
+    width: 40px; height: 2px; background: #d4552b; border-radius: 1px; margin-bottom: 26px;
+  }
+  h1 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+    font-size: 96px;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: #f5eee0;
+    margin: 0;
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 8px 30px rgba(212, 85, 43, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.35);
+    max-width: 900px;
+  }
+  h1 .italic {
+    font-weight: 500;
+    font-style: italic;
+  }
+  p.sub {
+    margin: 24px 0 0;
+    font-size: 22px;
+    line-height: 1.45;
+    color: rgba(245, 238, 224, 0.72);
+    max-width: 780px;
+  }
+
+  .strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .col {
+    background: rgba(26, 20, 16, 0.55);
+    border: 1px solid rgba(123, 164, 165, 0.28);
+    border-radius: 10px;
+    padding: 18px 22px;
+  }
+  .col .col-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+  }
+  .col .col-value {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #f5eee0;
+    margin-top: 8px;
+    line-height: 1.15;
+  }
+  .col .col-count {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 20px;
+    color: #d4552b;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+  }
+  .col.status .col-value { color: rgba(245, 238, 224, 0.72); font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="og" id="og">
+    <div class="top">
+      <span class="label">Ogarocious · Slides</span>
+      <span class="brand-dot"></span>
+    </div>
+
+    <div class="middle">
+      <span class="accent-rule"></span>
+      <h1>Eleven dancers.<br/><span class="italic">Two dates.</span></h1>
+      <p class="sub">Kiz ATX workshop interest, translated into a Saturday for August and September.</p>
+    </div>
+
+    <div class="strip">
+      <div class="col">
+        <div class="col-label">August</div>
+        <div class="col-value">Sat, Aug 29 · 4 to 7 PM</div>
+        <div class="col-count">7 of 11</div>
+      </div>
+      <div class="col">
+        <div class="col-label">September</div>
+        <div class="col-value">Sat, Sep 12 · 4 to 7 PM</div>
+        <div class="col-count">7 of 11</div>
+      </div>
+      <div class="col status">
+        <div class="col-label">Status</div>
+        <div class="col-value">Signal still open</div>
+        <div class="col-count">4 pending</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
