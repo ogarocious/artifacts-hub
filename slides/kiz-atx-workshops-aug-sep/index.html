@@ -628,6 +628,142 @@
     margin: 0.25rem 0 0;
     letter-spacing: 0.04em;
   }
+
+  /* Money slide */
+  .internal-chip {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px dashed rgba(201, 150, 71, 0.7);
+    background: rgba(201, 150, 71, 0.06);
+    border-radius: 4px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #c99647;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .internal-chip::before {
+    content: '';
+    width: 8px; height: 8px; border-radius: 999px; background: #c99647;
+  }
+  .money-card {
+    padding: 1.5rem 1.6rem 1.6rem;
+    border-radius: 14px;
+    background: rgba(26, 20, 16, 0.6);
+    border: 1px solid rgba(90, 125, 100, 0.42);
+  }
+  .money-card .money-slot-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .money-card .money-slot-date {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #f5eee0;
+    margin: 0.4rem 0 0.15rem;
+    line-height: 1.15;
+  }
+  .money-card .money-slot-sub {
+    color: rgba(245, 238, 224, 0.6);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    margin: 0 0 1.2rem;
+  }
+  .money-matrix {
+    display: grid;
+    grid-template-columns: minmax(120px, 1.5fr) 1fr 1fr;
+    background: rgba(15, 11, 8, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 164, 165, 0.16);
+  }
+  .money-cell {
+    padding: 0.75rem 0.85rem;
+    border-right: 1px solid rgba(123, 164, 165, 0.10);
+    border-bottom: 1px solid rgba(123, 164, 165, 0.10);
+    display: flex; align-items: center;
+  }
+  .money-cell:nth-child(3n) { border-right: none; }
+  .money-cell.is-last-row { border-bottom: none; }
+  .money-cell.is-header {
+    background: rgba(123, 164, 165, 0.08);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    justify-content: flex-end;
+  }
+  .money-cell.is-header.is-corner { justify-content: flex-start; }
+  .money-cell.is-row-label {
+    background: rgba(26, 20, 16, 0.4);
+    font-size: 0.88rem;
+    color: rgba(245, 238, 224, 0.88);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+  }
+  .money-cell.is-row-label .row-label-caption {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    color: rgba(245, 238, 224, 0.55);
+    letter-spacing: 0.04em;
+  }
+  .money-cell.is-value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #f5eee0;
+    justify-content: flex-end;
+  }
+  .money-cell.is-value.is-expected { color: #5f7d64; }
+  .money-breakeven {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 238, 224, 0.72);
+    margin: 0.9rem 0 0;
+    letter-spacing: 0.02em;
+  }
+  .money-breakeven strong { color: #7ba4a5; font-weight: 500; }
+  .money-total-card {
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    background: rgba(212, 85, 43, 0.06);
+    border: 1px solid rgba(212, 85, 43, 0.32);
+    max-width: 48rem;
+    margin-top: 1.5rem;
+  }
+  .money-total-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0 0 0.25rem;
+  }
+  .money-total-value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #f5eee0;
+    margin: 0;
+    line-height: 1.05;
+  }
+  .money-total-caption {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 238, 224, 0.65);
+    margin: 0.4rem 0 0;
+    letter-spacing: 0.02em;
+  }
+  .money-total-caption strong { color: #da7f4e; font-weight: 500; }
 </style>
 </head>
 <body class="text-ivory-50 font-sans antialiased">
@@ -644,7 +780,7 @@
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
       <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
       <span class="hidden md:inline">·</span>
-      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 3, 2026 · 10:30 PM CDT · rev 13</span>
+      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 3, 2026 · 10:55 PM CDT · rev 14</span>
       <span class="hidden lg:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
       <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
@@ -694,8 +830,8 @@
     <div class="mt-12 flex flex-wrap gap-3 text-xs relative">
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">14 responses</span>
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">100% completion</span>
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026 · 10:30 PM CDT</span>
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 13</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026 · 10:55 PM CDT</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 14</span>
     </div>
     <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
       <span class="kbd">Space</span> to advance
@@ -1089,6 +1225,74 @@
     </div>
   </section>
 
+  <!-- MONEY MATH -->
+  <section id="money" data-title="Money math" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <span class="internal-chip" aria-label="Internal use only">Internal · Do not share</span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Does the money work?</h2>
+    <p class="text-dimmed mb-8 max-w-3xl">Surplus after venue only — Alina and other costs aren't in this math yet. Modeled at $40/hour × 4 hours = $160 venue. Sensitivity: at $25/hour venue, surpluses are ~$60 higher across the board; at $50/hour, ~$40 lower.</p>
+
+    <div class="grid md:grid-cols-2 gap-5 max-w-5xl">
+      <div class="money-card">
+        <p class="money-slot-tag">August</p>
+        <p class="money-slot-date">Saturday, August 29 · 4–7 PM</p>
+        <p class="money-slot-sub">Surplus after $160 venue</p>
+
+        <div class="money-matrix">
+          <div class="money-cell is-header is-corner">Scenario</div>
+          <div class="money-cell is-header">$35 ticket</div>
+          <div class="money-cell is-header">$50 ticket</div>
+
+          <div class="money-cell is-row-label">Conservative<span class="row-label-caption">7 attendees · 20% no-show</span></div>
+          <div class="money-cell is-value">$85</div>
+          <div class="money-cell is-value">$190</div>
+
+          <div class="money-cell is-row-label">Expected<span class="row-label-caption">9 attendees · committed</span></div>
+          <div class="money-cell is-value is-expected">$155</div>
+          <div class="money-cell is-value is-expected">$290</div>
+
+          <div class="money-cell is-row-label is-last-row">Optimistic<span class="row-label-caption">12 attendees · pending fills</span></div>
+          <div class="money-cell is-value is-last-row">$260</div>
+          <div class="money-cell is-value is-last-row">$440</div>
+        </div>
+
+        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 9 clears both.</p>
+      </div>
+
+      <div class="money-card">
+        <p class="money-slot-tag">September</p>
+        <p class="money-slot-date">Saturday, September 12 · 4–7 PM</p>
+        <p class="money-slot-sub">Surplus after $160 venue</p>
+
+        <div class="money-matrix">
+          <div class="money-cell is-header is-corner">Scenario</div>
+          <div class="money-cell is-header">$35 ticket</div>
+          <div class="money-cell is-header">$50 ticket</div>
+
+          <div class="money-cell is-row-label">Conservative<span class="row-label-caption">8 attendees · 20% no-show</span></div>
+          <div class="money-cell is-value">$120</div>
+          <div class="money-cell is-value">$240</div>
+
+          <div class="money-cell is-row-label">Expected<span class="row-label-caption">10 attendees · committed</span></div>
+          <div class="money-cell is-value is-expected">$190</div>
+          <div class="money-cell is-value is-expected">$340</div>
+
+          <div class="money-cell is-row-label is-last-row">Optimistic<span class="row-label-caption">13 attendees · pending fills</span></div>
+          <div class="money-cell is-value is-last-row">$295</div>
+          <div class="money-cell is-value is-last-row">$490</div>
+        </div>
+
+        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 10 clears both.</p>
+      </div>
+    </div>
+
+    <div class="money-total-card">
+      <p class="money-total-label">Both workshops combined · Expected × $50</p>
+      <p class="money-total-value">$630 surplus</p>
+      <p class="money-total-caption">Range: <strong>$205</strong> (Conservative × $35) to <strong>$930</strong> (Optimistic × $50). Alina's cut, marketing, and other costs still to subtract.</p>
+    </div>
+  </section>
+
   <!-- TOPICS (filtered per room) -->
   <section id="topics" data-title="Topics" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule" aria-hidden="true"></span>
@@ -1251,7 +1455,7 @@
       <a href="https://kizatx.com/events" class="cta-btn-primary cta-btn">Kiz ATX events</a>
       <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
     </div>
-    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 14 responses · Updated Aug 3, 2026 · 10:30 PM CDT · rev 13</p>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 14 responses · Updated Aug 3, 2026 · 10:55 PM CDT · rev 14</p>
   </section>
 
 </main>
