@@ -844,6 +844,101 @@
   .breakdown-legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
   .breakdown-legend .swatch-venue { background: rgba(201, 150, 71, 0.85); }
   .breakdown-legend .swatch-profit { background: rgba(95, 125, 100, 0.9); }
+
+  /* Ticket × Venue heatmap */
+  .heatmap-container { }
+  .heatmap-title {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0 0 0.65rem;
+  }
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: minmax(66px, auto) repeat(4, minmax(0, 1fr));
+    gap: 2px;
+    background: rgba(15, 11, 8, 0.5);
+    padding: 2px;
+    border-radius: 6px;
+    border: 1px solid rgba(123, 164, 165, 0.14);
+  }
+  .heatmap-corner,
+  .heatmap-col-header,
+  .heatmap-row-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.5rem;
+    background: rgba(26, 20, 16, 0.7);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .heatmap-corner {
+    font-size: 8.5px;
+    color: rgba(245, 238, 224, 0.5);
+    letter-spacing: 0.06em;
+  }
+  .heatmap-row-header {
+    justify-content: flex-end;
+  }
+  .heatmap-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.35rem;
+    gap: 2px;
+    min-height: 52px;
+    background: rgba(26, 20, 16, 0.4);
+  }
+  .heatmap-cell.is-tight  { background: rgba(201, 150, 71, 0.22); }
+  .heatmap-cell.is-fair   { background: rgba(201, 150, 71, 0.09); }
+  .heatmap-cell.is-strong { background: rgba(95, 125, 100, 0.22); }
+  .heatmap-cell .cell-profit {
+    font-family: "Rubik", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #f5eee0;
+    line-height: 1;
+  }
+  .heatmap-cell.is-strong .cell-profit { color: #a6c1aa; }
+  .heatmap-cell.is-tight  .cell-profit { color: #d4a76a; }
+  .heatmap-cell .cell-margin {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    color: rgba(245, 238, 224, 0.55);
+    letter-spacing: 0.02em;
+  }
+  .heatmap-legend {
+    display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center;
+    margin-top: 1rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(245, 238, 224, 0.6);
+    text-transform: uppercase;
+  }
+  .heatmap-legend > span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .heatmap-legend .swatch { width: 12px; height: 12px; border-radius: 2px; }
+  .heatmap-legend .swatch-tight  { background: rgba(201, 150, 71, 0.4);  border: 1px solid rgba(201, 150, 71, 0.6); }
+  .heatmap-legend .swatch-fair   { background: rgba(201, 150, 71, 0.14); border: 1px solid rgba(201, 150, 71, 0.28); }
+  .heatmap-legend .swatch-strong { background: rgba(95, 125, 100, 0.4);  border: 1px solid rgba(95, 125, 100, 0.6); }
+
+  @media (max-width: 700px) {
+    .heatmap-cell { padding: 0.35rem 0.25rem; min-height: 44px; gap: 1px; }
+    .heatmap-cell .cell-profit { font-size: 0.78rem; }
+    .heatmap-cell .cell-margin { font-size: 0.58rem; }
+    .heatmap-col-header,
+    .heatmap-row-header,
+    .heatmap-corner { font-size: 9px; padding: 0.3rem 0.25rem; }
+    .heatmap-grid { grid-template-columns: minmax(52px, auto) repeat(4, minmax(0, 1fr)); }
+  }
 </style>
 </head>
 <body class="text-ivory-50 font-sans antialiased">
@@ -860,7 +955,7 @@
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
       <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
       <span class="hidden md:inline">·</span>
-      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 3, 2026 · 11:30 PM CDT · rev 17</span>
+      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 3, 2026 · 11:50 PM CDT · rev 18</span>
       <span class="hidden lg:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
       <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
@@ -910,8 +1005,8 @@
     <div class="mt-12 flex flex-wrap gap-3 text-xs relative">
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">14 responses</span>
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">100% completion</span>
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026 · 11:30 PM CDT</span>
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 17</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026 · 11:50 PM CDT</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 18</span>
     </div>
     <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
       <span class="kbd">Space</span> to advance
@@ -1404,6 +1499,113 @@
       </div>
     </div>
 
+    <!-- TICKET × VENUE HEATMAPS -->
+    <div class="mt-8 max-w-6xl">
+      <p class="text-sm text-muted max-w-2xl mb-4 leading-relaxed">Ticket price × venue rate. Cell shows profit and margin at Expected attendance. Ochre = tight margin (&lt;50%); sage = strong (≥65%).</p>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="heatmap-container">
+          <p class="heatmap-title">Aug 29 · 9 attendees · profit / margin</p>
+          <div class="heatmap-grid">
+            <div class="heatmap-corner">Venue / Ticket</div>
+            <div class="heatmap-col-header">$35</div>
+            <div class="heatmap-col-header">$40</div>
+            <div class="heatmap-col-header">$45</div>
+            <div class="heatmap-col-header">$50</div>
+
+            <div class="heatmap-row-header">$25/hr</div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$215</span><span class="cell-margin">68%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$260</span><span class="cell-margin">72%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$305</span><span class="cell-margin">75%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$350</span><span class="cell-margin">78%</span></div>
+
+            <div class="heatmap-row-header">$30/hr</div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$195</span><span class="cell-margin">62%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$240</span><span class="cell-margin">67%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$285</span><span class="cell-margin">70%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$330</span><span class="cell-margin">73%</span></div>
+
+            <div class="heatmap-row-header">$35/hr</div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$175</span><span class="cell-margin">56%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$220</span><span class="cell-margin">61%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$265</span><span class="cell-margin">65%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$310</span><span class="cell-margin">69%</span></div>
+
+            <div class="heatmap-row-header">$40/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$155</span><span class="cell-margin">49%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$200</span><span class="cell-margin">56%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$245</span><span class="cell-margin">60%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$290</span><span class="cell-margin">64%</span></div>
+
+            <div class="heatmap-row-header">$45/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$135</span><span class="cell-margin">43%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$180</span><span class="cell-margin">50%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$225</span><span class="cell-margin">56%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$270</span><span class="cell-margin">60%</span></div>
+
+            <div class="heatmap-row-header">$50/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$115</span><span class="cell-margin">37%</span></div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$160</span><span class="cell-margin">44%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$205</span><span class="cell-margin">51%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$250</span><span class="cell-margin">56%</span></div>
+          </div>
+        </div>
+
+        <div class="heatmap-container">
+          <p class="heatmap-title">Sep 12 · 10 attendees · profit / margin</p>
+          <div class="heatmap-grid">
+            <div class="heatmap-corner">Venue / Ticket</div>
+            <div class="heatmap-col-header">$35</div>
+            <div class="heatmap-col-header">$40</div>
+            <div class="heatmap-col-header">$45</div>
+            <div class="heatmap-col-header">$50</div>
+
+            <div class="heatmap-row-header">$25/hr</div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$250</span><span class="cell-margin">71%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$300</span><span class="cell-margin">75%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$350</span><span class="cell-margin">78%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$400</span><span class="cell-margin">80%</span></div>
+
+            <div class="heatmap-row-header">$30/hr</div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$230</span><span class="cell-margin">66%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$280</span><span class="cell-margin">70%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$330</span><span class="cell-margin">73%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$380</span><span class="cell-margin">76%</span></div>
+
+            <div class="heatmap-row-header">$35/hr</div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$210</span><span class="cell-margin">60%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$260</span><span class="cell-margin">65%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$310</span><span class="cell-margin">69%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$360</span><span class="cell-margin">72%</span></div>
+
+            <div class="heatmap-row-header">$40/hr</div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$190</span><span class="cell-margin">54%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$240</span><span class="cell-margin">60%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$290</span><span class="cell-margin">64%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$340</span><span class="cell-margin">68%</span></div>
+
+            <div class="heatmap-row-header">$45/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$170</span><span class="cell-margin">49%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$220</span><span class="cell-margin">55%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$270</span><span class="cell-margin">60%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$320</span><span class="cell-margin">64%</span></div>
+
+            <div class="heatmap-row-header">$50/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$150</span><span class="cell-margin">43%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$200</span><span class="cell-margin">50%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$250</span><span class="cell-margin">56%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$300</span><span class="cell-margin">60%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="heatmap-legend" aria-label="Margin legend">
+        <span><span class="swatch swatch-tight"></span>Tight (&lt;50%)</span>
+        <span><span class="swatch swatch-fair"></span>Fair (50–64%)</span>
+        <span><span class="swatch swatch-strong"></span>Strong (≥65%)</span>
+        <span style="color: rgba(245, 238, 224, 0.45);">Numbers = profit / margin at Expected attendance</span>
+      </div>
+    </div>
+
     <div class="money-total-card">
       <p class="money-total-label">Both workshops combined · Expected × $50</p>
       <p class="money-total-value">$630 surplus · $79/hr</p>
@@ -1573,7 +1775,7 @@
       <a href="https://kizatx.com/events" class="cta-btn-primary cta-btn">Kiz ATX events</a>
       <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
     </div>
-    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 14 responses · Updated Aug 3, 2026 · 11:30 PM CDT · rev 17</p>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 14 responses · Updated Aug 3, 2026 · 11:50 PM CDT · rev 18</p>
   </section>
 
 </main>
