@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kiz ATX Workshops: August &amp; September Signal · Ogarocious</title>
-<meta name="description" content="Interest-form results from 12 dancers, translated into a Saturday date for August and September." />
+<meta name="description" content="Interest-form results from 13 dancers, translated into a Saturday date for August and September." />
 <link rel="canonical" href="https://slides.ogarocious.com/kiz-atx-workshops-aug-sep/" />
 <meta name="theme-color" content="#1f1b15" />
 
@@ -12,15 +12,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://slides.ogarocious.com/kiz-atx-workshops-aug-sep/" />
 <meta property="og:title" content="Kiz ATX Workshops: August &amp; September Signal · Ogarocious" />
-<meta property="og:description" content="Interest-form results from 12 dancers, translated into a Saturday date for August and September." />
+<meta property="og:description" content="Interest-form results from 13 dancers, translated into a Saturday date for August and September." />
 <meta property="og:image" content="https://slides.ogarocious.com/kiz-atx-workshops-aug-sep/og.png" />
-<meta property="og:image:alt" content="Kiz ATX workshop signal: twelve dancers, two recommended Saturday dates for August and September. Seven can attend the August date; eight can attend the September date." />
+<meta property="og:image:alt" content="Kiz ATX workshop signal: thirteen dancers, two recommended Saturday dates for August and September. Eight can attend the August date; nine can attend the September date." />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Kiz ATX Workshops: August &amp; September Signal · Ogarocious" />
-<meta name="twitter:description" content="Interest-form results from 12 dancers, translated into a Saturday date for August and September." />
+<meta name="twitter:description" content="Interest-form results from 13 dancers, translated into a Saturday date for August and September." />
 <meta name="twitter:image" content="https://slides.ogarocious.com/kiz-atx-workshops-aug-sep/og.png" />
 
 <link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
@@ -30,7 +30,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Kiz ATX Workshops: August & September Signal",
-  "description": "Interest-form results from 12 dancers, translated into a Saturday date for August and September.",
+  "description": "Interest-form results from 13 dancers, translated into a Saturday date for August and September.",
   "url": "https://slides.ogarocious.com/kiz-atx-workshops-aug-sep/",
   "image": "https://slides.ogarocious.com/kiz-atx-workshops-aug-sep/og.png",
   "author": { "@type": "Person", "name": "Charles Ogar", "url": "https://ogarocious.com" },
@@ -443,6 +443,147 @@
   .roster-legend .dot-lead { background: #d4552b; }
   .roster-legend .dot-both { background: #c99647; }
   .roster-legend .dot-follow { background: #7ba4a5; }
+
+  /* Lead-follow ratio */
+  .ratio-rule {
+    display: inline-block;
+    padding: 0.75rem 1.15rem;
+    border-radius: 8px;
+    border: 1px solid rgba(123, 164, 165, 0.28);
+    background: rgba(123, 164, 165, 0.06);
+    font-size: 0.9rem;
+    color: rgba(245, 238, 224, 0.85);
+    margin-bottom: 1.75rem;
+    max-width: 46rem;
+    line-height: 1.5;
+  }
+  .ratio-rule strong {
+    color: #7ba4a5;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .ratio-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    max-width: 60rem;
+  }
+  .ratio-card {
+    padding: 1.25rem 1.35rem 1.35rem;
+    border-radius: 12px;
+    background: rgba(26, 20, 16, 0.55);
+    border: 1px solid rgba(212, 85, 43, 0.32);
+  }
+  .ratio-card.is-met {
+    border-color: rgba(90, 125, 100, 0.55);
+    background: rgba(90, 125, 100, 0.06);
+  }
+  .ratio-card-slot {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .ratio-gap {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    color: #d4552b;
+    font-size: 2.1rem;
+    line-height: 1.05;
+    margin: 0.55rem 0 0.15rem;
+  }
+  .ratio-card.is-met .ratio-gap { color: #5f7d64; }
+  .ratio-gap-caption {
+    color: rgba(245, 238, 224, 0.72);
+    font-size: 0.85rem;
+    margin: 0 0 0.9rem;
+    line-height: 1.35;
+  }
+  .ratio-math {
+    border-top: 1px dashed rgba(123, 164, 165, 0.22);
+    padding-top: 0.7rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 238, 224, 0.7);
+    line-height: 1.75;
+  }
+  .ratio-math .label { color: #7ba4a5; }
+  .ratio-math .now { color: rgba(245, 238, 224, 0.88); }
+
+  /* Rotation viz */
+  .rotation-section { margin-top: 2.25rem; max-width: 60rem; }
+  .rotation-header {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0 0 0.9rem;
+  }
+  .rotation-row {
+    display: grid;
+    grid-template-columns: minmax(160px, 200px) 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    background: rgba(26, 20, 16, 0.45);
+    border: 1px solid rgba(123, 164, 165, 0.16);
+    margin-bottom: 0.5rem;
+  }
+  .rotation-row-label {
+    font-size: 0.88rem;
+    color: rgba(245, 238, 224, 0.92);
+  }
+  .rotation-icons {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    align-items: center;
+  }
+  .rotation-pair {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(95, 125, 100, 0.14);
+    border: 1px solid rgba(95, 125, 100, 0.45);
+  }
+  .rotation-pair::before,
+  .rotation-pair::after {
+    content: '';
+    width: 8px; height: 8px; border-radius: 999px;
+  }
+  .rotation-pair::before { background: #d4552b; }
+  .rotation-pair::after  { background: #7ba4a5; }
+  .rotation-waiting {
+    display: inline-block;
+    width: 14px; height: 14px; border-radius: 999px;
+    background: rgba(201, 150, 71, 0.20);
+    border: 1.5px dashed rgba(201, 150, 71, 0.85);
+  }
+  .rotation-summary {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 238, 224, 0.7);
+    white-space: nowrap;
+  }
+  .rotation-legend {
+    display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+    margin-top: 1rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(245, 238, 224, 0.6);
+    text-transform: uppercase;
+  }
+  .rotation-legend > span { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+  @media (max-width: 700px) {
+    .rotation-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    .rotation-summary { white-space: normal; }
+  }
 </style>
 </head>
 <body class="text-ivory-50 font-sans antialiased">
@@ -498,14 +639,14 @@
   <section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
     <div class="ember-glow" aria-hidden="true"></div>
     <h1 class="font-display font-extrabold text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
-      Twelve dancers.<br/>
+      Thirteen dancers.<br/>
       <span class="italic font-medium">Two dates.</span>
     </h1>
     <p class="mt-8 max-w-xl text-body text-lg leading-relaxed relative">
-      A Tally interest form ran through late July into early August. Twelve dancers have filled it out. This is what they said about August and September, and which Saturday afternoon we should book.
+      A Tally interest form ran through late July into early August. Thirteen dancers have filled it out. This is what they said about August and September, and which Saturday afternoon we should book.
     </p>
     <div class="mt-12 flex flex-wrap gap-3 text-xs relative">
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">12 responses</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">13 responses</span>
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">100% completion</span>
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026</span>
     </div>
@@ -519,19 +660,19 @@
     <div class="ember-glow" aria-hidden="true"></div>
     <span class="accent-rule" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm relative">The pick</h2>
-    <p class="text-dimmed mb-10 max-w-2xl relative">August still ends in a tie at the top; the tiebreaker keeps our only Lead in the room. September's afternoon slot has pulled ahead into a real majority — eight of twelve.</p>
+    <p class="text-dimmed mb-10 max-w-2xl relative">Saul's arrival broke the August tie — Aug 29 evening now sits alone at the top with 8 of 13. September's afternoon slot pulled ahead to a clean majority at 9 of 13. Ratio math also improves: three confirmed leads now, not two.</p>
     <div class="grid md:grid-cols-2 gap-5 max-w-4xl relative">
       <div class="rec-card">
         <span class="rec-tag">August</span>
         <p class="rec-date">Saturday, August 29</p>
         <p class="rec-time">4:00 to 7:00 PM</p>
-        <p class="rec-meta"><strong>7 of 12</strong> can attend. Tied with Aug 22 evening on headcount; wins on lead coverage. Two confirmed leads in the room (Kurt and Renier) plus Lia switching both directions. Bonus: four Aug 29 attendees are already yes to Aug 22 evening, so a two-workshop arc is warm.</p>
+        <p class="rec-meta"><strong>8 of 13</strong> can attend. Alone at the top for August (Aug 22 evening now trails at 7). Three confirmed leads in the room (Kurt, Renier, Saul) plus Lia switching — ratio essentially meets the floor.</p>
       </div>
       <div class="rec-card">
         <span class="rec-tag">September</span>
         <p class="rec-date">Saturday, September 12</p>
         <p class="rec-time">4:00 to 7:00 PM</p>
-        <p class="rec-meta"><strong>8 of 12</strong> can attend — the clearest majority in the whole signal. Ten of twelve can hit Sep 12 in some form; two respondents are out that day entirely.</p>
+        <p class="rec-meta"><strong>9 of 13</strong> can attend — the clearest majority in the whole signal. Eleven of thirteen can hit Sep 12 in some form; two respondents are out that day entirely. Still needs one more lead to fully meet the ratio floor.</p>
       </div>
     </div>
   </section>
@@ -540,42 +681,42 @@
   <section id="august" data-title="August" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">August availability</h2>
-    <p class="text-dimmed mb-10 max-w-2xl">Six slots offered across three Saturdays. Two time windows each day. The top of the field is still a two-way tie at seven; one respondent is out for August entirely.</p>
+    <p class="text-dimmed mb-10 max-w-2xl">Six slots offered across three Saturdays. Two time windows each day. Aug 29 evening now stands alone at the top with 8 of 13 — Saul broke the tie.</p>
     <div class="grid gap-2.5 max-w-3xl">
       <div class="slot-row is-winner">
         <div class="slot-label">Saturday, Aug 29 · 4 to 7 PM</div>
-        <div class="slot-count">7</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div>
-      </div>
-      <div class="slot-row is-winner">
-        <div class="slot-label">Saturday, Aug 22 · 4 to 7 PM</div>
-        <div class="slot-count">7</div>
+        <div class="slot-count">8</div>
         <div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div>
       </div>
       <div class="slot-row">
+        <div class="slot-label">Saturday, Aug 22 · 4 to 7 PM</div>
+        <div class="slot-count">7</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 87.5%"></div></div>
+      </div>
+      <div class="slot-row">
         <div class="slot-label">Saturday, Aug 29 · 10 AM to 1 PM</div>
-        <div class="slot-count">6</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 85.7%"></div></div>
+        <div class="slot-count">7</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 87.5%"></div></div>
       </div>
       <div class="slot-row">
         <div class="slot-label">Saturday, Aug 15 · 4 to 7 PM</div>
         <div class="slot-count">6</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 85.7%"></div></div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 75%"></div></div>
       </div>
       <div class="slot-row">
         <div class="slot-label">Saturday, Aug 22 · 10 AM to 1 PM</div>
         <div class="slot-count">4</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 57.1%"></div></div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 50%"></div></div>
       </div>
       <div class="slot-row">
         <div class="slot-label">Saturday, Aug 15 · 10 AM to 1 PM</div>
         <div class="slot-count">2</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 28.6%"></div></div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 25%"></div></div>
       </div>
       <div class="slot-row">
         <div class="slot-label">None of the August dates work for me</div>
         <div class="slot-count">1</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 14.3%"></div></div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 12.5%"></div></div>
       </div>
     </div>
   </section>
@@ -584,22 +725,22 @@
   <section id="september" data-title="September" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">September availability</h2>
-    <p class="text-dimmed mb-10 max-w-2xl">One Saturday offered, two time windows. Ten of twelve can hit at least one of them; two are out that day entirely.</p>
+    <p class="text-dimmed mb-10 max-w-2xl">One Saturday offered, two time windows. Eleven of thirteen can hit at least one of them; two are out that day entirely.</p>
     <div class="grid gap-2.5 max-w-3xl">
       <div class="slot-row is-winner">
         <div class="slot-label">Saturday, Sep 12 · 4 to 7 PM</div>
-        <div class="slot-count">8</div>
+        <div class="slot-count">9</div>
         <div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div>
       </div>
       <div class="slot-row">
         <div class="slot-label">Saturday, Sep 12 · 10 AM to 1 PM</div>
-        <div class="slot-count">5</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 62.5%"></div></div>
+        <div class="slot-count">6</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div>
       </div>
       <div class="slot-row">
         <div class="slot-label">Sep 12 does not work for me</div>
         <div class="slot-count">2</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 25%"></div></div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 22.2%"></div></div>
       </div>
     </div>
   </section>
@@ -621,10 +762,11 @@
         <div class="roster-slot is-winner">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sat, Aug 29 · 4 to 7 PM</div>
-            <div class="roster-slot-count">7 of 12 · top pick</div>
+            <div class="roster-slot-count">8 of 13 · top pick</div>
           </div>
           <div class="roster-chips">
             <span class="roster-chip role-lead">Kurt <span class="rc-tag">L · Imp</span></span>
+            <span class="roster-chip role-lead">Saul <span class="rc-tag">L · Imp</span></span>
             <span class="roster-chip role-both">Renier <span class="rc-tag">B · Imp</span></span>
             <span class="roster-chip role-both">Lia <span class="rc-tag">B · Beg</span></span>
             <span class="roster-chip">Christina Bello <span class="rc-tag">F · Imp</span></span>
@@ -634,10 +776,10 @@
           </div>
         </div>
 
-        <div class="roster-slot is-winner">
+        <div class="roster-slot">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sat, Aug 22 · 4 to 7 PM</div>
-            <div class="roster-slot-count">7 of 12 · alternate</div>
+            <div class="roster-slot-count">7 of 13 · alternate</div>
           </div>
           <div class="roster-chips">
             <span class="roster-chip role-both">Renier <span class="rc-tag">B · Imp</span></span>
@@ -653,9 +795,10 @@
         <div class="roster-slot">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sat, Aug 29 · 10 AM to 1 PM</div>
-            <div class="roster-slot-count">6 of 12</div>
+            <div class="roster-slot-count">7 of 13</div>
           </div>
           <div class="roster-chips">
+            <span class="roster-chip role-lead">Saul <span class="rc-tag">L · Imp</span></span>
             <span class="roster-chip role-both">Renier <span class="rc-tag">B · Imp</span></span>
             <span class="roster-chip">Claudia <span class="rc-tag">F · Beg</span></span>
             <span class="roster-chip">Cristina Trujillo <span class="rc-tag">F · Imp</span></span>
@@ -668,7 +811,7 @@
         <div class="roster-slot">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sat, Aug 15 · 4 to 7 PM</div>
-            <div class="roster-slot-count">6 of 12</div>
+            <div class="roster-slot-count">6 of 13</div>
           </div>
           <div class="roster-chips">
             <span class="roster-chip role-both">Renier <span class="rc-tag">B · Imp</span></span>
@@ -683,7 +826,7 @@
         <div class="roster-slot">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sat, Aug 22 · 10 AM to 1 PM</div>
-            <div class="roster-slot-count">4 of 12</div>
+            <div class="roster-slot-count">4 of 13</div>
           </div>
           <div class="roster-chips">
             <span class="roster-chip">Claudia <span class="rc-tag">F · Beg</span></span>
@@ -696,7 +839,7 @@
         <div class="roster-slot">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sat, Aug 15 · 10 AM to 1 PM</div>
-            <div class="roster-slot-count">2 of 12</div>
+            <div class="roster-slot-count">2 of 13</div>
           </div>
           <div class="roster-chips">
             <span class="roster-chip">Claudia <span class="rc-tag">F · Beg</span></span>
@@ -711,10 +854,11 @@
         <div class="roster-slot is-winner">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sat, Sep 12 · 4 to 7 PM</div>
-            <div class="roster-slot-count">8 of 12 · top pick</div>
+            <div class="roster-slot-count">9 of 13 · top pick</div>
           </div>
           <div class="roster-chips">
             <span class="roster-chip role-lead">Kurt <span class="rc-tag">L · Imp</span></span>
+            <span class="roster-chip role-lead">Saul <span class="rc-tag">L · Imp</span></span>
             <span class="roster-chip role-both">Renier <span class="rc-tag">B · Imp</span></span>
             <span class="roster-chip role-both">Lia <span class="rc-tag">B · Beg</span></span>
             <span class="roster-chip">Christina Bello <span class="rc-tag">F · Imp</span></span>
@@ -728,9 +872,10 @@
         <div class="roster-slot">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sat, Sep 12 · 10 AM to 1 PM</div>
-            <div class="roster-slot-count">5 of 12</div>
+            <div class="roster-slot-count">6 of 13</div>
           </div>
           <div class="roster-chips">
+            <span class="roster-chip role-lead">Saul <span class="rc-tag">L · Imp</span></span>
             <span class="roster-chip role-both">Renier <span class="rc-tag">B · Imp</span></span>
             <span class="roster-chip">Claudia <span class="rc-tag">F · Beg</span></span>
             <span class="roster-chip">Cristina Trujillo <span class="rc-tag">F · Imp</span></span>
@@ -742,7 +887,7 @@
         <div class="roster-slot is-out">
           <div class="roster-slot-head">
             <div class="roster-slot-label">Sep 12 does not work</div>
-            <div class="roster-slot-count">2 of 12</div>
+            <div class="roster-slot-count">2 of 13</div>
           </div>
           <div class="roster-chips">
             <span class="roster-chip">Anyi <span class="rc-tag">F · Int</span></span>
@@ -755,41 +900,154 @@
     </div>
   </section>
 
-  <!-- TOPICS -->
+  <!-- LEAD-FOLLOW RATIO -->
+  <section id="ratio" data-title="Lead-Follow Ratio" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Do we have enough leads?</h2>
+    <p class="text-dimmed mb-6 max-w-2xl">A room with too few leads punishes follows — they sit out most songs. Setting a floor keeps the room warm.</p>
+    <div class="ratio-rule">
+      <strong>The floor:</strong> at least <strong>3 leads</strong> in the room, and no worse than <strong>3 leads per 4 follows</strong>. Saul's arrival adds a third confirmed lead — Aug 29 now essentially meets the floor. Sep 12 still needs one more. Math below counts Kurt, Renier, and Saul as confirmed leads with Lia as a follow (conservative).
+    </div>
+
+    <div class="ratio-grid">
+      <div class="ratio-card is-met">
+        <p class="ratio-card-slot">Sat, Aug 29 · 4 to 7 PM</p>
+        <p class="ratio-gap">Meets floor</p>
+        <p class="ratio-gap-caption">3L / 5F is 0.60 — just under 3:4. But if Lia leads, 4L / 4F clears it easily. Effectively ratio-safe.</p>
+        <div class="ratio-math">
+          <div><span class="label">Now:</span> <span class="now">3L · 5F</span></div>
+          <div><span class="label">Target:</span> 4L · 5F (or 3L / 4F with Lia leading)</div>
+        </div>
+      </div>
+      <div class="ratio-card">
+        <p class="ratio-card-slot">Sat, Sep 12 · 4 to 7 PM</p>
+        <p class="ratio-gap">Need 2 more leads</p>
+        <p class="ratio-gap-caption">Or 1 more if Lia leads. Biggest room in the signal — still the priority for lead recruiting.</p>
+        <div class="ratio-math">
+          <div><span class="label">Now:</span> <span class="now">3L · 6F</span></div>
+          <div><span class="label">Target:</span> 5L · 6F</div>
+        </div>
+      </div>
+      <div class="ratio-card">
+        <p class="ratio-card-slot">Sat, Aug 22 · 4 to 7 PM · alternate</p>
+        <p class="ratio-gap">Need 4 more leads</p>
+        <p class="ratio-gap-caption">Saul isn't in this room. Only Renier as confirmed lead. Steepest gap — Aug 29 wins clearly.</p>
+        <div class="ratio-math">
+          <div><span class="label">Now:</span> <span class="now">1L · 6F</span></div>
+          <div><span class="label">Target:</span> 5L · 6F</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rotation-section">
+      <p class="rotation-header">Follows waiting each song (current lineup)</p>
+
+      <div class="rotation-row">
+        <div class="rotation-row-label">Sat, Aug 29 · 4–7 PM</div>
+        <div class="rotation-icons" aria-label="three dancing pairs and two follows waiting">
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+        </div>
+        <div class="rotation-summary">3 pairs · 2 waiting</div>
+      </div>
+
+      <div class="rotation-row">
+        <div class="rotation-row-label">Sat, Sep 12 · 4–7 PM</div>
+        <div class="rotation-icons" aria-label="three dancing pairs and three follows waiting">
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+        </div>
+        <div class="rotation-summary">3 pairs · 3 waiting</div>
+      </div>
+
+      <div class="rotation-row">
+        <div class="rotation-row-label">Sat, Aug 22 · 4–7 PM</div>
+        <div class="rotation-icons" aria-label="one dancing pair and five follows waiting">
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+        </div>
+        <div class="rotation-summary">1 pair · 5 waiting</div>
+      </div>
+
+      <div class="rotation-legend" aria-label="Legend">
+        <span><span class="rotation-pair" aria-hidden="true"></span> dancing pair</span>
+        <span><span class="rotation-waiting" aria-hidden="true"></span> follow waiting</span>
+      </div>
+
+      <p class="mt-4 text-sm text-muted max-w-2xl leading-relaxed">In a straight rotation, a follow in the Sep 12 room dances roughly <span class="text-dimmed">half of every song</span> now — a big jump from one-in-three before Saul. Aug 29 is close to a full-flow room. Recruit one more lead and Sep 12 is there too.</p>
+    </div>
+
+    <div class="rotation-section" style="margin-top: 2rem;">
+      <p class="rotation-header">Load-bearing names — retention priority</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-6xl">
+        <div class="stat-tile">
+          <h4>Confirmed lead · flex</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Renier</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Picked <strong class="text-dimmed">6 slots</strong>. Present in every practical room. Confirmed leading. Anchors both recommended dates.</p>
+        </div>
+        <div class="stat-tile">
+          <h4>Dedicated lead · limited</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Kurt</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Only picked <strong class="text-dimmed">2 slots</strong> (both PMs — exactly your picks). No wiggle room; protect the two rooms he's in.</p>
+        </div>
+        <div class="stat-tile">
+          <h4>New dedicated lead</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Saul</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Picked <strong class="text-dimmed">4 slots</strong> — both morning and evening on Aug 29 and Sep 12. But said <strong class="text-dimmed">"no thanks"</strong> to future workshops — he's here for these dates only.</p>
+        </div>
+        <div class="stat-tile">
+          <h4>Most-committed follow</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Nadine</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Picked <strong class="text-dimmed">6 slots</strong> — tied with Renier for most. In both recommended rooms. Drives in from outside Austin — check in before each date.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPICS (filtered per room) -->
   <section id="topics" data-title="Topics" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule" aria-hidden="true"></span>
-    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">What they want to learn</h2>
-    <p class="text-dimmed mb-10 max-w-2xl">Three topics tie at the top with eleven checks. Two more sit right below at ten. Nothing got rejected. Any of these could carry a workshop; the top three earn top billing.</p>
-    <div class="grid gap-2.5 max-w-3xl">
-      <div class="slot-row is-winner">
-        <div class="slot-label">Tarraxo</div>
-        <div class="slot-count">11</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Topics — per picked room</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">Filtering out respondents who can't make the picked dates. All-respondent counts inflated the ranking with votes from people who won't be in the room; here's what the actual attendees want.</p>
+    <div class="grid md:grid-cols-2 gap-6 max-w-6xl">
+      <div>
+        <p class="roster-col-title">Aug 29 · 4–7 PM · 8 attendees</p>
+        <div class="ratio-rule" style="margin-bottom: 1rem;">
+          Two topics tie at 8/8: <strong>Tarraxo</strong> and <strong>Intro to Shadow Position</strong>. The other four sit at 7/8 — only Saul skipped them (he only picked Tarraxo and Intro to Shadow). Strong signal to open with either topic.
+        </div>
+        <div class="grid gap-2.5">
+          <div class="slot-row is-winner"><div class="slot-label">Tarraxo</div><div class="slot-count">8 / 8</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div></div>
+          <div class="slot-row is-winner"><div class="slot-label">Intro to Shadow Position</div><div class="slot-count">8 / 8</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Foot &amp; Leg Play</div><div class="slot-count">7 / 8</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 87.5%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Axial Play</div><div class="slot-count">7 / 8</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 87.5%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Hook Steps</div><div class="slot-count">7 / 8</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 87.5%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Alternative Connection Points</div><div class="slot-count">7 / 8</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 87.5%"></div></div></div>
+        </div>
       </div>
-      <div class="slot-row is-winner">
-        <div class="slot-label">Foot &amp; Leg Play</div>
-        <div class="slot-count">11</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div>
-      </div>
-      <div class="slot-row is-winner">
-        <div class="slot-label">Axial Play</div>
-        <div class="slot-count">11</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div>
-      </div>
-      <div class="slot-row">
-        <div class="slot-label">Alternative Connection Points</div>
-        <div class="slot-count">10</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 90.9%"></div></div>
-      </div>
-      <div class="slot-row">
-        <div class="slot-label">Hook Steps</div>
-        <div class="slot-count">10</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 90.9%"></div></div>
-      </div>
-      <div class="slot-row">
-        <div class="slot-label">Intro to Shadow Position</div>
-        <div class="slot-count">9</div>
-        <div class="slot-bar"><div class="slot-bar-fill" style="width: 81.8%"></div></div>
+      <div>
+        <p class="roster-col-title">Sep 12 · 4–7 PM · 9 attendees</p>
+        <div class="ratio-rule" style="margin-bottom: 1rem;">
+          <strong>Tarraxo</strong> sits alone at 9/9. <strong>Foot &amp; Leg Play</strong> alone at 8/9. Then a four-way tie at 7/9. Saul, Cristina Trujillo, and Ace are the swing voters — each skipped different topics.
+        </div>
+        <div class="grid gap-2.5">
+          <div class="slot-row is-winner"><div class="slot-label">Tarraxo</div><div class="slot-count">9 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div></div>
+          <div class="slot-row is-winner"><div class="slot-label">Foot &amp; Leg Play</div><div class="slot-count">8 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Intro to Shadow Position</div><div class="slot-count">7 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 77.8%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Axial Play</div><div class="slot-count">7 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 77.8%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Hook Steps</div><div class="slot-count">7 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 77.8%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Alternative Connection Points</div><div class="slot-count">7 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 77.8%"></div></div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -804,14 +1062,14 @@
         <h4>Role</h4>
         <dl>
           <div class="row"><dt>Follow</dt><dd>9</dd></div>
+          <div class="row"><dt>Lead</dt><dd>2</dd></div>
           <div class="row"><dt>Both</dt><dd>2</dd></div>
-          <div class="row"><dt>Lead</dt><dd>1</dd></div>
         </dl>
       </div>
       <div class="stat-tile">
         <h4>Level</h4>
         <dl>
-          <div class="row"><dt>Improver</dt><dd>6</dd></div>
+          <div class="row"><dt>Improver</dt><dd>7</dd></div>
           <div class="row"><dt>Beginner</dt><dd>4</dd></div>
           <div class="row"><dt>Intermediate</dt><dd>2</dd></div>
         </dl>
@@ -821,7 +1079,7 @@
         <dl>
           <div class="row"><dt>South</dt><dd>3</dd></div>
           <div class="row"><dt>North</dt><dd>3</dd></div>
-          <div class="row"><dt>Central</dt><dd>2</dd></div>
+          <div class="row"><dt>Central</dt><dd>3</dd></div>
           <div class="row"><dt>Outside</dt><dd>2</dd></div>
           <div class="row"><dt>East</dt><dd>1</dd></div>
           <div class="row"><dt>West</dt><dd>1</dd></div>
@@ -831,14 +1089,14 @@
         <h4>Format preference</h4>
         <dl>
           <div class="row"><dt>Split by level</dt><dd>5</dd></div>
-          <div class="row"><dt>No preference</dt><dd>4</dd></div>
+          <div class="row"><dt>No preference</dt><dd>5</dd></div>
           <div class="row"><dt>One all-level</dt><dd>3</dd></div>
         </dl>
       </div>
       <div class="stat-tile">
         <h4>WhatsApp community</h4>
         <dl>
-          <div class="row"><dt>Already in</dt><dd>9</dd></div>
+          <div class="row"><dt>Already in</dt><dd>10</dd></div>
           <div class="row"><dt>Wants to join</dt><dd>2</dd></div>
           <div class="row"><dt>No thanks</dt><dd>1</dd></div>
         </dl>
@@ -847,12 +1105,35 @@
         <h4>How they heard</h4>
         <dl>
           <div class="row"><dt>WhatsApp</dt><dd>6</dd></div>
+          <div class="row"><dt>Class or event</dt><dd>4</dd></div>
           <div class="row"><dt>Charles directly</dt><dd>3</dd></div>
-          <div class="row"><dt>Class or event</dt><dd>3</dd></div>
           <div class="row"><dt>Facebook</dt><dd>2</dd></div>
         </dl>
       </div>
     </div>
+  </section>
+
+  <!-- KSX BRIDGE -->
+  <section id="ksx-signal" data-title="Kiz ATX ↔ KSX" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
+    <div class="ember-glow" aria-hidden="true"></div>
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm relative">The KSX preview</h2>
+    <p class="text-dimmed mb-10 max-w-2xl relative">This signal isn't just about August and September. It's a small mirror of the recruiting problem waiting for us in October and November.</p>
+    <div class="grid md:grid-cols-2 gap-6 max-w-5xl relative">
+      <div class="rec-card">
+        <span class="rec-tag">This signal</span>
+        <p class="rec-date">9 Follows · 2 Leads</p>
+        <p class="rec-time">Plus 2 Both (Renier and Lia)</p>
+        <p class="rec-meta">Thirteen dancers filled out the interest form. <strong>Nine</strong> are Follows. <strong>Two</strong> are dedicated Leads (Kurt, Saul). Even counting the two Boths as flex leaders, the room stays follow-weighted at more than 2:1.</p>
+      </div>
+      <div class="rec-card" style="border-color: rgba(123, 164, 165, 0.32); background: rgba(123, 164, 165, 0.05);">
+        <span class="rec-tag" style="color: #7ba4a5;">KSX · Oct 30 – Nov 9</span>
+        <p class="rec-date">Same imbalance, larger scale</p>
+        <p class="rec-time">Multi-day summit, national reach</p>
+        <p class="rec-meta" style="color: rgba(245, 238, 224, 0.75);">If Kiz ATX's most engaged 13 skew this hard toward Follow, KSX will hit the same wall — just with more people. <strong style="color: #7ba4a5; font-family: 'JetBrains Mono', monospace; font-weight: 500;">Lead recruitment is not a workshop problem. It's a KSX problem.</strong> Solve it here first.</p>
+      </div>
+    </div>
+    <p class="mt-8 text-sm text-muted max-w-3xl relative leading-relaxed">Treat these workshops as a lead-recruiting lab. If we can move the ratio in a room of 8, we know what levers work at 80.</p>
   </section>
 
   <!-- BREATHER: CHRISTINA'S QUOTE -->
@@ -871,9 +1152,9 @@
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-10 tracking-tight text-shadow-warm">What to do with this</h2>
     <ul class="space-y-4 max-w-3xl text-lg text-body">
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Book Aug 29 and Sep 12, both 4 to 7 PM. Announce both dates together so the momentum carries.</span></li>
-      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Aug 22 evening is a valid alternate if Aug 29 falls through. Same headcount, one fewer leader-capable dancer.</span></li>
-      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Lead the pitch with any of the top three topics. Eleven-of-twelve interest in Tarraxo, Foot &amp; Leg Play, and Axial Play.</span></li>
-      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Recruit more Leads. Kurt and Renier are confirmed leading; Lia switches. Roughly three leader-capable bodies against nine Follows. Balance the room before opening it up.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Aug 22 evening is a valid alternate if Aug 29 falls through — but it now trails Aug 29 by one headcount and has only one confirmed lead (no Saul, no Kurt). Not a real substitute.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Curriculum: on Sep 12, open with Tarraxo (9/9) and layer Foot &amp; Leg Play (8/9). On Aug 29, Tarraxo and Intro to Shadow Position both hit 8/8 — either is a safe headline.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Recruit one more Lead for Sep 12. Kurt, Renier, and Saul are confirmed; Lia switches. Aug 29 essentially meets the ratio floor. Sep 12 still needs a fourth.</span></li>
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Run the room as one all-level workshop with a short foundations pass in the first 20 minutes. Christina's note is a design brief, not a complaint.</span></li>
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Promote through WhatsApp first. Six of eleven heard about this there; it is the biggest lever for the next signup.</span></li>
     </ul>
@@ -883,11 +1164,25 @@
   <section id="waiting" data-title="Still Waiting" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Signal is still open</h2>
-    <p class="text-dimmed mb-10 max-w-2xl">Ace filed on Aug 3 (Sep 12 evening only). Three expected respondents still out. Their answers could shift the August tiebreaker or push Sep 12 evening into a clearer majority. This deck reflects the twelve we have now.</p>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
-      <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Christian</p></div>
-      <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Saul</p></div>
-      <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Duane</p></div>
+    <p class="text-dimmed mb-10 max-w-2xl">Ace and Saul both filed on Aug 3. Two expected respondents still out. Three respondents shut out from the picked dates entirely. This deck reflects the thirteen we have — but keep both lists warm.</p>
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+      <div>
+        <p class="roster-col-title">Pending — expected but not yet filed</p>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Christian</p></div>
+          <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Duane</p></div>
+        </div>
+        <p class="mt-4 text-sm text-muted leading-relaxed">Nudge them. Rerun the analysis when they submit.</p>
+      </div>
+      <div>
+        <p class="roster-col-title">Shut out — warm list for the next run</p>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="stat-tile"><h4>Evening only</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Anyi</p></div>
+          <div class="stat-tile"><h4>Morning only</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Claudia</p></div>
+          <div class="stat-tile"><h4>Morning only</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Aysha</p></div>
+        </div>
+        <p class="mt-4 text-sm text-muted leading-relaxed">Filed the form, can't make Aug 29 PM or Sep 12 PM. Text them personally so they're seen. Add a matching date to the next run.</p>
+      </div>
     </div>
     <p class="mt-10 text-sm text-muted max-w-2xl">Nudge them. Rerun the analysis when they submit.</p>
   </section>
@@ -903,7 +1198,7 @@
       <a href="https://kizatx.com/events" class="cta-btn-primary cta-btn">Kiz ATX events</a>
       <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
     </div>
-    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 12 responses · Updated Aug 3, 2026</p>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 13 responses · Updated Aug 3, 2026</p>
   </section>
 
 </main>
