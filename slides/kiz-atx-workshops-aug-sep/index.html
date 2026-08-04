@@ -955,7 +955,7 @@
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
       <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
       <span class="hidden md:inline">·</span>
-      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 4, 2026 · 9:15 AM CDT · rev 20</span>
+      <span class="hidden lg:inline" title="Timestamp of last data refresh"><span data-inject="updated">Updated Aug 4, 2026 · 9:15 AM CDT</span> · <span data-inject="rev">rev 20</span></span>
       <span class="hidden lg:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
       <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
@@ -994,6 +994,7 @@
 
   <!-- COVER -->
   <section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
+    <!-- REGION:cover -->
     <div class="ember-glow" aria-hidden="true"></div>
     <h1 class="font-display font-extrabold text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
       Fifteen dancers.<br/>
@@ -1011,10 +1012,12 @@
     <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
       <span class="kbd">Space</span> to advance
     </div>
+  <!-- /REGION:cover -->
   </section>
 
   <!-- RECOMMENDATION -->
   <section id="pick" data-title="The Pick" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
+    <!-- REGION:pick -->
     <div class="ember-glow" aria-hidden="true"></div>
     <span class="accent-rule" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm relative">The pick</h2>
@@ -1033,10 +1036,12 @@
         <p class="rec-meta"><strong>10 of 15</strong> can attend — the clearest majority in the signal. Same five leads plus Alina. Ratio 5L / 7F is 0.71 — just barely under the floor. One more lead and Sep 12 clears it too.</p>
       </div>
     </div>
+  <!-- /REGION:pick -->
   </section>
 
   <!-- AUGUST AVAILABILITY -->
   <section id="august" data-title="August" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:august -->
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">August availability</h2>
     <p class="text-dimmed mb-10 max-w-2xl">Six slots offered across three Saturdays. Two time windows each day. Aug 29 evening still leads at 9 of 15. Morning slots grew after Svitlana filed (morning-only).</p>
@@ -1077,10 +1082,12 @@
         <div class="slot-bar"><div class="slot-bar-fill" style="width: 11.1%"></div></div>
       </div>
     </div>
+  <!-- /REGION:august -->
   </section>
 
   <!-- SEPTEMBER AVAILABILITY -->
   <section id="september" data-title="September" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:september -->
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">September availability</h2>
     <p class="text-dimmed mb-10 max-w-2xl">One Saturday offered, two time windows. Thirteen of fifteen can hit at least one of them; two are out that day entirely. Sep 12 morning grew after Svitlana joined the morning cohort.</p>
@@ -1101,10 +1108,12 @@
         <div class="slot-bar"><div class="slot-bar-fill" style="width: 20%"></div></div>
       </div>
     </div>
+  <!-- /REGION:september -->
   </section>
 
   <!-- PER-SLOT ROSTER -->
   <section id="roster" data-title="Per-Slot Roster" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:roster -->
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Who's in each slot</h2>
     <p class="text-dimmed mb-6 max-w-2xl">Each name is a real respondent. Lead-capable dancers pop; Follows sit in slate. Use this to pick a room, not just a headcount.</p>
@@ -1265,10 +1274,12 @@
         <p class="mt-6 text-sm text-muted max-w-md leading-relaxed">Note: <span class="text-dimmed">Renier plans to lead in the workshops</span> and shows up in almost every slot. Treat him as a confirmed second lead alongside Kurt; if he drops, most rooms lose that coverage.</p>
       </div>
     </div>
+  <!-- /REGION:roster -->
   </section>
 
   <!-- DEEPER CUTS -->
   <section id="deeper-cuts" data-title="Deeper cuts" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:deeper-cuts -->
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Who's in what room — deeper cuts</h2>
     <p class="text-dimmed mb-8 max-w-3xl">Beyond headcount. Three views: who attends both workshops (the retention core), how committed each person is (slots picked), and named cohorts emerging from the data.</p>
@@ -1334,10 +1345,12 @@
         </div>
       </div>
     </div>
+  <!-- /REGION:deeper-cuts -->
   </section>
 
   <!-- LEAD-FOLLOW RATIO -->
   <section id="ratio" data-title="Lead-Follow Ratio" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:ratio -->
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Do we have enough leads?</h2>
     <p class="text-dimmed mb-6 max-w-2xl">A room with too few leads punishes follows — they sit out most songs. Setting a floor keeps the room warm.</p>
@@ -1470,10 +1483,12 @@
         </div>
       </div>
     </div>
+  <!-- /REGION:ratio -->
   </section>
 
   <!-- MONEY MATH -->
   <section id="money" data-title="Money math" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:money -->
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <span class="internal-chip" aria-label="Internal use only">Internal · Do not share</span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Does the money work?</h2>
@@ -1683,10 +1698,12 @@
       <p class="money-total-value">$630 surplus · $79/hr</p>
       <p class="money-total-caption">Across 8 teaching hours. Range: <strong>$205</strong> ($26/hr) at Conservative × $35 to <strong>$930</strong> ($116/hr) at Optimistic × $50. Hourly rate covers teaching time only — no prep, marketing, or admin. Alina's cut and other costs still to subtract.</p>
     </div>
+  <!-- /REGION:money -->
   </section>
 
   <!-- TOPICS (filtered per room) -->
   <section id="topics" data-title="Topics" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:topics -->
     <span class="accent-rule" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Topics — per picked room</h2>
     <p class="text-dimmed mb-10 max-w-3xl">Filtering out respondents who can't make the picked dates. All-respondent counts inflated the ranking with votes from people who won't be in the room; here's what the actual attendees want.</p>
@@ -1720,10 +1737,12 @@
         </div>
       </div>
     </div>
+  <!-- /REGION:topics -->
   </section>
 
   <!-- WHO -->
   <section id="who" data-title="Who Showed Up" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:who -->
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Who filled it out</h2>
     <p class="text-dimmed mb-10 max-w-2xl">A follow-heavy improver room, mostly already in the WhatsApp, spread across the city with a couple driving in.</p>
@@ -1782,6 +1801,7 @@
         </dl>
       </div>
     </div>
+  <!-- /REGION:who -->
   </section>
 
   <!-- BREATHER: CHRISTINA'S QUOTE -->
@@ -1796,6 +1816,7 @@
 
   <!-- TAKEAWAYS -->
   <section id="takeaways" data-title="What to Do" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:takeaways -->
     <span class="accent-rule" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-10 tracking-tight text-shadow-warm">What to do with this</h2>
     <ul class="space-y-4 max-w-3xl text-lg text-body">
@@ -1806,10 +1827,12 @@
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Run the room as one all-level workshop with a short foundations pass in the first 20 minutes. Christina's note is a design brief, not a complaint.</span></li>
       <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Promote through WhatsApp first. Six of eleven heard about this there; it is the biggest lever for the next signup.</span></li>
     </ul>
+  <!-- /REGION:takeaways -->
   </section>
 
   <!-- STILL WAITING -->
   <section id="waiting" data-title="Still Waiting" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:waiting -->
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Signal is still open</h2>
     <p class="text-dimmed mb-10 max-w-3xl">Svitlana filed Aug 4 morning-only — joins the shut-out cohort. Four expected respondents still out — including Germain, a lapsed workshop attendee we're reaching out to. Four respondents now shut out from the picked dates entirely. This deck reflects the fifteen we have — but keep both lists warm.</p>
@@ -1835,6 +1858,7 @@
         <p class="mt-4 text-sm text-muted leading-relaxed">Filed the form, can't make Aug 29 PM or Sep 12 PM. Text them personally so they're seen. Add a matching date to the next run.</p>
       </div>
     </div>
+  <!-- /REGION:waiting -->
   </section>
 
   <!-- CTA -->
@@ -1848,7 +1872,7 @@
       <a href="https://kizatx.com/events" class="cta-btn-primary cta-btn">Kiz ATX events</a>
       <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
     </div>
-    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 15 responses · Updated Aug 4, 2026 · 9:15 AM CDT · rev 20</p>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · <span data-inject="response-count">15 responses</span> · <span data-inject="updated">Updated Aug 4, 2026 · 9:15 AM CDT</span> · <span data-inject="rev">rev 20</span></p>
   </section>
 
 </main>
