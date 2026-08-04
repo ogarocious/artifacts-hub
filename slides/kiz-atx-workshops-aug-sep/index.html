@@ -584,6 +584,50 @@
     .rotation-row { grid-template-columns: 1fr; gap: 0.5rem; }
     .rotation-summary { white-space: normal; }
   }
+
+  /* Pending / shut-out tiles */
+  .pending-tile {
+    padding: 1.1rem 1.25rem 1.25rem;
+    border-radius: 10px;
+    background: rgba(26, 20, 16, 0.55);
+    border: 1px solid rgba(123, 164, 165, 0.22);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .pending-tile.is-reaching-out {
+    border-color: rgba(212, 85, 43, 0.42);
+    background: rgba(212, 85, 43, 0.06);
+  }
+  .pending-tile.is-shutout {
+    border-color: rgba(201, 150, 71, 0.36);
+    background: rgba(201, 150, 71, 0.05);
+  }
+  .pending-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .pending-tile.is-reaching-out .pending-tag { color: #da7f4e; }
+  .pending-tile.is-shutout .pending-tag { color: #c99647; }
+  .pending-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 600;
+    font-size: 1.75rem;
+    color: #f5eee0;
+    margin: 0;
+    line-height: 1.1;
+  }
+  .pending-detail {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: rgba(245, 238, 224, 0.65);
+    margin: 0.25rem 0 0;
+    letter-spacing: 0.04em;
+  }
 </style>
 </head>
 <body class="text-ivory-50 font-sans antialiased">
@@ -600,7 +644,7 @@
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
       <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
       <span class="hidden md:inline">·</span>
-      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 3, 2026 · 8:50 PM CDT · rev 8</span>
+      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 3, 2026 · 9:20 PM CDT · rev 9</span>
       <span class="hidden lg:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
       <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
@@ -650,8 +694,8 @@
     <div class="mt-12 flex flex-wrap gap-3 text-xs relative">
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">13 responses</span>
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">100% completion</span>
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026 · 8:50 PM CDT</span>
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 8</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026 · 9:20 PM CDT</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 9</span>
     </div>
     <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
       <span class="kbd">Space</span> to advance
@@ -1116,29 +1160,6 @@
     </div>
   </section>
 
-  <!-- KSX BRIDGE -->
-  <section id="ksx-signal" data-title="Kiz ATX ↔ KSX" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
-    <div class="ember-glow" aria-hidden="true"></div>
-    <span class="accent-rule" aria-hidden="true"></span>
-    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm relative">The KSX preview</h2>
-    <p class="text-dimmed mb-10 max-w-2xl relative">This signal isn't just about August and September. It's a small mirror of the recruiting problem waiting for us in October and November.</p>
-    <div class="grid md:grid-cols-2 gap-6 max-w-5xl relative">
-      <div class="rec-card">
-        <span class="rec-tag">This signal</span>
-        <p class="rec-date">9 Follows · 2 Leads</p>
-        <p class="rec-time">Plus 2 Both (Renier and Lia)</p>
-        <p class="rec-meta">Thirteen dancers filled out the interest form. <strong>Nine</strong> are Follows. <strong>Two</strong> are dedicated Leads (Kurt, Saul). Even counting the two Boths as flex leaders, the room stays follow-weighted at more than 2:1.</p>
-      </div>
-      <div class="rec-card" style="border-color: rgba(123, 164, 165, 0.32); background: rgba(123, 164, 165, 0.05);">
-        <span class="rec-tag" style="color: #7ba4a5;">KSX · Oct 30 – Nov 9</span>
-        <p class="rec-date">Same imbalance, larger scale</p>
-        <p class="rec-time">Multi-day summit, national reach</p>
-        <p class="rec-meta" style="color: rgba(245, 238, 224, 0.75);">If Kiz ATX's most engaged 13 skew this hard toward Follow, KSX will hit the same wall — just with more people. <strong style="color: #7ba4a5; font-family: 'JetBrains Mono', monospace; font-weight: 500;">Lead recruitment is not a workshop problem. It's a KSX problem.</strong> Solve it here first.</p>
-      </div>
-    </div>
-    <p class="mt-8 text-sm text-muted max-w-3xl relative leading-relaxed">Treat these workshops as a lead-recruiting lab. If we can move the ratio in a room of 8, we know what levers work at 80.</p>
-  </section>
-
   <!-- BREATHER: CHRISTINA'S QUOTE -->
   <section id="quote" data-title="What One Dancer Said" class="snap-slide min-h-screen flex items-center px-6 md:px-20 border-t border-terracotta-500/10">
     <div class="max-w-3xl">
@@ -1167,30 +1188,29 @@
   <section id="waiting" data-title="Still Waiting" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Signal is still open</h2>
-    <p class="text-dimmed mb-10 max-w-2xl">Ace and Saul both filed on Aug 3. Five expected respondents still out — including Germain, a lapsed workshop attendee we're reaching out to. Three respondents shut out from the picked dates entirely. This deck reflects the thirteen we have — but keep both lists warm.</p>
-    <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+    <p class="text-dimmed mb-10 max-w-3xl">Ace and Saul both filed on Aug 3. Five expected respondents still out — including Germain, a lapsed workshop attendee we're reaching out to. Three respondents shut out from the picked dates entirely. This deck reflects the thirteen we have — but keep both lists warm.</p>
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl">
       <div>
         <p class="roster-col-title">Pending — expected but not yet filed</p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Christian</p></div>
-          <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Duane</p></div>
-          <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Svitlana</p></div>
-          <div class="stat-tile"><h4>Pending</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Lisa</p></div>
-          <div class="stat-tile"><h4>Reaching out</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Germain</p></div>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3">
+          <div class="pending-tile"><p class="pending-tag">Pending</p><p class="pending-name">Christian</p></div>
+          <div class="pending-tile"><p class="pending-tag">Pending</p><p class="pending-name">Duane</p></div>
+          <div class="pending-tile"><p class="pending-tag">Pending</p><p class="pending-name">Svitlana</p></div>
+          <div class="pending-tile"><p class="pending-tag">Pending</p><p class="pending-name">Lisa</p></div>
+          <div class="pending-tile is-reaching-out"><p class="pending-tag">Reaching out</p><p class="pending-name">Germain</p></div>
         </div>
         <p class="mt-4 text-sm text-muted leading-relaxed">Nudge them. Rerun the analysis when they submit.</p>
       </div>
       <div>
         <p class="roster-col-title">Shut out — warm list for the next run</p>
-        <div class="grid grid-cols-3 gap-3">
-          <div class="stat-tile"><h4>Evening only</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Anyi</p></div>
-          <div class="stat-tile"><h4>Morning only</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Claudia</p></div>
-          <div class="stat-tile"><h4>Morning only</h4><p class="font-display font-semibold text-xl text-ivory-50 mt-1">Aysha</p></div>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-3">
+          <div class="pending-tile is-shutout"><p class="pending-tag">Evening only</p><p class="pending-name">Anyi</p><p class="pending-detail">Follow · Int</p></div>
+          <div class="pending-tile is-shutout"><p class="pending-tag">Morning only</p><p class="pending-name">Claudia</p><p class="pending-detail">Follow · Beg</p></div>
+          <div class="pending-tile is-shutout"><p class="pending-tag">Morning only</p><p class="pending-name">Aysha</p><p class="pending-detail">Follow · Imp</p></div>
         </div>
         <p class="mt-4 text-sm text-muted leading-relaxed">Filed the form, can't make Aug 29 PM or Sep 12 PM. Text them personally so they're seen. Add a matching date to the next run.</p>
       </div>
     </div>
-    <p class="mt-10 text-sm text-muted max-w-2xl">Nudge them. Rerun the analysis when they submit.</p>
   </section>
 
   <!-- CTA -->
@@ -1204,7 +1224,7 @@
       <a href="https://kizatx.com/events" class="cta-btn-primary cta-btn">Kiz ATX events</a>
       <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
     </div>
-    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 13 responses · Updated Aug 3, 2026 · 8:50 PM CDT · rev 8</p>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 13 responses · Updated Aug 3, 2026 · 9:20 PM CDT · rev 9</p>
   </section>
 
 </main>
