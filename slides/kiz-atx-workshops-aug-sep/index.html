@@ -721,9 +721,22 @@
     font-weight: 600;
     font-size: 1.25rem;
     color: #f5eee0;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0;
+    line-height: 1.15;
   }
   .money-cell.is-value.is-expected { color: #5f7d64; }
+  .money-cell .cell-hourly {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem;
+    color: rgba(245, 238, 224, 0.55);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-top: 3px;
+  }
+  .money-cell.is-value.is-expected .cell-hourly { color: rgba(95, 125, 100, 0.85); }
   .money-breakeven {
     font-family: "JetBrains Mono", ui-monospace, monospace;
     font-size: 0.78rem;
@@ -780,7 +793,7 @@
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
       <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
       <span class="hidden md:inline">·</span>
-      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 3, 2026 · 10:55 PM CDT · rev 14</span>
+      <span class="hidden lg:inline" title="Timestamp of last data refresh">Updated Aug 3, 2026 · 11:10 PM CDT · rev 15</span>
       <span class="hidden lg:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
       <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
@@ -830,8 +843,8 @@
     <div class="mt-12 flex flex-wrap gap-3 text-xs relative">
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">14 responses</span>
       <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">100% completion</span>
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026 · 10:55 PM CDT</span>
-      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 14</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 3, 2026 · 11:10 PM CDT</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 15</span>
     </div>
     <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
       <span class="kbd">Space</span> to advance
@@ -1244,19 +1257,19 @@
           <div class="money-cell is-header">$50 ticket</div>
 
           <div class="money-cell is-row-label">Conservative<span class="row-label-caption">7 attendees · 20% no-show</span></div>
-          <div class="money-cell is-value">$85</div>
-          <div class="money-cell is-value">$190</div>
+          <div class="money-cell is-value">$85<span class="cell-hourly">$21/hr</span></div>
+          <div class="money-cell is-value">$190<span class="cell-hourly">$48/hr</span></div>
 
           <div class="money-cell is-row-label">Expected<span class="row-label-caption">9 attendees · committed</span></div>
-          <div class="money-cell is-value is-expected">$155</div>
-          <div class="money-cell is-value is-expected">$290</div>
+          <div class="money-cell is-value is-expected">$155<span class="cell-hourly">$39/hr</span></div>
+          <div class="money-cell is-value is-expected">$290<span class="cell-hourly">$73/hr</span></div>
 
           <div class="money-cell is-row-label is-last-row">Optimistic<span class="row-label-caption">12 attendees · pending fills</span></div>
-          <div class="money-cell is-value is-last-row">$260</div>
-          <div class="money-cell is-value is-last-row">$440</div>
+          <div class="money-cell is-value is-last-row">$260<span class="cell-hourly">$65/hr</span></div>
+          <div class="money-cell is-value is-last-row">$440<span class="cell-hourly">$110/hr</span></div>
         </div>
 
-        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 9 clears both.</p>
+        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 9 clears both. Hourly rate = surplus ÷ 4 teaching hours.</p>
       </div>
 
       <div class="money-card">
@@ -1270,26 +1283,26 @@
           <div class="money-cell is-header">$50 ticket</div>
 
           <div class="money-cell is-row-label">Conservative<span class="row-label-caption">8 attendees · 20% no-show</span></div>
-          <div class="money-cell is-value">$120</div>
-          <div class="money-cell is-value">$240</div>
+          <div class="money-cell is-value">$120<span class="cell-hourly">$30/hr</span></div>
+          <div class="money-cell is-value">$240<span class="cell-hourly">$60/hr</span></div>
 
           <div class="money-cell is-row-label">Expected<span class="row-label-caption">10 attendees · committed</span></div>
-          <div class="money-cell is-value is-expected">$190</div>
-          <div class="money-cell is-value is-expected">$340</div>
+          <div class="money-cell is-value is-expected">$190<span class="cell-hourly">$48/hr</span></div>
+          <div class="money-cell is-value is-expected">$340<span class="cell-hourly">$85/hr</span></div>
 
           <div class="money-cell is-row-label is-last-row">Optimistic<span class="row-label-caption">13 attendees · pending fills</span></div>
-          <div class="money-cell is-value is-last-row">$295</div>
-          <div class="money-cell is-value is-last-row">$490</div>
+          <div class="money-cell is-value is-last-row">$295<span class="cell-hourly">$74/hr</span></div>
+          <div class="money-cell is-value is-last-row">$490<span class="cell-hourly">$123/hr</span></div>
         </div>
 
-        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 10 clears both.</p>
+        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 10 clears both. Hourly rate = surplus ÷ 4 teaching hours.</p>
       </div>
     </div>
 
     <div class="money-total-card">
       <p class="money-total-label">Both workshops combined · Expected × $50</p>
-      <p class="money-total-value">$630 surplus</p>
-      <p class="money-total-caption">Range: <strong>$205</strong> (Conservative × $35) to <strong>$930</strong> (Optimistic × $50). Alina's cut, marketing, and other costs still to subtract.</p>
+      <p class="money-total-value">$630 surplus · $79/hr</p>
+      <p class="money-total-caption">Across 8 teaching hours. Range: <strong>$205</strong> ($26/hr) at Conservative × $35 to <strong>$930</strong> ($116/hr) at Optimistic × $50. Hourly rate covers teaching time only — no prep, marketing, or admin. Alina's cut and other costs still to subtract.</p>
     </div>
   </section>
 
@@ -1455,7 +1468,7 @@
       <a href="https://kizatx.com/events" class="cta-btn-primary cta-btn">Kiz ATX events</a>
       <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
     </div>
-    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 14 responses · Updated Aug 3, 2026 · 10:55 PM CDT · rev 14</p>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · 14 responses · Updated Aug 3, 2026 · 11:10 PM CDT · rev 15</p>
   </section>
 
 </main>
