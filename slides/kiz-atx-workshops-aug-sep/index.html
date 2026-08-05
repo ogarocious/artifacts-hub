@@ -939,6 +939,373 @@
     .heatmap-corner { font-size: 9px; padding: 0.3rem 0.25rem; }
     .heatmap-grid { grid-template-columns: minmax(52px, auto) repeat(4, minmax(0, 1fr)); }
   }
+
+  /* ============================================================
+     MONEY v6: profit surface + break-even ladder + ToC (2026-08-05)
+     ============================================================ */
+
+  /* Desktop matrix (visible >= 900px) */
+  .matrix-desktop { display: none; }
+  @media (min-width: 900px) {
+    .matrix-desktop { display: grid; }
+    .matrix-mobile { display: none !important; }
+  }
+  .matrix-desktop {
+    grid-template-columns: 3.5rem repeat(16, minmax(0, 1fr));
+    border: 1px solid rgba(212, 85, 43, 0.18);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(15, 11, 8, 0.45);
+    max-width: 1200px;
+  }
+  .matrix-desktop .m-cell {
+    padding: 0.4rem 0.15rem;
+    text-align: center;
+    border-right: 1px solid rgba(245, 238, 224, 0.05);
+    border-bottom: 1px solid rgba(245, 238, 224, 0.05);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 2.9rem;
+    line-height: 1.1;
+    gap: 0.05rem;
+  }
+  .matrix-desktop .m-cell.group-end {
+    border-right: 2px solid rgba(212, 85, 43, 0.35);
+  }
+  .matrix-desktop .m-cell.is-studio-header {
+    background: rgba(15, 11, 8, 0.85);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(228, 200, 155, 0.95);
+    padding: 0.7rem 0.15rem;
+    border-bottom: 2px solid rgba(212, 85, 43, 0.35);
+    min-height: unset;
+  }
+  .matrix-desktop .m-cell.is-ticket-header {
+    background: rgba(15, 11, 8, 0.7);
+    font-size: 0.6rem;
+    color: rgba(245, 238, 224, 0.55);
+    letter-spacing: 0.03em;
+    padding: 0.35rem 0.15rem;
+    min-height: unset;
+  }
+  .matrix-desktop .m-cell.is-corner {
+    background: rgba(15, 11, 8, 0.9);
+    font-size: 0.5rem;
+    color: rgba(245, 238, 224, 0.5);
+    line-height: 1.15;
+    padding: 0.5rem 0.3rem;
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .matrix-desktop .m-cell.is-row-label {
+    background: rgba(15, 11, 8, 0.7);
+    font-size: 0.85rem;
+    color: rgba(245, 238, 224, 0.85);
+  }
+  .matrix-desktop .m-cell:nth-child(17n) { border-right: none; }
+
+  /* Zone colors — apply to both desktop and mobile matrix cells */
+  .zone-loss  { background: rgba(79, 21, 0, 0.55);   color: rgba(228, 168, 148, 0.95); }
+  .zone-below { background: rgba(201, 150, 71, 0.14); color: rgba(228, 200, 155, 0.95); }
+  .zone-floor { background: rgba(95, 125, 100, 0.32); color: rgba(180, 220, 190, 0.98); }
+  .m-cell .profit, .mc .profit { font-size: 0.8rem; font-weight: 500; }
+  .m-cell .rate, .mc .rate     { font-size: 0.55rem; opacity: 0.65; }
+
+  /* Mobile mini-matrices (< 900px) */
+  .matrix-mobile { display: flex; flex-direction: column; gap: 1.25rem; }
+  .mini-matrix {
+    border: 1px solid rgba(212, 85, 43, 0.18);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(15, 11, 8, 0.45);
+  }
+  .mini-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 0.7rem 1rem;
+    background: rgba(15, 11, 8, 0.85);
+    border-bottom: 2px solid rgba(212, 85, 43, 0.35);
+  }
+  .mini-header .mh-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: rgba(228, 200, 155, 0.95);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .mini-header .mh-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(245, 238, 224, 0.55);
+  }
+  .mini-grid {
+    display: grid;
+    grid-template-columns: 3.5rem repeat(4, minmax(0, 1fr));
+  }
+  .mini-grid .mc {
+    padding: 0.5rem 0.25rem;
+    text-align: center;
+    border-right: 1px solid rgba(245, 238, 224, 0.05);
+    border-bottom: 1px solid rgba(245, 238, 224, 0.05);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 2.6rem;
+    line-height: 1.1;
+    gap: 0.05rem;
+  }
+  .mini-grid .mc:nth-child(5n) { border-right: none; }
+  .mini-grid .mc.is-header {
+    background: rgba(15, 11, 8, 0.7);
+    font-size: 0.65rem;
+    color: rgba(245, 238, 224, 0.55);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    min-height: unset;
+    padding: 0.4rem 0.15rem;
+  }
+  .mini-grid .mc.is-row-label {
+    background: rgba(15, 11, 8, 0.7);
+    font-size: 0.8rem;
+    color: rgba(245, 238, 224, 0.85);
+  }
+
+  /* Zone legend */
+  .zone-legend-money {
+    display: flex; gap: 1.25rem; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.04em;
+    color: rgba(245, 238, 224, 0.6);
+    margin-top: 1rem;
+  }
+  .zone-legend-money .swatch {
+    display: inline-block; width: 0.8rem; height: 0.8rem;
+    border-radius: 2px; margin-right: 0.4rem; vertical-align: middle;
+  }
+  .zone-legend-money .sw-loss  { background: rgba(79, 21, 0, 0.75); }
+  .zone-legend-money .sw-below { background: rgba(201, 150, 71, 0.4); border: 1px solid rgba(201, 150, 71, 0.55); }
+  .zone-legend-money .sw-floor { background: rgba(95, 125, 100, 0.55); }
+
+  /* Break-even ladder */
+  .be-block {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245, 238, 224, 0.08);
+    max-width: 1200px;
+  }
+  .be-heading {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+  }
+  .be-heading h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    color: rgba(245, 238, 224, 0.98);
+  }
+  .be-heading .be-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(245, 238, 224, 0.55);
+    letter-spacing: 0.04em;
+  }
+  .be-rows {
+    display: grid;
+    grid-template-columns: 11rem 1fr 8.5rem;
+    gap: 0.5rem 0.9rem;
+    margin-top: 1.25rem;
+    align-items: center;
+  }
+  .be-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(245, 238, 224, 0.75);
+    text-align: right;
+    padding-right: 0.25rem;
+    line-height: 1.2;
+  }
+  .be-label .studio-part { color: #edd0a0; }
+  .be-label .ticket-part { color: rgba(180, 220, 190, 0.9); display: block; }
+  .be-bar {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    height: 2.7rem;
+    background: rgba(15, 11, 8, 0.6);
+    border: 1px solid rgba(245, 238, 224, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .be-seg {
+    height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    gap: 0.05rem;
+    padding: 0.1rem 0.2rem;
+    line-height: 1.05;
+  }
+  .be-seg.be-cover {
+    background: rgba(201, 150, 71, 0.5);
+    color: #f5eee0;
+    border-right: 1px solid rgba(15, 11, 8, 0.5);
+  }
+  .be-seg.be-floor {
+    background: rgba(95, 125, 100, 0.65);
+    color: #ecfff2;
+  }
+  .be-seg .seg-count { font-size: 0.75rem; font-weight: 500; }
+  .be-seg .seg-money { font-size: 0.58rem; opacity: 0.85; }
+  .be-stats {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(245, 238, 224, 0.8);
+    line-height: 1.35;
+  }
+  .be-stats .stat-line { display: flex; justify-content: space-between; gap: 0.5rem; }
+  .be-stats .stat-line .k {
+    color: rgba(245, 238, 224, 0.45);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    line-height: 1;
+  }
+  .be-stats .stat-line .v { color: #edd0a0; font-weight: 500; }
+  .be-stats .stat-line .v.profit-v { color: #8dbb95; font-weight: 500; }
+  .be-key {
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.04em;
+    color: rgba(245, 238, 224, 0.6);
+    margin-top: 1.25rem;
+    padding: 0.75rem 1rem;
+    background: rgba(15, 11, 8, 0.4);
+    border-radius: 6px;
+    border: 1px dashed rgba(245, 238, 224, 0.12);
+  }
+  .be-key .k-swatch {
+    display: inline-block; width: 0.8rem; height: 0.8rem;
+    border-radius: 2px; margin-right: 0.4rem; vertical-align: middle;
+  }
+  .be-key .k-cover  { background: rgba(201, 150, 71, 0.55); }
+  .be-key .k-floor  { background: rgba(95, 125, 100, 0.7); }
+
+  /* Mobile ladder reflow (< 700px) */
+  @media (max-width: 700px) {
+    .be-rows { grid-template-columns: 1fr; gap: 0.25rem; }
+    .be-label {
+      text-align: left;
+      padding: 0.15rem 0.25rem 0.1rem;
+      font-size: 0.78rem;
+      line-height: 1.2;
+    }
+    .be-label .ticket-part { display: inline; }
+    .be-label .ticket-part::before { content: ' · '; color: rgba(245, 238, 224, 0.4); }
+    .be-label:not(:first-child) {
+      margin-top: 0.9rem;
+      border-top: 1px dashed rgba(245, 238, 224, 0.10);
+      padding-top: 0.9rem;
+    }
+    .be-bar { height: 2.6rem; margin: 0 0.25rem; }
+    .be-seg .seg-count { font-size: 0.78rem; }
+    .be-seg .seg-money { font-size: 0.6rem; }
+    .be-stats {
+      padding: 0.4rem 0.5rem 0.1rem;
+      font-size: 0.72rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+    }
+    .be-stats .stat-line {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      justify-content: flex-start;
+    }
+    .be-stats .stat-line .k { display: inline; font-size: 0.6rem; }
+  }
+
+  /* Collapsible ToC — anchored at bottom of cover slide */
+  .deck-toc {
+    margin-top: 2.5rem;
+    max-width: 32rem;
+    position: relative;
+    z-index: 2;
+  }
+  .deck-toc summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 1rem;
+    background: rgba(15, 11, 8, 0.55);
+    border: 1px dashed rgba(201, 150, 71, 0.5);
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(228, 200, 155, 0.95);
+    cursor: pointer;
+    list-style: none;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .deck-toc summary::-webkit-details-marker { display: none; }
+  .deck-toc summary::before {
+    content: '▸';
+    font-size: 0.7rem;
+    transition: transform 200ms ease;
+    display: inline-block;
+  }
+  .deck-toc[open] summary::before { transform: rotate(90deg); }
+  .deck-toc summary:hover {
+    border-color: rgba(201, 150, 71, 0.85);
+    background: rgba(15, 11, 8, 0.75);
+  }
+  .deck-toc[open] summary {
+    background: rgba(201, 150, 71, 0.10);
+    border-color: rgba(201, 150, 71, 0.85);
+  }
+  .toc-list {
+    margin-top: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(15, 11, 8, 0.75);
+    border: 1px solid rgba(245, 238, 224, 0.10);
+    border-radius: 8px;
+    list-style: none;
+  }
+  .toc-list li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.35rem 0;
+    color: rgba(245, 238, 224, 0.8);
+  }
+  .toc-list li a {
+    color: rgba(245, 238, 224, 0.85);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(212, 85, 43, 0.3);
+    padding-bottom: 1px;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .toc-list li a:hover {
+    color: #edd0a0;
+    border-bottom-color: rgba(201, 150, 71, 0.85);
+  }
+  .toc-list .toc-group {
+    padding: 0.5rem 0 0.25rem;
+    color: rgba(228, 200, 155, 0.75);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .toc-list .toc-sub {
+    padding-left: 1.25rem;
+    color: rgba(245, 238, 224, 0.7);
+  }
+
 </style>
 </head>
 <body class="text-ivory-50 font-sans antialiased">
@@ -955,7 +1322,7 @@
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
       <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
       <span class="hidden md:inline">·</span>
-      <span class="hidden lg:inline" title="Timestamp of last data refresh"><span data-inject="updated">Updated Aug 5, 2026 · 12:16 PM CDT</span> · <span data-inject="rev">rev 22</span></span>
+      <span class="hidden lg:inline" title="Timestamp of last data refresh"><span data-inject="updated">Updated Aug 5, 2026 · 2:14 PM CDT</span> · <span data-inject="rev">rev 23</span></span>
       <span class="hidden lg:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
       <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
@@ -1013,6 +1380,26 @@
       <span class="kbd">Space</span> to advance
     </div>
   <!-- /REGION:cover -->
+  
+    <details class="deck-toc" data-toc="deck">
+      <summary>Contents</summary>
+      <ol class="toc-list">
+        <li><a href="#pick">The pick</a></li>
+        <li class="toc-group">Availability</li>
+        <li class="toc-sub"><a href="#august">August</a></li>
+        <li class="toc-sub"><a href="#september">September</a></li>
+        <li class="toc-sub"><a href="#roster">Per-slot roster</a></li>
+        <li class="toc-sub"><a href="#deeper-cuts">Deeper cuts</a></li>
+        <li class="toc-sub"><a href="#ratio">Lead-follow ratio</a></li>
+        <li><a href="#money">Money math (internal)</a></li>
+        <li><a href="#topics">Topics</a></li>
+        <li><a href="#who">Who showed up</a></li>
+        <li><a href="#quote">One dancer said</a></li>
+        <li><a href="#takeaways">What to do</a></li>
+        <li><a href="#waiting">Still waiting</a></li>
+      </ol>
+    </details>
+  
   </section>
 
   <!-- RECOMMENDATION -->
@@ -1497,214 +1884,206 @@
   <!-- MONEY MATH -->
   <section id="money" data-title="Money math" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
     <!-- REGION:money -->
+
     <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
-    <span class="internal-chip" aria-label="Internal use only">Internal · Do not share</span>
-    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Does the money work?</h2>
-    <p class="text-dimmed mb-8 max-w-3xl">Surplus after venue only — Alina and other costs aren't in this math yet. Modeled at $40/hour × 4 hours = $160 venue. Sensitivity: at $25/hour venue, surpluses are ~$60 higher across the board; at $50/hour, ~$40 lower.</p>
+    <span class="internal-chip">Internal · Do not share</span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">How to price this</h2>
+    <p class="text-dimmed mb-8 max-w-3xl">Profit surface across studio cost, ticket price, and sign-ups. Explores workshop configurations for future runs — not evaluating a specific date. All numbers before Alina's cut, marketing, and materials.</p>
 
-    <div class="grid md:grid-cols-2 gap-5 max-w-5xl">
-      <div class="money-card">
-        <p class="money-slot-tag">August</p>
-        <p class="money-slot-date">Saturday, August 29 · 4–7 PM</p>
-        <p class="money-slot-sub">Surplus after $160 venue</p>
+    <!-- Desktop matrix (>=900px) -->
+    <div class="matrix-desktop">
+      <div class="m-cell is-corner">Sign-ups ↓<br/>Ticket ↓ · Studio →</div>
+      <div class="m-cell is-studio-header">$30</div><div class="m-cell is-studio-header"></div><div class="m-cell is-studio-header"></div><div class="m-cell is-studio-header group-end"></div>
+      <div class="m-cell is-studio-header">$40</div><div class="m-cell is-studio-header"></div><div class="m-cell is-studio-header"></div><div class="m-cell is-studio-header group-end"></div>
+      <div class="m-cell is-studio-header">$50</div><div class="m-cell is-studio-header"></div><div class="m-cell is-studio-header"></div><div class="m-cell is-studio-header group-end"></div>
+      <div class="m-cell is-studio-header">$60</div><div class="m-cell is-studio-header"></div><div class="m-cell is-studio-header"></div><div class="m-cell is-studio-header">Studio<br/>$/hr</div>
 
-        <div class="money-matrix">
-          <div class="money-cell is-header is-corner">Scenario</div>
-          <div class="money-cell is-header">$35 ticket</div>
-          <div class="money-cell is-header">$50 ticket</div>
+      <div class="m-cell is-corner"></div>
+      <div class="m-cell is-ticket-header">$30</div><div class="m-cell is-ticket-header">$40</div><div class="m-cell is-ticket-header">$50</div><div class="m-cell is-ticket-header group-end">$60</div>
+      <div class="m-cell is-ticket-header">$30</div><div class="m-cell is-ticket-header">$40</div><div class="m-cell is-ticket-header">$50</div><div class="m-cell is-ticket-header group-end">$60</div>
+      <div class="m-cell is-ticket-header">$30</div><div class="m-cell is-ticket-header">$40</div><div class="m-cell is-ticket-header">$50</div><div class="m-cell is-ticket-header group-end">$60</div>
+      <div class="m-cell is-ticket-header">$30</div><div class="m-cell is-ticket-header">$40</div><div class="m-cell is-ticket-header">$50</div><div class="m-cell is-ticket-header">$60</div>
 
-          <div class="money-cell is-row-label">Conservative<span class="row-label-caption">8 attendees · 20% no-show</span></div>
-          <div class="money-cell is-value">$120<span class="cell-hourly">$30/hr</span></div>
-          <div class="money-cell is-value">$240<span class="cell-hourly">$60/hr</span></div>
+      <div class="m-cell is-row-label">4</div>
+      <div class="m-cell zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="m-cell zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div><div class="m-cell zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div><div class="m-cell zone-below group-end"><span class="profit">$120</span><span class="rate">$40/hr</span></div>
+      <div class="m-cell zone-loss"><span class="profit">-$40</span><span class="rate">-$13/hr</span></div><div class="m-cell zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="m-cell zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div><div class="m-cell zone-below group-end"><span class="profit">$80</span><span class="rate">$27/hr</span></div>
+      <div class="m-cell zone-loss"><span class="profit">-$80</span><span class="rate">-$27/hr</span></div><div class="m-cell zone-loss"><span class="profit">-$40</span><span class="rate">-$13/hr</span></div><div class="m-cell zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="m-cell zone-below group-end"><span class="profit">$40</span><span class="rate">$13/hr</span></div>
+      <div class="m-cell zone-loss"><span class="profit">-$120</span><span class="rate">-$40/hr</span></div><div class="m-cell zone-loss"><span class="profit">-$80</span><span class="rate">-$27/hr</span></div><div class="m-cell zone-loss"><span class="profit">-$40</span><span class="rate">-$13/hr</span></div><div class="m-cell zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div>
 
-          <div class="money-cell is-row-label">Expected<span class="row-label-caption">10 attendees · committed</span></div>
-          <div class="money-cell is-value is-expected">$190<span class="cell-hourly">$48/hr</span></div>
-          <div class="money-cell is-value is-expected">$340<span class="cell-hourly">$85/hr</span></div>
+      <div class="m-cell is-row-label">6</div>
+      <div class="m-cell zone-below"><span class="profit">$60</span><span class="rate">$20/hr</span></div><div class="m-cell zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div><div class="m-cell zone-floor"><span class="profit">$180</span><span class="rate">$60/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$240</span><span class="rate">$80/hr</span></div>
+      <div class="m-cell zone-below"><span class="profit">$20</span><span class="rate">$7/hr</span></div><div class="m-cell zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div><div class="m-cell zone-below"><span class="profit">$140</span><span class="rate">$47/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$200</span><span class="rate">$67/hr</span></div>
+      <div class="m-cell zone-loss"><span class="profit">-$20</span><span class="rate">-$7/hr</span></div><div class="m-cell zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div><div class="m-cell zone-below"><span class="profit">$100</span><span class="rate">$33/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$160</span><span class="rate">$53/hr</span></div>
+      <div class="m-cell zone-loss"><span class="profit">-$60</span><span class="rate">-$20/hr</span></div><div class="m-cell zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="m-cell zone-below"><span class="profit">$60</span><span class="rate">$20/hr</span></div><div class="m-cell zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div>
 
-          <div class="money-cell is-row-label is-last-row">Optimistic<span class="row-label-caption">13 attendees · pending fills</span></div>
-          <div class="money-cell is-value is-last-row">$295<span class="cell-hourly">$74/hr</span></div>
-          <div class="money-cell is-value is-last-row">$490<span class="cell-hourly">$123/hr</span></div>
-        </div>
+      <div class="m-cell is-row-label">8</div>
+      <div class="m-cell zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div><div class="m-cell zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div><div class="m-cell zone-floor"><span class="profit">$280</span><span class="rate">$93/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$360</span><span class="rate">$120/hr</span></div>
+      <div class="m-cell zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div><div class="m-cell zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div><div class="m-cell zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$320</span><span class="rate">$107/hr</span></div>
+      <div class="m-cell zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div><div class="m-cell zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div><div class="m-cell zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$280</span><span class="rate">$93/hr</span></div>
+      <div class="m-cell zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="m-cell zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div><div class="m-cell zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div><div class="m-cell zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div>
 
-        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 10 clears both. Hourly rate = surplus ÷ 4 teaching hours.</p>
+      <div class="m-cell is-row-label">10</div>
+      <div class="m-cell zone-floor"><span class="profit">$180</span><span class="rate">$60/hr</span></div><div class="m-cell zone-floor"><span class="profit">$280</span><span class="rate">$93/hr</span></div><div class="m-cell zone-floor"><span class="profit">$380</span><span class="rate">$127/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$480</span><span class="rate">$160/hr</span></div>
+      <div class="m-cell zone-below"><span class="profit">$140</span><span class="rate">$47/hr</span></div><div class="m-cell zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div><div class="m-cell zone-floor"><span class="profit">$340</span><span class="rate">$113/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$440</span><span class="rate">$147/hr</span></div>
+      <div class="m-cell zone-below"><span class="profit">$100</span><span class="rate">$33/hr</span></div><div class="m-cell zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div><div class="m-cell zone-floor"><span class="profit">$300</span><span class="rate">$100/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$400</span><span class="rate">$133/hr</span></div>
+      <div class="m-cell zone-below"><span class="profit">$60</span><span class="rate">$20/hr</span></div><div class="m-cell zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div><div class="m-cell zone-floor"><span class="profit">$260</span><span class="rate">$87/hr</span></div><div class="m-cell zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div>
 
-        <p class="breakdown-title">Where the money goes · Expected case</p>
-        <div class="breakdown-row">
-          <span class="breakdown-label">$35 ticket</span>
-          <div class="breakdown-track" aria-label="At $35 ticket: revenue $350, venue $160, profit $190">
-            <div class="breakdown-segment breakdown-venue" style="flex: 0 0 32%">$160</div>
-            <div class="breakdown-segment breakdown-profit" style="flex: 0 0 38%">$190</div>
-          </div>
-        </div>
-        <div class="breakdown-row">
-          <span class="breakdown-label">$50 ticket</span>
-          <div class="breakdown-track" aria-label="At $50 ticket: revenue $500, venue $160, profit $340">
-            <div class="breakdown-segment breakdown-venue" style="flex: 0 0 32%">$160</div>
-            <div class="breakdown-segment breakdown-profit" style="flex: 0 0 68%">$340</div>
-          </div>
+      <div class="m-cell is-row-label">12</div>
+      <div class="m-cell zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div><div class="m-cell zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div><div class="m-cell zone-floor"><span class="profit">$480</span><span class="rate">$160/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$600</span><span class="rate">$200/hr</span></div>
+      <div class="m-cell zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div><div class="m-cell zone-floor"><span class="profit">$320</span><span class="rate">$107/hr</span></div><div class="m-cell zone-floor"><span class="profit">$440</span><span class="rate">$147/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$560</span><span class="rate">$187/hr</span></div>
+      <div class="m-cell zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div><div class="m-cell zone-floor"><span class="profit">$280</span><span class="rate">$93/hr</span></div><div class="m-cell zone-floor"><span class="profit">$400</span><span class="rate">$133/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$520</span><span class="rate">$173/hr</span></div>
+      <div class="m-cell zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div><div class="m-cell zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div><div class="m-cell zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div><div class="m-cell zone-floor"><span class="profit">$480</span><span class="rate">$160/hr</span></div>
+
+      <div class="m-cell is-row-label">15</div>
+      <div class="m-cell zone-floor"><span class="profit">$330</span><span class="rate">$110/hr</span></div><div class="m-cell zone-floor"><span class="profit">$480</span><span class="rate">$160/hr</span></div><div class="m-cell zone-floor"><span class="profit">$630</span><span class="rate">$210/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$780</span><span class="rate">$260/hr</span></div>
+      <div class="m-cell zone-floor"><span class="profit">$290</span><span class="rate">$97/hr</span></div><div class="m-cell zone-floor"><span class="profit">$440</span><span class="rate">$147/hr</span></div><div class="m-cell zone-floor"><span class="profit">$590</span><span class="rate">$197/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$740</span><span class="rate">$247/hr</span></div>
+      <div class="m-cell zone-floor"><span class="profit">$250</span><span class="rate">$83/hr</span></div><div class="m-cell zone-floor"><span class="profit">$400</span><span class="rate">$133/hr</span></div><div class="m-cell zone-floor"><span class="profit">$550</span><span class="rate">$183/hr</span></div><div class="m-cell zone-floor group-end"><span class="profit">$700</span><span class="rate">$233/hr</span></div>
+      <div class="m-cell zone-floor"><span class="profit">$210</span><span class="rate">$70/hr</span></div><div class="m-cell zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div><div class="m-cell zone-floor"><span class="profit">$510</span><span class="rate">$170/hr</span></div><div class="m-cell zone-floor"><span class="profit">$660</span><span class="rate">$220/hr</span></div>
+    </div>
+
+    <!-- Mobile stacked mini-matrices (<900px) -->
+    <div class="matrix-mobile">
+      <div class="mini-matrix">
+        <div class="mini-header"><span class="mh-title">$30 studio</span><span class="mh-sub">$120 venue · 4hr</span></div>
+        <div class="mini-grid">
+          <div class="mc is-header">Sign-ups ↓</div><div class="mc is-header">$30 tkt</div><div class="mc is-header">$40 tkt</div><div class="mc is-header">$50 tkt</div><div class="mc is-header">$60 tkt</div>
+          <div class="mc is-row-label">4</div><div class="mc zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="mc zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div><div class="mc zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div><div class="mc zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div>
+          <div class="mc is-row-label">6</div><div class="mc zone-below"><span class="profit">$60</span><span class="rate">$20/hr</span></div><div class="mc zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div><div class="mc zone-floor"><span class="profit">$180</span><span class="rate">$60/hr</span></div><div class="mc zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div>
+          <div class="mc is-row-label">8</div><div class="mc zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div><div class="mc zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div><div class="mc zone-floor"><span class="profit">$280</span><span class="rate">$93/hr</span></div><div class="mc zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div>
+          <div class="mc is-row-label">10</div><div class="mc zone-floor"><span class="profit">$180</span><span class="rate">$60/hr</span></div><div class="mc zone-floor"><span class="profit">$280</span><span class="rate">$93/hr</span></div><div class="mc zone-floor"><span class="profit">$380</span><span class="rate">$127/hr</span></div><div class="mc zone-floor"><span class="profit">$480</span><span class="rate">$160/hr</span></div>
+          <div class="mc is-row-label">12</div><div class="mc zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div><div class="mc zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div><div class="mc zone-floor"><span class="profit">$480</span><span class="rate">$160/hr</span></div><div class="mc zone-floor"><span class="profit">$600</span><span class="rate">$200/hr</span></div>
+          <div class="mc is-row-label">15</div><div class="mc zone-floor"><span class="profit">$330</span><span class="rate">$110/hr</span></div><div class="mc zone-floor"><span class="profit">$480</span><span class="rate">$160/hr</span></div><div class="mc zone-floor"><span class="profit">$630</span><span class="rate">$210/hr</span></div><div class="mc zone-floor"><span class="profit">$780</span><span class="rate">$260/hr</span></div>
         </div>
       </div>
-
-      <div class="money-card">
-        <p class="money-slot-tag">September</p>
-        <p class="money-slot-date">Saturday, September 12 · 4–7 PM</p>
-        <p class="money-slot-sub">Surplus after $160 venue</p>
-
-        <div class="money-matrix">
-          <div class="money-cell is-header is-corner">Scenario</div>
-          <div class="money-cell is-header">$35 ticket</div>
-          <div class="money-cell is-header">$50 ticket</div>
-
-          <div class="money-cell is-row-label">Conservative<span class="row-label-caption">9 attendees · 20% no-show</span></div>
-          <div class="money-cell is-value">$155<span class="cell-hourly">$39/hr</span></div>
-          <div class="money-cell is-value">$290<span class="cell-hourly">$73/hr</span></div>
-
-          <div class="money-cell is-row-label">Expected<span class="row-label-caption">11 attendees · committed</span></div>
-          <div class="money-cell is-value is-expected">$225<span class="cell-hourly">$56/hr</span></div>
-          <div class="money-cell is-value is-expected">$390<span class="cell-hourly">$98/hr</span></div>
-
-          <div class="money-cell is-row-label is-last-row">Optimistic<span class="row-label-caption">14 attendees · pending fills</span></div>
-          <div class="money-cell is-value is-last-row">$330<span class="cell-hourly">$83/hr</span></div>
-          <div class="money-cell is-value is-last-row">$540<span class="cell-hourly">$135/hr</span></div>
+      <div class="mini-matrix">
+        <div class="mini-header"><span class="mh-title">$40 studio</span><span class="mh-sub">$160 venue · 4hr</span></div>
+        <div class="mini-grid">
+          <div class="mc is-header">Sign-ups ↓</div><div class="mc is-header">$30 tkt</div><div class="mc is-header">$40 tkt</div><div class="mc is-header">$50 tkt</div><div class="mc is-header">$60 tkt</div>
+          <div class="mc is-row-label">4</div><div class="mc zone-loss"><span class="profit">-$40</span><span class="rate">-$13/hr</span></div><div class="mc zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="mc zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div><div class="mc zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div>
+          <div class="mc is-row-label">6</div><div class="mc zone-below"><span class="profit">$20</span><span class="rate">$7/hr</span></div><div class="mc zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div><div class="mc zone-below"><span class="profit">$140</span><span class="rate">$47/hr</span></div><div class="mc zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div>
+          <div class="mc is-row-label">8</div><div class="mc zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div><div class="mc zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div><div class="mc zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div><div class="mc zone-floor"><span class="profit">$320</span><span class="rate">$107/hr</span></div>
+          <div class="mc is-row-label">10</div><div class="mc zone-below"><span class="profit">$140</span><span class="rate">$47/hr</span></div><div class="mc zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div><div class="mc zone-floor"><span class="profit">$340</span><span class="rate">$113/hr</span></div><div class="mc zone-floor"><span class="profit">$440</span><span class="rate">$147/hr</span></div>
+          <div class="mc is-row-label">12</div><div class="mc zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div><div class="mc zone-floor"><span class="profit">$320</span><span class="rate">$107/hr</span></div><div class="mc zone-floor"><span class="profit">$440</span><span class="rate">$147/hr</span></div><div class="mc zone-floor"><span class="profit">$560</span><span class="rate">$187/hr</span></div>
+          <div class="mc is-row-label">15</div><div class="mc zone-floor"><span class="profit">$290</span><span class="rate">$97/hr</span></div><div class="mc zone-floor"><span class="profit">$440</span><span class="rate">$147/hr</span></div><div class="mc zone-floor"><span class="profit">$590</span><span class="rate">$197/hr</span></div><div class="mc zone-floor"><span class="profit">$740</span><span class="rate">$247/hr</span></div>
         </div>
-
-        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 11 clears both. Hourly rate = surplus ÷ 4 teaching hours.</p>
-
-        <p class="breakdown-title">Where the money goes · Expected case</p>
-        <div class="breakdown-row">
-          <span class="breakdown-label">$35 ticket</span>
-          <div class="breakdown-track" aria-label="At $35 ticket: revenue $385, venue $160, profit $225">
-            <div class="breakdown-segment breakdown-venue" style="flex: 0 0 32%">$160</div>
-            <div class="breakdown-segment breakdown-profit" style="flex: 0 0 43%">$225</div>
-          </div>
+      </div>
+      <div class="mini-matrix">
+        <div class="mini-header"><span class="mh-title">$50 studio</span><span class="mh-sub">$200 venue · 4hr</span></div>
+        <div class="mini-grid">
+          <div class="mc is-header">Sign-ups ↓</div><div class="mc is-header">$30 tkt</div><div class="mc is-header">$40 tkt</div><div class="mc is-header">$50 tkt</div><div class="mc is-header">$60 tkt</div>
+          <div class="mc is-row-label">4</div><div class="mc zone-loss"><span class="profit">-$80</span><span class="rate">-$27/hr</span></div><div class="mc zone-loss"><span class="profit">-$40</span><span class="rate">-$13/hr</span></div><div class="mc zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="mc zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div>
+          <div class="mc is-row-label">6</div><div class="mc zone-loss"><span class="profit">-$20</span><span class="rate">-$7/hr</span></div><div class="mc zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div><div class="mc zone-below"><span class="profit">$100</span><span class="rate">$33/hr</span></div><div class="mc zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div>
+          <div class="mc is-row-label">8</div><div class="mc zone-below"><span class="profit">$40</span><span class="rate">$13/hr</span></div><div class="mc zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div><div class="mc zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div><div class="mc zone-floor"><span class="profit">$280</span><span class="rate">$93/hr</span></div>
+          <div class="mc is-row-label">10</div><div class="mc zone-below"><span class="profit">$100</span><span class="rate">$33/hr</span></div><div class="mc zone-floor"><span class="profit">$200</span><span class="rate">$67/hr</span></div><div class="mc zone-floor"><span class="profit">$300</span><span class="rate">$100/hr</span></div><div class="mc zone-floor"><span class="profit">$400</span><span class="rate">$133/hr</span></div>
+          <div class="mc is-row-label">12</div><div class="mc zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div><div class="mc zone-floor"><span class="profit">$280</span><span class="rate">$93/hr</span></div><div class="mc zone-floor"><span class="profit">$400</span><span class="rate">$133/hr</span></div><div class="mc zone-floor"><span class="profit">$520</span><span class="rate">$173/hr</span></div>
+          <div class="mc is-row-label">15</div><div class="mc zone-floor"><span class="profit">$250</span><span class="rate">$83/hr</span></div><div class="mc zone-floor"><span class="profit">$400</span><span class="rate">$133/hr</span></div><div class="mc zone-floor"><span class="profit">$550</span><span class="rate">$183/hr</span></div><div class="mc zone-floor"><span class="profit">$700</span><span class="rate">$233/hr</span></div>
         </div>
-        <div class="breakdown-row">
-          <span class="breakdown-label">$50 ticket</span>
-          <div class="breakdown-track" aria-label="At $50 ticket: revenue $550, venue $160, profit $390">
-            <div class="breakdown-segment breakdown-venue" style="flex: 0 0 32%">$160</div>
-            <div class="breakdown-segment breakdown-profit" style="flex: 0 0 71%">$390</div>
-          </div>
-        </div>
-
-        <div class="breakdown-legend" aria-label="Legend">
-          <span><span class="swatch swatch-venue"></span>Venue</span>
-          <span><span class="swatch swatch-profit"></span>Profit</span>
-          <span style="color: rgba(245, 238, 224, 0.45);">Bars scaled to $550 (Sep 12 × $50 = full track)</span>
+      </div>
+      <div class="mini-matrix">
+        <div class="mini-header"><span class="mh-title">$60 studio</span><span class="mh-sub">$240 venue · 4hr</span></div>
+        <div class="mini-grid">
+          <div class="mc is-header">Sign-ups ↓</div><div class="mc is-header">$30 tkt</div><div class="mc is-header">$40 tkt</div><div class="mc is-header">$50 tkt</div><div class="mc is-header">$60 tkt</div>
+          <div class="mc is-row-label">4</div><div class="mc zone-loss"><span class="profit">-$120</span><span class="rate">-$40/hr</span></div><div class="mc zone-loss"><span class="profit">-$80</span><span class="rate">-$27/hr</span></div><div class="mc zone-loss"><span class="profit">-$40</span><span class="rate">-$13/hr</span></div><div class="mc zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div>
+          <div class="mc is-row-label">6</div><div class="mc zone-loss"><span class="profit">-$60</span><span class="rate">-$20/hr</span></div><div class="mc zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="mc zone-below"><span class="profit">$60</span><span class="rate">$20/hr</span></div><div class="mc zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div>
+          <div class="mc is-row-label">8</div><div class="mc zone-below"><span class="profit">$0</span><span class="rate">$0/hr</span></div><div class="mc zone-below"><span class="profit">$80</span><span class="rate">$27/hr</span></div><div class="mc zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div><div class="mc zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div>
+          <div class="mc is-row-label">10</div><div class="mc zone-below"><span class="profit">$60</span><span class="rate">$20/hr</span></div><div class="mc zone-floor"><span class="profit">$160</span><span class="rate">$53/hr</span></div><div class="mc zone-floor"><span class="profit">$260</span><span class="rate">$87/hr</span></div><div class="mc zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div>
+          <div class="mc is-row-label">12</div><div class="mc zone-below"><span class="profit">$120</span><span class="rate">$40/hr</span></div><div class="mc zone-floor"><span class="profit">$240</span><span class="rate">$80/hr</span></div><div class="mc zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div><div class="mc zone-floor"><span class="profit">$480</span><span class="rate">$160/hr</span></div>
+          <div class="mc is-row-label">15</div><div class="mc zone-floor"><span class="profit">$210</span><span class="rate">$70/hr</span></div><div class="mc zone-floor"><span class="profit">$360</span><span class="rate">$120/hr</span></div><div class="mc zone-floor"><span class="profit">$510</span><span class="rate">$170/hr</span></div><div class="mc zone-floor"><span class="profit">$660</span><span class="rate">$220/hr</span></div>
         </div>
       </div>
     </div>
 
-    <div class="mt-8 max-w-6xl">
-      <p class="text-sm text-muted max-w-2xl mb-4 leading-relaxed">Ticket price × venue rate. Cell shows profit and margin at Expected attendance. Ochre = tight margin (&lt;50%); sage = strong (≥65%).</p>
-      <div class="grid md:grid-cols-2 gap-5">
-        <div class="heatmap-container">
-          <p class="heatmap-title">Aug 29 · 10 attendees · profit / margin</p>
-          <div class="heatmap-grid">
-            <div class="heatmap-corner">Venue / Ticket</div>
-            <div class="heatmap-col-header">$35</div>
-            <div class="heatmap-col-header">$40</div>
-            <div class="heatmap-col-header">$45</div>
-            <div class="heatmap-col-header">$50</div>
-
-            <div class="heatmap-row-header">$25/hr</div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$250</span><span class="cell-margin">71%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$300</span><span class="cell-margin">75%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$350</span><span class="cell-margin">78%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$400</span><span class="cell-margin">80%</span></div>
-
-            <div class="heatmap-row-header">$30/hr</div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$230</span><span class="cell-margin">66%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$280</span><span class="cell-margin">70%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$330</span><span class="cell-margin">73%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$380</span><span class="cell-margin">76%</span></div>
-
-            <div class="heatmap-row-header">$35/hr</div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$210</span><span class="cell-margin">60%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$260</span><span class="cell-margin">65%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$310</span><span class="cell-margin">69%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$360</span><span class="cell-margin">72%</span></div>
-
-            <div class="heatmap-row-header">$40/hr</div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$190</span><span class="cell-margin">54%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$240</span><span class="cell-margin">60%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$290</span><span class="cell-margin">64%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$340</span><span class="cell-margin">68%</span></div>
-
-            <div class="heatmap-row-header">$45/hr</div>
-            <div class="heatmap-cell is-tight"><span class="cell-profit">$170</span><span class="cell-margin">49%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$220</span><span class="cell-margin">55%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$270</span><span class="cell-margin">60%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$320</span><span class="cell-margin">64%</span></div>
-
-            <div class="heatmap-row-header">$50/hr</div>
-            <div class="heatmap-cell is-tight"><span class="cell-profit">$150</span><span class="cell-margin">43%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$200</span><span class="cell-margin">50%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$250</span><span class="cell-margin">56%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$300</span><span class="cell-margin">60%</span></div>
-          </div>
-        </div>
-
-        <div class="heatmap-container">
-          <p class="heatmap-title">Sep 12 · 11 attendees · profit / margin</p>
-          <div class="heatmap-grid">
-            <div class="heatmap-corner">Venue / Ticket</div>
-            <div class="heatmap-col-header">$35</div>
-            <div class="heatmap-col-header">$40</div>
-            <div class="heatmap-col-header">$45</div>
-            <div class="heatmap-col-header">$50</div>
-
-            <div class="heatmap-row-header">$25/hr</div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$285</span><span class="cell-margin">72%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$340</span><span class="cell-margin">76%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$395</span><span class="cell-margin">79%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$450</span><span class="cell-margin">81%</span></div>
-
-            <div class="heatmap-row-header">$30/hr</div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$265</span><span class="cell-margin">68%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$320</span><span class="cell-margin">71%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$375</span><span class="cell-margin">74%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$430</span><span class="cell-margin">77%</span></div>
-
-            <div class="heatmap-row-header">$35/hr</div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$245</span><span class="cell-margin">61%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$300</span><span class="cell-margin">65%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$355</span><span class="cell-margin">69%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$410</span><span class="cell-margin">72%</span></div>
-
-            <div class="heatmap-row-header">$40/hr</div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$225</span><span class="cell-margin">56%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$280</span><span class="cell-margin">60%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$335</span><span class="cell-margin">64%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$390</span><span class="cell-margin">68%</span></div>
-
-            <div class="heatmap-row-header">$45/hr</div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$205</span><span class="cell-margin">51%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$260</span><span class="cell-margin">55%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$315</span><span class="cell-margin">60%</span></div>
-            <div class="heatmap-cell is-strong"><span class="cell-profit">$370</span><span class="cell-margin">64%</span></div>
-
-            <div class="heatmap-row-header">$50/hr</div>
-            <div class="heatmap-cell is-tight"><span class="cell-profit">$185</span><span class="cell-margin">45%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$240</span><span class="cell-margin">50%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$295</span><span class="cell-margin">56%</span></div>
-            <div class="heatmap-cell is-fair"><span class="cell-profit">$350</span><span class="cell-margin">60%</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="heatmap-legend" aria-label="Margin legend">
-        <span><span class="swatch swatch-tight"></span>Tight (&lt;50%)</span>
-        <span><span class="swatch swatch-fair"></span>Fair (50–64%)</span>
-        <span><span class="swatch swatch-strong"></span>Strong (≥65%)</span>
-        <span style="color: rgba(245, 238, 224, 0.45);">Numbers = profit / margin at Expected attendance</span>
-      </div>
+    <div class="zone-legend-money">
+      <span><span class="swatch sw-loss"></span>Loss on venue</span>
+      <span><span class="swatch sw-below"></span>Below floor ($0 – $149 profit)</span>
+      <span><span class="swatch sw-floor"></span>At floor ($150+ profit · $50/hr teaching)</span>
     </div>
 
-    <div class="money-total-card">
-      <p class="money-total-label">Both workshops combined · Expected × $50</p>
-      <p class="money-total-value">$730 surplus · $91/hr</p>
-      <p class="money-total-caption">Across 8 teaching hours. Range: <strong>$245</strong> ($31/hr) at Conservative × $35 to <strong>$1030</strong> ($129/hr) at Optimistic × $50. Hourly rate covers teaching time only — no prep, marketing, or admin. Alina's cut and other costs still to subtract.</p>
+    <p class="text-muted text-xs font-mono mt-3">
+      Cell: <strong style="color:#edd0a0">large</strong> = profit ($) · <strong style="color:#edd0a0">small</strong> = teaching-hour rate ($/hr ÷ 3hr). Formula: (sign-ups × ticket) − (studio × 4). Excluded: Alina's cut, marketing, materials.
+    </p>
+
+    <div class="be-block">
+      <div class="be-heading">
+        <h3>Break-even ladder</h3>
+        <span class="be-sub">Sorted easiest to hardest · yellow = cover venue · green = additional to hit $150 floor</span>
+      </div>
+      <div class="be-rows">
+        <div class="be-label"><span class="studio-part">$30 studio</span><span class="ticket-part">$60 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 2"><span class="seg-count">2</span><span class="seg-money">$120</span></div><div class="be-seg be-floor" style="grid-column: span 3"><span class="seg-count">+3</span><span class="seg-money">+$180</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">5</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$300</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$180</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$30 studio</span><span class="ticket-part">$50 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 3"><span class="seg-count">3</span><span class="seg-money">$150</span></div><div class="be-seg be-floor" style="grid-column: span 3"><span class="seg-count">+3</span><span class="seg-money">+$150</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">6</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$300</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$180</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$40 studio</span><span class="ticket-part">$60 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 3"><span class="seg-count">3</span><span class="seg-money">$180</span></div><div class="be-seg be-floor" style="grid-column: span 3"><span class="seg-count">+3</span><span class="seg-money">+$180</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">6</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$360</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$200</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$50 studio</span><span class="ticket-part">$60 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 4"><span class="seg-count">4</span><span class="seg-money">$240</span></div><div class="be-seg be-floor" style="grid-column: span 2"><span class="seg-count">+2</span><span class="seg-money">+$120</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">6</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$360</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$160</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$30 studio</span><span class="ticket-part">$40 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 3"><span class="seg-count">3</span><span class="seg-money">$120</span></div><div class="be-seg be-floor" style="grid-column: span 4"><span class="seg-count">+4</span><span class="seg-money">+$160</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">7</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$280</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$160</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$40 studio</span><span class="ticket-part">$50 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 4"><span class="seg-count">4</span><span class="seg-money">$200</span></div><div class="be-seg be-floor" style="grid-column: span 3"><span class="seg-count">+3</span><span class="seg-money">+$150</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">7</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$350</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$190</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$50 studio</span><span class="ticket-part">$50 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 4"><span class="seg-count">4</span><span class="seg-money">$200</span></div><div class="be-seg be-floor" style="grid-column: span 3"><span class="seg-count">+3</span><span class="seg-money">+$150</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">7</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$350</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$150</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$60 studio</span><span class="ticket-part">$60 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 4"><span class="seg-count">4</span><span class="seg-money">$240</span></div><div class="be-seg be-floor" style="grid-column: span 3"><span class="seg-count">+3</span><span class="seg-money">+$180</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">7</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$420</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$180</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$40 studio</span><span class="ticket-part">$40 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 4"><span class="seg-count">4</span><span class="seg-money">$160</span></div><div class="be-seg be-floor" style="grid-column: span 4"><span class="seg-count">+4</span><span class="seg-money">+$160</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">8</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$320</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$160</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$60 studio</span><span class="ticket-part">$50 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 5"><span class="seg-count">5</span><span class="seg-money">$250</span></div><div class="be-seg be-floor" style="grid-column: span 3"><span class="seg-count">+3</span><span class="seg-money">+$150</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">8</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$400</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$160</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$30 studio</span><span class="ticket-part">$30 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 4"><span class="seg-count">4</span><span class="seg-money">$120</span></div><div class="be-seg be-floor" style="grid-column: span 5"><span class="seg-count">+5</span><span class="seg-money">+$150</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">9</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$270</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$150</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$50 studio</span><span class="ticket-part">$40 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 5"><span class="seg-count">5</span><span class="seg-money">$200</span></div><div class="be-seg be-floor" style="grid-column: span 4"><span class="seg-count">+4</span><span class="seg-money">+$160</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">9</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$360</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$160</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$60 studio</span><span class="ticket-part">$40 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 6"><span class="seg-count">6</span><span class="seg-money">$240</span></div><div class="be-seg be-floor" style="grid-column: span 4"><span class="seg-count">+4</span><span class="seg-money">+$160</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">10</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$400</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$160</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$40 studio</span><span class="ticket-part">$30 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 6"><span class="seg-count">6</span><span class="seg-money">$180</span></div><div class="be-seg be-floor" style="grid-column: span 5"><span class="seg-count">+5</span><span class="seg-money">+$150</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">11</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$330</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$170</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$50 studio</span><span class="ticket-part">$30 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 7"><span class="seg-count">7</span><span class="seg-money">$210</span></div><div class="be-seg be-floor" style="grid-column: span 5"><span class="seg-count">+5</span><span class="seg-money">+$150</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">12</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$360</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$160</span></div></div>
+
+        <div class="be-label"><span class="studio-part">$60 studio</span><span class="ticket-part">$30 ticket</span></div>
+        <div class="be-bar"><div class="be-seg be-cover" style="grid-column: span 8"><span class="seg-count">8</span><span class="seg-money">$240</span></div><div class="be-seg be-floor" style="grid-column: span 5"><span class="seg-count">+5</span><span class="seg-money">+$150</span></div></div>
+        <div class="be-stats"><div class="stat-line"><span class="k">signups</span><span class="v">13</span></div><div class="stat-line"><span class="k">revenue</span><span class="v">$390</span></div><div class="stat-line"><span class="k">profit</span><span class="v profit-v">$150</span></div></div>
+      </div>
+
+      <div class="be-key">
+        <span><span class="k-swatch k-cover"></span>Sign-ups to cover venue (break-even)</span>
+        <span><span class="k-swatch k-floor"></span>Additional sign-ups to clear $150 profit floor</span>
+      </div>
+
+      <p class="text-muted text-xs font-mono mt-3">
+        Segment: "N sign-ups → $X revenue." Yellow revenue covers the venue rent; green revenue is your profit above the $150 floor. Profit may overshoot $150 because you can't sell fractional sign-ups.
+      </p>
     </div>
+  
   <!-- /REGION:money -->
   </section>
 
@@ -1878,7 +2257,7 @@
       <a href="https://kizatx.com/events" class="cta-btn-primary cta-btn">Kiz ATX events</a>
       <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
     </div>
-    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · <span data-inject="response-count">16 responses</span> · <span data-inject="updated">Updated Aug 5, 2026 · 12:16 PM CDT</span> · <span data-inject="rev">rev 22</span></p>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Data from Tally form "Kiz ATX Specialty Workshops Interest Form" · <span data-inject="response-count">16 responses</span> · <span data-inject="updated">Updated Aug 5, 2026 · 2:14 PM CDT</span> · <span data-inject="rev">rev 23</span></p>
   </section>
 
 </main>
