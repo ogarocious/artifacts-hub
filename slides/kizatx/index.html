@@ -1,0 +1,1338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kiz ATX × Eskina — Residency Pulse</title>
+<meta name="description" content="Internal residency tracker: monthly payouts, per-class growth, and reverse-math on the room. Not for distribution." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0d1520" />
+
+<link rel="canonical" href="https://slides.ogarocious.com/kizatx/" />
+
+<meta property="og:site_name" content="Kiz ATX" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://slides.ogarocious.com/kizatx/" />
+<meta property="og:title" content="Kiz ATX × Eskina · Residency Pulse" />
+<meta property="og:description" content="Monthly payouts, per-class growth, and reverse-math on the Sunday residency. Internal ledger." />
+<meta property="og:image" content="https://slides.ogarocious.com/kizatx/og.png" />
+<meta property="og:image:alt" content="Kiz ATX × Eskina residency pulse cover: $94 per class in July, +24.5% per-class growth since April, +66% raw dollar growth since April." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Kiz ATX × Eskina · Residency Pulse" />
+<meta name="twitter:description" content="Monthly payouts, per-class growth, and reverse-math on the Sunday residency. Internal ledger." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/kizatx/og.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: {
+            950: '#060a10', 900: '#0d1520', 800: '#131e2c',
+            700: '#1c2a3d', 600: '#263547', 500: '#334a63',
+          },
+          electric: {
+            300: '#a5e2fb', 400: '#7dd6fa', 500: '#4fc3f7',
+            600: '#2196c9', 700: '#0e77a3',
+          },
+          ivory: {
+            50: '#f5f7fa', 100: '#e2e8f0', 200: '#c9d0d9', 300: '#94a3b8',
+          },
+          positive: { 400: '#86efac', 500: '#4ade80', 600: '#22c55e' },
+          negative: { 400: '#fca5a5', 500: '#f87171', 600: '#ef4444' },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  body {
+    background-color: #0d1520;
+    background-image:
+      radial-gradient(ellipse 1200px 700px at 20% 10%, rgba(79, 195, 247, 0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 80%, rgba(79, 195, 247, 0.06), transparent 65%),
+      linear-gradient(180deg, #060a10 0%, #0d1520 40%, #0d1520 60%, #060a10 100%);
+    min-height: 100vh;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  .text-body   { color: rgba(245, 247, 250, 0.90); }
+  .text-dimmed { color: rgba(245, 247, 250, 0.72); }
+  .text-muted  { color: rgba(245, 247, 250, 0.55); }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: #4fc3f7;
+    transform: scaleX(0); transform-origin: left center;
+    z-index: 51; pointer-events: none; will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(19, 30, 44, 0.55);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(79, 195, 247, 0.14);
+    box-shadow:
+      0 1px 0 rgba(245, 247, 250, 0.04) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(79, 195, 247, 0.30); }
+
+  .text-shadow-cool {
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 8px 30px rgba(79, 195, 247, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+
+  :focus-visible {
+    outline: 2px solid #4fc3f7;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .accent-rule {
+    display: inline-block; width: 40px; height: 2px;
+    background: #4fc3f7; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+
+  /* Header (fixed top bar) */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: rgba(6, 10, 16, 0.75);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(79, 195, 247, 0.10);
+  }
+  .site-header .brand-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: inherit;
+  }
+  .site-header .brand-dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: #4fc3f7;
+    transition: box-shadow 220ms ease;
+  }
+  .site-header .brand-link:hover .brand-dot {
+    box-shadow: 0 0 18px rgba(79, 195, 247, 0.7);
+  }
+  .site-header .brand-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: -0.01em;
+    color: #f5f7fa;
+  }
+  .site-header .brand-sub {
+    font-size: 0.75rem; color: rgba(245, 247, 250, 0.55);
+  }
+  .site-header .meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.72rem; color: rgba(245, 247, 250, 0.55);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .site-header .counter { color: rgba(245, 247, 250, 0.72); }
+  .site-header .sep { color: rgba(245, 247, 250, 0.25); }
+  @media (max-width: 900px) { .site-header .lg-only { display: none; } }
+  @media (max-width: 700px) { .site-header .md-only { display: none; } }
+
+  /* Keyboard chip */
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(79, 195, 247, 0.30);
+    background: rgba(79, 195, 247, 0.07);
+    color: #f5f7fa;
+    display: inline-block;
+    margin: 0 1px;
+  }
+
+  /* Menu button (mobile only) */
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.85rem; border-radius: 999px;
+    border: 1px solid rgba(79, 195, 247, 0.28);
+    background: rgba(79, 195, 247, 0.06);
+    color: #f5f7fa;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(79, 195, 247, 0.55);
+    background: rgba(79, 195, 247, 0.10);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+  @media (min-width: 768px) { .menu-btn { display: none; } }
+
+  /* Side navigation (desktop only) */
+  .side-nav {
+    position: fixed; top: 0; left: 0; height: 100vh;
+    width: 280px;
+    padding: 5rem 1.75rem 2rem;
+    z-index: 40;
+    background: rgba(6, 10, 16, 0.55);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-right: 1px solid rgba(79, 195, 247, 0.10);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) { .side-nav { display: flex; } }
+  .side-nav .nav-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(79, 195, 247, 0.85);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(79, 195, 247, 0.14);
+  }
+  .side-nav .nav-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.1rem;
+  }
+  .side-nav .nav-list a {
+    display: block;
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    color: rgba(245, 247, 250, 0.60);
+    text-decoration: none;
+    font-size: 0.88rem; line-height: 1.3;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+  .side-nav .nav-list a:hover {
+    color: #4fc3f7;
+    background: rgba(79, 195, 247, 0.06);
+  }
+  .side-nav .nav-list .nav-active a {
+    color: #4fc3f7;
+    background: rgba(79, 195, 247, 0.10);
+  }
+  .side-nav .nav-group {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9px; letter-spacing: 0.14em;
+    color: rgba(245, 247, 250, 0.35);
+    text-transform: uppercase;
+    padding: 0.85rem 0.65rem 0.25rem;
+    list-style: none;
+  }
+  .side-nav .nav-foot {
+    font-size: 0.72rem; color: rgba(245, 247, 250, 0.45);
+    line-height: 1.55;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(79, 195, 247, 0.10);
+  }
+  .side-nav .nav-foot .foot-brand { color: rgba(245, 247, 250, 0.72); font-weight: 500; }
+
+  /* Drawer (mobile only) */
+  .drawer {
+    position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    background: rgba(6, 10, 16, 0.85);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(13, 21, 32, 0.98);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(79, 195, 247, 0.85);
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .drawer-list {
+    border-left: 1px solid rgba(79, 195, 247, 0.28);
+    padding-left: 1rem;
+    margin: 0;
+    list-style: none;
+  }
+  .drawer-item {
+    display: block; padding: 0.85rem 0.9rem; margin-left: -0.5rem;
+    color: #f5f7fa; text-decoration: none;
+    font-size: 1.1rem; font-weight: 500; line-height: 1.3;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .drawer-item:hover, .drawer-item.is-active {
+    background: rgba(79, 195, 247, 0.12);
+    color: #4fc3f7;
+  }
+  .drawer-group {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(79, 195, 247, 0.65);
+    text-transform: uppercase;
+    padding: 1.25rem 0.4rem 0.5rem;
+    margin-left: -1rem;
+    list-style: none;
+  }
+
+  /* Cover TOC */
+  .deck-toc {
+    margin-top: 2.5rem;
+    max-width: 32rem;
+    position: relative;
+    z-index: 2;
+  }
+  .deck-toc summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 1rem;
+    background: rgba(13, 21, 32, 0.55);
+    border: 1px dashed rgba(79, 195, 247, 0.5);
+    border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(165, 226, 251, 0.95);
+    cursor: pointer;
+    list-style: none;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .deck-toc summary::-webkit-details-marker { display: none; }
+  .deck-toc summary::before {
+    content: '▸';
+    font-size: 0.7rem;
+    transition: transform 200ms ease;
+    display: inline-block;
+  }
+  .deck-toc[open] summary::before { transform: rotate(90deg); }
+  .deck-toc summary:hover {
+    border-color: rgba(79, 195, 247, 0.85);
+    background: rgba(13, 21, 32, 0.75);
+  }
+  .deck-toc[open] summary {
+    background: rgba(79, 195, 247, 0.10);
+    border-color: rgba(79, 195, 247, 0.85);
+  }
+  .toc-list {
+    margin-top: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(13, 21, 32, 0.75);
+    border: 1px solid rgba(79, 195, 247, 0.14);
+    border-radius: 8px;
+    list-style: none;
+  }
+  .toc-list li {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem;
+    padding: 0.35rem 0;
+    color: rgba(245, 247, 250, 0.8);
+  }
+  .toc-list li a {
+    color: rgba(245, 247, 250, 0.85);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(79, 195, 247, 0.3);
+    padding-bottom: 1px;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .toc-list li a:hover {
+    color: #a5e2fb;
+    border-bottom-color: rgba(79, 195, 247, 0.85);
+  }
+  .toc-list .toc-group {
+    padding: 0.5rem 0 0.25rem;
+    color: rgba(165, 226, 251, 0.75);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .toc-list .toc-sub {
+    padding-left: 1.25rem;
+    color: rgba(245, 247, 250, 0.7);
+  }
+
+  /* Data tiles */
+  .stat-tile {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(79, 195, 247, 0.20);
+    background: rgba(19, 30, 44, 0.55);
+  }
+  .stat-tile .label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(79, 195, 247, 0.85);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .stat-tile .value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.25rem);
+    color: #f5f7fa; line-height: 1.1;
+  }
+  .stat-tile .sub { color: rgba(245, 247, 250, 0.65); font-size: 0.85rem; margin-top: 0.4rem; }
+
+  /* Delta pills */
+  .delta {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.15rem 0.55rem; border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; font-weight: 500;
+  }
+  .delta-pos { background: rgba(74, 222, 128, 0.14); color: #86efac; border: 1px solid rgba(74, 222, 128, 0.30); }
+  .delta-neg { background: rgba(248, 113, 113, 0.14); color: #fca5a5; border: 1px solid rgba(248, 113, 113, 0.30); }
+  .delta-neu { background: rgba(148, 163, 184, 0.10); color: rgba(245, 247, 250, 0.65); border: 1px solid rgba(148, 163, 184, 0.20); }
+
+  /* Bar chart */
+  .bar-chart {
+    display: grid;
+    grid-template-columns: 4rem 1fr 6rem;
+    gap: 0.75rem 1rem;
+    align-items: center;
+  }
+  .bar-track {
+    height: 26px; border-radius: 6px;
+    background: rgba(79, 195, 247, 0.06);
+    border: 1px solid rgba(79, 195, 247, 0.10);
+    overflow: hidden; display: flex;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(79, 195, 247, 0.55), rgba(125, 214, 250, 0.90));
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: #0d1520; font-weight: 600;
+  }
+  .bar-fill.stack-kizomba { background: linear-gradient(90deg, #2196c9, #4fc3f7); }
+  .bar-fill.stack-private { background: linear-gradient(90deg, #86efac, #4ade80); color: #0d1520; }
+  .bar-fill.stack-photo   { background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0d1520; }
+  .bar-month {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem; color: rgba(245, 247, 250, 0.72);
+  }
+  .bar-total {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.9rem; color: #f5f7fa;
+    text-align: right;
+  }
+  @media (max-width: 700px) {
+    .bar-chart { grid-template-columns: 3.5rem 1fr 5rem; gap: 0.4rem 0.6rem; }
+  }
+
+  /* Line chart (SVG) */
+  .line-chart-wrap { position: relative; }
+  .line-chart { width: 100%; height: auto; display: block; }
+
+  /* Tables */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem;
+  }
+  .data-table thead th {
+    text-align: left; padding: 0.75rem 0.85rem;
+    font-size: 0.7rem; letter-spacing: 0.14em;
+    color: rgba(79, 195, 247, 0.85);
+    text-transform: uppercase; font-weight: 500;
+    border-bottom: 1px solid rgba(79, 195, 247, 0.20);
+  }
+  .data-table td {
+    padding: 0.7rem 0.85rem;
+    color: rgba(245, 247, 250, 0.88);
+    border-bottom: 1px dashed rgba(79, 195, 247, 0.10);
+  }
+  .data-table tr:last-child td { border-bottom: 0; }
+  .data-table tr.highlight td {
+    background: rgba(79, 195, 247, 0.06);
+    color: #f5f7fa;
+  }
+  .data-table td.num { text-align: right; }
+  .data-table caption {
+    caption-side: top; text-align: left;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.14em;
+    color: rgba(79, 195, 247, 0.80);
+    text-transform: uppercase;
+    padding-bottom: 0.6rem;
+  }
+
+  /* Legend chips */
+  .legend { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .legend .chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.2rem 0.65rem; border-radius: 999px;
+    background: rgba(19, 30, 44, 0.6);
+    border: 1px solid rgba(79, 195, 247, 0.16);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    color: rgba(245, 247, 250, 0.82);
+  }
+  .legend .swatch {
+    display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+  }
+
+  /* Ask / open-questions list */
+  .ask-list { list-style: none; padding: 0; margin: 0; }
+  .ask-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px dashed rgba(79, 195, 247, 0.10);
+  }
+  .ask-list li:last-child { border-bottom: 0; }
+  .ask-list .marker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.14em;
+    color: #4fc3f7; text-transform: uppercase;
+    padding-top: 0.15rem;
+  }
+  .ask-list .body { color: rgba(245, 247, 250, 0.85); line-height: 1.55; }
+  .ask-list .body strong { color: #f5f7fa; }
+
+  /* Update log */
+  .log-list { list-style: none; padding: 0; margin: 0; }
+  .log-list li {
+    display: grid; grid-template-columns: 8rem 1fr; gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px dashed rgba(79, 195, 247, 0.10);
+  }
+  .log-list li:last-child { border-bottom: 0; }
+  .log-list .date {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; color: rgba(79, 195, 247, 0.85);
+    padding-top: 0.1rem;
+  }
+  .log-list .note { color: rgba(245, 247, 250, 0.85); line-height: 1.5; }
+  @media (max-width: 640px) {
+    .log-list li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+</style>
+</head>
+<body class="font-sans text-ivory-50 antialiased">
+
+<div class="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+<header class="site-header">
+  <a href="#cover" class="brand-link">
+    <span class="brand-dot"></span>
+    <span class="brand-name">Kiz ATX × Eskina</span>
+    <span class="brand-sub md-only">· Residency Pulse</span>
+  </a>
+  <div class="meta">
+    <span class="counter" id="counter" aria-live="polite">1 of 9</span>
+    <span class="sep md-only">·</span>
+    <span class="md-only" title="Last data refresh"><span data-inject="updated">Updated 2026-08-10</span> · <span data-inject="rev">rev 1</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+    <button id="menuBtn" class="menu-btn" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+      <span class="menu-hamburger">MENU</span>
+      <span class="menu-close">CLOSE</span>
+    </button>
+  </div>
+</header>
+
+<nav id="sideNav" class="side-nav" aria-label="Sections">
+  <div>
+    <p class="nav-label">Sections</p>
+    <ul id="navList" class="nav-list"></ul>
+  </div>
+  <div class="nav-foot">
+    <p class="foot-brand">Kiz ATX × Eskina</p>
+    <p>Internal ledger.<br />Not for distribution.</p>
+    <p style="margin-top: 0.5rem;">Single HTML file. Updated by hand.</p>
+  </div>
+</nav>
+
+<div id="mobileMenu" class="drawer" role="dialog" aria-modal="true" aria-label="Sections" hidden>
+  <div class="drawer-panel">
+    <p class="drawer-label">Sections</p>
+    <ul id="mobileNavList" class="drawer-list"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll" style="padding-top: 3.5rem;">
+
+<!-- 1. COVER -->
+<section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
+  <div class="max-w-5xl relative">
+    <span class="accent-rule"></span>
+    <div class="font-mono text-xs tracking-[0.22em] text-electric-500 uppercase mb-4">
+      Residency Pulse · April → July 2026
+    </div>
+    <h1 class="font-display font-extrabold text-5xl md:text-7xl leading-[0.98] tracking-tight text-ivory-50 text-shadow-cool mb-8">
+      Kiz ATX × Eskina
+    </h1>
+    <p class="text-body text-lg md:text-xl max-w-3xl leading-relaxed mb-10">
+      Internal ledger for the Sunday residency. Monthly payouts from Michelle, normalized for Sundays taught,
+      cross-referenced against the pricing sheet to reverse-engineer what the room actually looked like.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
+      <div class="stat-tile">
+        <div class="label">Latest $/class</div>
+        <div class="value">$94.36</div>
+        <div class="sub">July 2026 · Kizomba only</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">Growth since April</div>
+        <div class="value text-positive-400">+24.5%</div>
+        <div class="sub">Per-class basis · honest metric</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">Raw dollars since April</div>
+        <div class="value text-electric-400">+66.0%</div>
+        <div class="sub">Inflated by extra Sunday in later months</div>
+      </div>
+    </div>
+
+    <div class="mt-10 text-muted text-xs font-mono tracking-wider uppercase">
+      Not for distribution · Charles Ogar · Last update 2026-08-10
+    </div>
+
+    <details class="deck-toc" data-toc="deck">
+      <summary>Contents</summary>
+      <ol class="toc-list">
+        <li><a href="#read">The read</a></li>
+        <li class="toc-group">The Ledger</li>
+        <li class="toc-sub"><a href="#monthly">Monthly $</a></li>
+        <li class="toc-sub"><a href="#kizomba">Kizomba trajectory</a></li>
+        <li class="toc-sub"><a href="#table">Full data table</a></li>
+        <li class="toc-sub"><a href="#room">What the payout implies</a></li>
+        <li class="toc-sub"><a href="#ancillary">Ancillary revenue</a></li>
+        <li class="toc-group">Signal</li>
+        <li class="toc-sub"><a href="#unknowns">What we don't know</a></li>
+        <li class="toc-sub"><a href="#log">Update log</a></li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<!-- 2. THE READ -->
+<section id="read" data-title="The Read" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-5xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-8 tracking-tight text-shadow-cool">The read</h2>
+
+    <div class="space-y-5 text-body text-lg md:text-xl leading-relaxed max-w-3xl">
+      <p>
+        <strong class="text-electric-400">June was the inflection.</strong>
+        Per-class earnings jumped from $68.81 to $90.69, a real +31.8% step and not a calendar artifact.
+      </p>
+      <p>
+        <strong class="text-electric-400">July held it.</strong>
+        Nudged up to $94.36 per class. The residency didn't regress after the June jump.
+      </p>
+      <p>
+        <strong class="text-electric-400">The raw-dollar story is misleading.</strong>
+        Total payouts are +66% since April, but per-class is +24.5%. Most of the "growth" between April and May was
+        just teaching one extra Sunday.
+      </p>
+      <p>
+        <strong class="text-electric-400">The unknown is the room.</strong>
+        Reverse-math on July implies 9–17 paid heads per Sunday. Gut says the room felt bigger than that.
+        Comp policy visibility is the missing signal.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. MONTHLY PAYOUT - ALL LINES -->
+<section id="monthly" data-title="Monthly $" data-group="The Ledger" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Monthly payout</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      Raw Kizomba residency dollars by month. Privates and photo shoots tracked separately on the Ancillary slide.
+    </p>
+
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <!-- Bar chart: Kizomba-only, scaled to $400 max for headroom -->
+      <div class="space-y-4">
+        <div class="bar-chart">
+          <div class="bar-month">April</div>
+          <div class="bar-track">
+            <div class="bar-fill stack-kizomba" style="width: 56.8%;">$227.33</div>
+          </div>
+          <div class="bar-total">$227.33</div>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-month">May</div>
+          <div class="bar-track">
+            <div class="bar-fill stack-kizomba" style="width: 68.8%;">$275.25</div>
+          </div>
+          <div class="bar-total">$275.25</div>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-month">June</div>
+          <div class="bar-track">
+            <div class="bar-fill stack-kizomba" style="width: 90.7%;">$362.75</div>
+          </div>
+          <div class="bar-total">$362.75</div>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-month">July</div>
+          <div class="bar-track">
+            <div class="bar-fill stack-kizomba" style="width: 94.4%;">$377.43</div>
+          </div>
+          <div class="bar-total">$377.43</div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-electric-500/10 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+        <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Apr → May</div>
+          <span class="delta delta-pos">▲ +21.1%</span>
+        </div>
+        <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">May → Jun</div>
+          <span class="delta delta-pos">▲ +31.8%</span>
+        </div>
+        <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Jun → Jul</div>
+          <span class="delta delta-pos">▲ +4.0%</span>
+        </div>
+        <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Apr → Jul (total)</div>
+          <span class="delta delta-pos">▲ +66.0%</span>
+        </div>
+      </div>
+      <p class="text-muted text-xs mt-4 font-mono">
+        Scale: $0 → $400. Bar view of the residency; line-chart trajectory + normalized $/class on the next slide.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. KIZOMBA TRAJECTORY -->
+<section id="kizomba" data-title="Kizomba" data-group="The Ledger" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Kizomba residency</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      Practica-only, normalized for Sundays taught. The honest growth metric.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Raw $ chart -->
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Raw $ per month</div>
+        <div class="line-chart-wrap">
+          <svg class="line-chart" viewBox="0 0 500 260" preserveAspectRatio="xMidYMid meet" aria-label="Raw Kizomba monthly payout chart">
+            <!-- grid -->
+            <g stroke="rgba(79,195,247,0.10)" stroke-width="1">
+              <line x1="50" y1="30"  x2="480" y2="30" />
+              <line x1="50" y1="85"  x2="480" y2="85" />
+              <line x1="50" y1="140" x2="480" y2="140" />
+              <line x1="50" y1="195" x2="480" y2="195" />
+              <line x1="50" y1="230" x2="480" y2="230" />
+            </g>
+            <!-- y labels ($0 → $400) -->
+            <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(245,247,250,0.45)">
+              <text x="10" y="34">$400</text>
+              <text x="10" y="89">$300</text>
+              <text x="10" y="144">$200</text>
+              <text x="10" y="199">$100</text>
+              <text x="10" y="234">$0</text>
+            </g>
+            <!-- data: Apr $227.33, May $275.25, Jun $362.75, Jul $377.43. Scale: y = 230 - (val/400)*200 -->
+            <!-- Apr: 230 - (227.33/400)*200 = 230 - 113.7 = 116.3 -->
+            <!-- May: 230 - (275.25/400)*200 = 230 - 137.6 = 92.4 -->
+            <!-- Jun: 230 - (362.75/400)*200 = 230 - 181.4 = 48.6 -->
+            <!-- Jul: 230 - (377.43/400)*200 = 230 - 188.7 = 41.3 -->
+            <!-- x positions (4 months, spread from x=90 to x=440) -->
+            <polyline points="90,116.3 200,92.4 320,48.6 440,41.3"
+                      fill="none" stroke="#4fc3f7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <g fill="#4fc3f7">
+              <circle cx="90"  cy="116.3" r="5" />
+              <circle cx="200" cy="92.4"  r="5" />
+              <circle cx="320" cy="48.6"  r="5" />
+              <circle cx="440" cy="41.3"  r="5" />
+            </g>
+            <!-- x labels -->
+            <g font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(245,247,250,0.72)" text-anchor="middle">
+              <text x="90"  y="252">Apr</text>
+              <text x="200" y="252">May</text>
+              <text x="320" y="252">Jun</text>
+              <text x="440" y="252">Jul</text>
+            </g>
+            <!-- value labels above dots -->
+            <g font-family="JetBrains Mono, monospace" font-size="10" fill="#f5f7fa" text-anchor="middle">
+              <text x="90"  y="105">$227</text>
+              <text x="200" y="81">$275</text>
+              <text x="320" y="37">$363</text>
+              <text x="440" y="30">$377</text>
+            </g>
+          </svg>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="delta delta-pos">Apr→May ▲ +21.1%</span>
+          <span class="delta delta-pos">May→Jun ▲ +31.8%</span>
+          <span class="delta delta-pos">Jun→Jul ▲ +4.0%</span>
+        </div>
+      </div>
+
+      <!-- $/class chart -->
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">$/class (normalized)</div>
+        <div class="line-chart-wrap">
+          <svg class="line-chart" viewBox="0 0 500 260" preserveAspectRatio="xMidYMid meet" aria-label="Kizomba per-class earnings chart">
+            <g stroke="rgba(79,195,247,0.10)" stroke-width="1">
+              <line x1="50" y1="30"  x2="480" y2="30" />
+              <line x1="50" y1="85"  x2="480" y2="85" />
+              <line x1="50" y1="140" x2="480" y2="140" />
+              <line x1="50" y1="195" x2="480" y2="195" />
+              <line x1="50" y1="230" x2="480" y2="230" />
+            </g>
+            <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(245,247,250,0.45)">
+              <text x="10" y="34">$100</text>
+              <text x="10" y="89">$75</text>
+              <text x="10" y="144">$50</text>
+              <text x="10" y="199">$25</text>
+              <text x="10" y="234">$0</text>
+            </g>
+            <!-- $/class: Apr 75.78, May 68.81, Jun 90.69, Jul 94.36. Scale: y = 230 - (val/100)*200 -->
+            <!-- Apr: 230 - (75.78/100)*200 = 230 - 151.6 = 78.4 -->
+            <!-- May: 230 - (68.81/100)*200 = 230 - 137.6 = 92.4 -->
+            <!-- Jun: 230 - (90.69/100)*200 = 230 - 181.4 = 48.6 -->
+            <!-- Jul: 230 - (94.36/100)*200 = 230 - 188.7 = 41.3 -->
+            <polyline points="90,78.4 200,92.4 320,48.6 440,41.3"
+                      fill="none" stroke="#86efac" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <g fill="#86efac">
+              <circle cx="90"  cy="78.4" r="5" />
+              <circle cx="200" cy="92.4" r="5" />
+              <circle cx="320" cy="48.6" r="5" />
+              <circle cx="440" cy="41.3" r="5" />
+            </g>
+            <g font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(245,247,250,0.72)" text-anchor="middle">
+              <text x="90"  y="252">Apr</text>
+              <text x="200" y="252">May</text>
+              <text x="320" y="252">Jun</text>
+              <text x="440" y="252">Jul</text>
+            </g>
+            <g font-family="JetBrains Mono, monospace" font-size="10" fill="#f5f7fa" text-anchor="middle">
+              <text x="90"  y="67">$75.78</text>
+              <text x="200" y="81">$68.81</text>
+              <text x="320" y="37">$90.69</text>
+              <text x="440" y="30">$94.36</text>
+            </g>
+          </svg>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="delta delta-neg">Apr→May ▼ −9.2%</span>
+          <span class="delta delta-pos">May→Jun ▲ +31.8%</span>
+          <span class="delta delta-pos">Jun→Jul ▲ +4.0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 glass rounded-xl p-5 max-w-4xl">
+      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-2">Why the two charts diverge</div>
+      <p class="text-dimmed leading-relaxed">
+        April had 3 Sundays taught (skipped Easter). May–July had 4 each. Raw dollars conflate calendar with performance;
+        $/class isolates performance. Apr→May: raw looks like +21% growth, but per-class is actually a −9% dip.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. FULL TABLE -->
+<section id="table" data-title="Table" data-group="The Ledger" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Show the work</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      Every number in this deck, in one place. Highlighted row = June inflection.
+    </p>
+
+    <div class="glass rounded-2xl p-6 md:p-8 overflow-x-auto">
+      <table class="data-table">
+        <caption>Monthly Kizomba residency · April–July 2026</caption>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th class="num">Sundays taught</th>
+            <th class="num">Kizomba $</th>
+            <th class="num">$/class</th>
+            <th class="num">$ MoM</th>
+            <th class="num">$/class MoM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>April 2026</td>
+            <td class="num">3</td>
+            <td class="num">$227.33</td>
+            <td class="num">$75.78</td>
+            <td class="num">·</td>
+            <td class="num">·</td>
+          </tr>
+          <tr>
+            <td>May 2026</td>
+            <td class="num">4</td>
+            <td class="num">$275.25</td>
+            <td class="num">$68.81</td>
+            <td class="num"><span class="delta delta-pos">+21.1%</span></td>
+            <td class="num"><span class="delta delta-neg">−9.2%</span></td>
+          </tr>
+          <tr class="highlight">
+            <td>June 2026</td>
+            <td class="num">4</td>
+            <td class="num">$362.75</td>
+            <td class="num">$90.69</td>
+            <td class="num"><span class="delta delta-pos">+31.8%</span></td>
+            <td class="num"><span class="delta delta-pos">+31.8%</span></td>
+          </tr>
+          <tr>
+            <td>July 2026</td>
+            <td class="num">4</td>
+            <td class="num">$377.43</td>
+            <td class="num">$94.36</td>
+            <td class="num"><span class="delta delta-pos">+4.0%</span></td>
+            <td class="num"><span class="delta delta-pos">+4.0%</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mt-6 pt-6 border-t border-electric-500/10 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-dimmed">
+        <div><span class="font-mono text-electric-400 text-xs uppercase tracking-wider">Notes:</span></div>
+        <div></div>
+        <div>April skipped Easter Sunday (Apr 5).</div>
+        <div>May skipped Memorial Day Sunday (May 24).</div>
+        <div>July includes +$49 correction for 7/5 attendance.</div>
+        <div>Payout to Charles = 50% of gross (studio split).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. WHAT THE PAYOUT IMPLIES ABOUT THE ROOM -->
+<section id="room" data-title="The Room" data-group="The Ledger" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">What the payout implies</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      Reverse-math for the latest month. Payout ÷ split ÷ Sundays = gross per Sunday.
+      What that gross implies for headcount depends on the pricing mix.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+      <div class="stat-tile">
+        <div class="label">July payout (Charles)</div>
+        <div class="value">$377.43</div>
+        <div class="sub">Includes $49 correction</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">Implied gross</div>
+        <div class="value text-electric-400">$754.86</div>
+        <div class="sub">50/50 split with studio</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">Per Sunday (4 taught)</div>
+        <div class="value text-electric-400">$188.72</div>
+        <div class="sub">Studio-side gross</div>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Implied paid headcount per Sunday, by pricing scenario</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th class="num">Effective $/head</th>
+            <th class="num">Implied heads/Sunday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>All non-member drop-ins</td>
+            <td class="num">$20.00</td>
+            <td class="num">~9.4</td>
+          </tr>
+          <tr>
+            <td>All member drop-ins</td>
+            <td class="num">$18.00</td>
+            <td class="num">~10.5</td>
+          </tr>
+          <tr>
+            <td>All 10-class pass (non-member)</td>
+            <td class="num">$12.50</td>
+            <td class="num">~15.1</td>
+          </tr>
+          <tr>
+            <td>All 10-class pass (member)</td>
+            <td class="num">$11.00</td>
+            <td class="num">~17.2</td>
+          </tr>
+          <tr>
+            <td>All new-student $70 unlimited (÷4 wks)</td>
+            <td class="num">~$17.50</td>
+            <td class="num">~10.8</td>
+          </tr>
+          <tr class="highlight">
+            <td><strong>Charles's felt headcount (Jul)</strong></td>
+            <td class="num">·</td>
+            <td class="num">fill in ▍</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mt-6 pt-6 border-t border-electric-500/10 text-dimmed leading-relaxed">
+        <p class="mb-3">
+          <strong class="text-electric-400">The delta between "felt" and "paid-for"</strong> is the number worth chasing.
+          If the room felt like 15–20 and paid-for math implies 9–17, the gap = comps + heavy-package regulars.
+        </p>
+        <p>
+          The pricing sheet doesn't list free classes, but 501c3 studios typically comp:
+          instructor guests, work-trade volunteers, board/staff, and promo visitors.
+          None of those hit your payout.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. ANCILLARY REVENUE -->
+<section id="ancillary" data-title="Ancillary" data-group="The Ledger" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Ancillary revenue</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      Privates and photo shoots through Eskina. Lumpy, one-off, but real. Track separately so they don't distort
+      the residency trend line.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-positive-500 mb-4">Private Lessons</div>
+        <div class="space-y-3">
+          <div class="flex justify-between items-baseline py-2 border-b border-electric-500/10">
+            <span class="text-dimmed">April</span>
+            <span class="font-mono text-muted">·</span>
+          </div>
+          <div class="flex justify-between items-baseline py-2 border-b border-electric-500/10">
+            <span class="text-dimmed">May</span>
+            <span class="font-mono text-muted">·</span>
+          </div>
+          <div class="flex justify-between items-baseline py-2 border-b border-electric-500/10">
+            <span class="text-dimmed">June</span>
+            <span class="font-mono text-positive-400">$62.50</span>
+          </div>
+          <div class="flex justify-between items-baseline py-2">
+            <span class="text-dimmed">July</span>
+            <span class="font-mono text-muted">·</span>
+          </div>
+        </div>
+        <div class="mt-4 pt-4 border-t border-electric-500/10 flex justify-between items-baseline">
+          <span class="font-mono text-xs uppercase tracking-wider text-electric-400">4-mo total</span>
+          <span class="font-mono text-lg text-ivory-50">$62.50</span>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider mb-4" style="color: #fbbf24;">Photo Shoots</div>
+        <div class="space-y-3">
+          <div class="flex justify-between items-baseline py-2 border-b border-electric-500/10">
+            <span class="text-dimmed">April</span>
+            <span class="font-mono text-muted">·</span>
+          </div>
+          <div class="flex justify-between items-baseline py-2 border-b border-electric-500/10">
+            <span class="text-dimmed">May</span>
+            <span class="font-mono" style="color: #fbbf24;">$25.50</span>
+          </div>
+          <div class="flex justify-between items-baseline py-2 border-b border-electric-500/10">
+            <span class="text-dimmed">June</span>
+            <span class="font-mono text-muted">·</span>
+          </div>
+          <div class="flex justify-between items-baseline py-2">
+            <span class="text-dimmed">July</span>
+            <span class="font-mono text-muted">·</span>
+          </div>
+        </div>
+        <div class="mt-4 pt-4 border-t border-electric-500/10 flex justify-between items-baseline">
+          <span class="font-mono text-xs uppercase tracking-wider text-electric-400">4-mo total</span>
+          <span class="font-mono text-lg text-ivory-50">$25.50</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 glass rounded-xl p-5 max-w-4xl">
+      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-2">All-in Eskina revenue, 4 months</div>
+      <div class="flex items-baseline gap-4 flex-wrap">
+        <div class="font-display font-bold text-4xl text-ivory-50">$1,330.76</div>
+        <div class="text-dimmed">$1,242.76 Kizomba + $62.50 Privates + $25.50 Photo Shoot</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. WHAT WE DON'T KNOW -->
+<section id="unknowns" data-title="Unknowns" data-group="Signal" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-5xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">What we don't know</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      Data gaps that would sharpen this tracker. Ordered by expected upside.
+    </p>
+
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <ul class="ask-list">
+        <li>
+          <span class="marker">Ask</span>
+          <div class="body">
+            <strong>Per-Sunday headcount from Michelle.</strong>
+            She has it (the 7/5 correction proves it). If she'll include a per-Friday-and-Sunday headcount + paid-vs-comp split
+            in future breakdowns, this deck becomes a real attendance tracker instead of a payout ledger.
+          </div>
+        </li>
+        <li>
+          <span class="marker">Ask</span>
+          <div class="body">
+            <strong>Package vs. drop-in mix.</strong>
+            The reverse-math table on slide 6 collapses to a single number the moment we know how many students are on drop-in
+            vs. 5-pack vs. 10-pack vs. unlimited. Even a rough monthly breakdown would work.
+          </div>
+        </li>
+        <li>
+          <span class="marker">Ask</span>
+          <div class="body">
+            <strong>Comp policy visibility.</strong>
+            Who counts as comped: instructors, board, work-trade, promo guests?
+            Without this, "felt headcount vs. paid-for" is always a hand-wave.
+          </div>
+        </li>
+        <li>
+          <span class="marker">Watch</span>
+          <div class="body">
+            <strong>Is the July $49 correction a one-off?</strong>
+            Or does per-night attendance reconciliation happen regularly? Track how many corrections show up over the next 3 months.
+          </div>
+        </li>
+        <li>
+          <span class="marker">Watch</span>
+          <div class="body">
+            <strong>New-student $70 unlimited uptake.</strong>
+            This is the biggest gross-per-head suppressor on the pricing sheet. If lots of newcomers land on it, per-class $
+            can stagnate even while headcount grows.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9. UPDATE LOG -->
+<section id="log" data-title="Update log" data-group="Signal" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-5xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Update log</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      One line per data drop. When numbers change, when questions get answered, when new asks land here.
+    </p>
+
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <ul class="log-list">
+        <li>
+          <span class="date">2026-08-10</span>
+          <span class="note">
+            Initial build. Loaded Apr–Jul 2026 payouts from Michelle Erickson (michelle@esquinatango.org).
+            July includes $49 correction for 7/5 attendance (Michelle email 2026-08-10).
+            <br /><span class="text-muted text-sm">Next: Charles to email Michelle re: per-Sunday headcount going forward.</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-10 glass rounded-xl p-5 max-w-3xl">
+      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-2">Update ritual</div>
+      <p class="text-dimmed leading-relaxed">
+        When the monthly payout email arrives from Michelle: forward it to Claude with "add to Eskina pulse" and
+        this deck gets a new row, updated deltas, and a new log entry.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  const sections     = [...document.querySelectorAll('section.snap-slide')];
+  const navList      = document.getElementById('navList');
+  const mobileNavList = document.getElementById('mobileNavList');
+  const progressBar  = document.querySelector('.progress-bar');
+  const counter      = document.getElementById('counter');
+  const menuBtn      = document.getElementById('menuBtn');
+  const mobileMenu   = document.getElementById('mobileMenu');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const hasGroups    = sections.some(s => s.dataset.group);
+
+  const navLinks     = new Array(sections.length);
+  const drawerLinks  = new Array(sections.length);
+
+  // Build sidebar nav (flat)
+  sections.forEach((s, i) => {
+    const li = document.createElement('li');
+    const a  = document.createElement('a');
+    a.href = '#' + s.id;
+    a.textContent = s.dataset.title || s.id;
+    li.appendChild(a);
+    navList.appendChild(li);
+    navLinks[i] = li;
+  });
+
+  // Build mobile drawer nav (grouped where applicable)
+  const buildDrawerLink = (s) => {
+    const li = document.createElement('li');
+    const a  = document.createElement('a');
+    a.href = '#' + s.id;
+    a.textContent = s.dataset.title || s.id;
+    a.className = 'drawer-item';
+    li.appendChild(a);
+    return { li, a };
+  };
+  if (hasGroups) {
+    const groupMap = new Map();
+    const ungrouped = [];
+    sections.forEach(s => {
+      if (s.dataset.group) {
+        if (!groupMap.has(s.dataset.group)) groupMap.set(s.dataset.group, []);
+        groupMap.get(s.dataset.group).push(s);
+      } else {
+        ungrouped.push(s);
+      }
+    });
+    ungrouped.forEach(s => {
+      const { li, a } = buildDrawerLink(s);
+      mobileNavList.appendChild(li);
+      drawerLinks[sections.indexOf(s)] = a;
+    });
+    groupMap.forEach((sects, name) => {
+      const heading = document.createElement('li');
+      heading.className = 'drawer-group';
+      heading.textContent = name;
+      mobileNavList.appendChild(heading);
+      sects.forEach(s => {
+        const { li, a } = buildDrawerLink(s);
+        mobileNavList.appendChild(li);
+        drawerLinks[sections.indexOf(s)] = a;
+      });
+    });
+  } else {
+    sections.forEach((s, i) => {
+      const { li, a } = buildDrawerLink(s);
+      mobileNavList.appendChild(li);
+      drawerLinks[i] = a;
+    });
+  }
+
+  // Active-state observer
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target);
+        navLinks.forEach((li, i) => {
+          if (li) li.classList.toggle('nav-active', i === idx);
+        });
+        drawerLinks.forEach((link, i) => {
+          if (link) link.classList.toggle('is-active', i === idx);
+        });
+        if (counter) counter.textContent = `${idx + 1} of ${sections.length}`;
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => io.observe(s));
+
+  // Progress bar
+  let ticking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progressBar.style.transform = `scaleX(${pct})`;
+    progressBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  updateProgress();
+
+  // Menu toggle
+  const isMenuOpen = () => !mobileMenu.hidden;
+  function openMenu() {
+    mobileMenu.hidden = false;
+    document.body.style.overflow = 'hidden';
+    menuBtn.classList.add('is-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    mobileMenu.hidden = true;
+    document.body.style.overflow = '';
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn?.addEventListener('click', () => isMenuOpen() ? closeMenu() : openMenu());
+  mobileMenu?.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) closeMenu();
+  });
+
+  // Keyboard nav
+  const currentIndex = () => {
+    const y = window.scrollY + window.innerHeight * 0.5;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= y) return i;
+    }
+    return 0;
+  };
+  const go = (dir) => {
+    const i = currentIndex();
+    const next = Math.max(0, Math.min(sections.length - 1, i + dir));
+    sections[next].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+  };
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (isMenuOpen()) return;
+    if (e.key === ' ' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+    if (e.key === 'End')  { e.preventDefault(); sections[sections.length-1].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+  });
+})();
+</script>
+</body>
+</html>
