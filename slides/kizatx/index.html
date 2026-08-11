@@ -551,9 +551,9 @@
     <span class="brand-sub md-only">· Residency Pulse</span>
   </a>
   <div class="meta">
-    <span class="counter" id="counter" aria-live="polite">1 of 10</span>
+    <span class="counter" id="counter" aria-live="polite">1 of 11</span>
     <span class="sep md-only">·</span>
-    <span class="md-only" title="Last data refresh"><span data-inject="updated">Updated 2026-08-11</span> · <span data-inject="rev">rev 2</span></span>
+    <span class="md-only" title="Last data refresh"><span data-inject="updated">Updated 2026-08-11</span> · <span data-inject="rev">rev 3</span></span>
     <span class="sep lg-only">·</span>
     <span class="lg-only"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
     <button id="menuBtn" class="menu-btn" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
@@ -629,6 +629,7 @@
         <li class="toc-sub"><a href="#monthly">Monthly $</a></li>
         <li class="toc-sub"><a href="#kizomba">Kizomba trajectory</a></li>
         <li class="toc-sub"><a href="#attendance">The room got bigger</a></li>
+        <li class="toc-sub"><a href="#arc">The 4-month arc</a></li>
         <li class="toc-sub"><a href="#table">Full data table</a></li>
         <li class="toc-sub"><a href="#room">What the payout implies</a></li>
         <li class="toc-sub"><a href="#ancillary">Ancillary revenue</a></li>
@@ -988,7 +989,141 @@
   </div>
 </section>
 
-<!-- 6. FULL TABLE -->
+<!-- 6. THE 4-MONTH ARC -->
+<section id="arc" data-title="4-month arc" data-group="The Ledger" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">The 4-month arc</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      Estimating April and May check-ins at June's measured rate ($8.85 per check-in, Charles's cut) puts the whole
+      residency on one arc. Attendance and payout tracked in lockstep for three months, then July split them.
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="stat-tile">
+        <div class="label">April <span class="text-muted text-xs">(est.)</span></div>
+        <div class="value text-dimmed">~26</div>
+        <div class="sub">3 Sundays · ~8.7 avg</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">May <span class="text-muted text-xs">(est.)</span></div>
+        <div class="value text-dimmed">~31</div>
+        <div class="sub">4 Sundays · ~7.8 avg</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">June <span class="text-positive-400 text-xs font-mono">MEASURED</span></div>
+        <div class="value">41</div>
+        <div class="sub">4 Sundays · 10.2 avg</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">July <span class="text-positive-400 text-xs font-mono">MEASURED</span></div>
+        <div class="value text-electric-400">61</div>
+        <div class="sub">4 Sundays · 15.2 avg</div>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Indexed to April = 100 · both series on one scale</div>
+
+      <div class="line-chart-wrap">
+        <svg class="line-chart" viewBox="0 0 500 260" preserveAspectRatio="xMidYMid meet" aria-label="Indexed check-ins vs payout, April through July 2026">
+          <!-- grid -->
+          <g stroke="rgba(79,195,247,0.10)" stroke-width="1">
+            <line x1="50" y1="30"  x2="480" y2="30" />
+            <line x1="50" y1="70"  x2="480" y2="70" />
+            <line x1="50" y1="110" x2="480" y2="110" />
+            <line x1="50" y1="150" x2="480" y2="150" />
+            <line x1="50" y1="190" x2="480" y2="190" />
+            <line x1="50" y1="230" x2="480" y2="230" />
+          </g>
+          <!-- y labels: 250 100 -->
+          <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(245,247,250,0.45)">
+            <text x="10" y="34">250</text>
+            <text x="10" y="74">200</text>
+            <text x="10" y="114">175</text>
+            <text x="10" y="154">150</text>
+            <text x="10" y="194">125</text>
+            <text x="10" y="234">100</text>
+          </g>
+          <!-- Data (formula y = 230 - (index - 100) / 150 * 200)
+               Check-ins: Apr 100, May 119, Jun 158, Jul 235
+                 y: 230, 204.7, 152.7, 50
+               Payout: Apr 100, May 121, Jun 160, Jul 166
+                 y: 230, 202, 150, 142 -->
+
+          <!-- Payout line (drawn under check-ins so check-ins reads on top) -->
+          <polyline points="90,230 200,202 320,150 440,142"
+                    fill="none" stroke="rgba(245, 247, 250, 0.55)" stroke-width="2" stroke-dasharray="4 4"
+                    stroke-linecap="round" stroke-linejoin="round" />
+          <g fill="rgba(245, 247, 250, 0.65)">
+            <circle cx="90"  cy="230" r="4" />
+            <circle cx="200" cy="202" r="4" />
+            <circle cx="320" cy="150" r="4" />
+            <circle cx="440" cy="142" r="4" />
+          </g>
+
+          <!-- Check-ins line -->
+          <polyline points="90,230 200,204.7 320,152.7 440,50"
+                    fill="none" stroke="#4fc3f7" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+          <g fill="#4fc3f7">
+            <circle cx="90"  cy="230" r="5" />
+            <circle cx="200" cy="204.7" r="5" />
+            <circle cx="320" cy="152.7" r="5" />
+            <circle cx="440" cy="50" r="5" />
+          </g>
+
+          <!-- x labels -->
+          <g font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(245,247,250,0.72)" text-anchor="middle">
+            <text x="90"  y="252">Apr</text>
+            <text x="200" y="252">May</text>
+            <text x="320" y="252">Jun</text>
+            <text x="440" y="252">Jul</text>
+          </g>
+
+          <!-- inline series labels -->
+          <g font-family="JetBrains Mono, monospace" font-size="10" text-anchor="end">
+            <text x="440" y="42" fill="#4fc3f7">Check-ins · 235</text>
+            <text x="440" y="134" fill="rgba(245, 247, 250, 0.72)">Payout · 166</text>
+          </g>
+
+          <!-- estimate-region background hint (Apr-May) -->
+          <rect x="70" y="15" width="150" height="230" fill="rgba(148, 163, 184, 0.03)" stroke="none" />
+          <text x="145" y="24" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(148, 163, 184, 0.60)" text-anchor="middle">EST. REGION</text>
+        </svg>
+      </div>
+
+      <div class="mt-6 pt-6 border-t border-electric-500/10 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Attendance arc</div>
+          <div class="font-mono text-2xl text-ivory-50">+135%</div>
+          <div class="text-muted text-xs mt-1">Apr → Jul, indexed</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Payout arc</div>
+          <div class="font-mono text-2xl text-dimmed">+66%</div>
+          <div class="text-muted text-xs mt-1">Apr → Jul, indexed</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Divergence</div>
+          <div class="font-mono text-2xl text-negative-400">69 pt</div>
+          <div class="text-muted text-xs mt-1">Almost all in July</div>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-6 border-t border-electric-500/10 text-dimmed leading-relaxed">
+        <p>
+          <strong class="text-electric-400">The tell:</strong> attendance and payout tracked in lockstep April → June
+          (each roughly +60% by June). Then July split them. Attendance jumped another +49% while payout only nudged
+          +4%. The cash-basis pass-burn hypothesis fits: if a big share of July's check-ins were passes bought in
+          April and May, that money was already booked in earlier months and doesn't show up in July's split.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. FULL TABLE -->
 <section id="table" data-title="Table" data-group="The Ledger" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
   <div class="max-w-6xl">
     <span class="accent-rule"></span>
@@ -1020,10 +1155,10 @@
             <td class="num">$227.33</td>
             <td class="num">$75.78</td>
             <td class="num">·</td>
-            <td class="num">·</td>
-            <td class="num">·</td>
-            <td class="num">·</td>
-            <td class="num">·</td>
+            <td class="num text-dimmed">~26</td>
+            <td class="num text-dimmed">~8.7</td>
+            <td class="num text-dimmed">·</td>
+            <td class="num text-dimmed">$8.85</td>
           </tr>
           <tr>
             <td>May 2026</td>
@@ -1031,10 +1166,10 @@
             <td class="num">$275.25</td>
             <td class="num">$68.81</td>
             <td class="num"><span class="delta delta-pos">+21.1%</span></td>
-            <td class="num">·</td>
-            <td class="num">·</td>
-            <td class="num">·</td>
-            <td class="num">·</td>
+            <td class="num text-dimmed">~31</td>
+            <td class="num text-dimmed">~7.8</td>
+            <td class="num text-dimmed">·</td>
+            <td class="num text-dimmed">$8.85</td>
           </tr>
           <tr class="highlight">
             <td>June 2026</td>
@@ -1069,7 +1204,8 @@
         <div>July $ includes +$49 correction for 7/5 attendance.</div>
         <div>Jun 7 sub-taught by Alina; other 7 classes taught by Charles.</div>
         <div>Payout to Charles = 50% of gross (studio split).</div>
-        <div>Check-in data only exists Jun 1 onward (Esquina export range).</div>
+        <div>April/May attendance estimated at June's measured $8.85/check-in rate.</div>
+        <div>Check-in data (measured) only exists Jun 1 onward (Esquina export range).</div>
       </div>
     </div>
   </div>
@@ -1296,7 +1432,16 @@
         <li>
           <span class="date">2026-08-11</span>
           <span class="note">
-            Imported Esquina Tango check-in export (Jun 1 – Jul 31) from
+            Rev 3: added "The 4-month arc" slide. Estimated April (~26 check-ins) and May (~31) using June's
+            measured $8.85 per check-in rate, evenly distributed across Sundays. Indexed line chart shows
+            attendance and payout tracking together Apr→Jun, then diverging sharply in July (+69 point gap).
+            Full table filled in with estimated April/May attendance columns.
+          </span>
+        </li>
+        <li>
+          <span class="date">2026-08-11</span>
+          <span class="note">
+            Rev 2: imported Esquina Tango check-in export (Jun 1 – Jul 31) from
             <code class="text-electric-400">Armature/dance/esquina-residency/</code>. Real per-class attendance now
             drives the "The room got bigger" and revised reverse-math slides. Confirmed +49% attendance MoM
             against +4% payout. Cash-basis hypothesis added as the leading explanation.
