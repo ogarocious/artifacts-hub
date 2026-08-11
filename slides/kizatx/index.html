@@ -1023,7 +1023,7 @@
     </div>
 
     <div class="glass rounded-2xl p-6 md:p-8">
-      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Indexed to April = 100 · both series on one scale</div>
+      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">% change since April · both series on one scale</div>
 
       <div class="line-chart-wrap">
         <svg class="line-chart" viewBox="0 0 500 260" preserveAspectRatio="xMidYMid meet" aria-label="Indexed check-ins vs payout, April through July 2026">
@@ -1036,14 +1036,14 @@
             <line x1="50" y1="190" x2="480" y2="190" />
             <line x1="50" y1="230" x2="480" y2="230" />
           </g>
-          <!-- y labels: 250 100 -->
+          <!-- y labels: % change from April baseline -->
           <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(245,247,250,0.45)">
-            <text x="10" y="34">250</text>
-            <text x="10" y="74">200</text>
-            <text x="10" y="114">175</text>
-            <text x="10" y="154">150</text>
-            <text x="10" y="194">125</text>
-            <text x="10" y="234">100</text>
+            <text x="10" y="34">+150%</text>
+            <text x="10" y="74">+100%</text>
+            <text x="10" y="114">+75%</text>
+            <text x="10" y="154">+50%</text>
+            <text x="10" y="194">+25%</text>
+            <text x="10" y="234">0%</text>
           </g>
           <!-- Data (formula y = 230 - (index - 100) / 150 * 200)
                Check-ins: Apr 100, May 119, Jun 158, Jul 235
@@ -1083,8 +1083,8 @@
 
           <!-- inline series labels -->
           <g font-family="JetBrains Mono, monospace" font-size="10" text-anchor="end">
-            <text x="440" y="42" fill="#4fc3f7">Check-ins · 235</text>
-            <text x="440" y="134" fill="rgba(245, 247, 250, 0.72)">Payout · 166</text>
+            <text x="440" y="42" fill="#4fc3f7">Check-ins · +135%</text>
+            <text x="440" y="134" fill="rgba(245, 247, 250, 0.72)">Payout · +66%</text>
           </g>
 
           <!-- estimate-region background hint (Apr-May) -->
@@ -1097,12 +1097,12 @@
         <div>
           <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Attendance arc</div>
           <div class="font-mono text-2xl text-ivory-50">+135%</div>
-          <div class="text-muted text-xs mt-1">Apr → Jul, indexed</div>
+          <div class="text-muted text-xs mt-1">Apr → Jul, % change</div>
         </div>
         <div>
           <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Payout arc</div>
           <div class="font-mono text-2xl text-dimmed">+66%</div>
-          <div class="text-muted text-xs mt-1">Apr → Jul, indexed</div>
+          <div class="text-muted text-xs mt-1">Apr → Jul, % change</div>
         </div>
         <div>
           <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Divergence</div>
