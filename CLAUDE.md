@@ -55,6 +55,44 @@ Every scrollable slide deck follows the same shell. Reference instances:
 
 When either lands, update the registry above and drop the ⚠️ TEMP flag.
 
+## Brand facts: check Armature first
+
+Palette is only one slice of a brand. For **names, times, addresses, handles, framing rules, and voice**, check `~/Documents/GitHub/Armature/` before drafting anything for a specific brand. Armature is the source of truth for brand content and editorial rules; this CLAUDE.md is the source of truth for visual design.
+
+**Kiz ATX** (Kizomba residency + community brand):
+- `Armature/dance/CLAUDE.md` — dance workstation rules, brand hierarchy (NeoKiz → Kiz ATX), vocabulary
+- `Armature/dance/memory.md` — accumulated dance-specific facts
+- `Armature/dance/kizatx-brand-voice.md` — canonical brand voice (Black ownership, Kizomba is Angolan / diasporic, refusal to "shut up and dance")
+- `Armature/dance/kizatx-master-prompt.md` — site architecture, brand hierarchy, tech stack
+- `Armature/dance/kiz-practicas/CLAUDE.md` — practica-specific facts (**Sundays 5:30 PM to 7:30 PM**, 209 Pedernales St Austin, Esquina Tango partnership, cast/routing)
+- `Armature/dance/kiz-practicas/memory.md` — practica running log
+- `Armature/dance/esquina-residency/` — attendance CSVs and summaries (Jun–Jul 2026 export)
+
+**KSX** (Kiz Summit Exchange, Kage Edition — Oct 30 to Nov 9, 2026):
+- `Armature/dance/kiz-summit-exchange/CLAUDE.md` — routing doc
+- `Armature/dance/kiz-summit-exchange/{planning-structure,event-structure,marketing,grant,legal-compliance}.md` — topic-scoped facts
+
+**Editorial framing rules that MUST be honored** (never negotiable, they override palette or design instinct):
+- **Alina is Charles's teaching partner, not a substitute.** When Alina teaches without Charles: "Alina is teaching solo that Sunday" or "Alina is leading on her own." Never "sub", "substitute", or "covering." She teaches every week alongside Charles.
+- **Kizomba is Angolan and diasporic.** Never reduce to "a fun Latin dance." Use "Angolan partner dance" or leave unqualified.
+- **Charles is the face and voice of Kiz ATX.** Byline / attribution when the artifact warrants it. Don't bury him.
+- **KSX = Kiz Summit Exchange (Kage Edition).** Never "Kiz Kage Summit" / "KKS" (renamed via Submittable). Never "AACHK" (retired Elevate 2025 cycle name).
+- **NeoKiz and Kiz ATX coexist.** NeoKiz is the umbrella since 2014; Kiz ATX is the current Austin sub-brand. Not one replacing the other.
+
+**Public handles + venues (from Armature):**
+
+| Brand | Instagram | Website | Physical / venue |
+|---|---|---|---|
+| Kiz ATX | `@kizatx` | kizatx.com | Sunday practica at Esquina Tango, 209 Pedernales St, Austin TX 78702 |
+| KSX | `@kizsummitexchange` | kizatx.com/events/kiz-summit-exchange | Austin, various venues |
+
+**Other brands' brand-fact source of truth (not Armature — repo-local):**
+- Learntokiz — `~/Documents/GitHub/Learntokiz-2.0/app/frontend/entrypoints/tokens.css` (design tokens)
+- Vidhive — `~/Documents/GitHub/vidhive/DESIGN.md` (typography migration + brand)
+- WhereCanWeDance — `~/Documents/GitHub/wherecanwedance/` (shadcn-based, brand accent pending)
+
+**When registry palette and Armature editorial rule seem to conflict:** palette wins for visual design; Armature wins for content, copy, and framing. Always.
+
 ## Public vs. Internal Decks
 
 **Public** (shareable, indexable): standard OG/Twitter meta, canonical URL, no robots restriction.
