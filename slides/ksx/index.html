@@ -1,0 +1,1541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KSX Waitlist Signal · Kiz Summit Exchange 2026</title>
+<meta name="description" content="Internal read on the 68-person KSX waitlist: attendance intent, geography, skill mix, programming demand, and a proposed 11-day rhythm. Not for distribution." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0f0b08" />
+
+<link rel="canonical" href="https://slides.ogarocious.com/ksx/" />
+
+<meta property="og:site_name" content="Kiz Summit Exchange" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://slides.ogarocious.com/ksx/" />
+<meta property="og:title" content="KSX Waitlist Signal · 68 signups, 18 definitely, 37 flying in" />
+<meta property="og:description" content="What the waitlist is telling us about who's coming, what they want, and how to shape the 11 days." />
+<meta property="og:image" content="https://slides.ogarocious.com/ksx/og.png" />
+<meta property="og:image:alt" content="KSX Waitlist Signal cover: 68 signups, 18 definitely coming, 37 flying in, 6 pros in the room." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KSX Waitlist Signal · 68 signups so far" />
+<meta name="twitter:description" content="Attendance intent, geography, programming demand, and a proposed 11-day rhythm." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/ksx/og.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: {
+            950: '#080604', 900: '#0f0b08', 800: '#1a120c',
+            700: '#241811', 600: '#2f2118', 500: '#3d2c20',
+          },
+          crimson: {
+            300: '#e08475', 400: '#d05e4c', 500: '#c0392b',
+            600: '#9a2d21', 700: '#761f16',
+          },
+          gold: {
+            300: '#f2d896', 400: '#ecc978', 500: '#e5b95a',
+            600: '#c99e42', 700: '#a67f34',
+          },
+          ivory: {
+            50: '#faf6ee', 100: '#f5f0e8', 200: '#e6dccb', 300: '#c9bda9',
+          },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'Georgia', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  body {
+    background-color: #0f0b08;
+    background-image:
+      radial-gradient(ellipse 1200px 700px at 20% 10%, rgba(192, 57, 43, 0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 80%, rgba(229, 185, 90, 0.06), transparent 65%),
+      linear-gradient(180deg, #080604 0%, #0f0b08 40%, #0f0b08 60%, #080604 100%);
+    min-height: 100vh;
+    color: #f5f0e8;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  .text-body   { color: rgba(245, 240, 232, 0.90); }
+  .text-dimmed { color: rgba(245, 240, 232, 0.72); }
+  .text-muted  { color: rgba(245, 240, 232, 0.55); }
+  .text-deep   { color: rgba(245, 240, 232, 0.30); }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: #c0392b;
+    transform: scaleX(0); transform-origin: left center;
+    z-index: 51; pointer-events: none; will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(26, 18, 12, 0.65);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(192, 57, 43, 0.22);
+    box-shadow:
+      0 1px 0 rgba(245, 240, 232, 0.03) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(192, 57, 43, 0.42); }
+
+  .accent-rule {
+    display: inline-block; width: 48px; height: 2px;
+    background: #c0392b; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid #e5b95a;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Header (fixed top bar) */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: rgba(8, 6, 4, 0.80);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(192, 57, 43, 0.14);
+  }
+  .site-header .brand-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: inherit;
+  }
+  .site-header .brand-dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: #c0392b;
+    transition: background-color 220ms ease;
+  }
+  .site-header .brand-link:hover .brand-dot {
+    background: #e5b95a;
+  }
+  .site-header .brand-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e5b95a;
+  }
+  .site-header .brand-sub {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: rgba(245, 240, 232, 0.55);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .site-header .meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.72rem; color: rgba(245, 240, 232, 0.55);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .site-header .counter { color: rgba(245, 240, 232, 0.75); }
+  .site-header .sep { color: rgba(245, 240, 232, 0.25); }
+  @media (max-width: 900px) { .site-header .lg-only { display: none; } }
+  @media (max-width: 700px) { .site-header .md-only { display: none; } }
+
+  /* Keyboard chip */
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.07);
+    color: #f5f0e8;
+    display: inline-block; margin: 0 1px;
+  }
+
+  /* Menu button (mobile only) */
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.85rem; border-radius: 999px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.08);
+    color: #f5f0e8;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(229, 185, 90, 0.70);
+    background: rgba(192, 57, 43, 0.14);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+  @media (min-width: 768px) { .menu-btn { display: none; } }
+
+  /* Side navigation (desktop only) */
+  .side-nav {
+    position: fixed; top: 0; left: 0; height: 100vh;
+    width: 280px;
+    padding: 5rem 1.75rem 2rem;
+    z-index: 40;
+    background: rgba(8, 6, 4, 0.60);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-right: 1px solid rgba(192, 57, 43, 0.12);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) { .side-nav { display: flex; } }
+  .side-nav .nav-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.20);
+  }
+  .side-nav .nav-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.1rem;
+  }
+  .side-nav .nav-list a {
+    display: block;
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    color: rgba(245, 240, 232, 0.60);
+    text-decoration: none;
+    font-size: 0.88rem; line-height: 1.3;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+  .side-nav .nav-list a:hover {
+    color: #e5b95a;
+    background: rgba(192, 57, 43, 0.08);
+  }
+  .side-nav .nav-list .nav-active a {
+    color: #e5b95a;
+    background: rgba(192, 57, 43, 0.14);
+  }
+  .side-nav .nav-foot {
+    font-size: 0.72rem; color: rgba(245, 240, 232, 0.45);
+    line-height: 1.55;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(192, 57, 43, 0.12);
+  }
+  .side-nav .nav-foot .foot-brand { color: rgba(229, 185, 90, 0.85); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.65rem; }
+
+  /* Drawer (mobile only) */
+  .drawer {
+    position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    background: rgba(8, 6, 4, 0.85);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(15, 11, 8, 0.98);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .drawer-list {
+    border-left: 1px solid rgba(192, 57, 43, 0.30);
+    padding-left: 1rem;
+    margin: 0; list-style: none;
+  }
+  .drawer-item {
+    display: block; padding: 0.85rem 0.9rem; margin-left: -0.5rem;
+    color: #f5f0e8; text-decoration: none;
+    font-size: 1.1rem; font-weight: 500; line-height: 1.3;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .drawer-item:hover, .drawer-item.is-active {
+    background: rgba(192, 57, 43, 0.14);
+    color: #e5b95a;
+  }
+
+  /* Cover TOC */
+  .deck-toc { margin-top: 2.5rem; max-width: 32rem; position: relative; z-index: 2; }
+  .deck-toc summary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.55rem 1rem;
+    background: rgba(26, 18, 12, 0.55);
+    border: 1px dashed rgba(229, 185, 90, 0.55);
+    border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(229, 185, 90, 0.95);
+    cursor: pointer; list-style: none;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .deck-toc summary::-webkit-details-marker { display: none; }
+  .deck-toc summary::before {
+    content: '▸'; font-size: 0.7rem;
+    transition: transform 200ms ease; display: inline-block;
+  }
+  .deck-toc[open] summary::before { transform: rotate(90deg); }
+  .deck-toc summary:hover {
+    border-color: rgba(229, 185, 90, 0.95);
+    background: rgba(26, 18, 12, 0.80);
+  }
+  .deck-toc[open] summary {
+    background: rgba(192, 57, 43, 0.14);
+    border-color: rgba(229, 185, 90, 0.95);
+  }
+  .toc-list {
+    margin-top: 1rem; padding: 1.25rem 1.5rem;
+    background: rgba(26, 18, 12, 0.75);
+    border: 1px solid rgba(192, 57, 43, 0.18);
+    border-radius: 8px; list-style: none;
+  }
+  .toc-list li {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem; padding: 0.35rem 0;
+    color: rgba(245, 240, 232, 0.85);
+  }
+  .toc-list li a {
+    color: rgba(245, 240, 232, 0.90);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(229, 185, 90, 0.35);
+    padding-bottom: 1px;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .toc-list li a:hover {
+    color: #e5b95a; border-bottom-color: rgba(229, 185, 90, 0.95);
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #c0392b;
+  }
+
+  /* Section headings */
+  .h-display {
+    font-family: "Rubik", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #f5f0e8;
+    line-height: 1.02;
+  }
+  .h-gold { color: #e5b95a; }
+
+  /* Data tiles */
+  .stat-tile {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.25);
+    background: rgba(26, 18, 12, 0.70);
+  }
+  .stat-tile .label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .stat-tile .value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.35rem);
+    color: #f5f0e8; line-height: 1.1;
+  }
+  .stat-tile .value.gold { color: #e5b95a; }
+  .stat-tile .sub { color: rgba(245, 240, 232, 0.65); font-size: 0.85rem; margin-top: 0.4rem; }
+
+  /* Bar chart */
+  .bar-chart {
+    display: grid;
+    grid-template-columns: 11rem 1fr 4rem;
+    gap: 0.5rem 1rem;
+    align-items: center;
+  }
+  .bar-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.82rem; color: rgba(245, 240, 232, 0.82);
+    text-align: right;
+  }
+  .bar-track {
+    height: 22px; border-radius: 4px;
+    background: rgba(192, 57, 43, 0.07);
+    border: 1px solid rgba(192, 57, 43, 0.14);
+    overflow: hidden; display: flex;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(192, 57, 43, 0.75), rgba(229, 185, 90, 0.85));
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: #0f0b08; font-weight: 700;
+  }
+  .bar-fill.crimson-only { background: linear-gradient(90deg, rgba(122, 34, 24, 0.9), rgba(192, 57, 43, 0.95)); color: #f5f0e8; }
+  .bar-fill.gold-only { background: linear-gradient(90deg, rgba(201, 158, 66, 0.9), rgba(229, 185, 90, 0.95)); color: #0f0b08; }
+  .bar-total {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem; color: rgba(245, 240, 232, 0.85);
+  }
+  @media (max-width: 700px) {
+    .bar-chart { grid-template-columns: 7rem 1fr 3rem; gap: 0.35rem 0.6rem; }
+    .bar-label { font-size: 0.72rem; }
+  }
+
+  /* Callout chips */
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.28rem 0.75rem; border-radius: 999px;
+    background: rgba(26, 18, 12, 0.65);
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    color: rgba(245, 240, 232, 0.85);
+  }
+  .chip.internal {
+    border: 1px dashed rgba(229, 185, 90, 0.80);
+    background: rgba(229, 185, 90, 0.08);
+    color: #e5b95a;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    font-weight: 600;
+  }
+  .chip.crimson {
+    border-color: rgba(192, 57, 43, 0.65);
+    background: rgba(192, 57, 43, 0.15);
+    color: #e08475;
+  }
+
+  /* Person / roster chip */
+  .person-chip {
+    display: inline-flex; align-items: baseline; gap: 0.4rem;
+    padding: 0.4rem 0.75rem; border-radius: 6px;
+    background: rgba(26, 18, 12, 0.70);
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    font-family: "Rubik", sans-serif;
+    font-size: 0.88rem;
+    color: #f5f0e8;
+  }
+  .person-chip .pc-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem; letter-spacing: 0.10em; text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.55);
+  }
+  .person-chip.is-pro {
+    background: rgba(229, 185, 90, 0.10);
+    border-color: rgba(229, 185, 90, 0.55);
+    color: #f5f0e8;
+  }
+  .person-chip.is-pro .pc-tag { color: #e5b95a; }
+  .person-chip.is-adv {
+    background: rgba(192, 57, 43, 0.12);
+    border-color: rgba(192, 57, 43, 0.45);
+  }
+  .person-chip.is-adv .pc-tag { color: #e08475; }
+
+  /* Theme cards */
+  .theme-card {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    background: rgba(26, 18, 12, 0.60);
+  }
+  .theme-card .th-count {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.16em;
+    color: #e5b95a; text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .theme-card .th-title {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    color: #f5f0e8; margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+  .theme-card .th-body {
+    color: rgba(245, 240, 232, 0.72);
+    font-size: 0.9rem; line-height: 1.55;
+  }
+  .theme-card .th-names {
+    margin-top: 0.75rem;
+    color: rgba(245, 240, 232, 0.50);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.06em;
+  }
+
+  /* Pull quote */
+  .pullquote {
+    padding: 1.75rem 2rem;
+    background: rgba(26, 18, 12, 0.55);
+    border-radius: 4px;
+    border: 1px solid rgba(192, 57, 43, 0.14);
+  }
+  .pullquote p {
+    font-family: "Rubik", Georgia, serif;
+    font-style: italic;
+    color: #f5f0e8;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 0.85rem;
+    text-indent: -0.4em;
+  }
+  .pullquote p::before {
+    content: '\201C';
+    color: rgba(229, 185, 90, 0.55);
+    font-style: normal;
+    font-size: 1.4em;
+    line-height: 0;
+    vertical-align: -0.15em;
+    margin-right: 0.08em;
+  }
+  .pullquote .attr {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; letter-spacing: 0.10em;
+    color: #e5b95a; text-transform: uppercase;
+  }
+
+  /* Calendar grid */
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .day-hdr {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(229, 185, 90, 0.85);
+    text-align: center;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.15);
+  }
+  .day-cell {
+    min-height: 130px;
+    padding: 0.65rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(192, 57, 43, 0.14);
+    background: rgba(26, 18, 12, 0.45);
+    display: flex; flex-direction: column;
+    gap: 0.35rem;
+  }
+  .day-cell.is-weekend {
+    background: rgba(229, 185, 90, 0.06);
+    border-color: rgba(229, 185, 90, 0.30);
+  }
+  .day-cell.is-weekday {
+    background: rgba(192, 57, 43, 0.06);
+    border-color: rgba(192, 57, 43, 0.28);
+  }
+  .day-cell.is-close {
+    background: rgba(26, 18, 12, 0.35);
+    border-style: dashed;
+    border-color: rgba(192, 57, 43, 0.28);
+  }
+  .day-cell .day-num {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1.15rem;
+    color: #f5f0e8; line-height: 1;
+  }
+  .day-cell.is-weekend .day-num { color: #e5b95a; }
+  .day-cell .day-name {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.55);
+    margin-top: -0.15rem;
+  }
+  .day-cell .day-plan {
+    font-family: "Rubik", sans-serif;
+    font-size: 0.72rem; line-height: 1.35;
+    color: rgba(245, 240, 232, 0.85);
+    margin-top: auto;
+  }
+  .day-cell .day-plan strong {
+    font-weight: 600; color: #e5b95a; font-size: 0.72rem;
+  }
+  .day-cell .day-badge {
+    display: inline-block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.55rem; letter-spacing: 0.10em; text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    background: rgba(192, 57, 43, 0.20);
+    color: #e08475;
+    align-self: flex-start;
+  }
+  .day-cell.is-weekend .day-badge {
+    background: rgba(229, 185, 90, 0.18);
+    color: #e5b95a;
+  }
+  @media (max-width: 900px) {
+    .day-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .day-cell { min-height: auto; flex-direction: row; align-items: center; gap: 0.85rem; }
+    .day-cell .day-num { font-size: 1.4rem; }
+    .day-cell .day-plan { margin-top: 0; }
+  }
+
+  /* Ask/takeaway list */
+  .ask-list { list-style: none; padding: 0; margin: 0; }
+  .ask-list li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0.85rem;
+    padding: 1rem 0;
+    border-bottom: 1px dashed rgba(192, 57, 43, 0.14);
+  }
+  .ask-list li:last-child { border-bottom: 0; }
+  .ask-list .marker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; letter-spacing: 0.14em;
+    color: #e5b95a; text-transform: uppercase;
+    padding-top: 0.25rem;
+    font-weight: 600;
+  }
+  .ask-list .ask-body strong {
+    color: #f5f0e8; font-weight: 600;
+  }
+  .ask-list .ask-body {
+    color: rgba(245, 240, 232, 0.85);
+    line-height: 1.55;
+  }
+
+  /* CTA */
+  .cta-btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem; letter-spacing: 0.20em;
+    text-transform: uppercase; font-weight: 700;
+    background: #e5b95a; color: #0f0b08;
+    text-decoration: none;
+    border: 1px solid #e5b95a;
+  }
+  .cta-btn:hover { background: #f0cc6a; border-color: #f0cc6a; }
+  .cta-btn.ghost {
+    background: transparent; color: #e5b95a;
+    border: 1px solid rgba(229, 185, 90, 0.55);
+  }
+  .cta-btn.ghost:hover {
+    background: rgba(229, 185, 90, 0.12);
+    border-color: #e5b95a;
+  }
+</style>
+</head>
+<body class="font-sans">
+
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a class="brand-link" href="#cover">
+    <span class="brand-dot"></span>
+    <span class="brand-name">KSX</span>
+    <span class="brand-sub md-only">/ Kage Edition</span>
+  </a>
+  <div class="meta">
+    <span class="counter md-only"><span id="slideIdx">01</span> / <span id="slideTotal">13</span></span>
+    <span class="sep md-only">·</span>
+    <span class="lg-only">updated <span data-inject="updated">2026-08-14</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only">rev <span data-inject="rev">1</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only"><span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">
+      <span class="menu-hamburger">≡ menu</span>
+      <span class="menu-close">× close</span>
+    </button>
+  </div>
+</header>
+
+<nav class="side-nav" aria-label="Deck sections">
+  <div>
+    <div class="nav-label">Sections</div>
+    <ul class="nav-list" id="sideNavList"></ul>
+  </div>
+  <div class="nav-foot">
+    <div class="foot-brand">Kiz Summit Exchange</div>
+    Waitlist signal · rev <span data-inject="rev">1</span>
+    <br /><span class="text-deep">Internal · Do not distribute</span>
+  </div>
+</nav>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-panel">
+    <div class="drawer-label">Sections</div>
+    <ul class="drawer-list" id="drawerList"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll">
+
+  <!-- 1. Cover -->
+  <section id="cover" class="snap-slide min-h-screen flex items-center px-6 md:px-14 pt-24 pb-16" data-title="Cover">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">KSX Waitlist · Signal Read</div>
+      <h1 class="h-display text-[clamp(2.5rem,6vw,4.75rem)] mb-6">
+        68 signups. <span class="h-gold">18 definitely.</span><br />
+        37 flying in.
+      </h1>
+      <p class="text-body text-lg md:text-xl max-w-3xl leading-relaxed">
+        What the waitlist is telling us about who's coming to Austin
+        Oct 30 – Nov 9, what they want in the room, and how the 11 days should breathe.
+      </p>
+
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+        <div class="stat-tile">
+          <div class="label">Responses</div>
+          <div class="value">68</div>
+          <div class="sub">since Jun 22</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Definitely</div>
+          <div class="value gold">18</div>
+          <div class="sub">warm-lead pool</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Flying in</div>
+          <div class="value">37</div>
+          <div class="sub">54% of respondents</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Pros in room</div>
+          <div class="value gold">6</div>
+          <div class="sub">+ 5 advanced</div>
+        </div>
+      </div>
+
+      <details class="deck-toc">
+        <summary>▸ Contents</summary>
+        <ol class="toc-list">
+          <li><a href="#signal">1 · The signal</a></li>
+          <li><a href="#intent">2 · Attendance intent</a></li>
+          <li><a href="#geo">3 · Travel + geography</a></li>
+          <li><a href="#skill">4 · Skill mix + load-bearing pros</a></li>
+          <li><a href="#programming">5 · Programming demand</a></li>
+          <li><a href="#categories">6 · Category interest</a></li>
+          <li><a href="#themes">7 · Themes in feedback</a></li>
+          <li><a href="#quotes">8 · Representative quotes</a></li>
+          <li><a href="#constraint">9 · The scheduling constraint</a></li>
+          <li><a href="#rhythm">10 · Proposed 11-day rhythm</a></li>
+          <li><a href="#takeaways">11 · What this tells us</a></li>
+          <li><a href="#cta">12 · What to decide next</a></li>
+        </ol>
+      </details>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <span class="chip internal">Internal · Do not share</span>
+        <span class="chip">Source: KSX Waitlist · Notion</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The signal -->
+  <section id="signal" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The signal">
+    <div class="max-w-4xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">The signal</div>
+      <h2 class="h-display text-[clamp(2rem,4.5vw,3.25rem)] mb-8">
+        This isn't a festival crowd. It's a <span class="h-gold">weekender crowd</span> that got told it might be 10 days.
+      </h2>
+      <div class="text-body text-lg leading-relaxed space-y-5 max-w-3xl">
+        <p>
+          Two thirds of the room says <em>probably</em> or <em>maybe</em>. Only one in four is fully committed.
+          When they explain themselves in the feedback field, the same story shows up over and over:
+          they want to be there, but they can't disappear for 11 days.
+        </p>
+        <p>
+          The design implication is bigger than "add flex tickets." It reshapes the whole rhythm. Daytime programming
+          only makes sense on the weekends; weekdays have to leave room for remote work and for the international
+          crew to explore Austin while locals are on Zoom.
+        </p>
+        <p class="text-dimmed">
+          Below: what the numbers say, then what to do with them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Attendance intent -->
+  <section id="intent" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Attendance intent">
+    <div class="max-w-4xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Attendance intent</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-8">
+        <span class="h-gold">18 definitelys.</span> 32 probablys. The soft middle is where the design pressure lives.
+      </h2>
+
+      <div class="bar-chart mb-6">
+        <div class="bar-label">Definitely</div>
+        <div class="bar-track"><div class="bar-fill gold-only" style="width: 56%;">18</div></div>
+        <div class="bar-total">27%</div>
+
+        <div class="bar-label">Probably</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 100%;">32</div></div>
+        <div class="bar-total">47%</div>
+
+        <div class="bar-label">Maybe</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 37.5%;">12</div></div>
+        <div class="bar-total">18%</div>
+
+        <div class="bar-label">Curious</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 3.1%;">1</div></div>
+        <div class="bar-total">1%</div>
+
+        <div class="bar-label">Partial · no answer</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 15.6%; opacity: 0.55;">5</div></div>
+        <div class="bar-total">7%</div>
+      </div>
+
+      <p class="text-dimmed text-sm">
+        n = 68 real responses (2 Charles test rows excluded). Bar widths scaled to the largest bucket.
+        The 32-person "probably" bucket is the swing vote: how the 11 days are structured decides how many of them convert.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. Travel + geography -->
+  <section id="geo" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Travel + geography">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Travel + geography</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-8">
+        Over half are <span class="h-gold">flying in.</span> Most of the ground game is Texas + OK.
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <div class="bar-chart mb-4">
+            <div class="bar-label">Flying</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%;">37</div></div>
+            <div class="bar-total">54%</div>
+
+            <div class="bar-label">Driving</div>
+            <div class="bar-track"><div class="bar-fill gold-only" style="width: 35%;">13</div></div>
+            <div class="bar-total">19%</div>
+
+            <div class="bar-label">Local</div>
+            <div class="bar-track"><div class="bar-fill gold-only" style="width: 27%;">10</div></div>
+            <div class="bar-total">15%</div>
+
+            <div class="bar-label">Not sure</div>
+            <div class="bar-track"><div class="bar-fill crimson-only" style="width: 8%;">3</div></div>
+            <div class="bar-total">4%</div>
+
+            <div class="bar-label">Partial</div>
+            <div class="bar-track"><div class="bar-fill crimson-only" style="width: 13.5%; opacity: 0.55;">5</div></div>
+            <div class="bar-total">7%</div>
+          </div>
+          <p class="text-muted text-sm">
+            The high fly-in share is the load-bearing fact for scheduling: mid-week daytime programming penalizes
+            37 people who paid for a flight and can't just "commute in the evenings."
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6">
+          <div class="eyebrow mb-3">Home base clusters</div>
+          <div class="space-y-3 text-body text-sm">
+            <div><span class="text-gold-500 font-semibold">TX (local + drive):</span> Austin (9) · Dallas (6) · Houston (3) · San Antonio · Georgetown</div>
+            <div><span class="text-gold-500 font-semibold">Oklahoma:</span> OKC (3) · Tulsa (2)</div>
+            <div><span class="text-gold-500 font-semibold">Midwest:</span> Minneapolis (3) · Chicago (2) · Columbus (2) · Detroit · Omaha</div>
+            <div><span class="text-gold-500 font-semibold">East:</span> Boston (3) · Philadelphia · Roanoke · Myrtle Beach · Atlanta</div>
+            <div><span class="text-gold-500 font-semibold">West:</span> LA · San Diego · Portland (3) · SLC · Scottsdale · Phoenix</div>
+            <div><span class="text-gold-500 font-semibold">International:</span> Paris · Reims · Kelowna BC · Halifax · Chihuahua MX</div>
+          </div>
+          <div class="mt-4 pt-4 border-t border-crimson-500/20 text-muted text-xs font-mono">
+            Austin is the biggest single origin (9) but only ~13% of the room. This is a national event with an international thread.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Skill mix + load-bearing pros -->
+  <section id="skill" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Skill mix + load-bearing names">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Skill mix + load-bearing pros</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-8">
+        <span class="h-gold">Intermediate is the room.</span> But six pros and five advanced dancers set the ceiling.
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <div>
+          <div class="bar-chart mb-4">
+            <div class="bar-label">Intermediate</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%;">46</div></div>
+            <div class="bar-total">68%</div>
+
+            <div class="bar-label">Beginner</div>
+            <div class="bar-track"><div class="bar-fill crimson-only" style="width: 24%;">11</div></div>
+            <div class="bar-total">16%</div>
+
+            <div class="bar-label">Pro</div>
+            <div class="bar-track"><div class="bar-fill gold-only" style="width: 13%;">6</div></div>
+            <div class="bar-total">9%</div>
+
+            <div class="bar-label">Advanced</div>
+            <div class="bar-track"><div class="bar-fill gold-only" style="width: 11%;">5</div></div>
+            <div class="bar-total">7%</div>
+          </div>
+          <p class="text-muted text-sm">
+            Zero self-identified non-dancers. Programming should assume everyone has enough foundation to be
+            in a room. But the beginner-to-pro spread (11 to 6) means level-tracking matters.
+            Trini asked for it explicitly: "enforce specific requirements to attend certain class levels."
+          </p>
+        </div>
+
+        <div class="glass rounded-xl p-6">
+          <div class="eyebrow mb-3 text-gold-500">Load-bearing names</div>
+          <p class="text-dimmed text-sm mb-4">
+            The pros are travelling for this. Their presence is what makes it "the room the artists trained
+            with." If any two drop, the pitch changes.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="person-chip is-pro">Nii <span class="pc-tag">pro · DC · probably</span></span>
+            <span class="person-chip is-pro">Trini <span class="pc-tag">pro · Dallas · definitely</span></span>
+            <span class="person-chip is-pro">Laurent <span class="pc-tag">pro · Paris · definitely</span></span>
+            <span class="person-chip is-pro">Amen <span class="pc-tag">pro · Columbus · definitely</span></span>
+            <span class="person-chip is-pro">Savannah <span class="pc-tag">pro · Houston · definitely</span></span>
+            <span class="person-chip is-pro">Luke <span class="pc-tag">pro · San Diego · maybe</span></span>
+          </div>
+
+          <div class="eyebrow mb-3 text-gold-500">Advanced tier</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="person-chip is-adv">Vika <span class="pc-tag">adv · Boston</span></span>
+            <span class="person-chip is-adv">Robyn <span class="pc-tag">adv · Boston</span></span>
+            <span class="person-chip is-adv">Nadine <span class="pc-tag">adv · Chicago</span></span>
+            <span class="person-chip is-adv">Lena <span class="pc-tag">adv · Orlando</span></span>
+            <span class="person-chip is-adv">Brianna <span class="pc-tag">adv · Dallas</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Programming demand -->
+  <section id="programming" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Programming demand">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Programming demand</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-8">
+        Social dancing + musicality + guided practica are the <span class="h-gold">non-negotiables.</span>
+      </h2>
+
+      <div class="bar-chart mb-4">
+        <div class="bar-label">Social dancing</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 100%;">52</div></div>
+        <div class="bar-total">79%</div>
+
+        <div class="bar-label">Musicality</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 87%;">45</div></div>
+        <div class="bar-total">68%</div>
+
+        <div class="bar-label">Guided practica</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 83%;">43</div></div>
+        <div class="bar-total">65%</div>
+
+        <div class="bar-label">Mindset</div>
+        <div class="bar-track"><div class="bar-fill gold-only" style="width: 69%;">36</div></div>
+        <div class="bar-total">55%</div>
+
+        <div class="bar-label">Follower-only</div>
+        <div class="bar-track"><div class="bar-fill gold-only" style="width: 63%;">33</div></div>
+        <div class="bar-total">50%</div>
+
+        <div class="bar-label">UKiz history</div>
+        <div class="bar-track"><div class="bar-fill gold-only" style="width: 52%;">27</div></div>
+        <div class="bar-total">41%</div>
+
+        <div class="bar-label">Eat + gather</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 42%;">22</div></div>
+        <div class="bar-total">33%</div>
+
+        <div class="bar-label">Games</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 40%;">21</div></div>
+        <div class="bar-total">32%</div>
+
+        <div class="bar-label">Jack &amp; Jill</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 34%;">18</div></div>
+        <div class="bar-total">27%</div>
+
+        <div class="bar-label">Convo cards</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 34%;">18</div></div>
+        <div class="bar-total">27%</div>
+
+        <div class="bar-label">Choreo → video</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 30%;">16</div></div>
+        <div class="bar-total">24%</div>
+
+        <div class="bar-label">Solo dance</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 28%;">15</div></div>
+        <div class="bar-total">23%</div>
+
+        <div class="bar-label">Hiking</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 26%; opacity: 0.75;">14</div></div>
+        <div class="bar-total">21%</div>
+
+        <div class="bar-label">Line dancing</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 21%; opacity: 0.7;">11</div></div>
+        <div class="bar-total">17%</div>
+
+        <div class="bar-label">Show your style</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 17%; opacity: 0.65;">9</div></div>
+        <div class="bar-total">14%</div>
+
+        <div class="bar-label">Movies</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 13%; opacity: 0.55;">7</div></div>
+        <div class="bar-total">11%</div>
+      </div>
+
+      <p class="text-muted text-sm mt-4">
+        n = 66 respondents who answered the programming question · multiple selections per person.
+        The top six (social · musicality · practica · mindset · follower-only · history) each cross 40%.
+        Below the line is elective territory: worth offering once, not core.
+      </p>
+    </div>
+  </section>
+
+  <!-- 7. Category interest -->
+  <section id="categories" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Category interest">
+    <div class="max-w-4xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Category interest</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-8">
+        Workshops + socials carry the room. Competitions are a <span class="h-gold">minority track</span>, not a headliner.
+      </h2>
+
+      <div class="bar-chart mb-6">
+        <div class="bar-label">Workshops</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 100%;">62</div></div>
+        <div class="bar-total">94%</div>
+
+        <div class="bar-label">Socials + games</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 94%;">58</div></div>
+        <div class="bar-total">88%</div>
+
+        <div class="bar-label">Experiences</div>
+        <div class="bar-track"><div class="bar-fill gold-only" style="width: 55%;">34</div></div>
+        <div class="bar-total">52%</div>
+
+        <div class="bar-label">Competitions</div>
+        <div class="bar-track"><div class="bar-fill crimson-only" style="width: 31%;">19</div></div>
+        <div class="bar-total">29%</div>
+      </div>
+
+      <p class="text-body leading-relaxed max-w-3xl">
+        Nearly everyone wants classes and socials. The "experiences" thread (hiking, meals, movies, hangouts)
+        is a real 52% share and pairs cleanly with the midweek daytime slots that can't be workshops.
+        Competitions are a passionate 29% (Luke's ask: "a serious JnJ on a weekend"). Schedule one, don't
+        anchor the event around it.
+      </p>
+    </div>
+  </section>
+
+  <!-- 8. Themes in feedback -->
+  <section id="themes" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Themes in feedback">
+    <div class="max-w-6xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Themes in the open feedback</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-8">
+        Six clusters kept showing up. <span class="h-gold">Wellness + scheduling led every other topic.</span>
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="theme-card">
+          <div class="th-count">#1 · 6+ mentions</div>
+          <div class="th-title">Wellness &amp; realistic schedule</div>
+          <div class="th-body">
+            Earlier social start / earlier end, room to rest, "can't do 10 days," remote-work-friendly weekdays.
+            The most repeated ask by a wide margin.
+          </div>
+          <div class="th-names">Wendy · Nancy · Jess · Phebe · Anna · Steven · Lena · Anvita</div>
+        </div>
+
+        <div class="theme-card">
+          <div class="th-count">#2 · 4 mentions</div>
+          <div class="th-title">Lead-to-follow ratio at socials</div>
+          <div class="th-body">
+            The universal follower complaint. Explicit asks for balancing efforts, switch hours, and
+            no-queue policies at socials.
+          </div>
+          <div class="th-names">Barbara · Rachel · Darlene · Lena</div>
+        </div>
+
+        <div class="theme-card">
+          <div class="th-count">#3 · 4 mentions</div>
+          <div class="th-title">Depth over choreo-with-a-topic</div>
+          <div class="th-body">
+            "Concepts, not moves." Musicality classes that are actually musicality, technique that goes past
+            styling, axis + control instead of routines.
+          </div>
+          <div class="th-names">Sanchita · Lia · Ini · Kenn</div>
+        </div>
+
+        <div class="theme-card">
+          <div class="th-count">#4 · 6+ mentions</div>
+          <div class="th-title">Community-building energy</div>
+          <div class="th-body">
+            "Connect the NA scene," house-party feel, board games, pool parties, cookouts. People want to
+            leave with new relationships, not just workshop notes.
+          </div>
+          <div class="th-names">Joshua · Nadia · Nii · Cindy · Jason · Nikki</div>
+        </div>
+
+        <div class="theme-card">
+          <div class="th-count">#5 · 3 mentions</div>
+          <div class="th-title">Teacher development track</div>
+          <div class="th-body">
+            Advanced students asking for the pathway to instructor. Feedback from Sophie/Laurent on marketing,
+            structure, and readiness.
+          </div>
+          <div class="th-names">Renier · Brianna · (Reid on DJing)</div>
+        </div>
+
+        <div class="theme-card">
+          <div class="th-count">#6 · 5 mentions</div>
+          <div class="th-title">Tarraxo / semba / fusion appetite</div>
+          <div class="th-body">
+            Recurring interest in the sister-styles most Kiz weekends underserve. Also fusion with tango/zouk
+            (Geena).
+          </div>
+          <div class="th-names">Caryn · Melanie · Steven · Annastatia · Geena</div>
+        </div>
+      </div>
+
+      <p class="text-muted text-sm mt-6">
+        Also surfaced (2 mentions each): hygiene &amp; etiquette (Bruno, Savannah) · Halloween theme &amp;
+        Logia Mexico conflict (Nii) · behind-the-scenes DJ / instructor content (Nadia, Reid).
+      </p>
+    </div>
+  </section>
+
+  <!-- 9. Quotes -->
+  <section id="quotes" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Representative quotes">
+    <div class="max-w-4xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">What people actually said</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-10">
+        Three voices that capture the <span class="h-gold">design tension.</span>
+      </h2>
+
+      <div class="space-y-6">
+        <div class="pullquote">
+          <p>
+            "I would like to see a wellness-focused retreat. The classic festivals that run back-to-back
+            continuous workshops for 6–7 hours during the day with a few hours for dinner and then socials
+            from midnight to 6 am for 3–4 days is rough on the mind and the body… I would not be able to
+            attend for 10 days straight, but would see if I can attend for 2–3 nights."
+          </p>
+          <div class="attr">Wendy · intermediate · Kelowna BC · probably · flying</div>
+        </div>
+
+        <div class="pullquote">
+          <p>
+            "I would be able to attend the 10-day event if I could work remotely during the day. I would
+            therefore love for workshops and classes to be in the late afternoons and evening (such as 5 pm
+            onwards), with the socials on the weekends."
+          </p>
+          <div class="attr">Anna · beginner · Salt Lake City · maybe · flying</div>
+        </div>
+
+        <div class="pullquote">
+          <p>
+            "The most frustrating part of big festivals is the disproportionate amount of followers to leads.
+            I really like to dance. I'm less fond of waiting and hoping to dance… I wish that attempt would
+            be made [to balance socials]. Maybe you do that, Charles. I loved your idea of levels and longer
+            workshops."
+          </p>
+          <div class="attr">Barbara · intermediate · Kelowna area · probably · flying</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Scheduling constraint -->
+  <section id="constraint" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The scheduling constraint">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">The scheduling constraint</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-8">
+        At least 8 people <span class="h-gold">explicitly can't do full weekday daytime.</span> A soft majority signalled the same thing.
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <div class="glass rounded-xl p-6">
+          <div class="eyebrow mb-3">Named "can't do 10 days" cluster</div>
+          <ul class="text-body space-y-3 text-sm leading-relaxed">
+            <li><strong class="text-gold-500">Wendy</strong> · "2–3 nights, wellness-focused"</li>
+            <li><strong class="text-gold-500">Anna</strong> · remote work, workshops 5 pm+</li>
+            <li><strong class="text-gold-500">Phebe</strong> · "4–5 days max, Wed–Sun"</li>
+            <li><strong class="text-gold-500">Steven</strong> · "evenings, or post-noon"</li>
+            <li><strong class="text-gold-500">Lena</strong> · earlier starts + ends</li>
+            <li><strong class="text-gold-500">Anvita</strong> · flex ticketing for partial attendance</li>
+            <li><strong class="text-gold-500">Bruno</strong> · "only Thursday–Friday"</li>
+            <li><strong class="text-gold-500">Jess</strong> · "socials ended by 2 am"</li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-body text-lg leading-relaxed mb-4">
+            The wellness / remote-work / partial-attendance signal isn't a fringe request. It's the
+            <span class="text-gold-500 font-semibold">dominant thread</span> in the open feedback field,
+            appearing across skill levels, locations, and attendance intents.
+          </p>
+          <p class="text-body text-lg leading-relaxed mb-4">
+            The response isn't to shorten the event. It's to design the rhythm so that the same person can
+            attend 3 days, or 7 days, or all 11, without penalty. Weekdays hold evening programming.
+            Weekends hold daytime. Days aren't wasted; they're returned to attendees for work, rest, or Austin.
+          </p>
+          <p class="text-dimmed text-sm">
+            This also frees the Paris crew (Laurent + Cécile) to do daytime Austin exploration midweek
+            while locals are working. That's a feature, not a compromise.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Proposed 11-day rhythm -->
+  <section id="rhythm" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Proposed 11-day rhythm">
+    <div class="max-w-6xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Proposed rhythm · Oct 30 to Nov 9, 2026</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.75rem)] mb-8">
+        <span class="h-gold">Weekends daytime.</span> Weekdays evening-only. Two weekends bookend a work-friendly week.
+      </h2>
+
+      <div class="mb-4 flex flex-wrap gap-3">
+        <span class="chip"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#e5b95a;margin-right:6px"></span>Weekend · full-day programming</span>
+        <span class="chip"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#c0392b;margin-right:6px"></span>Weekday · evening only (7 pm start)</span>
+        <span class="chip"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(192,57,43,0.35);border:1px dashed rgba(192,57,43,0.6);margin-right:6px"></span>Soft close</span>
+      </div>
+
+      <div class="day-grid mb-6">
+        <div class="day-hdr">Mon</div>
+        <div class="day-hdr">Tue</div>
+        <div class="day-hdr">Wed</div>
+        <div class="day-hdr">Thu</div>
+        <div class="day-hdr">Fri</div>
+        <div class="day-hdr">Sat</div>
+        <div class="day-hdr">Sun</div>
+
+        <!-- Row 1: Oct 26–Nov 1 (Fri, Sat, Sun in second half) -->
+        <div class="day-cell" style="opacity:0.25"></div>
+        <div class="day-cell" style="opacity:0.25"></div>
+        <div class="day-cell" style="opacity:0.25"></div>
+        <div class="day-cell" style="opacity:0.25"></div>
+
+        <div class="day-cell is-weekend">
+          <div class="day-num">30</div>
+          <div class="day-name">Fri · Oct</div>
+          <span class="day-badge">Open</span>
+          <div class="day-plan">
+            Welcome social · <strong>7 pm</strong> beginner intro before DJ · doors 8 pm
+          </div>
+        </div>
+        <div class="day-cell is-weekend">
+          <div class="day-num">31</div>
+          <div class="day-name">Sat · Halloween</div>
+          <span class="day-badge">Weekend</span>
+          <div class="day-plan">
+            Daytime workshops · <strong>Halloween social</strong> evening (theme welcome per Nii's ask)
+          </div>
+        </div>
+        <div class="day-cell is-weekend">
+          <div class="day-num">01</div>
+          <div class="day-name">Sun · Nov</div>
+          <span class="day-badge">Weekend</span>
+          <div class="day-plan">
+            Daytime workshops + brunch social · early-end evening for travel + rest
+          </div>
+        </div>
+
+        <!-- Row 2: Nov 2–8 -->
+        <div class="day-cell is-weekday">
+          <div class="day-num">02</div>
+          <div class="day-name">Mon</div>
+          <span class="day-badge">Evening</span>
+          <div class="day-plan">
+            <strong>7 pm+ only</strong> · practica + social · days free
+          </div>
+        </div>
+        <div class="day-cell is-weekday">
+          <div class="day-num">03</div>
+          <div class="day-name">Tue</div>
+          <span class="day-badge">Evening</span>
+          <div class="day-plan">
+            <strong>7 pm+</strong> · musicality workshop · social · early wrap
+          </div>
+        </div>
+        <div class="day-cell is-weekday">
+          <div class="day-num">04</div>
+          <div class="day-name">Wed</div>
+          <span class="day-badge">Evening</span>
+          <div class="day-plan">
+            <strong>7 pm+</strong> · guided practica · convo cards · social
+          </div>
+        </div>
+        <div class="day-cell is-weekday">
+          <div class="day-num">05</div>
+          <div class="day-name">Thu</div>
+          <span class="day-badge">Evening</span>
+          <div class="day-plan">
+            <strong>7 pm+</strong> · follower-only + JnJ prelim · social
+          </div>
+        </div>
+        <div class="day-cell is-weekend">
+          <div class="day-num">06</div>
+          <div class="day-name">Fri</div>
+          <span class="day-badge">Weekend</span>
+          <div class="day-plan">
+            Daytime workshops · Jack &amp; Jill main round · late social
+          </div>
+        </div>
+        <div class="day-cell is-weekend">
+          <div class="day-num">07</div>
+          <div class="day-name">Sat</div>
+          <span class="day-badge">Weekend</span>
+          <div class="day-plan">
+            Full day workshops (both instructor tracks) · big Saturday social
+          </div>
+        </div>
+        <div class="day-cell is-weekend">
+          <div class="day-num">08</div>
+          <div class="day-name">Sun</div>
+          <span class="day-badge">Weekend</span>
+          <div class="day-plan">
+            UKiz history + mindset AM · closing social · <strong>early wrap</strong>
+          </div>
+        </div>
+
+        <!-- Row 3: Nov 9 (Mon only) -->
+        <div class="day-cell is-close">
+          <div class="day-num">09</div>
+          <div class="day-name">Mon</div>
+          <span class="day-badge">Soft close</span>
+          <div class="day-plan">
+            Optional brunch · hiking · farewell hangout for those still in town
+          </div>
+        </div>
+        <div class="day-cell" style="opacity:0.25"></div>
+        <div class="day-cell" style="opacity:0.25"></div>
+        <div class="day-cell" style="opacity:0.25"></div>
+        <div class="day-cell" style="opacity:0.25"></div>
+        <div class="day-cell" style="opacity:0.25"></div>
+        <div class="day-cell" style="opacity:0.25"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mt-6">
+        <div class="stat-tile">
+          <div class="label">Weekend days</div>
+          <div class="value gold">6</div>
+          <div class="sub">Full-day programming days</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Weekday evenings</div>
+          <div class="value">4</div>
+          <div class="sub">7 pm+ only · days free for work / touring</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Attendance archetypes</div>
+          <div class="value">3</div>
+          <div class="sub">Weekend-only · full-11 · flex partial</div>
+        </div>
+      </div>
+
+      <p class="text-muted text-sm mt-6">
+        Weekend socials still go late but end earlier than 6 am (Jess, Wendy asks).
+        Weekday days are protected for remote work, rest, and touristy time for out-of-towners.
+        Every session is designed to be attendable as a stand-alone by someone doing 3 days.
+      </p>
+    </div>
+  </section>
+
+  <!-- 12. Takeaways -->
+  <section id="takeaways" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="What this tells us">
+    <div class="max-w-4xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">What to actually do about it</div>
+      <h2 class="h-display text-[clamp(1.75rem,3.5vw,2.5rem)] mb-8">
+        Seven decisions the signal is pushing us toward.
+      </h2>
+
+      <ol class="ask-list">
+        <li>
+          <span class="marker">Ticket</span>
+          <div class="ask-body"><strong>Sell a flexible ticket, not "the 11 days."</strong> Weekend-only, full-event, and a middle-week pass. Anvita, Phebe, Wendy, Bruno all name this directly: flex is the difference between "probably" and "definitely" for a real chunk of the 32.</div>
+        </li>
+        <li>
+          <span class="marker">Rhythm</span>
+          <div class="ask-body"><strong>Lock the weekday-evening / weekend-daytime split.</strong> Weekdays start at 7 pm, weekends run full day. Communicate it in the announcement so people don't have to ask.</div>
+        </li>
+        <li>
+          <span class="marker">Ratio</span>
+          <div class="ask-body"><strong>Recruit leads.</strong> The follower-heavy socials complaint is universal (Barbara, Rachel, Darlene, Lena). Recruit driving-distance leads from TX + OK ahead of the announcement. Try a switch-hour experiment in at least one social.</div>
+        </li>
+        <li>
+          <span class="marker">Depth</span>
+          <div class="ask-body"><strong>Book one workshop that is only concepts.</strong> Not moves with a topic label. Sanchita, Lia, Ini, Kenn are all asking for the same thing. Musicality-as-technique or axis-control-as-technique is the pitch.</div>
+        </li>
+        <li>
+          <span class="marker">Tarraxo</span>
+          <div class="ask-body"><strong>Add a sister-style session.</strong> Tarraxo, semba, or fusion. Five people named it unprompted, an underserved appetite in the North American Kiz circuit.</div>
+        </li>
+        <li>
+          <span class="marker">JnJ</span>
+          <div class="ask-body"><strong>Program one Jack &amp; Jill on a weekend.</strong> 18 people want it. Luke wants it serious. Put it on Friday Nov 6 as an anchor for the closing weekend.</div>
+        </li>
+        <li>
+          <span class="marker">Community</span>
+          <div class="ask-body"><strong>Design non-dance touchpoints on purpose.</strong> Board games, a brunch, a hike, a Halloween theme. 52% want experiences programming. It's what turns a festival into an exchange.</div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 13. CTA -->
+  <section id="cta" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="What to decide next">
+    <div class="max-w-4xl w-full text-center mx-auto">
+      <span class="accent-rule mx-auto block"></span>
+      <div class="eyebrow mb-6">Decide + move</div>
+      <h2 class="h-display text-[clamp(2.5rem,5.5vw,4rem)] mb-8">
+        Lock the rhythm.<br />
+        <span class="h-gold">Then announce the tickets.</span>
+      </h2>
+      <p class="text-body text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+        The waitlist has given us enough signal to shape the 11 days without guessing. The next unblock is
+        a decision on the ticketing tiers and a Nov schedule the announcement can point to.
+      </p>
+
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a class="cta-btn" href="#rhythm">Review the rhythm →</a>
+        <a class="cta-btn ghost" href="#takeaways">The 7 decisions</a>
+      </div>
+
+      <div class="mt-14 text-muted text-sm font-mono">
+        Data pulled from the KSX Waitlist Notion DB · <span data-inject="updated">2026-08-14</span> · rev <span data-inject="rev">1</span><br />
+        <span class="text-deep">Internal artifact for Charles + Alina · Do not distribute</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    var sections = Array.from(document.querySelectorAll('main section.snap-slide'));
+    var progressBar = document.getElementById('progressBar');
+    var slideIdx = document.getElementById('slideIdx');
+    var slideTotal = document.getElementById('slideTotal');
+    var sideNavList = document.getElementById('sideNavList');
+    var drawerList = document.getElementById('drawerList');
+    var drawer = document.getElementById('drawer');
+    var menuBtn = document.getElementById('menuBtn');
+
+    if (slideTotal) slideTotal.textContent = String(sections.length).padStart(2, '0');
+
+    // Build nav lists
+    sections.forEach(function (s, i) {
+      var id = s.id;
+      var title = s.getAttribute('data-title') || id;
+      var li = document.createElement('li');
+      li.dataset.section = id;
+      var a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = (String(i + 1).padStart(2, '0')) + ' · ' + title;
+      li.appendChild(a);
+      sideNavList.appendChild(li);
+
+      var da = document.createElement('a');
+      da.href = '#' + id;
+      da.className = 'drawer-item';
+      da.dataset.section = id;
+      da.textContent = title;
+      da.addEventListener('click', function () {
+        drawer.hidden = true;
+        menuBtn.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+      drawerList.appendChild(da);
+    });
+
+    // IntersectionObserver for active state + counter + progress
+    var current = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var idx = sections.indexOf(entry.target);
+        if (idx < 0) return;
+        current = idx;
+        // counter
+        slideIdx.textContent = String(idx + 1).padStart(2, '0');
+        // progress bar
+        var pct = sections.length > 1 ? (idx / (sections.length - 1)) : 1;
+        progressBar.style.transform = 'scaleX(' + pct + ')';
+        // side nav active
+        Array.from(sideNavList.children).forEach(function (li) {
+          li.classList.toggle('nav-active', li.dataset.section === entry.target.id);
+        });
+        Array.from(drawerList.children).forEach(function (a) {
+          a.classList.toggle('is-active', a.dataset.section === entry.target.id);
+        });
+      });
+    }, { threshold: [0.35, 0.55] });
+    sections.forEach(function (s) { io.observe(s); });
+
+    // Mobile drawer toggle
+    if (menuBtn) {
+      menuBtn.addEventListener('click', function () {
+        var open = drawer.hidden === false;
+        drawer.hidden = open;
+        menuBtn.classList.toggle('is-open', !open);
+        menuBtn.setAttribute('aria-expanded', String(!open));
+      });
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', function (e) {
+      if (e.target && ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(e.target.tagName) >= 0) return;
+      var key = e.key;
+      var target = null;
+      if (key === 'ArrowDown' || key === ' ' || key === 'PageDown') { target = sections[Math.min(current + 1, sections.length - 1)]; e.preventDefault(); }
+      else if (key === 'ArrowUp' || key === 'PageUp') { target = sections[Math.max(current - 1, 0)]; e.preventDefault(); }
+      else if (key === 'Home') { target = sections[0]; e.preventDefault(); }
+      else if (key === 'End') { target = sections[sections.length - 1]; e.preventDefault(); }
+      else if (key === 'Escape' && !drawer.hidden) { drawer.hidden = true; menuBtn.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+</script>
+
+</body>
+</html>
