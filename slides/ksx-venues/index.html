@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KSX Venue Board · Kiz Summit Exchange 2026</title>
+<meta name="description" content="Live venue tracker for KSX: who is in play, what they cost, what is confirmed, and what is still open. Internal. Not for distribution." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0f0b08" />
+
+<link rel="canonical" href="https://slides.ogarocious.com/ksx-venues/" />
+
+<meta property="og:site_name" content="Kiz Summit Exchange" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://slides.ogarocious.com/ksx-venues/" />
+<meta property="og:title" content="KSX Venue Board · 6 in play, 2 tours booked, 0 signed" />
+<meta property="og:description" content="Live tracker for every venue thread: status, rates, dates, curfews, and the one night still uncovered." />
+<meta property="og:image" content="https://slides.ogarocious.com/ksx-venues/og.png" />
+<meta property="og:image:alt" content="KSX Venue Board cover: 6 venues in play, 2 tours booked, 0 signed, Oct 31 uncovered." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KSX Venue Board · live tracker" />
+<meta name="twitter:description" content="Status, rates, dates and curfews for every venue thread." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/ksx-venues/og.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: {
+            950: '#080604', 900: '#0f0b08', 800: '#1a120c',
+            700: '#241811', 600: '#2f2118', 500: '#3d2c20',
+          },
+          crimson: {
+            300: '#e08475', 400: '#d05e4c', 500: '#c0392b',
+            600: '#9a2d21', 700: '#761f16',
+          },
+          gold: {
+            300: '#f2d896', 400: '#ecc978', 500: '#e5b95a',
+            600: '#c99e42', 700: '#a67f34',
+          },
+          ivory: {
+            50: '#faf6ee', 100: '#f5f0e8', 200: '#e6dccb', 300: '#c9bda9',
+          },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'Georgia', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  body {
+    background-color: #0f0b08;
+    background-image:
+      radial-gradient(ellipse 1200px 700px at 20% 10%, rgba(192, 57, 43, 0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 80%, rgba(229, 185, 90, 0.06), transparent 65%),
+      linear-gradient(180deg, #080604 0%, #0f0b08 40%, #0f0b08 60%, #080604 100%);
+    min-height: 100vh;
+    color: #f5f0e8;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  .text-body   { color: rgba(245, 240, 232, 0.90); }
+  .text-dimmed { color: rgba(245, 240, 232, 0.72); }
+  .text-muted  { color: rgba(245, 240, 232, 0.55); }
+  .text-deep   { color: rgba(245, 240, 232, 0.30); }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: #c0392b;
+    transform: scaleX(0); transform-origin: left center;
+    z-index: 51; pointer-events: none; will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(26, 18, 12, 0.65);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(192, 57, 43, 0.22);
+    box-shadow:
+      0 1px 0 rgba(245, 240, 232, 0.03) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(192, 57, 43, 0.42); }
+
+  .accent-rule {
+    display: inline-block; width: 48px; height: 2px;
+    background: #c0392b; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid #e5b95a;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Header (fixed top bar) */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: rgba(8, 6, 4, 0.80);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(192, 57, 43, 0.14);
+  }
+  .site-header .brand-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: inherit;
+  }
+  .site-header .brand-dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: #c0392b;
+    transition: background-color 220ms ease;
+  }
+  .site-header .brand-link:hover .brand-dot {
+    background: #e5b95a;
+  }
+  .site-header .brand-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e5b95a;
+  }
+  .site-header .brand-sub {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: rgba(245, 240, 232, 0.55);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .site-header .meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.72rem; color: rgba(245, 240, 232, 0.55);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .site-header .counter { color: rgba(245, 240, 232, 0.75); }
+  .site-header .sep { color: rgba(245, 240, 232, 0.25); }
+  @media (max-width: 900px) { .site-header .lg-only { display: none; } }
+  @media (max-width: 700px) { .site-header .md-only { display: none; } }
+
+  /* Keyboard chip */
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.07);
+    color: #f5f0e8;
+    display: inline-block; margin: 0 1px;
+  }
+
+  /* Menu button (mobile only) */
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.85rem; border-radius: 999px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.08);
+    color: #f5f0e8;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(229, 185, 90, 0.70);
+    background: rgba(192, 57, 43, 0.14);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+  @media (min-width: 768px) { .menu-btn { display: none; } }
+
+  /* Side navigation (desktop only) */
+  .side-nav {
+    position: fixed; top: 0; left: 0; height: 100vh;
+    width: 280px;
+    padding: 5rem 1.75rem 2rem;
+    z-index: 40;
+    background: rgba(8, 6, 4, 0.60);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-right: 1px solid rgba(192, 57, 43, 0.12);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) { .side-nav { display: flex; } }
+  .side-nav .nav-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.20);
+  }
+  .side-nav .nav-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.1rem;
+  }
+  .side-nav .nav-list a {
+    display: block;
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    color: rgba(245, 240, 232, 0.60);
+    text-decoration: none;
+    font-size: 0.88rem; line-height: 1.3;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+  .side-nav .nav-list a:hover {
+    color: #e5b95a;
+    background: rgba(192, 57, 43, 0.08);
+  }
+  .side-nav .nav-list .nav-active a {
+    color: #e5b95a;
+    background: rgba(192, 57, 43, 0.14);
+  }
+  .side-nav .nav-foot {
+    font-size: 0.72rem; color: rgba(245, 240, 232, 0.45);
+    line-height: 1.55;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(192, 57, 43, 0.12);
+  }
+  .side-nav .nav-foot .foot-brand { color: rgba(229, 185, 90, 0.85); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.65rem; }
+
+  /* Drawer (mobile only) */
+  .drawer {
+    position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    background: rgba(8, 6, 4, 0.85);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(15, 11, 8, 0.98);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .drawer-list {
+    border-left: 1px solid rgba(192, 57, 43, 0.30);
+    padding-left: 1rem;
+    margin: 0; list-style: none;
+  }
+  .drawer-item {
+    display: block; padding: 0.85rem 0.9rem; margin-left: -0.5rem;
+    color: #f5f0e8; text-decoration: none;
+    font-size: 1.1rem; font-weight: 500; line-height: 1.3;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .drawer-item:hover, .drawer-item.is-active {
+    background: rgba(192, 57, 43, 0.14);
+    color: #e5b95a;
+  }
+
+  /* Cover TOC */
+  .deck-toc { margin-top: 2.5rem; max-width: 32rem; position: relative; z-index: 2; }
+  .deck-toc summary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.55rem 1rem;
+    background: rgba(26, 18, 12, 0.55);
+    border: 1px dashed rgba(229, 185, 90, 0.55);
+    border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(229, 185, 90, 0.95);
+    cursor: pointer; list-style: none;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .deck-toc summary::-webkit-details-marker { display: none; }
+  .deck-toc summary::before {
+    content: '▸'; font-size: 0.7rem;
+    transition: transform 200ms ease; display: inline-block;
+  }
+  .deck-toc[open] summary::before { transform: rotate(90deg); }
+  .deck-toc summary:hover {
+    border-color: rgba(229, 185, 90, 0.95);
+    background: rgba(26, 18, 12, 0.80);
+  }
+  .deck-toc[open] summary {
+    background: rgba(192, 57, 43, 0.14);
+    border-color: rgba(229, 185, 90, 0.95);
+  }
+  .toc-list {
+    margin-top: 1rem; padding: 1.25rem 1.5rem;
+    background: rgba(26, 18, 12, 0.75);
+    border: 1px solid rgba(192, 57, 43, 0.18);
+    border-radius: 8px; list-style: none;
+  }
+  .toc-list li {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem; padding: 0.35rem 0;
+    color: rgba(245, 240, 232, 0.85);
+  }
+  .toc-list li a {
+    color: rgba(245, 240, 232, 0.90);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(229, 185, 90, 0.35);
+    padding-bottom: 1px;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .toc-list li a:hover {
+    color: #e5b95a; border-bottom-color: rgba(229, 185, 90, 0.95);
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #c0392b;
+  }
+
+  /* Section headings */
+  .h-display {
+    font-family: "Rubik", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #f5f0e8;
+    line-height: 1.02;
+  }
+  .h-gold { color: #e5b95a; }
+
+  /* Data tiles */
+  .stat-tile {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.25);
+    background: rgba(26, 18, 12, 0.70);
+  }
+  .stat-tile .label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .stat-tile .value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.35rem);
+    color: #f5f0e8; line-height: 1.1;
+  }
+  .stat-tile .value.gold { color: #e5b95a; }
+  .stat-tile .sub { color: rgba(245, 240, 232, 0.65); font-size: 0.85rem; margin-top: 0.4rem; }
+
+  /* Bar chart */
+  .bar-chart {
+    display: grid;
+    grid-template-columns: 11rem 1fr 4rem;
+    gap: 0.5rem 1rem;
+    align-items: center;
+  }
+  .bar-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.82rem; color: rgba(245, 240, 232, 0.82);
+    text-align: right;
+  }
+  .bar-track {
+    height: 22px; border-radius: 4px;
+    background: rgba(192, 57, 43, 0.07);
+    border: 1px solid rgba(192, 57, 43, 0.14);
+    overflow: hidden; display: flex;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(192, 57, 43, 0.75), rgba(229, 185, 90, 0.85));
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: #0f0b08; font-weight: 700;
+  }
+  .bar-fill.crimson-only { background: linear-gradient(90deg, rgba(122, 34, 24, 0.9), rgba(192, 57, 43, 0.95)); color: #f5f0e8; }
+  .bar-fill.gold-only { background: linear-gradient(90deg, rgba(201, 158, 66, 0.9), rgba(229, 185, 90, 0.95)); color: #0f0b08; }
+  .bar-total {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem; color: rgba(245, 240, 232, 0.85);
+  }
+  @media (max-width: 700px) {
+    .bar-chart { grid-template-columns: 7rem 1fr 3rem; gap: 0.35rem 0.6rem; }
+    .bar-label { font-size: 0.72rem; }
+  }
+
+  /* Callout chips */
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.28rem 0.75rem; border-radius: 999px;
+    background: rgba(26, 18, 12, 0.65);
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    color: rgba(245, 240, 232, 0.85);
+  }
+  .chip.internal {
+    border: 1px dashed rgba(229, 185, 90, 0.80);
+    background: rgba(229, 185, 90, 0.08);
+    color: #e5b95a;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    font-weight: 600;
+  }
+  .chip.crimson {
+    border-color: rgba(192, 57, 43, 0.65);
+    background: rgba(192, 57, 43, 0.15);
+    color: #e08475;
+  }
+
+  /* Person / roster chip */
+  .person-chip {
+    display: inline-flex; align-items: baseline; gap: 0.4rem;
+    padding: 0.4rem 0.75rem; border-radius: 6px;
+    background: rgba(26, 18, 12, 0.70);
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    font-family: "Rubik", sans-serif;
+    font-size: 0.88rem;
+    color: #f5f0e8;
+  }
+  .person-chip .pc-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem; letter-spacing: 0.10em; text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.55);
+  }
+  .person-chip.is-pro {
+    background: rgba(229, 185, 90, 0.10);
+    border-color: rgba(229, 185, 90, 0.55);
+    color: #f5f0e8;
+  }
+  .person-chip.is-pro .pc-tag { color: #e5b95a; }
+  .person-chip.is-adv {
+    background: rgba(192, 57, 43, 0.12);
+    border-color: rgba(192, 57, 43, 0.45);
+  }
+  .person-chip.is-adv .pc-tag { color: #e08475; }
+
+  /* Theme cards */
+  .theme-card {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    background: rgba(26, 18, 12, 0.60);
+  }
+  .theme-card .th-count {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.16em;
+    color: #e5b95a; text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .theme-card .th-title {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    color: #f5f0e8; margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+  .theme-card .th-body {
+    color: rgba(245, 240, 232, 0.72);
+    font-size: 0.9rem; line-height: 1.55;
+  }
+  .theme-card .th-names {
+    margin-top: 0.75rem;
+    color: rgba(245, 240, 232, 0.50);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.06em;
+  }
+
+  /* Pull quote */
+  .pullquote {
+    padding: 1.75rem 2rem;
+    background: rgba(26, 18, 12, 0.55);
+    border-radius: 4px;
+    border: 1px solid rgba(192, 57, 43, 0.14);
+  }
+  .pullquote p {
+    font-family: "Rubik", Georgia, serif;
+    font-style: italic;
+    color: #f5f0e8;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 0.85rem;
+    text-indent: -0.4em;
+  }
+  .pullquote p::before {
+    content: '\201C';
+    color: rgba(229, 185, 90, 0.55);
+    font-style: normal;
+    font-size: 1.4em;
+    line-height: 0;
+    vertical-align: -0.15em;
+    margin-right: 0.08em;
+  }
+  .pullquote .attr {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; letter-spacing: 0.10em;
+    color: #e5b95a; text-transform: uppercase;
+  }
+
+  /* Calendar grid */
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .day-hdr {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(229, 185, 90, 0.85);
+    text-align: center;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.15);
+  }
+  .day-cell {
+    min-height: 130px;
+    padding: 0.65rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(192, 57, 43, 0.14);
+    background: rgba(26, 18, 12, 0.45);
+    display: flex; flex-direction: column;
+    gap: 0.35rem;
+  }
+  .day-cell.is-weekend {
+    background: rgba(229, 185, 90, 0.06);
+    border-color: rgba(229, 185, 90, 0.30);
+  }
+  .day-cell.is-weekday {
+    background: rgba(192, 57, 43, 0.06);
+    border-color: rgba(192, 57, 43, 0.28);
+  }
+  .day-cell.is-close {
+    background: rgba(26, 18, 12, 0.35);
+    border-style: dashed;
+    border-color: rgba(192, 57, 43, 0.28);
+  }
+  .day-cell .day-num {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1.15rem;
+    color: #f5f0e8; line-height: 1;
+  }
+  .day-cell.is-weekend .day-num { color: #e5b95a; }
+  .day-cell .day-name {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.55);
+    margin-top: -0.15rem;
+  }
+  .day-cell .day-plan {
+    font-family: "Rubik", sans-serif;
+    font-size: 0.72rem; line-height: 1.35;
+    color: rgba(245, 240, 232, 0.85);
+    margin-top: auto;
+  }
+  .day-cell .day-plan strong {
+    font-weight: 600; color: #e5b95a; font-size: 0.72rem;
+  }
+  .day-cell .day-badge {
+    display: inline-block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.55rem; letter-spacing: 0.10em; text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    background: rgba(192, 57, 43, 0.20);
+    color: #e08475;
+    align-self: flex-start;
+  }
+  .day-cell.is-weekend .day-badge {
+    background: rgba(229, 185, 90, 0.18);
+    color: #e5b95a;
+  }
+  @media (max-width: 900px) {
+    .day-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .day-cell { min-height: auto; flex-direction: row; align-items: center; gap: 0.85rem; }
+    .day-cell .day-num { font-size: 1.4rem; }
+    .day-cell .day-plan { margin-top: 0; }
+  }
+
+  /* Ask/takeaway list */
+  .ask-list { list-style: none; padding: 0; margin: 0; }
+  .ask-list li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0.85rem;
+    padding: 1rem 0;
+    border-bottom: 1px dashed rgba(192, 57, 43, 0.14);
+  }
+  .ask-list li:last-child { border-bottom: 0; }
+  .ask-list .marker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; letter-spacing: 0.14em;
+    color: #e5b95a; text-transform: uppercase;
+    padding-top: 0.25rem;
+    font-weight: 600;
+  }
+  .ask-list .ask-body strong {
+    color: #f5f0e8; font-weight: 600;
+  }
+  .ask-list .ask-body {
+    color: rgba(245, 240, 232, 0.85);
+    line-height: 1.55;
+  }
+
+  /* CTA */
+  .cta-btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem; letter-spacing: 0.20em;
+    text-transform: uppercase; font-weight: 700;
+    background: #e5b95a; color: #0f0b08;
+    text-decoration: none;
+    border: 1px solid #e5b95a;
+  }
+  .cta-btn:hover { background: #f0cc6a; border-color: #f0cc6a; }
+  .cta-btn.ghost {
+    background: transparent; color: #e5b95a;
+    border: 1px solid rgba(229, 185, 90, 0.55);
+  }
+  .cta-btn.ghost:hover {
+    background: rgba(229, 185, 90, 0.12);
+    border-color: #e5b95a;
+  }
+</style>
+</head>
+<body class="font-sans">
+
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a class="brand-link" href="#cover">
+    <span class="brand-dot"></span>
+    <span class="brand-name">KSX</span>
+    <span class="brand-sub md-only">/ Venue Board</span>
+  </a>
+  <div class="meta">
+    <span class="counter md-only"><span id="slideIdx">01</span> / <span id="slideTotal">11</span></span>
+    <span class="sep md-only">·</span>
+    <span class="lg-only">updated <span data-inject="updated">2026-08-18</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only">rev <span data-inject="rev">1</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only"><span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">
+      <span class="menu-hamburger">≡ menu</span>
+      <span class="menu-close">× close</span>
+    </button>
+  </div>
+</header>
+
+<nav class="side-nav" aria-label="Deck sections">
+  <div>
+    <div class="nav-label">Sections</div>
+    <ul class="nav-list" id="sideNavList"></ul>
+  </div>
+  <div class="nav-foot">
+    <div class="foot-brand">Kiz Summit Exchange</div>
+    Venue board · rev <span data-inject="rev">1</span>
+    <br /><span class="text-deep">Internal · Do not distribute</span>
+  </div>
+</nav>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-panel">
+    <div class="drawer-label">Sections</div>
+    <ul class="drawer-list" id="drawerList"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll">
+
+  <!-- 1. Cover -->
+  <section id="cover" class="snap-slide min-h-screen flex items-center px-6 md:px-14 pt-24 pb-16" data-title="Cover">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">KSX Venue Board · Live Tracker</div>
+      <h1 class="h-display text-[clamp(2.5rem,6vw,4.75rem)] mb-6">
+        Six in play. <span class="h-gold">Two tours booked.</span><br />
+        Nothing signed.
+      </h1>
+      <p class="text-body text-lg md:text-xl max-w-3xl leading-relaxed">
+        Every venue thread for Oct 30 to Nov 9, in one place. What each one costs,
+        what they've actually confirmed, and the one night that still has nothing behind it.
+      </p>
+
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+        <div class="stat-tile">
+          <div class="label">Threads live</div>
+          <div class="value">6</div>
+          <div class="sub">4 emails sent Aug 18</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Tours booked</div>
+          <div class="value gold">2</div>
+          <div class="sub">Aug 19 · Aug 24</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Dates covered</div>
+          <div class="value">6 / 9</div>
+          <div class="sub">all by one venue</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Days to open</div>
+          <div class="value gold">73</div>
+          <div class="sub">to Fri Oct 30</div>
+        </div>
+      </div>
+
+      <details class="deck-toc">
+        <summary>▸ Contents</summary>
+        <ol class="toc-list">
+          <li><a href="#gap">1 · The Oct 31 gap</a></li>
+          <li><a href="#grid">2 · Date coverage</a></li>
+          <li><a href="#dadalab">3 · dadaLab</a></li>
+          <li><a href="#art">4 · Almost Real Things</a></li>
+          <li><a href="#ghostline">5 · Ghostline Kitchens</a></li>
+          <li><a href="#leases">6 · The lease plays</a></li>
+          <li><a href="#bench">7 · South Austin bench</a></li>
+          <li><a href="#rates">8 · What they cost</a></li>
+          <li><a href="#next">9 · Open + next actions</a></li>
+          <li><a href="#log">10 · Update log</a></li>
+        </ol>
+      </details>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <span class="chip internal">Internal · Do not share with venues</span>
+        <span class="chip">Source: venues.md · Armature</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The gap -->
+  <section id="gap" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The Oct 31 gap">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">The one real risk</div>
+      <h2 class="h-display text-[clamp(2rem,4.5vw,3.25rem)] mb-6">
+        Saturday <span class="h-gold">Oct 31</span> has nothing behind it.
+      </h2>
+      <p class="text-body text-lg max-w-3xl leading-relaxed mb-8">
+        Opening night, Halloween, and the Kage-rise moment the whole Four-Arc story is built on.
+        Every other date in the run has at least one candidate. This one has zero confirmed.
+      </p>
+      <div class="glass p-6 md:p-8 max-w-3xl">
+        <ul class="ask-list">
+          <li><span class="marker">1</span><div class="ask-body"><strong>dadaLab has no Saturdays at all</strong> in the window. Kills Oct 31 and Nov 7 both. Confirmed by Kyle Evans, Aug 18.</div></li>
+          <li><span class="marker">2</span><div class="ask-body"><strong>Almost Real Things is unconfirmed.</strong> Their rep flagged a possible conflicting event on the Halloween Friday or Saturday back on Aug 14. Still unanswered. The Aug 18 email asks directly.</div></li>
+          <li><span class="marker">3</span><div class="ask-body"><strong>Sagebrush is out.</strong> Oct 31 is already their own event.</div></li>
+          <li><span class="marker">4</span><div class="ask-body"><strong>Ghostline is unknown.</strong> Availability comes at the Aug 19 tour.</div></li>
+        </ul>
+      </div>
+      <p class="text-muted mt-6 max-w-3xl">Stated fallback remains an Airbnb house party. That is a downgrade for the biggest branded night of the run.</p>
+    </div>
+  </section>
+
+  <!-- 3. Grid -->
+  <section id="grid" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Date coverage">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Nine dates · what is actually confirmed</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Only dadaLab has given us dates.</h2>
+
+      <div class="glass p-5 md:p-7 overflow-x-auto">
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.18)">
+              <th style="text-align:left;padding:0.6rem 0.5rem;color:#c9bda9;font-weight:600">Date</th>
+              <th style="text-align:left;padding:0.6rem 0.5rem;color:#c9bda9;font-weight:600">Programme</th>
+              <th style="text-align:center;padding:0.6rem 0.5rem;color:#c9bda9;font-weight:600">dadaLab</th>
+              <th style="text-align:center;padding:0.6rem 0.5rem;color:#c9bda9;font-weight:600">ART</th>
+              <th style="text-align:center;padding:0.6rem 0.5rem;color:#c9bda9;font-weight:600">Ghostline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07);background:rgba(192,57,43,0.12)">
+              <td style="padding:0.55rem 0.5rem"><strong>Sat Oct 31</strong></td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Opening · Halloween</td>
+              <td style="text-align:center;color:#d05e4c"><strong>NO</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)">
+              <td style="padding:0.55rem 0.5rem">Sun Nov 1</td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Rest day</td>
+              <td style="text-align:center;color:#e5b95a"><strong>YES</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)">
+              <td style="padding:0.55rem 0.5rem">Mon Nov 2</td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Evening session</td>
+              <td style="text-align:center;color:#d05e4c"><strong>NO</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)">
+              <td style="padding:0.55rem 0.5rem">Tue Nov 3</td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Evening session</td>
+              <td style="text-align:center;color:#e5b95a"><strong>YES</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)">
+              <td style="padding:0.55rem 0.5rem">Wed Nov 4</td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Evening session</td>
+              <td style="text-align:center;color:#e5b95a"><strong>YES</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)">
+              <td style="padding:0.55rem 0.5rem">Thu Nov 5</td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Keynote + dinner</td>
+              <td style="text-align:center;color:#e5b95a"><strong>YES</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)">
+              <td style="padding:0.55rem 0.5rem">Fri Nov 6</td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Weekend opens</td>
+              <td style="text-align:center;color:#e5b95a"><strong>YES</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07);background:rgba(192,57,43,0.08)">
+              <td style="padding:0.55rem 0.5rem"><strong>Sat Nov 7</strong></td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Weekend party</td>
+              <td style="text-align:center;color:#d05e4c"><strong>NO</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+            <tr>
+              <td style="padding:0.55rem 0.5rem">Sun Nov 8</td><td style="padding:0.55rem 0.5rem;color:#c9bda9">Closing</td>
+              <td style="text-align:center;color:#e5b95a"><strong>YES</strong></td><td style="text-align:center;color:#c9bda9">?</td><td style="text-align:center;color:#c9bda9">?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted mt-6 max-w-3xl">Every question mark is a thread waiting on a reply. ART answers tonight. Ghostline answers Aug 19.</p>
+    </div>
+  </section>
+
+  <!-- 4. dadaLab -->
+  <section id="dadalab" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="dadaLab">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">East Austin · 2008 Alexander Ave, 78722</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-6">dadaLab <span class="h-gold">· fully answered</span></h2>
+      <div class="grid md:grid-cols-2 gap-5 mb-6">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Confirmed by Kyle Evans, Aug 18</div>
+          <ul class="text-body" style="line-height:2">
+            <li><strong>Dates:</strong> Nov 1, 3, 4, 5, 6, 8 only</li>
+            <li><strong>Saturdays:</strong> <span style="color:#d05e4c">none available</span></li>
+            <li><strong>Capacity:</strong> 150</li>
+            <li><strong>Curfew:</strong> midnight</li>
+            <li><strong>Sound + projection:</strong> <span style="color:#e5b95a">free on multi-day</span></li>
+            <li><strong>DJ backline:</strong> none, bring your own</li>
+            <li><strong>Catering:</strong> outside food fine</li>
+            <li><strong>Alcohol:</strong> TABC-certified server only</li>
+            <li><strong>ModTruss:</strong> quoted separately</li>
+            <li><strong>Parking:</strong> own lot, free street, $2/hr garage</li>
+          </ul>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">The read</div>
+          <p class="text-body mb-4">Book <strong>direct, not Peerspace</strong>. The Peerspace listing showed $215/hr plus a $185 sound fee. Booking multi-day direct makes sound and projection free. Kyle said so himself.</p>
+          <p class="text-body mb-4">Rate is still unquoted. He wants a schedule first, so the number is negotiable and depends on hours, headcount and which days.</p>
+          <p class="text-body">Midnight may be soft. Asked Aug 18 whether it is a lease or ordinance limit versus house preference. That phrasing invites an explanation rather than a no.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <span class="chip">Tour · Mon Aug 24, 11:00am</span>
+        <span class="chip">kyle@dadalab.io · (512) 222-8380</span>
+        <span class="chip">Concrete floor</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ART -->
+  <section id="art" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Almost Real Things">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">East Austin · 916 Springdale Rd, Bldg 2 #101</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-6">Almost Real Things <span class="h-gold">· reply due tonight</span></h2>
+      <div class="grid md:grid-cols-2 gap-5 mb-6">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Rate card · from their own inquiry form</div>
+          <ul class="text-body" style="line-height:2">
+            <li><strong>Rate:</strong> $150 to $400/hr by event type</li>
+            <li><strong>Minimum:</strong> 4 hours</li>
+            <li><strong>Hours:</strong> <span style="color:#e5b95a">24/7, no curfew</span></li>
+            <li><strong>Capacity:</strong> 200 inside, 600 whole site</li>
+            <li><strong>Space:</strong> 1,929 sq ft gallery + 1,600 sq ft atrium</li>
+            <li><strong>Included:</strong> 3 tables, 30 chairs, 1 Bluetooth speaker</li>
+            <li><strong>Setup:</strong> counts inside your rental hours</li>
+            <li><strong>Cleanup:</strong> you do it, to their checklist</li>
+          </ul>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">The read</div>
+          <p class="text-body mb-4"><strong>The rate lever is event type.</strong> A 125-person ticketed party running late with alcohol prices toward $400. A grant-funded international cultural exchange hosted in an arts complex prices toward $150. Both are true. Lead with the second.</p>
+          <p class="text-body mb-4">No curfew is the single biggest advantage over dadaLab's midnight.</p>
+          <p class="text-body">Slow comms remain the risk. Two days of silence broke only after an email plus an Instagram nudge on the same day.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <span class="chip">Email sent Aug 18, 1:50pm</span>
+        <span class="chip">tori@almostrealthings.com</span>
+        <span class="chip">Halloween conflict unconfirmed</span>
+        <span class="chip">Concrete floor</span>
+      </div>
+      <p class="text-muted mt-6 max-w-3xl">Also theirs: <strong>ART HQ, 820 Shelby Ln #103</strong> (St. Elmo). $150 to $350/hr, 10% off 8+ hours, sound +$150 flat, lighting +$150 flat, tables and chairs included, setup included. Better equipped than the Canopy room, wrong side of town.</p>
+    </div>
+  </section>
+
+  <!-- 6. Ghostline -->
+  <section id="ghostline" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Ghostline Kitchens">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Far southeast · 3400 Comsouth Dr, 78744</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-6">Ghostline Kitchens <span class="h-gold">· tour Aug 19</span></h2>
+      <div class="grid md:grid-cols-2 gap-5 mb-6">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Known</div>
+          <ul class="text-body" style="line-height:2">
+            <li><strong>Rate:</strong> from $90/hr, 3-hour minimum</li>
+            <li><strong>Capacity:</strong> 140 standing combined</li>
+            <li><strong>Commercial kitchen</strong> on site</li>
+            <li><strong>Show kitchen</strong> with 65" displays + demo camera</li>
+            <li><strong>Covered patio</strong></li>
+            <li><strong>Contact:</strong> Helky Camporini, (512) 994-4237 x1</li>
+          </ul>
+          <p class="text-muted mt-4" style="font-size:0.85rem">Conflicting figures on record: the Aug 17 call logged 80 capacity / 1,000 sq ft / ~$160. Resolve at the tour.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">The read</div>
+          <p class="text-body mb-4"><strong>The kitchen is the whole case.</strong> Feeding a visiting cohort for ten days means every other venue needs outside catering with nowhere to work. This is the only one that solves it.</p>
+          <p class="text-body mb-4">The show kitchen reads as a natural room for the Nov 5 keynote night.</p>
+          <p class="text-body">Location works against it. Roughly 9 miles out and nowhere near the rest of the run. Treat as a benchmark and a kitchen solution rather than a home base.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <span class="chip">Tour · Wed Aug 19, 4:00pm</span>
+        <span class="chip">Call on arrival, meet at picnic tables</span>
+        <span class="chip">Replied in 9 minutes</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Lease plays -->
+  <section id="leases" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The lease plays">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Rent the box, not the night</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Two shots at one home base.</h2>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Springdale General · TOPO</div>
+          <p class="text-body mb-4">Same landlord as Canopy, so one conversation could cover both. Asked whether they do short-term, roughly ten days, to avoid setting up and tearing down across multiple venues.</p>
+          <p class="text-body mb-4"><strong>Status:</strong> Jessie Frank replied Aug 18. Their community manager is out of the country until <strong>8/24</strong> and will be flagged on return.</p>
+          <p class="text-muted">Parked about a week. Chase Aug 25 to 26.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Elmo Arts · 440 E St Elmo Rd Bldg D</div>
+          <p class="text-body mb-4">Creative-district landlord, flex space 1,900 to 20,000 sq ft. Vacancies include <strong>820 Shelby #101</strong> (3,000 sq ft, next door to ART HQ), 3814 and 3911 Woodbury Dr.</p>
+          <p class="text-body mb-4"><strong>Status:</strong> emailed Aug 18 after finding the office locked. Asked about a two-week term and whether the certificate of occupancy permits assembly use.</p>
+          <p class="text-muted">The occupancy answer decides it. A shell with no PA, no dimmers and no assembly CO is not cheap, it is unusable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Bench -->
+  <section id="bench" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="South Austin bench">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Verified against each venue's own site, not aggregators</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">The backup bench.</h2>
+      <div class="glass p-5 md:p-7 overflow-x-auto mb-6">
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+          <thead><tr style="border-bottom:1px solid rgba(230,220,203,0.18)">
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Venue</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Known rate</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Catch</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Premier Dance Studio</strong><br /><span style="color:#c9bda9;font-size:0.8rem">4201 S Congress #108</span></td><td style="padding:0.5rem;color:#c9bda9">unpublished</td><td style="padding:0.5rem;color:#c9bda9">Real dance floor, been inside. Messaged page + David and Rose</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>The Austin Winery</strong><br /><span style="color:#c9bda9;font-size:0.8rem">440 E St Elmo A-1</span></td><td style="padding:0.5rem;color:#c9bda9">unpublished</td><td style="padding:0.5rem;color:#c9bda9">4,600 sq ft, 200 standing, DJs welcome. Closes 9pm</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>St. Elmo Soundstage</strong><br /><span style="color:#c9bda9;font-size:0.8rem">415 E St Elmo #1-G</span></td><td style="padding:0.5rem;color:#e5b95a">$200/hr · $1,250 half day</td><td style="padding:0.5rem;color:#c9bda9">2,100 sq ft. Too small for 125, good for weeknights</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>The Kitchen</strong><br /><span style="color:#c9bda9;font-size:0.8rem">440 E St Elmo C1</span></td><td style="padding:0.5rem;color:#e5b95a">$1,250 min / 3 hrs</td><td style="padding:0.5rem;color:#c9bda9">Court surface grips. Test a pivot first</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Sagebrush</strong><br /><span style="color:#c9bda9;font-size:0.8rem">5500 S Congress</span></td><td style="padding:0.5rem;color:#c9bda9">unpublished</td><td style="padding:0.5rem;color:#c9bda9">Oldest oak floor in town, open to 2am. <span style="color:#d05e4c">Oct 31 is their own event</span></td></tr>
+            <tr><td style="padding:0.5rem"><strong>Still Austin Quarter</strong><br /><span style="color:#c9bda9;font-size:0.8rem">4211 Willow Springs</span></td><td style="padding:0.5rem;color:#c9bda9">buyout, unpublished</td><td style="padding:0.5rem;color:#c9bda9">15,000 sq ft, 500 cap. Opens Sept 2026. Closed Mon/Tue</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted max-w-3xl"><strong>Ruled out:</strong> Pins Mechanical bans outside A/V, which kills a DJ. St. Elmo Public Market no longer exists, the site was redeveloped. Tesla at 500 E St Elmo is an operating service centre with nothing rentable.</p>
+    </div>
+  </section>
+
+  <!-- 9. Rates -->
+  <section id="rates" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="What they cost">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Modelled on one 8-hour marquee night</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">What a big night costs.</h2>
+      <div class="glass p-6 md:p-8 mb-6">
+        <div class="bar-chart">
+          <div class="bar-label">ART · low end</div><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><div class="bar-total">$1,200</div>
+          <div class="bar-label">ART · mid</div><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div><div class="bar-total">$2,200</div>
+          <div class="bar-label">ART · high end</div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><div class="bar-total">$3,200</div>
+          <div class="bar-label">ART HQ · 8hr less 10%</div><div class="bar-track"><div class="bar-fill" style="width:63%"></div></div><div class="bar-total">$2,520</div>
+          <div class="bar-label">dadaLab · Peerspace</div><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div><div class="bar-total">$1,720</div>
+          <div class="bar-label">Ghostline · from</div><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div><div class="bar-total">$720</div>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Four marquee nights</div>
+          <p class="text-body">At ART: <strong>$4,800 low / $8,800 mid / $12,800 high.</strong> Earlier budget assumed $8,500 to $11,000. The mid case matches. The low case is roughly half what was budgeted, and reaching it is a negotiation, not luck.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Not yet quoted</div>
+          <p class="text-body">dadaLab's real multi-date number, Ghostline's full-buyout scaling, Premier, Elmo Arts, and the Austin Winery. Five of the six live threads have no firm price attached.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Next -->
+  <section id="next" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Open + next actions">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">What moves this forward</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Open questions.</h2>
+      <div class="glass p-6 md:p-8">
+        <ol class="ask-list">
+          <li><span class="marker">1</span><div class="ask-body"><strong>Is Oct 31 open at ART?</strong> The only question that matters this week. Answer due tonight.</div></li>
+          <li><span class="marker">2</span><div class="ask-body"><strong>Is dadaLab's midnight hard or soft?</strong> Asked Aug 18. Changes whether it can hold a marquee night at all.</div></li>
+          <li><span class="marker">3</span><div class="ask-body"><strong>Can any venue stay set up between dates?</strong> Nobody has answered this. It is worth more than a lower hourly rate.</div></li>
+          <li><span class="marker">4</span><div class="ask-body"><strong>Does Elmo Arts' CO permit assembly use?</strong> A no ends that path in one line.</div></li>
+          <li><span class="marker">5</span><div class="ask-body"><strong>What is dadaLab's actual multi-date number?</strong> He quotes once given a schedule.</div></li>
+          <li><span class="marker">6</span><div class="ask-body"><strong>Ghostline capacity and rate, for real.</strong> Two conflicting sets on record. Resolve Aug 19.</div></li>
+        </ol>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="chip">Aug 19 · Ghostline tour 4pm</span>
+        <span class="chip">Aug 24 · dadaLab tour 11am</span>
+        <span class="chip">Aug 25-26 · chase TOPO</span>
+      </div>
+      <p class="text-muted mt-6 max-w-3xl">Two hard gates hold until a venue signs: <strong>no ticket sales, no major announcements.</strong></p>
+    </div>
+  </section>
+
+  <!-- 11. Log -->
+  <section id="log" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Update log">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Change history</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Update log.</h2>
+      <div class="glass p-6 md:p-8">
+        <ul class="ask-list">
+          <li><span class="marker">·</span><div class="ask-body"><strong>2026-08-18 · rev 1.</strong> Board created. Four emails out: Tori at ART, Helky at Ghostline, Kyle at dadaLab, Elmo Arts. Two tours booked. dadaLab answered all nine questions and ruled out both Saturdays. Jessie confirmed TOPO's community manager returns 8/24. ART's Instagram promised a reply by end of day.</div></li>
+          <li><span class="marker">·</span><div class="ask-body"><strong>2026-08-17.</strong> Paris flights booked live on the Charles + Laurent call. dadaLab and Ghostline first contacted. ART flagged as at risk after going silent.</div></li>
+          <li><span class="marker">·</span><div class="ask-body"><strong>2026-08-14.</strong> ART gallery toured. Their rep flagged a possible Halloween-weekend conflict, still unconfirmed. Official ART rate card obtained.</div></li>
+          <li><span class="marker">·</span><div class="ask-body"><strong>2026-08-12.</strong> First contact with TOPO. Routed to Natalie Earhart for Canopy event space.</div></li>
+        </ul>
+      </div>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <span class="chip internal">Internal · Do not share with venues</span>
+        <span class="chip">Full detail: venues.md · Armature</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    var sections = Array.from(document.querySelectorAll('main section.snap-slide'));
+    var progressBar = document.getElementById('progressBar');
+    var slideIdx = document.getElementById('slideIdx');
+    var slideTotal = document.getElementById('slideTotal');
+    var sideNavList = document.getElementById('sideNavList');
+    var drawerList = document.getElementById('drawerList');
+    var drawer = document.getElementById('drawer');
+    var menuBtn = document.getElementById('menuBtn');
+
+    if (slideTotal) slideTotal.textContent = String(sections.length).padStart(2, '0');
+
+    // Build nav lists
+    sections.forEach(function (s, i) {
+      var id = s.id;
+      var title = s.getAttribute('data-title') || id;
+      var li = document.createElement('li');
+      li.dataset.section = id;
+      var a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = (String(i + 1).padStart(2, '0')) + ' · ' + title;
+      li.appendChild(a);
+      sideNavList.appendChild(li);
+
+      var da = document.createElement('a');
+      da.href = '#' + id;
+      da.className = 'drawer-item';
+      da.dataset.section = id;
+      da.textContent = title;
+      da.addEventListener('click', function () {
+        drawer.hidden = true;
+        menuBtn.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+      drawerList.appendChild(da);
+    });
+
+    // IntersectionObserver for active state + counter + progress
+    var current = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var idx = sections.indexOf(entry.target);
+        if (idx < 0) return;
+        current = idx;
+        // counter
+        slideIdx.textContent = String(idx + 1).padStart(2, '0');
+        // progress bar
+        var pct = sections.length > 1 ? (idx / (sections.length - 1)) : 1;
+        progressBar.style.transform = 'scaleX(' + pct + ')';
+        // side nav active
+        Array.from(sideNavList.children).forEach(function (li) {
+          li.classList.toggle('nav-active', li.dataset.section === entry.target.id);
+        });
+        Array.from(drawerList.children).forEach(function (a) {
+          a.classList.toggle('is-active', a.dataset.section === entry.target.id);
+        });
+      });
+    }, { threshold: [0.35, 0.55] });
+    sections.forEach(function (s) { io.observe(s); });
+
+    // Mobile drawer toggle
+    if (menuBtn) {
+      menuBtn.addEventListener('click', function () {
+        var open = drawer.hidden === false;
+        drawer.hidden = open;
+        menuBtn.classList.toggle('is-open', !open);
+        menuBtn.setAttribute('aria-expanded', String(!open));
+      });
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', function (e) {
+      if (e.target && ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(e.target.tagName) >= 0) return;
+      var key = e.key;
+      var target = null;
+      if (key === 'ArrowDown' || key === ' ' || key === 'PageDown') { target = sections[Math.min(current + 1, sections.length - 1)]; e.preventDefault(); }
+      else if (key === 'ArrowUp' || key === 'PageUp') { target = sections[Math.max(current - 1, 0)]; e.preventDefault(); }
+      else if (key === 'Home') { target = sections[0]; e.preventDefault(); }
+      else if (key === 'End') { target = sections[sections.length - 1]; e.preventDefault(); }
+      else if (key === 'Escape' && !drawer.hidden) { drawer.hidden = true; menuBtn.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+</script>
+
+</body>
+</html>
