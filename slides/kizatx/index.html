@@ -553,7 +553,7 @@
   <div class="meta">
     <span class="counter" id="counter" aria-live="polite">1 of 11</span>
     <span class="sep md-only">·</span>
-    <span class="md-only" title="Last data refresh"><span data-inject="updated">Updated 2026-08-11</span> · <span data-inject="rev">rev 5</span></span>
+    <span class="md-only" title="Last data refresh"><span data-inject="updated">Updated 2026-08-18</span> · <span data-inject="rev">rev 6</span></span>
     <span class="sep lg-only">·</span>
     <span class="lg-only"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
     <button id="menuBtn" class="menu-btn" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
@@ -677,37 +677,46 @@
     <span class="accent-rule"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Monthly payout</h2>
     <p class="text-dimmed text-lg mb-8 max-w-3xl">
-      Raw Kizomba residency dollars by month. Privates and photo shoots tracked separately on the Ancillary slide.
+      Residency dollars by month, with private lessons and photo shoots stacked on top. Bar total is all-in Esquina Tango revenue.
     </p>
 
     <div class="glass rounded-2xl p-6 md:p-8">
-      <!-- Bar chart: Kizomba-only, scaled to $400 max for headroom -->
+      <!-- Legend -->
+      <div class="flex flex-wrap gap-4 mb-5 text-xs font-mono">
+        <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-sm" style="background: linear-gradient(90deg, #2196c9, #4fc3f7);"></span><span class="text-dimmed">Kizomba residency</span></div>
+        <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-sm" style="background: linear-gradient(90deg, #86efac, #4ade80);"></span><span class="text-dimmed">Private lesson</span></div>
+        <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-sm" style="background: linear-gradient(90deg, #fbbf24, #f59e0b);"></span><span class="text-dimmed">Photo shoot</span></div>
+      </div>
+
+      <!-- Bar chart: stacked, scaled to $500 max for headroom -->
       <div class="space-y-4">
         <div class="bar-chart">
           <div class="bar-month">April</div>
           <div class="bar-track">
-            <div class="bar-fill stack-kizomba" style="width: 56.8%;">$227.33</div>
+            <div class="bar-fill stack-kizomba" style="width: 45.5%;">$227.33</div>
           </div>
           <div class="bar-total">$227.33</div>
         </div>
         <div class="bar-chart">
           <div class="bar-month">May</div>
           <div class="bar-track">
-            <div class="bar-fill stack-kizomba" style="width: 68.8%;">$275.25</div>
+            <div class="bar-fill stack-kizomba" style="width: 55.1%;">$275.25</div>
+            <div class="bar-fill stack-photo" style="width: 5.1%;">$26</div>
           </div>
-          <div class="bar-total">$275.25</div>
+          <div class="bar-total">$300.75</div>
         </div>
         <div class="bar-chart">
           <div class="bar-month">June</div>
           <div class="bar-track">
-            <div class="bar-fill stack-kizomba" style="width: 90.7%;">$362.75</div>
+            <div class="bar-fill stack-kizomba" style="width: 72.6%;">$362.75</div>
+            <div class="bar-fill stack-private" style="width: 12.5%;">$62.50</div>
           </div>
-          <div class="bar-total">$362.75</div>
+          <div class="bar-total">$425.25</div>
         </div>
         <div class="bar-chart">
           <div class="bar-month">July</div>
           <div class="bar-track">
-            <div class="bar-fill stack-kizomba" style="width: 94.4%;">$377.43</div>
+            <div class="bar-fill stack-kizomba" style="width: 75.5%;">$377.43</div>
           </div>
           <div class="bar-total">$377.43</div>
         </div>
@@ -732,7 +741,7 @@
         </div>
       </div>
       <p class="text-muted text-xs mt-4 font-mono">
-        Scale: $0 → $400. Bar view of the residency; line-chart trajectory + normalized $/class on the next slide.
+        Scale: $0 → $500. Deltas above are residency-only; line-chart trajectory + normalized $/class on the next slide.
       </p>
     </div>
   </div>
@@ -1439,6 +1448,15 @@
 
     <div class="glass rounded-2xl p-6 md:p-8">
       <ul class="log-list">
+        <li>
+          <span class="date">2026-08-18</span>
+          <span class="note">
+            Rev 6: reconciled Apr–Jul payouts against Michelle's breakdown emails (verified via Gmail). Monthly
+            payout chart now stacks Kizomba residency + private lessons + photo shoots so bar totals equal
+            all-in Esquina revenue ($227.33 / $300.75 / $425.25 / $377.43). Scale bumped to $500 for June's
+            grand total headroom. Residency-only trendline unchanged.
+          </span>
+        </li>
         <li>
           <span class="date">2026-08-11</span>
           <span class="note">
