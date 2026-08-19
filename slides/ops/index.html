@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ops · Ogarocious</title>
+<meta name="description" content="Internal deck directory. Every artifact under slides.ogarocious.com with brand, kind, rev, and last-updated. Not for distribution." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#1f1b15" />
+<link rel="canonical" href="https://slides.ogarocious.com/ops/" />
+
+<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: { 950: '#100e0a', 900: '#1f1b15', 800: '#2a241c', 700: '#3a3226' },
+          terracotta: { 300: '#f0a887', 400: '#e58054', 500: '#d4552b', 600: '#b04220', 700: '#8a3319' },
+          ivory: { 50: '#f5f2ea', 100: '#e6dfd0', 200: '#c9bfa8', 300: '#8f8570' },
+          brand: {
+            kizatx: '#4fc3f7',
+            ksx:    '#e5b95a',
+            oga:    '#d4552b',
+          },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'system-ui', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  body {
+    background-color: #1f1b15;
+    background-image:
+      radial-gradient(ellipse 1100px 700px at 15% 5%, rgba(212, 85, 43, 0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 90%, rgba(212, 85, 43, 0.06), transparent 65%),
+      linear-gradient(180deg, #100e0a 0%, #1f1b15 50%, #100e0a 100%);
+    min-height: 100vh;
+  }
+
+  .text-body   { color: rgba(245, 242, 234, 0.90); }
+  .text-dimmed { color: rgba(245, 242, 234, 0.72); }
+  .text-muted  { color: rgba(245, 242, 234, 0.55); }
+
+  .glass {
+    background: rgba(42, 36, 28, 0.55);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(212, 85, 43, 0.14);
+    box-shadow:
+      0 1px 0 rgba(245, 242, 234, 0.04) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  :focus-visible {
+    outline: 2px solid #d4552b;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .accent-rule {
+    display: inline-block; width: 40px; height: 2px;
+    background: #d4552b; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+
+  /* Header */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: rgba(16, 14, 10, 0.75);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(212, 85, 43, 0.10);
+  }
+  .site-header .brand-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: inherit;
+  }
+  .site-header .brand-dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: #d4552b;
+  }
+  .site-header .brand-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: -0.01em;
+    color: #f5f2ea;
+  }
+  .site-header .brand-sub {
+    font-size: 0.75rem; color: rgba(245, 242, 234, 0.55);
+  }
+  .site-header .meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.72rem; color: rgba(245, 242, 234, 0.55);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .site-header .sep { color: rgba(245, 242, 234, 0.25); }
+  @media (max-width: 700px) { .site-header .md-only { display: none; } }
+
+  /* Data table */
+  .directory {
+    width: 100%;
+    border-collapse: separate; border-spacing: 0;
+    font-size: 0.9rem;
+  }
+  .directory th {
+    text-align: left;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: rgba(212, 85, 43, 0.85);
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid rgba(212, 85, 43, 0.20);
+    white-space: nowrap;
+  }
+  .directory td {
+    padding: 1rem 0.9rem;
+    border-bottom: 1px solid rgba(245, 242, 234, 0.06);
+    vertical-align: top;
+  }
+  .directory tr:last-child td { border-bottom: none; }
+  .directory tr:hover td { background: rgba(212, 85, 43, 0.04); }
+
+  .directory a.slug {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    color: #f5f2ea; font-weight: 500; text-decoration: none;
+    border-bottom: 1px solid rgba(212, 85, 43, 0.35);
+    padding-bottom: 1px;
+  }
+  .directory a.slug:hover { border-bottom-color: #d4552b; color: #f0a887; }
+
+  .badge {
+    display: inline-block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .badge-public   { border: 1px solid rgba(134, 239, 172, 0.35); color: #86efac; background: rgba(134, 239, 172, 0.08); }
+  .badge-internal { border: 1px solid rgba(212, 85, 43, 0.40); color: #f0a887; background: rgba(212, 85, 43, 0.08); }
+  .badge-draft    { border: 1px solid rgba(245, 242, 234, 0.25); color: rgba(245, 242, 234, 0.72); background: rgba(245, 242, 234, 0.04); }
+
+  .brand-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: rgba(245, 242, 234, 0.72);
+  }
+  .brand-dot-inline {
+    display: inline-block;
+    width: 8px; height: 8px; border-radius: 999px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .stat-tile {
+    background: rgba(42, 36, 28, 0.55);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(212, 85, 43, 0.14);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+  }
+  .stat-tile .num {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1.9rem;
+    color: #f5f2ea; line-height: 1;
+  }
+  .stat-tile .label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: rgba(212, 85, 43, 0.85);
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .directory .col-brand,
+    .directory .col-rev { display: none; }
+  }
+  @media (max-width: 640px) {
+    .directory .col-updated { display: none; }
+  }
+</style>
+</head>
+<body class="font-sans text-body min-h-screen">
+
+<header class="site-header" role="banner">
+  <a href="/" class="brand-link" aria-label="Ogarocious home">
+    <span class="brand-dot"></span>
+    <span class="brand-name">Ogarocious</span>
+    <span class="brand-sub md-only">· Ops</span>
+  </a>
+  <div class="meta">
+    <span>Updated 2026-08-18</span>
+    <span class="sep">·</span>
+    <span>rev 1</span>
+    <span class="sep md-only">·</span>
+    <span class="md-only">Internal</span>
+  </div>
+</header>
+
+<main class="pt-24 pb-20 px-6 md:px-16 max-w-7xl mx-auto">
+
+  <!-- Cover -->
+  <section class="mb-14">
+    <span class="accent-rule"></span>
+    <p class="font-mono text-xs uppercase tracking-widest text-terracotta-400 mb-4">Internal directory</p>
+    <h1 class="font-display font-extrabold text-4xl md:text-6xl leading-tight tracking-tight text-ivory-50 mb-6">
+      Every artifact under one URL.
+    </h1>
+    <p class="text-dimmed text-lg max-w-3xl mb-8">
+      One row per deck. Public and internal, all brands. This page is noindex; do not link from broadcast collateral.
+      Extract the number if a public piece needs a stat from an internal deck.
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
+      <div class="stat-tile">
+        <div class="num">7</div>
+        <div class="label">Live decks</div>
+      </div>
+      <div class="stat-tile">
+        <div class="num">3</div>
+        <div class="label">Internal</div>
+      </div>
+      <div class="stat-tile">
+        <div class="num">4</div>
+        <div class="label">Public</div>
+      </div>
+      <div class="stat-tile">
+        <div class="num">4</div>
+        <div class="label">Brands</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Directory -->
+  <section class="mb-14">
+    <div class="glass rounded-2xl p-2 md:p-4 overflow-x-auto">
+      <table class="directory">
+        <thead>
+          <tr>
+            <th>Slug</th>
+            <th class="col-brand">Brand</th>
+            <th>Kind</th>
+            <th class="col-rev">Rev</th>
+            <th class="col-updated">Updated</th>
+            <th>What it is</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td><a class="slug" href="/kizatx/">kizatx</a></td>
+            <td class="col-brand"><span class="brand-tag"><span class="brand-dot-inline" style="background:#4fc3f7;"></span>Kiz ATX</span></td>
+            <td><span class="badge badge-internal">Internal</span></td>
+            <td class="col-rev"><span class="font-mono text-xs text-dimmed">rev 6</span></td>
+            <td class="col-updated"><span class="font-mono text-xs text-dimmed">2026-08-18</span></td>
+            <td>Esquina residency pulse. Monthly payouts, per-class attendance, reverse-math on the room.</td>
+          </tr>
+
+          <tr>
+            <td><a class="slug" href="/ksx/">ksx</a></td>
+            <td class="col-brand"><span class="brand-tag"><span class="brand-dot-inline" style="background:#e5b95a;"></span>KSX</span></td>
+            <td><span class="badge badge-internal">Internal</span></td>
+            <td class="col-rev"><span class="font-mono text-xs text-dimmed">rev 2</span></td>
+            <td class="col-updated"><span class="font-mono text-xs text-muted">unstamped</span></td>
+            <td>KSX waitlist signal: 68-person read on attendance intent, geography, skill mix, 11-day rhythm.</td>
+          </tr>
+
+          <tr>
+            <td><a class="slug" href="/ksx-venues/">ksx-venues</a></td>
+            <td class="col-brand"><span class="brand-tag"><span class="brand-dot-inline" style="background:#e5b95a;"></span>KSX</span></td>
+            <td><span class="badge badge-internal">Internal</span></td>
+            <td class="col-rev"><span class="font-mono text-xs text-dimmed">rev 4</span></td>
+            <td class="col-updated"><span class="font-mono text-xs text-muted">unstamped</span></td>
+            <td>Live venue board. Who is in play, what they cost, confirmed vs open.</td>
+          </tr>
+
+          <tr>
+            <td><a class="slug" href="/kiz-atx-workshops-aug-sep/">kiz-atx-workshops-aug-sep</a></td>
+            <td class="col-brand"><span class="brand-tag"><span class="brand-dot-inline" style="background:#4fc3f7;"></span>Kiz ATX</span></td>
+            <td><span class="badge badge-public">Public</span></td>
+            <td class="col-rev"><span class="font-mono text-xs text-dimmed">rev 26</span></td>
+            <td class="col-updated"><span class="font-mono text-xs text-muted">unstamped</span></td>
+            <td>Interest-form results from 15 dancers. Saturday date for August and September. n8n auto-regen from Tally.</td>
+          </tr>
+
+          <tr>
+            <td><a class="slug" href="/ai-workflow-example/">ai-workflow-example</a></td>
+            <td class="col-brand"><span class="brand-tag"><span class="brand-dot-inline" style="background:#d4552b;"></span>Ogarocious</span></td>
+            <td><span class="badge badge-public">Public</span></td>
+            <td class="col-rev"><span class="font-mono text-xs text-dimmed">rev 1</span></td>
+            <td class="col-updated"><span class="font-mono text-xs text-muted">unstamped</span></td>
+            <td>Worked example of AI-assisted engagement planning. 15 respondents → 2 sessions, role mix + budget + topic pre-solved.</td>
+          </tr>
+
+          <tr>
+            <td><a class="slug" href="/steal-this/">steal-this</a></td>
+            <td class="col-brand"><span class="brand-tag"><span class="brand-dot-inline" style="background:#d4552b;"></span>Ogarocious</span></td>
+            <td><span class="badge badge-public">Public</span></td>
+            <td class="col-rev"><span class="font-mono text-xs text-muted">·</span></td>
+            <td class="col-updated"><span class="font-mono text-xs text-muted">unstamped</span></td>
+            <td>Canonical single-file scrollable artifact template. Reference for spinning up new decks.</td>
+          </tr>
+
+          <tr>
+            <td><a class="slug" href="/ops/">ops</a></td>
+            <td class="col-brand"><span class="brand-tag"><span class="brand-dot-inline" style="background:#d4552b;"></span>Ogarocious</span></td>
+            <td><span class="badge badge-internal">Internal</span></td>
+            <td class="col-rev"><span class="font-mono text-xs text-dimmed">rev 1</span></td>
+            <td class="col-updated"><span class="font-mono text-xs text-dimmed">2026-08-18</span></td>
+            <td>This directory. Every artifact under slides.ogarocious.com in one row-per-deck view.</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Uncommitted / off-grid section -->
+  <section class="mb-14">
+    <h2 class="font-display font-semibold text-xl text-ivory-50 mb-3">Off-grid <span class="text-muted font-mono text-sm">(on disk, not deployed)</span></h2>
+    <div class="glass rounded-2xl p-6">
+      <ul class="space-y-3 text-dimmed">
+        <li>
+          <span class="font-mono text-sm text-ivory-50">kizatx-growth/</span>
+          <span class="text-muted"> · Blog-post working directory (BLOG-POST.md, cover art variants). Not a deck; belongs in Armature/content or the Kiz ATX repo, not here.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="pt-8 border-t border-terracotta-500/10">
+    <p class="text-muted text-xs font-mono">
+      Ogarocious ops directory. Noindex. Never link from broadcast collateral.
+      To add a new deck, drop it under <span class="text-dimmed">slides/&lt;slug&gt;/</span> and add a row above.
+    </p>
+  </footer>
+
+</main>
+
+</body>
+</html>
