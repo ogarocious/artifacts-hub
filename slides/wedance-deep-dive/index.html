@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The WeDance Question · Ogarocious</title>
+<meta name="description" content="Deep dive on WeDance.world: partnership, acquisition, or independent. A strategic read for WhereCanWeDance." />
+<link rel="canonical" href="https://slides.ogarocious.com/wedance-deep-dive/" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#1f1b15" />
+
+<meta property="og:site_name" content="Ogarocious" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://slides.ogarocious.com/wedance-deep-dive/" />
+<meta property="og:title" content="The WeDance Question" />
+<meta property="og:description" content="Deep dive on WeDance.world: partnership, acquisition, or independent." />
+<meta property="og:image" content="https://slides.ogarocious.com/_shared/og-default.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: { 950: '#0a0705', 900: '#0f0b08', 800: '#1a1410', 700: '#1f1b15', 600: '#312d23' },
+          ivory: { 50: '#f5eee0', 100: '#d8d1c2', 200: '#b5ae9f', 300: '#8f8878' },
+          terracotta: {
+            50: '#fbeee6', 100: '#f4d5c0', 200: '#ebb99a', 300: '#e19c74',
+            400: '#da7f4e', 500: '#d4552b', 600: '#b84421', 700: '#952f0f',
+            800: '#732208', 900: '#4f1500',
+          },
+          slate: {
+            50: '#eaefef', 100: '#cddad9', 200: '#adbfbf', 300: '#8ba5a5',
+            400: '#7ba4a5', 500: '#669090', 600: '#4e7676', 700: '#3b5d5d',
+            800: '#2a4545', 900: '#1b2e2e',
+          },
+          sage:  { 400: '#5f7d64', 500: '#4a6b4e' },
+          coral: { 400: '#eb6f4f', 500: '#e85d3c' },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body {
+    background-color: #1f1b15;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.83  0 0 0 0 0.33  0 0 0 0 0.17  0 0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      linear-gradient(180deg, #0f0b08 0%, #1f1b15 50%, #0f0b08 100%);
+    background-blend-mode: soft-light, normal;
+    min-height: 100vh;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+
+  .text-body   { color: rgba(245, 238, 224, 0.90); }
+  .text-dimmed { color: rgba(245, 238, 224, 0.72); }
+  .text-muted  { color: rgba(245, 238, 224, 0.55); }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: #d4552b; transform: scaleX(0); transform-origin: left center;
+    z-index: 51; pointer-events: none; will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(26, 20, 16, 0.55);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(212, 85, 43, 0.14);
+    box-shadow: 0 1px 0 rgba(245, 238, 224, 0.04) inset, 0 -1px 0 rgba(0, 0, 0, 0.4) inset, 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(212, 85, 43, 0.28); }
+  .glass.glass-tech { border-color: rgba(123, 164, 165, 0.32); }
+  .glass.glass-tech:hover { border-color: rgba(123, 164, 165, 0.52); }
+  .glass.glass-warn { border-color: rgba(232, 93, 60, 0.42); }
+
+  .ember-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 900px 560px at 22% 42%, rgba(212, 85, 43, 0.22), rgba(212, 85, 43, 0.06) 45%, transparent 72%);
+    pointer-events: none; z-index: 0;
+  }
+  .ember-glow-cta {
+    background: radial-gradient(ellipse 800px 500px at 78% 60%, rgba(212, 85, 43, 0.20), rgba(184, 132, 61, 0.08) 42%, transparent 70%);
+  }
+
+  .text-shadow-warm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 8px 30px rgba(212, 85, 43, 0.18), 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+  :focus-visible { outline: 2px solid #d4552b; outline-offset: 3px; border-radius: 2px; }
+
+  .nav-dot { transition: background-color 180ms ease; }
+  .nav-active .nav-dot { background: #d4552b; }
+  .nav-active .nav-label { color: #f5eee0; }
+
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07); color: #f5eee0;
+  }
+
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.85rem; border-radius: 999px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07); color: #f5eee0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; cursor: pointer;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible { border-color: rgba(212, 85, 43, 0.42); background: rgba(212, 85, 43, 0.08); }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+
+  .accent-rule { display: inline-block; width: 40px; height: 2px; background: #d4552b; border-radius: 1px; margin-bottom: 1.75rem; }
+  .accent-rule-tech { background: #7ba4a5; }
+
+  .drawer {
+    position: fixed; top: 56px; left: 0; right: 0; bottom: 0; z-index: 45;
+    background: rgba(10, 7, 5, 0.72); backdrop-filter: blur(4px);
+    overflow-y: auto; display: flex; flex-direction: column;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel { background: rgba(15, 11, 8, 0.985); padding: 1.75rem 1.5rem 3rem; min-height: 100%; }
+  .drawer-label { font-family: "JetBrains Mono"; font-size: 10px; letter-spacing: 0.16em; color: #7ba4a5; padding-bottom: 0.5rem; margin-bottom: 0.25rem; }
+  .drawer-list { border-left: 1px solid rgba(123, 164, 165, 0.28); padding-left: 1rem; margin: 0; list-style: none; }
+  .drawer-item { display: block; padding: 0.85rem 0.9rem; margin-left: -0.5rem; color: #f5eee0; text-decoration: none; font-size: 1.2rem; font-weight: 500; line-height: 1.3; border-radius: 6px; }
+  .drawer-item:hover { color: #d4552b; }
+  .drawer-item.is-active { background: rgba(212, 85, 43, 0.14); color: #d4552b; }
+
+  /* Comparison table */
+  .cmp {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    font-size: 0.92rem;
+  }
+  .cmp thead th {
+    text-align: left; padding: 12px 14px;
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #7ba4a5; border-bottom: 1px solid rgba(123, 164, 165, 0.28);
+  }
+  .cmp thead th.wcwd { color: #d4552b; }
+  .cmp tbody td {
+    padding: 14px; vertical-align: top; color: rgba(245, 238, 224, 0.88);
+    border-bottom: 1px solid rgba(245, 238, 224, 0.06);
+  }
+  .cmp tbody td:first-child { color: rgba(245, 238, 224, 0.55); font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.04em; }
+  .cmp tbody tr:last-child td { border-bottom: none; }
+  .cmp .win { color: #f5eee0; }
+  .cmp .win::before { content: "◆ "; color: #d4552b; }
+  .cmp .miss { color: rgba(245, 238, 224, 0.42); font-style: italic; }
+
+  .stat-tile {
+    padding: 1.25rem 1.5rem; border-radius: 8px;
+    background: rgba(26, 20, 16, 0.55);
+    border: 1px solid rgba(123, 164, 165, 0.22);
+  }
+  .stat-value { font-family: "Rubik"; font-weight: 800; font-size: 2.4rem; color: #d4552b; line-height: 1; }
+  .stat-label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.12em; color: #7ba4a5; text-transform: uppercase; margin-top: 6px; }
+  .stat-note { font-size: 0.82rem; color: rgba(245, 238, 224, 0.55); margin-top: 8px; line-height: 1.4; }
+
+  .verdict {
+    display: inline-block; padding: 2px 10px; border-radius: 999px;
+    font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .verdict-do-nothing { background: rgba(123, 164, 165, 0.12); color: #adbfbf; border: 1px solid rgba(123,164,165,0.35); }
+  .verdict-partner { background: rgba(212, 85, 43, 0.12); color: #da7f4e; border: 1px solid rgba(212,85,43,0.45); }
+  .verdict-acquire { background: rgba(232, 93, 60, 0.10); color: #eb6f4f; border: 1px solid rgba(232,93,60,0.35); }
+
+  .path-card { display: grid; gap: 12px; padding: 1.75rem; border-radius: 12px; }
+  .path-pros li, .path-cons li { font-size: 0.9rem; line-height: 1.55; }
+  .path-pros { list-style: none; padding: 0; }
+  .path-pros li::before { content: "+ "; color: #5f7d64; font-family: "JetBrains Mono", monospace; }
+  .path-cons { list-style: none; padding: 0; }
+  .path-cons li::before { content: "– "; color: #eb6f4f; font-family: "JetBrains Mono", monospace; }
+
+  .ask-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .ask-list li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: baseline; }
+  .ask-list .ask-num { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #7ba4a5; letter-spacing: 0.08em; }
+  .ask-list .ask-body { font-size: 0.95rem; color: rgba(245, 238, 224, 0.90); line-height: 1.5; }
+  .ask-list .ask-note { display: block; margin-top: 4px; font-size: 0.78rem; color: rgba(245, 238, 224, 0.55); font-style: italic; }
+
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+</style>
+</head>
+<body class="text-ivory-50 font-sans antialiased">
+
+<div id="progressBar" class="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-espresso-900/70 border-b border-terracotta-500/10">
+  <div class="max-w-[1400px] mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-2 group">
+      <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500 group-hover:shadow-[0_0_18px_rgba(212,85,43,0.7)] transition"></span>
+      <span class="font-display font-bold text-lg tracking-tight">Ogarocious</span>
+      <span class="text-dimmed text-xs">· The WeDance Question</span>
+    </a>
+    <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
+      <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 12</span>
+      <span class="hidden md:inline">·</span>
+      <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+      <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
+        <svg class="menu-hamburger" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 3h12M1 7h12M1 11h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="menu-close" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span id="menuLabel">MENU</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="sideNav" class="fixed top-0 left-0 h-screen w-[280px] hidden md:flex flex-col justify-between pt-20 pb-8 px-8 z-40 border-r border-terracotta-500/10 bg-espresso-900/60 backdrop-blur" aria-label="Sections">
+  <div>
+    <p class="text-[11px] text-slate-300 mb-4 font-medium">Sections</p>
+    <ul id="navList" class="space-y-3 text-sm"></ul>
+  </div>
+  <div class="text-[11px] text-muted leading-relaxed">
+    <p class="mb-2 font-medium text-dimmed">Internal · WCWD strategy</p>
+    <p class="italic text-slate-300">2026-08-29 · draft v1</p>
+    <p class="mt-3">Written after Matt's call. Not for distribution.</p>
+  </div>
+</nav>
+
+<div id="mobileMenu" class="drawer" role="dialog" aria-modal="true" aria-label="Sections" hidden>
+  <div class="drawer-panel">
+    <p class="drawer-label">Sections</p>
+    <ul id="mobileNavList" class="drawer-list"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll">
+
+  <!-- Cover -->
+  <section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
+    <div class="ember-glow" aria-hidden="true"></div>
+    <p class="font-mono text-xs tracking-widest text-slate-300 mb-6 relative">INTERNAL · WCWD STRATEGY · 2026-08-29</p>
+    <h1 class="font-display font-extrabold text-5xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
+      The WeDance<br/>
+      <span class="italic font-medium">question.</span>
+    </h1>
+    <p class="mt-8 max-w-2xl text-body text-lg leading-relaxed relative">
+      Matt wants to sell, or partner, or something. He didn't tell you how much money the platform makes. This deck is what to know, what to ask, and what to decide.
+    </p>
+    <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl relative">
+      <div class="stat-tile">
+        <div class="stat-value">31k</div>
+        <div class="stat-label">URLs indexed</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-value">703</div>
+        <div class="stat-label">cities</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-value">7%</div>
+        <div class="stat-label">ticket take rate</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-value">2</div>
+        <div class="stat-label">founders (first names)</div>
+      </div>
+    </div>
+    <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
+      <span class="kbd">Space</span> to advance
+    </div>
+  </section>
+
+  <!-- The Call -->
+  <section id="call" data-title="The call" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-8 tracking-tight text-shadow-warm">What Matt said.</h2>
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+      <div class="glass rounded-lg p-6">
+        <h3 class="font-display font-semibold text-xl mb-3 text-terracotta-400">The pitch</h3>
+        <ul class="text-body space-y-2 text-sm leading-relaxed">
+          <li>Framed as "potential partnership"</li>
+          <li>Signal underneath: he wants to sell so he can do something else</li>
+          <li>Small team, self-funded, no investors</li>
+          <li>Public positioning: "focused on building the right thing"</li>
+        </ul>
+      </div>
+      <div class="glass glass-warn rounded-lg p-6">
+        <h3 class="font-display font-semibold text-xl mb-3 text-coral-400">What he didn't say</h3>
+        <ul class="text-body space-y-2 text-sm leading-relaxed">
+          <li>Revenue numbers</li>
+          <li>Monthly active organizers / ticket volume</li>
+          <li>Burn rate or cost structure</li>
+          <li>Whether "partner" means capital, integration, or acquihire</li>
+          <li>Why now, specifically</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-10 max-w-3xl text-dimmed italic text-lg leading-relaxed">
+      Everything downstream depends on the numbers he hasn't shared. Read this deck as scenarios, not a decision.
+    </p>
+  </section>
+
+  <!-- Who they actually are -->
+  <section id="who" data-title="Who they are" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">What the audit found.</h2>
+    <p class="text-dimmed mb-10 max-w-2xl">Cross-referenced against the SEO audit run on wedance.world. Public signals only.</p>
+    <div class="grid md:grid-cols-3 gap-5 max-w-6xl">
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">TEAM</div>
+        <p class="font-display font-semibold text-lg mb-2">Matt · Jason</p>
+        <p class="text-sm text-body">First names only on the /team page. No last names, no LinkedIn, no dance credentials, no verifiable identity outside the platform.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">LEGAL</div>
+        <p class="font-display font-semibold text-lg mb-2">WeDance, LLC · Delaware</p>
+        <p class="text-sm text-body">Registered at 300 Delaware Ave, Wilmington. That's a registered-agent address, not an HQ. Standard for LLC formation, not a red flag on its own but no other physical presence exists.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">FUNDING</div>
+        <p class="font-display font-semibold text-lg mb-2">Self-funded, small team</p>
+        <p class="text-sm text-body">Public claim. No press releases, no investor announcements, no funding rounds documented. Suggests personal runway rather than venture capital.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">ENTITY RECOGNITION</div>
+        <p class="font-display font-semibold text-lg mb-2">No Wikipedia article</p>
+        <p class="text-sm text-body">Verified via Wikipedia API. No Wikidata Q-number. Blocks LLM entity resolution. Also: no press mentions surfaced in audit. Brand exists mostly inside its own site.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">GEOGRAPHIC WEIGHT</div>
+        <p class="font-display font-semibold text-lg mb-2">APAC-heavy</p>
+        <p class="text-sm text-body">Densest activity: Shenzhen (181 Kizomba events), Siolim/Goa, Singapore, Hanoi. US is thin. Austin has 123 events across all styles vs. Shenzhen's 181 in one style.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">TECH POSTURE</div>
+        <p class="font-display font-semibold text-lg mb-2">Next.js · CloudFront · public API</p>
+        <p class="text-sm text-body">Genuinely well-built infrastructure. SSR, JSON-LD, 5-locale sitemaps, llms.txt, public JSON API, OpenAPI spec. This is real engineering, not a WordPress skin.</p>
+      </div>
+    </div>
+    <p class="mt-10 max-w-3xl text-body text-lg leading-relaxed">
+      Translation: strong platform, thin brand. The tech is worth more than the team's identity would suggest.
+    </p>
+  </section>
+
+  <!-- Wide vs Deep (statement slide) -->
+  <section id="wide-vs-deep" data-title="Wide vs deep" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <p class="font-display italic text-2xl md:text-3xl text-dimmed max-w-3xl mb-8 leading-snug">
+      They spread across the globe. You went into the trenches.
+    </p>
+    <h2 class="font-display font-bold text-4xl md:text-7xl leading-tight tracking-tight max-w-4xl mb-10 text-shadow-warm">
+      They're wide and shallow.<br/>
+      <span class="italic font-medium text-terracotta-400">You're narrow and deep.</span>
+    </h2>
+    <div class="grid md:grid-cols-2 gap-10 max-w-5xl text-body leading-relaxed">
+      <div>
+        <p class="mb-4">WeDance operates 82 dance styles across 703 cities in 5 languages. Every page is a variation of the same event-list template. Six words of editorial content on the Kizomba hub. Zero on the Austin city page.</p>
+        <p class="text-dimmed text-sm">Scale as strategy. Programmatic. Anonymous.</p>
+      </div>
+      <div>
+        <p class="mb-4">WhereCanWeDance runs a smaller footprint but ships depth the aggregator model can't touch: artist portals with real bios, private lessons with packages, a pedagogy system, a glossary, and a founder who dances at the venues he lists.</p>
+        <p class="text-dimmed text-sm">Ecosystem as strategy. Editorial. Named.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature matrix -->
+  <section id="matrix" data-title="Feature matrix" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Side by side.</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">The overlap is real; the divergence is bigger. Both do event discovery + ticketing. That's about it.</p>
+
+    <div class="max-w-6xl w-full glass rounded-lg overflow-hidden overflow-x-auto">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th style="width: 26%;">Capability</th>
+            <th class="wcwd" style="width: 37%;">WhereCanWeDance</th>
+            <th style="width: 37%;">WeDance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Event discovery</td>
+            <td><span class="win">City + style filters, real event data</span></td>
+            <td><span class="win">Global · 31k URLs · 703 cities · 5 langs</span></td>
+          </tr>
+          <tr>
+            <td>Ticketing</td>
+            <td><span class="win">Stripe · manual (cash/Venmo/Zelle/check)</span></td>
+            <td><span class="win">Stripe · PayPal · Wise · 7% take</span></td>
+          </tr>
+          <tr>
+            <td>Artist portal</td>
+            <td><span class="win">Full bio, booking, portal editor, claim flow</span></td>
+            <td><span class="miss">none (talent page is a jobs board)</span></td>
+          </tr>
+          <tr>
+            <td>Private lessons</td>
+            <td><span class="win">Types, packages, custom pricing, communication</span></td>
+            <td><span class="miss">none</span></td>
+          </tr>
+          <tr>
+            <td>Pedagogy / lesson planning</td>
+            <td><span class="win">Dance move library, fingerprint schema, class logs</span></td>
+            <td><span class="miss">none</span></td>
+          </tr>
+          <tr>
+            <td>Glossary / dictionary</td>
+            <td><span class="win">GlossaryTerm model, publish/archive, admin CRUD</span></td>
+            <td><span class="miss">none</span></td>
+          </tr>
+          <tr>
+            <td>Editorial content</td>
+            <td><span class="win">Blog, artist stories, style pages with prose</span></td>
+            <td><span class="miss">~6 words on the biggest style hub</span></td>
+          </tr>
+          <tr>
+            <td>Founder identity</td>
+            <td><span class="win">Charles: named, dances, organizes, teaches</span></td>
+            <td><span class="miss">Matt + Jason, first names only</span></td>
+          </tr>
+          <tr>
+            <td>International reach</td>
+            <td><span class="miss">US-focused</span></td>
+            <td><span class="win">APAC-dominant · Shenzhen, Siolim, Singapore</span></td>
+          </tr>
+          <tr>
+            <td>SEO scale</td>
+            <td><span class="miss">Smaller URL footprint, less indexed inventory</span></td>
+            <td><span class="win">31k URLs · 5-locale sitemap · hub-and-spoke</span></td>
+          </tr>
+          <tr>
+            <td>i18n infrastructure</td>
+            <td><span class="miss">English only</span></td>
+            <td><span class="win">/en, /zh, /zh-tw, /es, /ja (hreflang missing though)</span></td>
+          </tr>
+          <tr>
+            <td>Public API + llms.txt</td>
+            <td><span class="miss">private API surface</span></td>
+            <td><span class="win">Public /api/catalog + OpenAPI + detailed llms.txt</span></td>
+          </tr>
+          <tr>
+            <td>Native apps</td>
+            <td><span class="miss">Web-only PWA path</span></td>
+            <td><span class="win">iOS + Android (Step by WeDance)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-4xl text-sm text-muted italic">Overlap: 2 rows (event discovery, ticketing). Divergence: 11 rows. Different products dressed in similar clothing.</p>
+  </section>
+
+  <!-- The business model tension -->
+  <section id="money" data-title="Money model" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Where the money is (or isn't).</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">Their monetization is one line. Yours is a stack.</p>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+      <div class="glass rounded-lg p-6">
+        <div class="font-mono text-xs text-slate-300 mb-3">WEDANCE</div>
+        <h3 class="font-display font-bold text-2xl text-terracotta-400 mb-4">7% ticket fee. That's it.</h3>
+        <ul class="text-body space-y-2 text-sm leading-relaxed">
+          <li>7% per transaction on paid tickets</li>
+          <li>Free events: free to list, zero revenue</li>
+          <li>No organizer subscription tier surfaced</li>
+          <li>No artist/instructor monetization</li>
+          <li>No sponsored placement / featured listings</li>
+          <li>No pro tools upsell</li>
+        </ul>
+        <p class="mt-4 text-sm text-dimmed italic">Pure transaction fee. Growth = ticket volume × price. In sparse markets: near zero.</p>
+      </div>
+      <div class="glass rounded-lg p-6">
+        <div class="font-mono text-xs text-slate-300 mb-3">WHERECANWEDANCE (current + planned)</div>
+        <h3 class="font-display font-bold text-2xl text-terracotta-400 mb-4">Multi-lane stack.</h3>
+        <ul class="text-body space-y-2 text-sm leading-relaxed">
+          <li>Ticket transaction fee (current)</li>
+          <li>Manual-payment recording (revenue capture on offline txns)</li>
+          <li>Private lesson package fees</li>
+          <li>Artist Pro subscription (planned · fee waiver at scale)</li>
+          <li>Founding organizer program (application-based)</li>
+          <li>Potential: featured artist / event boosts, glossary licensing, pedagogy licensing</li>
+        </ul>
+        <p class="mt-4 text-sm text-dimmed italic">More vectors, more experiments. Each has to be validated separately.</p>
+      </div>
+    </div>
+    <div class="mt-8 max-w-5xl glass glass-warn rounded-lg p-5">
+      <p class="text-body text-sm leading-relaxed"><span class="font-mono text-xs text-coral-400 mr-2">TENSION</span> If Matt's platform makes $50k/year on 7% fees, it's a lifestyle side project. If it makes $500k, the number changes everything. <strong>You cannot evaluate any deal without seeing the P&amp;L.</strong> Ask for revenue, expenses, and MRR trend before any other conversation continues.</p>
+    </div>
+  </section>
+
+  <!-- Face of the platform -->
+  <section id="face" data-title="Face of the platform" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <p class="font-display italic text-2xl md:text-3xl text-dimmed max-w-3xl mb-8 leading-snug">
+      He won't put his face on it. You already have.
+    </p>
+    <h2 class="font-display font-bold text-4xl md:text-7xl leading-tight tracking-tight max-w-4xl mb-10 text-shadow-warm">
+      Trust is a durable moat.
+    </h2>
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+      <div class="glass rounded-lg p-6">
+        <h3 class="font-display font-semibold text-xl mb-3 text-terracotta-400">Their E-E-A-T signals</h3>
+        <ul class="text-body space-y-2 text-sm leading-relaxed">
+          <li>Two first names on a team page</li>
+          <li>No verifiable dance credentials</li>
+          <li>No press mentions</li>
+          <li>No Wikipedia article</li>
+          <li>Delaware LLC agent address</li>
+          <li>No named editor / no bylines</li>
+        </ul>
+      </div>
+      <div class="glass rounded-lg p-6">
+        <h3 class="font-display font-semibold text-xl mb-3 text-terracotta-400">Your E-E-A-T signals</h3>
+        <ul class="text-body space-y-2 text-sm leading-relaxed">
+          <li>Named founder who dances, teaches, organizes</li>
+          <li>Kiz ATX residency at Esquina Tango, weekly</li>
+          <li>NeoKiz umbrella since 2014 · verifiable history</li>
+          <li>KSX (Kiz Summit Exchange) as a produced event</li>
+          <li>Public brand voice across multiple properties</li>
+          <li>Alina as a named teaching partner</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-8 max-w-4xl text-body text-lg leading-relaxed">
+      Google's Quality Rater Guidelines specifically reward first-hand experience. LLMs increasingly do the same via entity graphs. The gap between a platform run by "Matt and Jason" and one run by Charles Ogar with a real dance history is a permanent asymmetry, and one that widens, not narrows, over time.
+    </p>
+  </section>
+
+  <!-- Overlap zone -->
+  <section id="overlap" data-title="Overlap zone" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Where you actually compete.</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">Two products, one narrow shared border. Everything else is beside each other, not on top of each other.</p>
+
+    <div class="grid md:grid-cols-3 gap-5 max-w-6xl">
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">SHARED · YOU COMPETE HERE</div>
+        <h3 class="font-display font-semibold text-lg mb-2 text-terracotta-400">Event ticketing (paid)</h3>
+        <p class="text-sm text-body">Both charge organizers a fee. Both process Stripe. The organizer picks one, not both.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">SHARED · YOU COMPETE HERE</div>
+        <h3 class="font-display font-semibold text-lg mb-2 text-terracotta-400">City event discovery</h3>
+        <p class="text-sm text-body">Both surface "kizomba events in Austin". WeDance has better SEO scale, you have better local context.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">ADJACENT · NOT SHARED</div>
+        <h3 class="font-display font-semibold text-lg mb-2 text-sage-400">Artist bookings + portals</h3>
+        <p class="text-sm text-body">You have it. They don't. Their /talent page is literally a jobs board for WeDance the company.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">ADJACENT · NOT SHARED</div>
+        <h3 class="font-display font-semibold text-lg mb-2 text-sage-400">Private lessons</h3>
+        <p class="text-sm text-body">Your dedicated product. Not on their roadmap based on public signals.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">ADJACENT · NOT SHARED</div>
+        <h3 class="font-display font-semibold text-lg mb-2 text-sage-400">Pedagogy + glossary</h3>
+        <p class="text-sm text-body">Yours. Nowhere on their site. Represents a different product philosophy entirely.</p>
+      </div>
+      <div class="glass rounded-lg p-5">
+        <div class="font-mono text-xs text-slate-300 mb-2">ADJACENT · NOT SHARED</div>
+        <h3 class="font-display font-semibold text-lg mb-2 text-sage-400">Global i18n + APAC market</h3>
+        <p class="text-sm text-body">Theirs. Not currently your target. Different customer base, different distribution.</p>
+      </div>
+    </div>
+
+    <p class="mt-8 max-w-4xl text-body text-lg leading-relaxed">
+      Real overlap: <strong>~15% of surface area.</strong> Rest is complementary or non-overlapping. This is the shape of a potential partnership more than a competitive threat.
+    </p>
+  </section>
+
+  <!-- Three paths -->
+  <section id="paths" data-title="Three paths" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Three ways this ends.</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">Not exhaustive. But the real branches of the decision tree.</p>
+
+    <div class="grid md:grid-cols-3 gap-6 max-w-6xl">
+      <div class="path-card glass">
+        <div><span class="verdict verdict-do-nothing">Path A · Independent</span></div>
+        <h3 class="font-display font-bold text-2xl">Keep building. Watch them.</h3>
+        <ul class="path-pros">
+          <li>Zero risk to your capital or focus</li>
+          <li>You keep 100% of upside</li>
+          <li>Their thin editorial + missing E-E-A-T stays their problem</li>
+          <li>Depth strategy compounds; scale strategy doesn't</li>
+        </ul>
+        <ul class="path-cons">
+          <li>You leave their 31k SEO URLs on the table</li>
+          <li>APAC market stays out of reach</li>
+          <li>i18n / apps built from scratch if you go global</li>
+          <li>Doesn't answer Matt (may sour him)</li>
+        </ul>
+      </div>
+
+      <div class="path-card glass" style="border-color: rgba(212,85,43,0.42);">
+        <div><span class="verdict verdict-partner">Path B · Partner</span></div>
+        <h3 class="font-display font-bold text-2xl">Non-overlapping trade.</h3>
+        <ul class="path-pros">
+          <li>You license artist-portal / glossary / pedagogy tech to them</li>
+          <li>They cross-list your artists into APAC catalog</li>
+          <li>Referral fee both directions</li>
+          <li>Learn their numbers without buying anything</li>
+          <li>Low capital, reversible</li>
+        </ul>
+        <ul class="path-cons">
+          <li>Complicated ownership + branding</li>
+          <li>If he really wants out, partnership won't scratch it</li>
+          <li>Distraction cost is real (integration, coordination)</li>
+          <li>May not survive his exit</li>
+        </ul>
+      </div>
+
+      <div class="path-card glass" style="border-color: rgba(232,93,60,0.35);">
+        <div><span class="verdict verdict-acquire">Path C · Acquire</span></div>
+        <h3 class="font-display font-bold text-2xl">Buy the platform.</h3>
+        <ul class="path-pros">
+          <li>Instant 31k-URL SEO footprint absorbed</li>
+          <li>APAC + i18n infrastructure baked in</li>
+          <li>Two native apps (iOS + Android) already published</li>
+          <li>Public API + OpenAPI + llms.txt strategy inherited</li>
+          <li>Removes a competitor</li>
+        </ul>
+        <ul class="path-cons">
+          <li>Only rational if revenue justifies the price</li>
+          <li>Integration cost = months of engineering</li>
+          <li>Two codebases, two brand identities to reconcile</li>
+          <li>May inherit tech debt you can't see from outside</li>
+          <li>If revenue is $0-50k, "acquisition" is really an asset-buy</li>
+          <li>Focus tax: pulls you off depth strategy</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Napkin math -->
+  <section id="math" data-title="Napkin math" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">What might they be worth?</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">Order-of-magnitude only. Real number requires his P&amp;L. This frames the range so you know what to ask.</p>
+
+    <div class="max-w-5xl w-full glass rounded-lg overflow-hidden overflow-x-auto">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Scenario</th>
+            <th style="width: 26%;">Signals if true</th>
+            <th style="width: 26%;">Rough valuation logic</th>
+            <th style="width: 26%;">Your move</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lifestyle project<br/><span class="text-slate-300 text-[10px]">$0 – $50k/yr</span></td>
+            <td>Two founders, no team, thin editorial, wanting out for "something else"</td>
+            <td>Asset sale: domain + code + apps + traffic. ~$50k – $200k range. Barely covers his time.</td>
+            <td>Cheap enough that Path C becomes a serious option. Partnership feels overkill.</td>
+          </tr>
+          <tr>
+            <td>Real side business<br/><span class="text-slate-300 text-[10px]">$100k – $300k/yr</span></td>
+            <td>Meaningful ticket volume in APAC, some organizer stickiness, growing MRR</td>
+            <td>Small SaaS multiple: 2–4× ARR. ~$300k – $1.2M range.</td>
+            <td>Path B (partnership) is safer than paying that much. Prove revenue quality first.</td>
+          </tr>
+          <tr>
+            <td>Actual company<br/><span class="text-slate-300 text-[10px]">$500k+ /yr</span></td>
+            <td>Real operational depth, growth trajectory, defensible position</td>
+            <td>3–6× ARR + strategic premium. $1.5M+ range.</td>
+            <td>Almost certainly not a fit for you to buy. Partnership or nothing.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-8 max-w-5xl glass glass-warn rounded-lg p-5">
+      <p class="text-body text-sm leading-relaxed"><span class="font-mono text-xs text-coral-400 mr-2">HEURISTIC</span> Founders "wanting to do something else" usually correlates with the low end. Real growth traps founders; only stalled or plateaued businesses feel like anchors. Matt's framing suggests the first or second row, not the third.</p>
+    </div>
+  </section>
+
+  <!-- Questions to ask Matt -->
+  <section id="questions" data-title="Ask Matt" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Questions to ask before anything else.</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">In this order. Refuse to negotiate anything until you get real answers to at least the first six.</p>
+
+    <p class="font-mono text-xs text-slate-300 tracking-widest mb-4">MUST-ANSWER · GATES EVERYTHING BELOW</p>
+    <ul class="ask-list max-w-4xl">
+      <li>
+        <span class="ask-num">◆</span>
+        <span class="ask-body">What is your trailing 12-month gross revenue and net revenue?
+          <span class="ask-note">If he won't share, the conversation ends here. Everything else is guesswork.</span>
+        </span>
+      </li>
+      <li>
+        <span class="ask-num">◆</span>
+        <span class="ask-body">What is your monthly ticket volume, both count and gross dollars?
+          <span class="ask-note">7% take rate is meaningless without volume behind it.</span>
+        </span>
+      </li>
+      <li>
+        <span class="ask-num">◆</span>
+        <span class="ask-body">Trailing MRR trend: up, flat, or declining over the last 6 months?
+          <span class="ask-note">Direction matters more than absolute number.</span>
+        </span>
+      </li>
+      <li>
+        <span class="ask-num">◆</span>
+        <span class="ask-body">What are your monthly hosting + third-party costs?
+          <span class="ask-note">Next.js + CloudFront + Postgres + email + apps + API costs add up. Net margin is what matters.</span>
+        </span>
+      </li>
+      <li>
+        <span class="ask-num">◆</span>
+        <span class="ask-body">Why sell now, specifically? What's the "something else"?
+          <span class="ask-note">Answer reveals leverage. If he's burned out, price softens. If he's chasing a new opportunity, price hardens.</span>
+        </span>
+      </li>
+      <li>
+        <span class="ask-num">◆</span>
+        <span class="ask-body">Who owns the code, the brand, the apps, and the data? Any co-founder equity issues?
+          <span class="ask-note">Delaware LLC with two founders. You need cap table clarity before any transaction talk.</span>
+        </span>
+      </li>
+    </ul>
+
+    <p class="font-mono text-xs text-slate-300 tracking-widest mt-10 mb-4">FOLLOW-UPS · IF THE FIRST SIX GO WELL</p>
+    <ul class="ask-list max-w-4xl">
+      <li>
+        <span class="ask-num">◇</span>
+        <span class="ask-body">What's the split between organizer accounts you'd characterize as "active" vs. "signed up once"?
+          <span class="ask-note">Vanity vs. real engagement.</span>
+        </span>
+      </li>
+      <li>
+        <span class="ask-num">◇</span>
+        <span class="ask-body">If we walk away today, what's your Plan B? Sell to whom else, keep running, wind down?
+          <span class="ask-note">Frames urgency. Also reveals whether he's talking to other buyers.</span>
+        </span>
+      </li>
+      <li>
+        <span class="ask-num">◇</span>
+        <span class="ask-body">Would you be open to a data-room review under NDA before we discuss structure?
+          <span class="ask-note">Filters serious sellers from tire-kickers.</span>
+        </span>
+      </li>
+      <li>
+        <span class="ask-num">◇</span>
+        <span class="ask-body">If "partner" is more interesting than "sell", what does a good partnership actually look like to you?
+          <span class="ask-note">Let him define it. Notice if he can.</span>
+        </span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Recommendation -->
+  <section id="rec" data-title="Recommendation" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
+    <div class="ember-glow ember-glow-cta" aria-hidden="true"></div>
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-6 tracking-tight text-shadow-warm relative">The read.</h2>
+
+    <div class="max-w-4xl relative">
+      <p class="text-body text-xl leading-relaxed mb-6">
+        Default to <strong class="text-terracotta-400">Path B (partnership)</strong>, but only after the numbers slide is filled in.
+      </p>
+      <p class="text-body text-lg leading-relaxed mb-6">
+        Their tech is genuinely good. Their brand is thin. Their overlap with you is ~15%. That combination is a licensing or integration opportunity, not an acquisition target, unless the P&amp;L makes it embarrassingly cheap. If it does, revisit Path C with cold eyes about integration cost.
+      </p>
+      <p class="text-body text-lg leading-relaxed mb-8">
+        You said you're not sure where the overlap is. The audit says: barely. You're not competing with him, you're both solving adjacent parts of the same problem. Which means the interesting question isn't "should I buy this?" It's <em class="text-terracotta-400">"what can we trade so we both win?"</em>
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-4 mt-10">
+        <div class="stat-tile">
+          <div class="font-mono text-xs text-sage-400 tracking-widest">STEP 1 · NOW</div>
+          <p class="mt-2 text-sm text-body leading-relaxed">Reply to Matt: "Curious, before we go further, willing to share topline revenue + ticket volume under NDA?"</p>
+        </div>
+        <div class="stat-tile">
+          <div class="font-mono text-xs text-sage-400 tracking-widest">STEP 2 · IF NUMBERS COME</div>
+          <p class="mt-2 text-sm text-body leading-relaxed">Score against the napkin-math table. Decide: partnership talk, asset-buy talk, or walk.</p>
+        </div>
+        <div class="stat-tile">
+          <div class="font-mono text-xs text-sage-400 tracking-widest">STEP 3 · IF NUMBERS DON'T COME</div>
+          <p class="mt-2 text-sm text-body leading-relaxed">Politely close the loop. Keep building. His unwillingness to share is itself the answer.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 glass glass-warn rounded-lg p-5 max-w-3xl">
+        <p class="text-sm text-body italic leading-relaxed"><span class="font-mono text-xs text-coral-400 mr-2">FINAL NOTE</span> Don't let flattery ("we should partner") pull you off your depth strategy. Every hour spent on this is an hour not spent on artist portals, private lessons, or Kiz ATX. The right answer might be a warm decline.</p>
+      </div>
+    </div>
+
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · WCWD strategy · Not for distribution</p>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  const sections = [...document.querySelectorAll('main > section')];
+  const navList = document.getElementById('navList');
+  const mobileNavList = document.getElementById('mobileNavList');
+  const counter = document.getElementById('counter');
+  const menuBtn = document.getElementById('menuBtn');
+  const menuLabel = document.getElementById('menuLabel');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const progressBar = document.getElementById('progressBar');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const drawerLinks = new Array(sections.length);
+
+  sections.forEach((s) => {
+    const title = s.dataset.title || s.id;
+    const desktopItem = document.createElement('li');
+    desktopItem.dataset.target = s.id;
+    desktopItem.innerHTML = `
+      <a href="#${s.id}" class="flex items-center gap-3 group">
+        <span class="nav-dot w-2 h-2 rounded-full bg-slate-400/40 group-hover:bg-terracotta-500"></span>
+        <span class="nav-label text-dimmed group-hover:text-ivory-50 text-sm">${title}</span>
+      </a>`;
+    navList.appendChild(desktopItem);
+  });
+
+  sections.forEach((s, i) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${s.id}`;
+    a.className = 'drawer-item';
+    a.textContent = s.dataset.title || s.id;
+    li.appendChild(a);
+    mobileNavList.appendChild(li);
+    drawerLinks[i] = a;
+  });
+
+  const navItems = [...navList.children];
+  const navLinks = navItems.map(n => n.querySelector('a'));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target);
+        navItems.forEach((n, i) => {
+          n.classList.toggle('nav-active', i === idx);
+          if (navLinks[i]) {
+            if (i === idx) navLinks[i].setAttribute('aria-current', 'location');
+            else navLinks[i].removeAttribute('aria-current');
+          }
+        });
+        drawerLinks.forEach((link, i) => {
+          if (link) link.classList.toggle('is-active', i === idx);
+        });
+        counter.textContent = `${idx + 1} of ${sections.length}`;
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => io.observe(s));
+
+  let ticking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progressBar.style.transform = `scaleX(${pct})`;
+    progressBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  updateProgress();
+
+  const isMenuOpen = () => !mobileMenu.hidden;
+  function openMenu() { mobileMenu.hidden = false; document.body.style.overflow = 'hidden'; menuBtn.classList.add('is-open'); menuBtn.setAttribute('aria-expanded', 'true'); menuLabel.textContent = 'CLOSE'; }
+  function closeMenu() { mobileMenu.hidden = true; document.body.style.overflow = ''; menuBtn.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); menuLabel.textContent = 'MENU'; }
+  menuBtn?.addEventListener('click', () => isMenuOpen() ? closeMenu() : openMenu());
+  mobileMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isMenuOpen()) closeMenu(); });
+
+  const currentIndex = () => {
+    const y = window.scrollY + window.innerHeight * 0.5;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= y) return i;
+    }
+    return 0;
+  };
+  const go = (dir) => {
+    const i = currentIndex();
+    const next = Math.max(0, Math.min(sections.length - 1, i + dir));
+    sections[next].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+  };
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (isMenuOpen()) return;
+    if (e.key === ' ' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+    if (e.key === 'End')  { e.preventDefault(); sections[sections.length-1].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+  });
+})();
+</script>
+</body>
+</html>
