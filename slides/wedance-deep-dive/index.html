@@ -216,7 +216,7 @@
       <span class="text-dimmed text-xs">· The WeDance Question</span>
     </a>
     <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
-      <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 12</span>
+      <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 13</span>
       <span class="hidden md:inline">·</span>
       <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
       <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
@@ -500,6 +500,64 @@
     <div class="mt-8 max-w-5xl glass glass-warn rounded-lg p-5">
       <p class="text-body text-sm leading-relaxed"><span class="font-mono text-xs text-coral-400 mr-2">TENSION</span> If Matt's platform makes $50k/year on 7% fees, it's a lifestyle side project. If it makes $500k, the number changes everything. <strong>You cannot evaluate any deal without seeing the P&amp;L.</strong> Ask for revenue, expenses, and MRR trend before any other conversation continues.</p>
     </div>
+  </section>
+
+  <!-- The empty shelf -->
+  <section id="empty-shelf" data-title="The empty shelf" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule" aria-hidden="true"></span>
+    <p class="font-mono text-xs tracking-widest text-coral-400 mb-4">DUE DILIGENCE · FOUND POST-CALL</p>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">The 7% applies to almost nothing.</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">Their own public API tells the story. Their 7% take rate is a headline, not a revenue engine.</p>
+
+    <div class="grid md:grid-cols-4 gap-4 max-w-5xl mb-10">
+      <div class="stat-tile">
+        <div class="stat-value">8</div>
+        <div class="stat-label">cities queried</div>
+        <div class="stat-note">London, Shenzhen, Singapore, Siolim, Dubai, Hong Kong, Toronto, Austin</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-value">~140</div>
+        <div class="stat-label">events sampled</div>
+        <div class="stat-note">Via /api/catalog/events endpoint</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-value">0</div>
+        <div class="stat-label">have ticket prices</div>
+        <div class="stat-note">`offers` field empty on every event</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-value">0</div>
+        <div class="stat-label">have checkout URLs</div>
+        <div class="stat-note">`checkoutUrl` null across the board</div>
+      </div>
+    </div>
+
+    <div class="max-w-5xl grid md:grid-cols-2 gap-6">
+      <div class="glass rounded-lg p-6">
+        <h3 class="font-display font-semibold text-lg mb-3 text-terracotta-400">What the API reveals</h3>
+        <ul class="text-body space-y-2 text-sm leading-relaxed">
+          <li>Their event catalog is largely scraped, not organizer-managed</li>
+          <li>Image URLs literally contain "SCRAPE_instagram", "SCRAPE_facebook"</li>
+          <li>The Dubai Kizomba Gold Festival (a real festival) has no ticketing on their platform</li>
+          <li>Recurring socials like "salsa mondays" in London show no price data</li>
+          <li>Directory mode, not marketplace mode</li>
+        </ul>
+      </div>
+      <div class="glass glass-warn rounded-lg p-6">
+        <h3 class="font-display font-semibold text-lg mb-3 text-coral-400">What this means for valuation</h3>
+        <ul class="text-body space-y-2 text-sm leading-relaxed">
+          <li>7% of near-zero volume equals near-zero revenue</li>
+          <li>The platform is closer to Songkick or Bandsintown (aggregator) than Eventbrite (transaction engine)</li>
+          <li>Ticketing has to be built out from cold-start with organizers, not just switched on</li>
+          <li>Any acquisition math anchored on ticket volume is speculative until Matt shares real numbers</li>
+          <li>Reinforces every question on the "Ask Matt" slide</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mt-8 max-w-4xl text-body text-lg leading-relaxed italic">
+      The platform indexes at scale. It does not transact at scale. Those are two different products dressed as one.
+    </p>
   </section>
 
   <!-- Face of the platform -->
