@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KSX Pricing · Kiz Summit Exchange 2026</title>
+<meta name="description" content="KSX pass architecture: three blocks, five pass products, single-night pricing, the Founding Ten launch tier and the on-sale sequence. Internal working proposal." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0f0b08" />
+
+<link rel="canonical" href="https://slides.ogarocious.com/ksx-pricing/" />
+
+<meta property="og:site_name" content="Kiz Summit Exchange" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://slides.ogarocious.com/ksx-pricing/" />
+<meta property="og:title" content="KSX Pricing · Three blocks, five passes, ten founding seats" />
+<meta property="og:description" content="The pass ladder built on the three-block shape of the run, the arithmetic that holds it together, and how sales open." />
+<meta property="og:image" content="https://slides.ogarocious.com/ksx-pricing/og.png" />
+<meta property="og:image:alt" content="KSX Pricing cover: 5 pass products, $325 full week standard, 10 founding seats at $199, $17.1k planning revenue." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KSX Pricing · pass architecture" />
+<meta name="twitter:description" content="Three blocks, five passes, and the launch mechanic for the first ten full-week seats." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/ksx-pricing/og.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: {
+            950: '#080604', 900: '#0f0b08', 800: '#1a120c',
+            700: '#241811', 600: '#2f2118', 500: '#3d2c20',
+          },
+          crimson: {
+            300: '#e08475', 400: '#d05e4c', 500: '#c0392b',
+            600: '#9a2d21', 700: '#761f16',
+          },
+          gold: {
+            300: '#f2d896', 400: '#ecc978', 500: '#e5b95a',
+            600: '#c99e42', 700: '#a67f34',
+          },
+          ivory: {
+            50: '#faf6ee', 100: '#f5f0e8', 200: '#e6dccb', 300: '#c9bda9',
+          },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'Georgia', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  body {
+    background-color: #0f0b08;
+    background-image:
+      radial-gradient(ellipse 1200px 700px at 20% 10%, rgba(192, 57, 43, 0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 80%, rgba(229, 185, 90, 0.06), transparent 65%),
+      linear-gradient(180deg, #080604 0%, #0f0b08 40%, #0f0b08 60%, #080604 100%);
+    min-height: 100vh;
+    color: #f5f0e8;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  .text-body   { color: rgba(245, 240, 232, 0.90); }
+  .text-dimmed { color: rgba(245, 240, 232, 0.72); }
+  .text-muted  { color: rgba(245, 240, 232, 0.55); }
+  .text-deep   { color: rgba(245, 240, 232, 0.30); }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: #c0392b;
+    transform: scaleX(0); transform-origin: left center;
+    z-index: 51; pointer-events: none; will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(26, 18, 12, 0.65);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(192, 57, 43, 0.22);
+    box-shadow:
+      0 1px 0 rgba(245, 240, 232, 0.03) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(192, 57, 43, 0.42); }
+
+  .accent-rule {
+    display: inline-block; width: 48px; height: 2px;
+    background: #c0392b; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid #e5b95a;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Header (fixed top bar) */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: rgba(8, 6, 4, 0.80);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(192, 57, 43, 0.14);
+  }
+  .site-header .brand-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: inherit;
+  }
+  .site-header .brand-dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: #c0392b;
+    transition: background-color 220ms ease;
+  }
+  .site-header .brand-link:hover .brand-dot {
+    background: #e5b95a;
+  }
+  .site-header .brand-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e5b95a;
+  }
+  .site-header .brand-sub {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: rgba(245, 240, 232, 0.55);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .site-header .meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.72rem; color: rgba(245, 240, 232, 0.55);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .site-header .counter { color: rgba(245, 240, 232, 0.75); }
+  .site-header .sep { color: rgba(245, 240, 232, 0.25); }
+  @media (max-width: 900px) { .site-header .lg-only { display: none; } }
+  @media (max-width: 700px) { .site-header .md-only { display: none; } }
+
+  /* Keyboard chip */
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.07);
+    color: #f5f0e8;
+    display: inline-block; margin: 0 1px;
+  }
+
+  /* Menu button (mobile only) */
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.85rem; border-radius: 999px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.08);
+    color: #f5f0e8;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(229, 185, 90, 0.70);
+    background: rgba(192, 57, 43, 0.14);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+  @media (min-width: 768px) { .menu-btn { display: none; } }
+
+  /* Side navigation (desktop only) */
+  .side-nav {
+    position: fixed; top: 0; left: 0; height: 100vh;
+    width: 280px;
+    padding: 5rem 1.75rem 2rem;
+    z-index: 40;
+    background: rgba(8, 6, 4, 0.60);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-right: 1px solid rgba(192, 57, 43, 0.12);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) { .side-nav { display: flex; } }
+  .side-nav .nav-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.20);
+  }
+  .side-nav .nav-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.1rem;
+  }
+  .side-nav .nav-list a {
+    display: block;
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    color: rgba(245, 240, 232, 0.60);
+    text-decoration: none;
+    font-size: 0.88rem; line-height: 1.3;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+  .side-nav .nav-list a:hover {
+    color: #e5b95a;
+    background: rgba(192, 57, 43, 0.08);
+  }
+  .side-nav .nav-list .nav-active a {
+    color: #e5b95a;
+    background: rgba(192, 57, 43, 0.14);
+  }
+  .side-nav .nav-foot {
+    font-size: 0.72rem; color: rgba(245, 240, 232, 0.45);
+    line-height: 1.55;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(192, 57, 43, 0.12);
+  }
+  .side-nav .nav-foot .foot-brand { color: rgba(229, 185, 90, 0.85); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.65rem; }
+
+  /* Drawer (mobile only) */
+  .drawer {
+    position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    background: rgba(8, 6, 4, 0.85);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(15, 11, 8, 0.98);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .drawer-list {
+    border-left: 1px solid rgba(192, 57, 43, 0.30);
+    padding-left: 1rem;
+    margin: 0; list-style: none;
+  }
+  .drawer-item {
+    display: block; padding: 0.85rem 0.9rem; margin-left: -0.5rem;
+    color: #f5f0e8; text-decoration: none;
+    font-size: 1.1rem; font-weight: 500; line-height: 1.3;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .drawer-item:hover, .drawer-item.is-active {
+    background: rgba(192, 57, 43, 0.14);
+    color: #e5b95a;
+  }
+
+  /* Cover TOC */
+  .deck-toc { margin-top: 2.5rem; max-width: 32rem; position: relative; z-index: 2; }
+  .deck-toc summary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.55rem 1rem;
+    background: rgba(26, 18, 12, 0.55);
+    border: 1px dashed rgba(229, 185, 90, 0.55);
+    border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(229, 185, 90, 0.95);
+    cursor: pointer; list-style: none;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .deck-toc summary::-webkit-details-marker { display: none; }
+  .deck-toc summary::before {
+    content: '▸'; font-size: 0.7rem;
+    transition: transform 200ms ease; display: inline-block;
+  }
+  .deck-toc[open] summary::before { transform: rotate(90deg); }
+  .deck-toc summary:hover {
+    border-color: rgba(229, 185, 90, 0.95);
+    background: rgba(26, 18, 12, 0.80);
+  }
+  .deck-toc[open] summary {
+    background: rgba(192, 57, 43, 0.14);
+    border-color: rgba(229, 185, 90, 0.95);
+  }
+  .toc-list {
+    margin-top: 1rem; padding: 1.25rem 1.5rem;
+    background: rgba(26, 18, 12, 0.75);
+    border: 1px solid rgba(192, 57, 43, 0.18);
+    border-radius: 8px; list-style: none;
+  }
+  .toc-list li {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem; padding: 0.35rem 0;
+    color: rgba(245, 240, 232, 0.85);
+  }
+  .toc-list li a {
+    color: rgba(245, 240, 232, 0.90);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(229, 185, 90, 0.35);
+    padding-bottom: 1px;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .toc-list li a:hover {
+    color: #e5b95a; border-bottom-color: rgba(229, 185, 90, 0.95);
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #c0392b;
+  }
+
+  /* Section headings */
+  .h-display {
+    font-family: "Rubik", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #f5f0e8;
+    line-height: 1.02;
+  }
+  .h-gold { color: #e5b95a; }
+
+  /* Data tiles */
+  .stat-tile {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.25);
+    background: rgba(26, 18, 12, 0.70);
+  }
+  .stat-tile .label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .stat-tile .value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.35rem);
+    color: #f5f0e8; line-height: 1.1;
+  }
+  .stat-tile .value.gold { color: #e5b95a; }
+  .stat-tile .sub { color: rgba(245, 240, 232, 0.65); font-size: 0.85rem; margin-top: 0.4rem; }
+
+  /* Bar chart */
+  .bar-chart {
+    display: grid;
+    grid-template-columns: 11rem 1fr 4rem;
+    gap: 0.5rem 1rem;
+    align-items: center;
+  }
+  .bar-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.82rem; color: rgba(245, 240, 232, 0.82);
+    text-align: right;
+  }
+  .bar-track {
+    height: 22px; border-radius: 4px;
+    background: rgba(192, 57, 43, 0.07);
+    border: 1px solid rgba(192, 57, 43, 0.14);
+    overflow: hidden; display: flex;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(192, 57, 43, 0.75), rgba(229, 185, 90, 0.85));
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: #0f0b08; font-weight: 700;
+  }
+  .bar-fill.crimson-only { background: linear-gradient(90deg, rgba(122, 34, 24, 0.9), rgba(192, 57, 43, 0.95)); color: #f5f0e8; }
+  .bar-fill.gold-only { background: linear-gradient(90deg, rgba(201, 158, 66, 0.9), rgba(229, 185, 90, 0.95)); color: #0f0b08; }
+  .bar-total {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem; color: rgba(245, 240, 232, 0.85);
+  }
+  @media (max-width: 700px) {
+    .bar-chart { grid-template-columns: 7rem 1fr 3rem; gap: 0.35rem 0.6rem; }
+    .bar-label { font-size: 0.72rem; }
+  }
+
+  /* Callout chips */
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.28rem 0.75rem; border-radius: 999px;
+    background: rgba(26, 18, 12, 0.65);
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    color: rgba(245, 240, 232, 0.85);
+  }
+  .chip.internal {
+    border: 1px dashed rgba(229, 185, 90, 0.80);
+    background: rgba(229, 185, 90, 0.08);
+    color: #e5b95a;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    font-weight: 600;
+  }
+  .chip.crimson {
+    border-color: rgba(192, 57, 43, 0.65);
+    background: rgba(192, 57, 43, 0.15);
+    color: #e08475;
+  }
+
+  /* Person / roster chip */
+  .person-chip {
+    display: inline-flex; align-items: baseline; gap: 0.4rem;
+    padding: 0.4rem 0.75rem; border-radius: 6px;
+    background: rgba(26, 18, 12, 0.70);
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    font-family: "Rubik", sans-serif;
+    font-size: 0.88rem;
+    color: #f5f0e8;
+  }
+  .person-chip .pc-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem; letter-spacing: 0.10em; text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.55);
+  }
+  .person-chip.is-pro {
+    background: rgba(229, 185, 90, 0.10);
+    border-color: rgba(229, 185, 90, 0.55);
+    color: #f5f0e8;
+  }
+  .person-chip.is-pro .pc-tag { color: #e5b95a; }
+  .person-chip.is-adv {
+    background: rgba(192, 57, 43, 0.12);
+    border-color: rgba(192, 57, 43, 0.45);
+  }
+  .person-chip.is-adv .pc-tag { color: #e08475; }
+
+  /* Theme cards */
+  .theme-card {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    background: rgba(26, 18, 12, 0.60);
+  }
+  .theme-card .th-count {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.16em;
+    color: #e5b95a; text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .theme-card .th-title {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    color: #f5f0e8; margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+  .theme-card .th-body {
+    color: rgba(245, 240, 232, 0.72);
+    font-size: 0.9rem; line-height: 1.55;
+  }
+  .theme-card .th-names {
+    margin-top: 0.75rem;
+    color: rgba(245, 240, 232, 0.50);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.06em;
+  }
+
+  /* Pull quote */
+  .pullquote {
+    padding: 1.75rem 2rem;
+    background: rgba(26, 18, 12, 0.55);
+    border-radius: 4px;
+    border: 1px solid rgba(192, 57, 43, 0.14);
+  }
+  .pullquote p {
+    font-family: "Rubik", Georgia, serif;
+    font-style: italic;
+    color: #f5f0e8;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 0.85rem;
+    text-indent: -0.4em;
+  }
+  .pullquote p::before {
+    content: '\201C';
+    color: rgba(229, 185, 90, 0.55);
+    font-style: normal;
+    font-size: 1.4em;
+    line-height: 0;
+    vertical-align: -0.15em;
+    margin-right: 0.08em;
+  }
+  .pullquote .attr {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; letter-spacing: 0.10em;
+    color: #e5b95a; text-transform: uppercase;
+  }
+
+  /* Calendar grid */
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .day-hdr {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(229, 185, 90, 0.85);
+    text-align: center;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.15);
+  }
+  .day-cell {
+    min-height: 130px;
+    padding: 0.65rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(192, 57, 43, 0.14);
+    background: rgba(26, 18, 12, 0.45);
+    display: flex; flex-direction: column;
+    gap: 0.35rem;
+  }
+  .day-cell.is-weekend {
+    background: rgba(229, 185, 90, 0.06);
+    border-color: rgba(229, 185, 90, 0.30);
+  }
+  .day-cell.is-weekday {
+    background: rgba(192, 57, 43, 0.06);
+    border-color: rgba(192, 57, 43, 0.28);
+  }
+  .day-cell.is-close {
+    background: rgba(26, 18, 12, 0.35);
+    border-style: dashed;
+    border-color: rgba(192, 57, 43, 0.28);
+  }
+  .day-cell .day-num {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1.15rem;
+    color: #f5f0e8; line-height: 1;
+  }
+  .day-cell.is-weekend .day-num { color: #e5b95a; }
+  .day-cell .day-name {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.55);
+    margin-top: -0.15rem;
+  }
+  .day-cell .day-plan {
+    font-family: "Rubik", sans-serif;
+    font-size: 0.72rem; line-height: 1.35;
+    color: rgba(245, 240, 232, 0.85);
+    margin-top: auto;
+  }
+  .day-cell .day-plan strong {
+    font-weight: 600; color: #e5b95a; font-size: 0.72rem;
+  }
+  .day-cell .day-badge {
+    display: inline-block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.55rem; letter-spacing: 0.10em; text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    background: rgba(192, 57, 43, 0.20);
+    color: #e08475;
+    align-self: flex-start;
+  }
+  .day-cell.is-weekend .day-badge {
+    background: rgba(229, 185, 90, 0.18);
+    color: #e5b95a;
+  }
+  @media (max-width: 900px) {
+    .day-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .day-cell { min-height: auto; flex-direction: row; align-items: center; gap: 0.85rem; }
+    .day-cell .day-num { font-size: 1.4rem; }
+    .day-cell .day-plan { margin-top: 0; }
+  }
+
+  /* Ask/takeaway list */
+  .ask-list { list-style: none; padding: 0; margin: 0; }
+  .ask-list li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0.85rem;
+    padding: 1rem 0;
+    border-bottom: 1px dashed rgba(192, 57, 43, 0.14);
+  }
+  .ask-list li:last-child { border-bottom: 0; }
+  .ask-list .marker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; letter-spacing: 0.14em;
+    color: #e5b95a; text-transform: uppercase;
+    padding-top: 0.25rem;
+    font-weight: 600;
+  }
+  .ask-list .ask-body strong {
+    color: #f5f0e8; font-weight: 600;
+  }
+  .ask-list .ask-body {
+    color: rgba(245, 240, 232, 0.85);
+    line-height: 1.55;
+  }
+
+  /* CTA */
+  .cta-btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem; letter-spacing: 0.20em;
+    text-transform: uppercase; font-weight: 700;
+    background: #e5b95a; color: #0f0b08;
+    text-decoration: none;
+    border: 1px solid #e5b95a;
+  }
+  .cta-btn:hover { background: #f0cc6a; border-color: #f0cc6a; }
+  .cta-btn.ghost {
+    background: transparent; color: #e5b95a;
+    border: 1px solid rgba(229, 185, 90, 0.55);
+  }
+  .cta-btn.ghost:hover {
+    background: rgba(229, 185, 90, 0.12);
+    border-color: #e5b95a;
+  }
+</style>
+</head>
+<body class="font-sans">
+
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a class="brand-link" href="#cover">
+    <span class="brand-dot"></span>
+    <span class="brand-name">KSX</span>
+    <span class="brand-sub md-only">/ Pricing</span>
+  </a>
+  <div class="meta">
+    <span class="counter md-only"><span id="slideIdx">01</span> / <span id="slideTotal">12</span></span>
+    <span class="sep md-only">·</span>
+    <span class="lg-only">updated <span data-inject="updated">2026-09-01</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only">rev <span data-inject="rev">1</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only"><span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">
+      <span class="menu-hamburger">≡ menu</span>
+      <span class="menu-close">× close</span>
+    </button>
+  </div>
+</header>
+
+<nav class="side-nav" aria-label="Deck sections">
+  <div>
+    <div class="nav-label">Sections</div>
+    <ul class="nav-list" id="sideNavList"></ul>
+  </div>
+  <div class="nav-foot">
+    <div class="foot-brand">Kiz Summit Exchange</div>
+    Pricing · rev <span data-inject="rev">1</span>
+    <br /><span class="text-deep">Internal · Working proposal</span>
+  </div>
+</nav>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-panel">
+    <div class="drawer-label">Sections</div>
+    <ul class="drawer-list" id="drawerList"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll">
+  <!-- 1. Cover -->
+  <section id="cover" class="snap-slide min-h-screen flex items-center px-6 md:px-14 pt-24 pb-16" data-title="Cover">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">KSX Pricing · Pass architecture and launch</div>
+      <h1 class="h-display text-[clamp(2.5rem,6vw,4.75rem)] mb-6">
+        Three blocks. <span class="h-gold">Five passes.</span><br />
+        Ten founding seats.
+      </h1>
+      <p class="text-body text-lg md:text-xl max-w-3xl leading-relaxed">
+        The run splits into an opening weekend, a midweek block and a closing weekend.
+        This is the ladder built on top of that shape, the arithmetic that stops anyone
+        assembling a cheaper version of the full week, and the mechanic for opening sales
+        the day a venue signs.
+      </p>
+
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+        <div class="stat-tile">
+          <div class="label">Pass products</div>
+          <div class="value gold">5</div>
+          <div class="sub">plus three single-night types</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Full week ceiling</div>
+          <div class="value">$350</div>
+          <div class="sub">standard sits at $325</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Founding seats</div>
+          <div class="value gold">10</div>
+          <div class="sub">$199, capped and timed</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Planning revenue</div>
+          <div class="value">$17.1k</div>
+          <div class="sub">at 100 paying</div>
+        </div>
+      </div>
+
+      <details class="deck-toc">
+        <summary>▸ Contents</summary>
+        <ol class="toc-list">
+          <li><a href="#blocks">1 · The three blocks</a></li>
+          <li><a href="#ladder">2 · The five products</a></li>
+          <li><a href="#cut">3 · The one we are not building</a></li>
+          <li><a href="#arbitrage">4 · Nothing undercuts the full week</a></li>
+          <li><a href="#nights">5 · Single nights</a></li>
+          <li><a href="#founding">6 · The Founding Ten</a></li>
+          <li><a href="#sequence">7 · On-sale sequence</a></li>
+          <li><a href="#cohort">8 · The Evokeez cohort</a></li>
+          <li><a href="#revenue">9 · Revenue at 100 paying</a></li>
+          <li><a href="#decide">10 · What we need to decide</a></li>
+          <li><a href="#log">11 · Update log</a></li>
+        </ol>
+      </details>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <span class="chip internal">Internal · Working proposal, nothing locked</span>
+        <span class="chip">Source: ticketing-pricing.md · Armature</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Blocks -->
+  <section id="blocks" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The three blocks">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Everything else is built on this</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">The run has three blocks.</h2>
+
+      <div class="grid md:grid-cols-3 gap-5 mb-6">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">A · Opening weekend</div>
+          <div class="h-display text-3xl mb-2">2 nights</div>
+          <ul class="text-body" style="line-height:1.9">
+            <li>Sat Oct 31 · Halloween, the brand moment</li>
+            <li>Sun Nov 1 · evening block</li>
+          </ul>
+          <p class="text-muted mt-4">Clocks fall back at 2:00am on Nov 1, so the Halloween social runs five real hours, not four.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">B · Midweek</div>
+          <div class="h-display text-3xl mb-2">4 nights</div>
+          <ul class="text-body" style="line-height:1.9">
+            <li>Mon Nov 2 to Wed Nov 4 · socials from 7:00pm</li>
+            <li>Thu Nov 5 · <span style="color:#e5b95a">keynote, no dancing</span></li>
+          </ul>
+          <p class="text-muted mt-4">The lowest-value block per night, and the one that changes character most with the venue.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">C · Closing weekend</div>
+          <div class="h-display text-3xl mb-2">3 nights</div>
+          <ul class="text-body" style="line-height:1.9">
+            <li>Fri Nov 6 · weekend party</li>
+            <li>Sat Nov 7 · daytime plus night</li>
+            <li>Sun Nov 8 · closing</li>
+          </ul>
+          <p class="text-muted mt-4">The marquee. Two of these three nights need a 2:00am close and neither Saturday has a venue yet.</p>
+        </div>
+      </div>
+
+      <div class="glass p-6">
+        <p class="text-body"><strong>Six contiguous spans are possible</strong> across three blocks: A, B, C, A+B, B+C and A+B+C. We are building five of them. Which one we drop, and why, is the next slide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Ladder -->
+  <section id="ladder" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The five products">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Standard prices · early bird and door move around these</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Five passes.</h2>
+
+      <div class="glass p-5 md:p-7 overflow-x-auto mb-6">
+        <table style="width:100%;border-collapse:collapse;font-size:0.86rem">
+          <thead><tr style="border-bottom:1px solid rgba(230,220,203,0.18)">
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Pass</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Blocks</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Span</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Nights</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Standard</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Per night</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Full Week Pass</strong></td><td style="padding:0.5rem;color:#e5b95a">A+B+C</td><td style="padding:0.5rem;color:#c9bda9">Oct 31 to Nov 8</td><td style="padding:0.5rem;color:#c9bda9">8</td><td style="padding:0.5rem;color:#e5b95a"><strong>$325</strong></td><td style="padding:0.5rem;color:#c9bda9">$41</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Summit Pass</strong></td><td style="padding:0.5rem;color:#e5b95a">B+C</td><td style="padding:0.5rem;color:#c9bda9">Nov 2 to Nov 8</td><td style="padding:0.5rem;color:#c9bda9">6</td><td style="padding:0.5rem;color:#e5b95a"><strong>$250</strong></td><td style="padding:0.5rem;color:#c9bda9">$42</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Weekend Pass</strong></td><td style="padding:0.5rem;color:#e5b95a">C</td><td style="padding:0.5rem;color:#c9bda9">Nov 6 to Nov 8</td><td style="padding:0.5rem;color:#c9bda9">3</td><td style="padding:0.5rem;color:#e5b95a"><strong>$150</strong></td><td style="padding:0.5rem;color:#c9bda9">$50</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Midweek Pass</strong></td><td style="padding:0.5rem;color:#e5b95a">B</td><td style="padding:0.5rem;color:#c9bda9">Nov 2 to Nov 5</td><td style="padding:0.5rem;color:#c9bda9">4</td><td style="padding:0.5rem;color:#e5b95a"><strong>$110</strong></td><td style="padding:0.5rem;color:#c9bda9">$28</td></tr>
+            <tr><td style="padding:0.5rem"><strong>Opening Weekend Pass</strong></td><td style="padding:0.5rem;color:#e5b95a">A</td><td style="padding:0.5rem;color:#c9bda9">Oct 31 to Nov 1</td><td style="padding:0.5rem;color:#c9bda9">2</td><td style="padding:0.5rem;color:#e5b95a"><strong>$85</strong></td><td style="padding:0.5rem;color:#c9bda9">$43</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Passes include classes</div>
+          <p class="text-body">Every pass carries the workshops in its span. Single nights never do. That one rule means we never have to price a day by what happens inside it, which matters while the venue is unknown.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Per night falls as you buy more</div>
+          <p class="text-body">$50 for a weekend night down to $41 across the full week. The midweek block sits low at $28 because those evenings are practicas as much as parties.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">The ceiling is Charles's call</div>
+          <p class="text-body"><strong>$350 is the hard ceiling</strong> on the full week and it scales down if the programme shrinks. Six programmed nights means $275. Four means $200 and a rename.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. The cut -->
+  <section id="cut" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The one we are not building">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Six spans exist, five get built</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">We are not selling A+B.</h2>
+
+      <div class="grid md:grid-cols-2 gap-5 mb-6">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3" style="color:#e08475">Opening weekend into the week</div>
+          <p class="text-body">Oct 31 through Nov 5, going home before the closing weekend. That buyer flies in for Halloween, does the midweek block, then leaves on the Friday the marquee nights start.</p>
+          <p class="text-muted mt-4">Almost nobody travels for the quiet half and skips the loud one. Every product we add is another price we have to defend against every other combination, so this one costs more in complexity than it returns.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">B+C earns its place</div>
+          <p class="text-body">Halloween falls on a Saturday. A real share of the North American market has commitments at home that night and cannot land until the Monday. The Summit Pass at $250 is built for exactly that person.</p>
+          <p class="text-muted mt-4">If someone genuinely wants A+B they buy the Opening Weekend and Midweek passes separately at $195 total. Nobody is turned away, we simply do not print a card for it.</p>
+        </div>
+      </div>
+
+      <div class="glass p-6">
+        <p class="text-body">There is a platform reason too. <strong>Where Can We Dance has no bundle or add-on concept</strong>, so every span has to be its own ticket row on the page. Five pass cards plus three single-night types is already eight things to read before deciding. Nine is worse, and the ninth would sell to almost nobody.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Arbitrage -->
+  <section id="arbitrage" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Nothing undercuts the full week">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Every path to the same nights, priced</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">The arithmetic holds.</h2>
+
+      <div class="glass p-6 md:p-8 mb-6">
+        <div class="bar-chart">
+          <div class="bar-label">Full Week Pass</div><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div><div class="bar-total">$325</div>
+          <div class="bar-label">A + B + C bought apart</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-total">$345</div>
+          <div class="bar-label">Every single night, no classes</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-total">$345</div>
+          <div class="bar-label">Summit Pass</div><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><div class="bar-total">$250</div>
+          <div class="bar-label">B + C bought apart</div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><div class="bar-total">$260</div>
+          <div class="bar-label">Weekend Pass</div><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div><div class="bar-total">$150</div>
+          <div class="bar-label">Three weekend nights apart</div><div class="bar-track"><div class="bar-fill" style="width:52%"></div></div><div class="bar-total">$180</div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Every bundle wins</div>
+          <p class="text-body">Full week beats its parts by <strong>$20</strong>. Summit beats its parts by <strong>$10</strong>. Weekend Pass beats three separate nights by <strong>$30</strong> and adds the classes on top.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">The weeknight moved to $25</div>
+          <p class="text-body">At $20 the all-singles path lands at $320, which is <strong>five dollars under the full week</strong>, and only the classes rule holds the line. $25 restores a real $20 cushion. It also returns to the number in the superseded ladder.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">What to watch</div>
+          <p class="text-body">Every discount on a single night narrows these gaps. <strong>Do not discount single nights.</strong> Discount the passes if anything, because that is the direction that keeps the ladder coherent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Single nights -->
+  <section id="nights" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Single nights">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">A different product for a different audience</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Single nights are social only.</h2>
+
+      <div class="glass p-5 md:p-7 overflow-x-auto mb-6">
+        <table style="width:100%;border-collapse:collapse;font-size:0.86rem">
+          <thead><tr style="border-bottom:1px solid rgba(230,220,203,0.18)">
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Night type</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Which nights</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Advance</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">At the door</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Halloween</strong></td><td style="padding:0.5rem;color:#c9bda9">Sat Oct 31</td><td style="padding:0.5rem;color:#e5b95a"><strong>$40</strong></td><td style="padding:0.5rem;color:#c9bda9">$55</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Weekend night</strong></td><td style="padding:0.5rem;color:#c9bda9">Nov 6, 7, 8</td><td style="padding:0.5rem;color:#e5b95a"><strong>$60</strong></td><td style="padding:0.5rem;color:#c9bda9">$80</td></tr>
+            <tr><td style="padding:0.5rem"><strong>Weeknight</strong></td><td style="padding:0.5rem;color:#c9bda9">Nov 1 to Nov 5</td><td style="padding:0.5rem;color:#e5b95a"><strong>$25</strong></td><td style="padding:0.5rem;color:#c9bda9">$35</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5 mb-6">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Two audiences, two products</div>
+          <p class="text-body">Roughly <strong>70% of the waitlist is travelling in</strong>, 30 flying and 10 driving, against only nine Austin locals. Someone who has already sunk $400 to $800 in flights and lodging is not buying a single Tuesday. The passes are for them.</p>
+          <p class="text-muted mt-4">Single nights are for the Kiz ATX group, 787 members deep, who decide on the day. That is community access and walk-up revenue, not the core business.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Run the door, and hold seats back for it</div>
+          <p class="text-body">The door is roughly <strong>20 to 35% above advance</strong>, which teaches the market that waiting costs money and pulls sales forward. Door cash is also the live contingency fund.</p>
+          <p class="text-muted mt-4">Hold back roughly <strong>15 spots per marquee night</strong> so a walk-up crowd cannot overfill the room. On the platform this means capping the public tier low and taking walk-ups through the organiser's manual order path.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Founding Ten -->
+  <section id="founding" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The Founding Ten">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Quantity and time, closing on whichever comes first</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Ten seats at $199.</h2>
+
+      <div class="glass p-5 md:p-7 overflow-x-auto mb-6">
+        <table style="width:100%;border-collapse:collapse;font-size:0.86rem">
+          <thead><tr style="border-bottom:1px solid rgba(230,220,203,0.18)">
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Tier</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Price</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Cap</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Window</th>
+            <th style="text-align:left;padding:0.55rem 0.5rem;color:#c9bda9">Closes when</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Founding Ten</strong></td><td style="padding:0.5rem;color:#e5b95a"><strong>$199</strong></td><td style="padding:0.5rem;color:#e5b95a"><strong>10</strong></td><td style="padding:0.5rem;color:#c9bda9">Launch + 7 days</td><td style="padding:0.5rem;color:#c9bda9">10 sold <strong>or</strong> day 7</td></tr>
+            <tr style="border-bottom:1px solid rgba(230,220,203,0.07)"><td style="padding:0.5rem"><strong>Early Bird</strong></td><td style="padding:0.5rem">$275</td><td style="padding:0.5rem;color:#c9bda9">15</td><td style="padding:0.5rem;color:#c9bda9">Day 7 to Oct 1</td><td style="padding:0.5rem;color:#c9bda9">15 sold <strong>or</strong> Oct 1</td></tr>
+            <tr><td style="padding:0.5rem"><strong>Standard</strong></td><td style="padding:0.5rem">$325</td><td style="padding:0.5rem;color:#c9bda9">none</td><td style="padding:0.5rem;color:#c9bda9">Oct 1 to Oct 30</td><td style="padding:0.5rem;color:#c9bda9">Event opens</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 mb-6">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Why $199 and not $275</div>
+          <p class="text-body">$199 reads as a launch number rather than a discount. The early bird already exists at $275, so the founding tier has to be a different kind of thing, not a slightly better version of the same thing.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">What it costs</div>
+          <p class="text-body">Roughly <strong>$760</strong> against selling those ten at the early bird price. That is the whole exposure, and it buys a full room at launch and ten people who tell the story for us.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Status, not just price</div>
+          <p class="text-body">Named on the printed programme and on signage, and first refusal on 2027 at Year 1 pricing. The recognition costs nothing and it is what makes the tier repeatable next year.</p>
+        </div>
+      </div>
+
+      <div class="glass p-6">
+        <div class="eyebrow mb-3" style="color:#e08475">The honest caveat</div>
+        <p class="text-body"><strong>The waitlist survey never captured price tolerance.</strong> $199 is a considered guess, not a measured number. A one-question follow-up to the 57 signups would settle it, takes an hour to build, and <strong>needs no venue</strong>. It is the highest-value action available right now. If it comes back showing comfort at $400 and above, this whole ladder should be revisited before anything locks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Sequence -->
+  <section id="sequence" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="On-sale sequence">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Everything is relative to the venue signature</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">How sales open.</h2>
+
+      <div class="glass p-6 md:p-8 mb-6">
+        <ol class="ask-list">
+          <li><span class="marker">0</span><div class="ask-body"><strong>Venue signs.</strong> The gate. No ticket sales and no major announcements before this, and both Saturdays are still open. Every asset below is built and staged in advance so the on-sale is a switch, not a project.</div></li>
+          <li><span class="marker">1</span><div class="ask-body"><strong>Day 0 · the 39 go first.</strong> The Founding Ten tier goes live <em>hidden</em>, unlocked by an access code on a link. That link goes only to the committed waitlist names. They get 48 hours alone with the ten seats.</div></li>
+          <li><span class="marker">2</span><div class="ask-body"><strong>Day 2 · public launch.</strong> The same tier is unhidden. Whatever founding seats are left go to the multi-channel blast. The page shows a live count of seats remaining.</div></li>
+          <li><span class="marker">3</span><div class="ask-body"><strong>Day 7 or sell-out · Early Bird takes over.</strong> The card advances to $275 on its own. Nothing has to be switched by hand, and no buyer ever sees a dead tier.</div></li>
+          <li><span class="marker">4</span><div class="ask-body"><strong>Oct 1 · Standard at $325.</strong> Roughly four weeks of run-up at the full price, which is where most of the volume should land.</div></li>
+          <li><span class="marker">5</span><div class="ask-body"><strong>Oct 30 · advance closes, door opens.</strong> Door pricing runs 20 to 35% above advance, on the seats deliberately held back.</div></li>
+        </ol>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Refund guarantee on the founding seats</div>
+          <p class="text-body">Full refund if the venue or the programmed nights change materially. It costs nothing if we deliver, and it is the honest answer to asking someone to buy before the room is certain. The refund policy is captured on every order at checkout.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Three platform fixes come first</div>
+          <p class="text-body">Abandoned carts currently hold seats forever, the seats-remaining badge shows capacity rather than what is left, and the capacity check has a gap two simultaneous buyers can slip through. <strong>On a ten-seat tier the first two will bite.</strong> All three are small and all three ship before on-sale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Cohort -->
+  <section id="cohort" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="The Evokeez cohort">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Outside the paid ladder entirely</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">The cohort does not buy tickets.</h2>
+
+      <div class="grid md:grid-cols-2 gap-5 mb-6">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">How they get in</div>
+          <p class="text-body">A <strong>hidden tier at zero cost, capped at 25</strong>, unlocked by a single access code. Laurent holds the code and passes it to the cohort. They never see the public pricing page and nothing they do touches the paid inventory.</p>
+          <ul class="text-body mt-4" style="line-height:1.9">
+            <li>Festival access is part of the Evokeez package</li>
+            <li>Housing and some group meals covered</li>
+            <li>Flights on Evokeez</li>
+          </ul>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">Why it is modelled this way</div>
+          <p class="text-body">The cohort is <strong>cost, not revenue.</strong> Keeping them on a separate free tier means the revenue model stays honest and every number on the next slide describes only the 100 paying attendees.</p>
+          <p class="text-muted mt-4">It also gives us a clean headcount for the room. 100 paying plus roughly 25 cohort is <strong>~125 in the room</strong>, which is the figure every venue conversation is built on.</p>
+        </div>
+      </div>
+
+      <div class="glass p-6">
+        <p class="text-body">Cohort package pricing is coordinated through Laurent and is <strong>not public</strong>. Nothing about it appears on the ticketing page, in the ladder, or in any marketing. The hidden tier is purely the mechanism for getting 25 people through the door with a check-in code each.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Revenue -->
+  <section id="revenue" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Revenue at 100 paying">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">100 paying, cohort excluded</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">What the ladder returns.</h2>
+
+      <div class="glass p-6 md:p-8 mb-6">
+        <div class="bar-chart">
+          <div class="bar-label">Conservative / pass-light mix</div><div class="bar-track"><div class="bar-fill" style="width:77%"></div></div><div class="bar-total">$15,100</div>
+          <div class="bar-label">Base / planning number</div><div class="bar-track"><div class="bar-fill" style="width:87%"></div></div><div class="bar-total">$17,100</div>
+          <div class="bar-label">Strong / full-week heavy</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-total">$19,600</div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 mb-6">
+        <div class="stat-tile">
+          <div class="label">Planning number</div>
+          <div class="value gold">$17.1k</div>
+          <div class="sub">up ~$1,000 on the old ladder</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Grant in hand</div>
+          <div class="value">$40k</div>
+          <div class="sub">$20k already received</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Cost estimate</div>
+          <div class="value">$38 to 46k</div>
+          <div class="sub">against ~$57k available</div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">The block passes pay for themselves</div>
+          <p class="text-body">Adding the Summit, Midweek and Opening Weekend passes lifts the planning number roughly <strong>$1,000</strong>, because they convert people who would otherwise have bought two or three single nights, or nothing at all.</p>
+        </div>
+        <div class="glass p-6">
+          <div class="eyebrow mb-3">The grant carries the event either way</div>
+          <p class="text-body">Price is a positioning decision, not cost recovery. If the venue lands at $11,000 instead of $7,000 that moves the housing cap, not the ticket price. <strong>Against an oversubscribed waitlist, underpricing and filling the room beats overpricing and running at 60.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Decide -->
+  <section id="decide" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="What we need to decide">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Open before anything locks</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Open questions.</h2>
+
+      <div class="glass p-6 md:p-8 mb-6">
+        <ol class="ask-list">
+          <li><span class="marker">1</span><div class="ask-body"><strong>Does $199 sit right as the founding number?</strong> It is a 63% step up to the $325 standard, which is steep. $225 is the safer version and costs $260 less in total exposure.</div></li>
+          <li><span class="marker">2</span><div class="ask-body"><strong>Run the price-tolerance survey now.</strong> One question to the 57 waitlist signups, no venue required. Add lead / follow / switch as a second question, because that was never captured either and it drives room balance.</div></li>
+          <li><span class="marker">3</span><div class="ask-body"><strong>Confirm the Summit Pass is the right second product.</strong> It assumes a real segment that cannot make Halloween but can arrive Monday. Laurent will know whether the Paris side sees that pattern too.</div></li>
+          <li><span class="marker">4</span><div class="ask-body"><strong>Does the Opening Weekend Pass bundle the Sunday?</strong> Currently it covers Halloween plus the Sunday evening block. If Sunday stays a chill day with a light programme, the pass is closer to $65 than $85.</div></li>
+          <li><span class="marker">5</span><div class="ask-body"><strong>Agree the cohort cap at 25.</strong> The hidden tier needs a fixed number, and the room maths at ~125 depends on it not drifting upward.</div></li>
+          <li><span class="marker">6</span><div class="ask-body"><strong>Visitor origin has nowhere to go.</strong> The platform captures no city or country, which the Elevate grant report needs. Interim answer is exporting billing country from Stripe. Worth knowing before the report is due Nov 30.</div></li>
+        </ol>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <span class="chip internal">Nothing here is locked</span>
+        <span class="chip">Buyer pays fees: $199 is about $215 out the door</span>
+        <span class="chip">Gate still holds: no on-sale until a venue signs</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Log -->
+  <section id="log" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-24" data-title="Update log">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">Change history</div>
+      <h2 class="h-display text-[clamp(1.75rem,4vw,2.75rem)] mb-8">Update log.</h2>
+      <div class="glass p-6 md:p-8">
+        <ul class="ask-list">
+          <li><span class="marker">·</span><div class="ask-body"><strong>2026-09-01 · rev 1.</strong> Deck created. Pass architecture rebuilt around the three-block shape of the run rather than a single full-week-plus-weekend split. Five products defined: Full Week, Summit (B+C), Weekend, Midweek and Opening Weekend. <strong>A+B deliberately not built</strong>, on the reasoning that nobody travels for the quiet half and skips the marquee weekend, and that every extra product is another arbitrage path to police on a platform with no bundle support. Arbitrage checked in both directions: full week beats its parts by $20, Summit by $10, Weekend Pass by $30 against three separate nights. <strong>Weeknight single moved from $20 back to $25</strong>, because at $20 the all-singles path came in five dollars under the full week. Founding Ten defined at $199, capped at 10 and timed at seven days, closing on whichever comes first, with a refund guarantee attached and a 48-hour head start for the 39 committed waitlist names via a hidden tier and access code. Evokeez cohort modelled as a hidden free tier capped at 25, kept out of the revenue model. Revenue restated at $15,100 / $17,100 / $19,600 on 100 paying, roughly $1,000 above the previous ladder. Price tolerance flagged as still unmeasured, and the survey named as the highest-value action available without a venue.</div></li>
+        </ul>
+      </div>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <span class="chip internal">Internal · Working proposal</span>
+        <span class="chip">Full detail: ticketing-pricing.md · Armature</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    var sections = Array.from(document.querySelectorAll('main section.snap-slide'));
+    var progressBar = document.getElementById('progressBar');
+    var slideIdx = document.getElementById('slideIdx');
+    var slideTotal = document.getElementById('slideTotal');
+    var sideNavList = document.getElementById('sideNavList');
+    var drawerList = document.getElementById('drawerList');
+    var drawer = document.getElementById('drawer');
+    var menuBtn = document.getElementById('menuBtn');
+
+    if (slideTotal) slideTotal.textContent = String(sections.length).padStart(2, '0');
+
+    // Build nav lists
+    sections.forEach(function (s, i) {
+      var id = s.id;
+      var title = s.getAttribute('data-title') || id;
+      var li = document.createElement('li');
+      li.dataset.section = id;
+      var a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = (String(i + 1).padStart(2, '0')) + ' · ' + title;
+      li.appendChild(a);
+      sideNavList.appendChild(li);
+
+      var da = document.createElement('a');
+      da.href = '#' + id;
+      da.className = 'drawer-item';
+      da.dataset.section = id;
+      da.textContent = title;
+      da.addEventListener('click', function () {
+        drawer.hidden = true;
+        menuBtn.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+      drawerList.appendChild(da);
+    });
+
+    // IntersectionObserver for active state + counter + progress
+    var current = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var idx = sections.indexOf(entry.target);
+        if (idx < 0) return;
+        current = idx;
+        // counter
+        slideIdx.textContent = String(idx + 1).padStart(2, '0');
+        // progress bar
+        var pct = sections.length > 1 ? (idx / (sections.length - 1)) : 1;
+        progressBar.style.transform = 'scaleX(' + pct + ')';
+        // side nav active
+        Array.from(sideNavList.children).forEach(function (li) {
+          li.classList.toggle('nav-active', li.dataset.section === entry.target.id);
+        });
+        Array.from(drawerList.children).forEach(function (a) {
+          a.classList.toggle('is-active', a.dataset.section === entry.target.id);
+        });
+      });
+    }, { threshold: [0.35, 0.55] });
+    sections.forEach(function (s) { io.observe(s); });
+
+    // Mobile drawer toggle
+    if (menuBtn) {
+      menuBtn.addEventListener('click', function () {
+        var open = drawer.hidden === false;
+        drawer.hidden = open;
+        menuBtn.classList.toggle('is-open', !open);
+        menuBtn.setAttribute('aria-expanded', String(!open));
+      });
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', function (e) {
+      if (e.target && ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(e.target.tagName) >= 0) return;
+      var key = e.key;
+      var target = null;
+      if (key === 'ArrowDown' || key === ' ' || key === 'PageDown') { target = sections[Math.min(current + 1, sections.length - 1)]; e.preventDefault(); }
+      else if (key === 'ArrowUp' || key === 'PageUp') { target = sections[Math.max(current - 1, 0)]; e.preventDefault(); }
+      else if (key === 'Home') { target = sections[0]; e.preventDefault(); }
+      else if (key === 'End') { target = sections[sections.length - 1]; e.preventDefault(); }
+      else if (key === 'Escape' && !drawer.hidden) { drawer.hidden = true; menuBtn.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+</script>
+
+</body>
+</html>
