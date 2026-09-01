@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Blog cover — 26 to 61 chart overlay</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --electric: #4fc3f7;
+      --electric-glow: rgba(79, 195, 247, 0.55);
+      --ivory: #f5f7fa;
+      --muted: rgba(245, 247, 250, 0.62);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; width: 1536px; height: 864px; overflow: hidden; background: #0d1520; }
+
+    .cover {
+      width: 1536px;
+      height: 864px;
+      position: relative;
+      overflow: hidden;
+      background: #0d1520;
+    }
+
+    .bg-image {
+      position: absolute;
+      inset: 0;
+      background-image: url('v03.png');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    /* soft darken over the right side (spanning chart height) so trajectory reads clearly */
+    .skyline-darken {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 860px;
+      height: 700px;
+      background: linear-gradient(to top left,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.40) 30%,
+        rgba(0, 0, 0, 0.22) 55%,
+        rgba(0, 0, 0, 0.08) 80%,
+        transparent 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* chart overlay — right-side, tall, peak reaches subtitle-line height */
+    .chart-wrap {
+      position: absolute;
+      right: 60px;
+      top: 210px;
+      bottom: 200px;
+      width: 780px;
+      z-index: 5;
+    }
+
+    svg.chart {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="bg-image"></div>
+    <div class="skyline-darken"></div>
+
+    <div class="chart-wrap">
+      <svg class="chart" viewBox="0 0 780 550" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <!-- glow filter for the line and dots -->
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="7" result="blur1"/>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur2"/>
+            <feMerge>
+              <feMergeNode in="blur1"/>
+              <feMergeNode in="blur2"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <!-- gradient under the line (soft fill) -->
+          <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4fc3f7" stop-opacity="0.32"/>
+            <stop offset="60%" stop-color="#4fc3f7" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#4fc3f7" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <!-- soft baseline / axis line (muted, sits along APR level) -->
+        <line x1="30" y1="490" x2="760" y2="490"
+              stroke="rgba(245,247,250,0.15)" stroke-width="1"
+              stroke-dasharray="2 4"/>
+
+        <!-- area under curve (soft gradient fill) -->
+        <path d="M 40 490
+                 L 40 490
+                 L 280 424
+                 L 520 293
+                 L 740 30
+                 L 740 490
+                 L 40 490 Z"
+              fill="url(#fillGrad)"/>
+
+        <!-- growth line: clean diagonal segments with rounded joins -->
+        <polyline points="40,490 280,424 520,293 740,30"
+              fill="none"
+              stroke="#4fc3f7"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              filter="url(#glow)"/>
+
+        <!-- data points -->
+        <!-- APR: 26 -->
+        <circle cx="40" cy="490" r="8" fill="#4fc3f7" filter="url(#glow)"/>
+        <circle cx="40" cy="490" r="3.5" fill="#f5f7fa"/>
+
+        <!-- MAY: 31 -->
+        <circle cx="280" cy="424" r="8" fill="#4fc3f7" filter="url(#glow)"/>
+        <circle cx="280" cy="424" r="3.5" fill="#f5f7fa"/>
+
+        <!-- JUN: 41 -->
+        <circle cx="520" cy="293" r="8" fill="#4fc3f7" filter="url(#glow)"/>
+        <circle cx="520" cy="293" r="3.5" fill="#f5f7fa"/>
+
+        <!-- JUL: 61 — the peak, larger + brighter -->
+        <circle cx="740" cy="30" r="13" fill="#4fc3f7" filter="url(#glow)"/>
+        <circle cx="740" cy="30" r="6" fill="#f5f7fa"/>
+
+        <!-- value labels above dots -->
+        <text x="40" y="470" text-anchor="middle"
+              font-family="Rubik, sans-serif" font-weight="700" font-size="24"
+              fill="#f5f7fa">26</text>
+        <text x="280" y="404" text-anchor="middle"
+              font-family="Rubik, sans-serif" font-weight="700" font-size="24"
+              fill="#f5f7fa">31</text>
+        <text x="520" y="273" text-anchor="middle"
+              font-family="Rubik, sans-serif" font-weight="700" font-size="26"
+              fill="#f5f7fa">41</text>
+        <text x="740" y="0" text-anchor="middle"
+              font-family="Rubik, sans-serif" font-weight="800" font-size="44"
+              fill="#4fc3f7" filter="url(#glow)">61</text>
+
+        <!-- month labels below baseline -->
+        <text x="40" y="525" text-anchor="middle"
+              font-family="JetBrains Mono, monospace" font-weight="500" font-size="13"
+              letter-spacing="2" fill="rgba(245,247,250,0.62)">APR</text>
+        <text x="280" y="525" text-anchor="middle"
+              font-family="JetBrains Mono, monospace" font-weight="500" font-size="13"
+              letter-spacing="2" fill="rgba(245,247,250,0.62)">MAY</text>
+        <text x="520" y="525" text-anchor="middle"
+              font-family="JetBrains Mono, monospace" font-weight="500" font-size="13"
+              letter-spacing="2" fill="rgba(245,247,250,0.62)">JUN</text>
+        <text x="740" y="525" text-anchor="middle"
+              font-family="JetBrains Mono, monospace" font-weight="600" font-size="14"
+              letter-spacing="2" fill="rgba(79,195,247,0.95)">JUL</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

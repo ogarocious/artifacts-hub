@@ -1,0 +1,2025 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Workflow Example · Ogarocious</title>
+<meta name="description" content="A worked example of AI-assisted recurring engagement planning: fifteen respondents, one interest form, translated into two scheduled sessions with role mix, budget, and topic all pre-solved." />
+<link rel="canonical" href="https://slides.ogarocious.com/ai-workflow-example/" />
+<meta name="theme-color" content="#1f1b15" />
+
+<meta property="og:site_name" content="Ogarocious" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://slides.ogarocious.com/ai-workflow-example/" />
+<meta property="og:title" content="AI Workflow Example · Ogarocious" />
+<meta property="og:description" content="A worked example of AI-assisted recurring engagement planning: fifteen respondents, one interest form, translated into two scheduled sessions with role mix, budget, and topic all pre-solved." />
+<meta property="og:image" content="https://slides.ogarocious.com/ai-workflow-example/og.png" />
+<meta property="og:image:alt" content="AI workflow example: fifteen respondents, two recommended session dates. Role mix, break-even math, and topic ranking pre-solved per room." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Workflow Example · Ogarocious" />
+<meta name="twitter:description" content="A worked example of AI-assisted recurring engagement planning: fifteen respondents, one interest form, translated into two scheduled sessions with role mix, budget, and topic all pre-solved." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/ai-workflow-example/og.png" />
+
+<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png" />
+
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AI Workflow Example — Recurring Engagement Planning",
+  "description": "A worked example of AI-assisted recurring engagement planning: fifteen respondents, one interest form, translated into two scheduled sessions with role mix, budget, and topic all pre-solved.",
+  "url": "https://slides.ogarocious.com/ai-workflow-example/",
+  "image": "https://slides.ogarocious.com/ai-workflow-example/og.png",
+  "author": { "@type": "Person", "name": "Charles Ogar", "url": "https://ogarocious.com" },
+  "publisher": { "@type": "Organization", "name": "Ogarocious", "url": "https://ogarocious.com" },
+  "datePublished": "2026-08-04"
+}</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: { 950: '#0a0705', 900: '#0f0b08', 800: '#1a1410', 700: '#1f1b15', 600: '#312d23' },
+          ivory: { 50: '#f5eee0', 100: '#d8d1c2', 200: '#b5ae9f', 300: '#8f8878' },
+          terracotta: {
+            50: '#fbeee6', 100: '#f4d5c0', 200: '#ebb99a', 300: '#e19c74',
+            400: '#da7f4e', 500: '#d4552b', 600: '#b84421', 700: '#952f0f',
+            800: '#732208', 900: '#4f1500',
+          },
+          slate: {
+            50: '#eaefef', 100: '#cddad9', 200: '#adbfbf', 300: '#8ba5a5',
+            400: '#7ba4a5', 500: '#669090', 600: '#4e7676', 700: '#3b5d5d',
+            800: '#2a4545', 900: '#1b2e2e',
+          },
+          ochre: { 50: '#faf1e0', 400: '#c99647', 500: '#b8843d', 600: '#996d31' },
+          sage:  { 50: '#e8eee9', 400: '#5f7d64', 500: '#4a6b4e', 600: '#3a563c' },
+          coral: { 50: '#fdeae4', 400: '#eb6f4f', 500: '#e85d3c', 600: '#c94826' },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body {
+    background-color: #1f1b15;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.83  0 0 0 0 0.33  0 0 0 0 0.17  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      linear-gradient(180deg, #0f0b08 0%, #1f1b15 50%, #0f0b08 100%);
+    background-blend-mode: soft-light, normal;
+    min-height: 100vh;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+
+  .text-body   { color: rgba(245, 238, 224, 0.90); }
+  .text-dimmed { color: rgba(245, 238, 224, 0.72); }
+  .text-muted  { color: rgba(245, 238, 224, 0.55); }
+
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #d4552b;
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 51;
+    pointer-events: none;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(26, 20, 16, 0.55);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(212, 85, 43, 0.14);
+    box-shadow:
+      0 1px 0 rgba(245, 238, 224, 0.04) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(212, 85, 43, 0.28); }
+  .glass.glass-tech { border-color: rgba(123, 164, 165, 0.32); }
+  .glass.glass-tech:hover { border-color: rgba(123, 164, 165, 0.52); }
+
+  .ember-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 560px at 22% 42%, rgba(212, 85, 43, 0.22), rgba(212, 85, 43, 0.06) 45%, transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ember-glow-cta {
+    background: radial-gradient(ellipse 800px 500px at 78% 60%, rgba(212, 85, 43, 0.20), rgba(184, 132, 61, 0.08) 42%, transparent 70%);
+  }
+
+  .text-shadow-warm {
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 8px 30px rgba(212, 85, 43, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+
+  :focus-visible {
+    outline: 2px solid #d4552b;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .nav-dot { transition: background-color 180ms ease; }
+  .nav-active .nav-dot { background: #d4552b; }
+  .nav-active .nav-label { color: #f5eee0; }
+
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07); color: #f5eee0;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07);
+    color: #f5eee0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(212, 85, 43, 0.42);
+    background: rgba(212, 85, 43, 0.08);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+
+  .accent-rule {
+    display: inline-block; width: 40px; height: 2px;
+    background: #d4552b; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+  .accent-rule-tech { background: #7ba4a5; }
+
+  .cta-btn-primary {
+    background: #d4552b; color: #0f0b08; font-weight: 600;
+    padding: 0.85rem 1.4rem; border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  }
+  .cta-btn-primary:hover { background: #da7f4e; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); }
+
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  .drawer {
+    position: fixed;
+    top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    background: rgba(10, 7, 5, 0.72);
+    backdrop-filter: blur(4px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(15, 11, 8, 0.985);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .drawer-list {
+    border-left: 1px solid rgba(123, 164, 165, 0.28);
+    padding-left: 1rem;
+    margin: 0;
+    list-style: none;
+  }
+  .drawer-item {
+    display: block;
+    padding: 0.85rem 0.9rem;
+    margin-left: -0.5rem;
+    color: #f5eee0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.3;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .drawer-item:hover { color: #d4552b; }
+  .drawer-item.is-active {
+    background: rgba(212, 85, 43, 0.14);
+    color: #d4552b;
+  }
+  .drawer-item:focus-visible {
+    outline: none;
+    background: rgba(212, 85, 43, 0.10);
+    color: #d4552b;
+  }
+
+  /* Data-viz specifics */
+  .slot-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 2.2fr);
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    background: rgba(26, 20, 16, 0.55);
+    border: 1px solid rgba(123, 164, 165, 0.18);
+  }
+  .slot-row.is-winner {
+    border-color: rgba(212, 85, 43, 0.55);
+    background: rgba(212, 85, 43, 0.06);
+  }
+  .slot-label {
+    font-weight: 500;
+    color: rgba(245, 238, 224, 0.90);
+    font-size: 0.95rem;
+  }
+  .slot-count {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #7ba4a5;
+    text-align: right;
+    min-width: 2.75rem;
+  }
+  .slot-row.is-winner .slot-count { color: #d4552b; }
+  .slot-bar {
+    height: 6px;
+    background: rgba(123, 164, 165, 0.10);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .slot-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(123, 164, 165, 0.55), rgba(123, 164, 165, 0.9));
+    border-radius: 999px;
+  }
+  .slot-row.is-winner .slot-bar-fill {
+    background: linear-gradient(90deg, rgba(212, 85, 43, 0.65), rgba(218, 127, 78, 0.95));
+  }
+  @media (max-width: 700px) {
+    .slot-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    .slot-count { text-align: left; }
+  }
+
+  .stat-tile {
+    padding: 1.2rem 1.35rem;
+    border-radius: 10px;
+    border: 1px solid rgba(123, 164, 165, 0.22);
+    background: rgba(26, 20, 16, 0.55);
+  }
+  .stat-tile h4 {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0 0 0.75rem;
+  }
+  .stat-tile dl { margin: 0; }
+  .stat-tile .row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed rgba(123, 164, 165, 0.12);
+    font-size: 0.95rem;
+  }
+  .stat-tile .row:last-child { border-bottom: 0; }
+  .stat-tile .row dt { color: rgba(245, 238, 224, 0.85); }
+  .stat-tile .row dd { margin: 0; font-family: "JetBrains Mono", monospace; color: #d4552b; font-weight: 500; }
+
+  .rec-card {
+    padding: 1.75rem;
+    border-radius: 14px;
+    background: rgba(26, 20, 16, 0.7);
+    border: 1px solid rgba(212, 85, 43, 0.32);
+    position: relative;
+    overflow: hidden;
+  }
+  .rec-card .rec-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+  }
+  .rec-card .rec-date {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    color: #f5eee0;
+    margin: 0.4rem 0 0.25rem;
+    line-height: 1.15;
+  }
+  .rec-card .rec-time {
+    color: #d4552b;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  .rec-card .rec-meta {
+    margin-top: 1.15rem;
+    color: rgba(245, 238, 224, 0.72);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .rec-card .rec-meta strong {
+    color: #da7f4e;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+  }
+
+  /* Per-slot roster */
+  .roster-col-title {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0 0 0.9rem;
+  }
+  .roster-slot {
+    padding: 0.95rem 1.1rem 1rem;
+    border-radius: 10px;
+    background: rgba(26, 20, 16, 0.55);
+    border: 1px solid rgba(123, 164, 165, 0.18);
+    margin-bottom: 0.65rem;
+  }
+  .roster-slot.is-winner {
+    border-color: rgba(212, 85, 43, 0.55);
+    background: rgba(212, 85, 43, 0.06);
+  }
+  .roster-slot.is-out {
+    border-color: rgba(245, 238, 224, 0.12);
+    background: rgba(15, 11, 8, 0.55);
+  }
+  .roster-slot-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.65rem;
+  }
+  .roster-slot-label {
+    font-weight: 500;
+    color: rgba(245, 238, 224, 0.92);
+    font-size: 0.95rem;
+  }
+  .roster-slot-count {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem;
+    color: #7ba4a5;
+  }
+  .roster-slot.is-winner .roster-slot-count { color: #d4552b; }
+  .roster-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .roster-chip {
+    display: inline-flex; align-items: baseline; gap: 0.4rem;
+    padding: 0.3rem 0.6rem 0.32rem;
+    border-radius: 999px;
+    border: 1px solid rgba(123, 164, 165, 0.24);
+    background: rgba(123, 164, 165, 0.07);
+    font-size: 0.82rem;
+    color: rgba(245, 238, 224, 0.92);
+    line-height: 1;
+  }
+  .roster-chip .rc-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: #8f8878;
+    text-transform: uppercase;
+  }
+  .roster-chip.role-lead   { border-color: rgba(212, 85, 43, 0.55); background: rgba(212, 85, 43, 0.10); }
+  .roster-chip.role-lead   .rc-tag { color: #da7f4e; }
+  .roster-chip.role-both   { border-color: rgba(201, 150, 71, 0.50); background: rgba(201, 150, 71, 0.08); }
+  .roster-chip.role-both   .rc-tag { color: #c99647; }
+  .roster-legend {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(245, 238, 224, 0.72);
+    text-transform: uppercase;
+  }
+  .roster-legend span {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid rgba(123, 164, 165, 0.22);
+  }
+  .roster-legend .dot { width: 8px; height: 8px; border-radius: 999px; }
+  .roster-legend .dot-lead { background: #d4552b; }
+  .roster-legend .dot-both { background: #c99647; }
+  .roster-legend .dot-follow { background: #7ba4a5; }
+
+  /* Primary/secondary role ratio */
+  .ratio-rule {
+    display: inline-block;
+    padding: 0.75rem 1.15rem;
+    border-radius: 8px;
+    border: 1px solid rgba(123, 164, 165, 0.28);
+    background: rgba(123, 164, 165, 0.06);
+    font-size: 0.9rem;
+    color: rgba(245, 238, 224, 0.85);
+    margin-bottom: 1.75rem;
+    max-width: 46rem;
+    line-height: 1.5;
+  }
+  .ratio-rule strong {
+    color: #7ba4a5;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .ratio-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    max-width: 60rem;
+  }
+  .ratio-card {
+    padding: 1.25rem 1.35rem 1.35rem;
+    border-radius: 12px;
+    background: rgba(26, 20, 16, 0.55);
+    border: 1px solid rgba(212, 85, 43, 0.32);
+  }
+  .ratio-card.is-met {
+    border-color: rgba(90, 125, 100, 0.55);
+    background: rgba(90, 125, 100, 0.06);
+  }
+  .ratio-card-slot {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .ratio-gap {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    color: #d4552b;
+    font-size: 2.1rem;
+    line-height: 1.05;
+    margin: 0.55rem 0 0.15rem;
+  }
+  .ratio-card.is-met .ratio-gap { color: #5f7d64; }
+  .ratio-gap-caption {
+    color: rgba(245, 238, 224, 0.72);
+    font-size: 0.85rem;
+    margin: 0 0 0.9rem;
+    line-height: 1.35;
+  }
+  .ratio-math {
+    border-top: 1px dashed rgba(123, 164, 165, 0.22);
+    padding-top: 0.7rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 238, 224, 0.7);
+    line-height: 1.75;
+  }
+  .ratio-math .label { color: #7ba4a5; }
+  .ratio-math .now { color: rgba(245, 238, 224, 0.88); }
+
+  /* Rotation viz */
+  .rotation-section { margin-top: 2.25rem; max-width: 60rem; }
+  .rotation-header {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0 0 0.9rem;
+  }
+  .rotation-row {
+    display: grid;
+    grid-template-columns: minmax(160px, 200px) 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    background: rgba(26, 20, 16, 0.45);
+    border: 1px solid rgba(123, 164, 165, 0.16);
+    margin-bottom: 0.5rem;
+  }
+  .rotation-row-label {
+    font-size: 0.88rem;
+    color: rgba(245, 238, 224, 0.92);
+  }
+  .rotation-icons {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    align-items: center;
+  }
+  .rotation-pair {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(95, 125, 100, 0.14);
+    border: 1px solid rgba(95, 125, 100, 0.45);
+  }
+  .rotation-pair::before,
+  .rotation-pair::after {
+    content: '';
+    width: 8px; height: 8px; border-radius: 999px;
+  }
+  .rotation-pair::before { background: #d4552b; }
+  .rotation-pair::after  { background: #7ba4a5; }
+  .rotation-waiting {
+    display: inline-block;
+    width: 14px; height: 14px; border-radius: 999px;
+    background: rgba(201, 150, 71, 0.20);
+    border: 1.5px dashed rgba(201, 150, 71, 0.85);
+  }
+  .rotation-summary {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 238, 224, 0.7);
+    white-space: nowrap;
+  }
+  .rotation-legend {
+    display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+    margin-top: 1rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(245, 238, 224, 0.6);
+    text-transform: uppercase;
+  }
+  .rotation-legend > span { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+  @media (max-width: 700px) {
+    .rotation-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    .rotation-summary { white-space: normal; }
+  }
+
+  /* Pending / shut-out tiles */
+  .pending-tile {
+    padding: 1.1rem 1.25rem 1.25rem;
+    border-radius: 10px;
+    background: rgba(26, 20, 16, 0.55);
+    border: 1px solid rgba(123, 164, 165, 0.22);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .pending-tile.is-reaching-out {
+    border-color: rgba(212, 85, 43, 0.42);
+    background: rgba(212, 85, 43, 0.06);
+  }
+  .pending-tile.is-shutout {
+    border-color: rgba(201, 150, 71, 0.36);
+    background: rgba(201, 150, 71, 0.05);
+  }
+  .pending-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .pending-tile.is-reaching-out .pending-tag { color: #da7f4e; }
+  .pending-tile.is-shutout .pending-tag { color: #c99647; }
+  .pending-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 600;
+    font-size: 1.75rem;
+    color: #f5eee0;
+    margin: 0;
+    line-height: 1.1;
+  }
+  .pending-detail {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: rgba(245, 238, 224, 0.65);
+    margin: 0.25rem 0 0;
+    letter-spacing: 0.04em;
+  }
+
+  /* Money slide */
+  .internal-chip {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px dashed rgba(201, 150, 71, 0.7);
+    background: rgba(201, 150, 71, 0.06);
+    border-radius: 4px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #c99647;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .internal-chip::before {
+    content: '';
+    width: 8px; height: 8px; border-radius: 999px; background: #c99647;
+  }
+  .money-card {
+    padding: 1.5rem 1.6rem 1.6rem;
+    border-radius: 14px;
+    background: rgba(26, 20, 16, 0.6);
+    border: 1px solid rgba(90, 125, 100, 0.42);
+  }
+  .money-card .money-slot-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .money-card .money-slot-date {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #f5eee0;
+    margin: 0.4rem 0 0.15rem;
+    line-height: 1.15;
+  }
+  .money-card .money-slot-sub {
+    color: rgba(245, 238, 224, 0.6);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    margin: 0 0 1.2rem;
+  }
+  .money-matrix {
+    display: grid;
+    grid-template-columns: minmax(120px, 1.5fr) 1fr 1fr;
+    background: rgba(15, 11, 8, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 164, 165, 0.16);
+  }
+  .money-cell {
+    padding: 0.75rem 0.85rem;
+    border-right: 1px solid rgba(123, 164, 165, 0.10);
+    border-bottom: 1px solid rgba(123, 164, 165, 0.10);
+    display: flex; align-items: center;
+  }
+  .money-cell:nth-child(3n) { border-right: none; }
+  .money-cell.is-last-row { border-bottom: none; }
+  .money-cell.is-header {
+    background: rgba(123, 164, 165, 0.08);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    justify-content: flex-end;
+  }
+  .money-cell.is-header.is-corner { justify-content: flex-start; }
+  .money-cell.is-row-label {
+    background: rgba(26, 20, 16, 0.4);
+    font-size: 0.88rem;
+    color: rgba(245, 238, 224, 0.88);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+  }
+  .money-cell.is-row-label .row-label-caption {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    color: rgba(245, 238, 224, 0.55);
+    letter-spacing: 0.04em;
+  }
+  .money-cell.is-value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #f5eee0;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0;
+    line-height: 1.15;
+  }
+  .money-cell.is-value.is-expected { color: #5f7d64; }
+  .money-cell .cell-hourly {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem;
+    color: rgba(245, 238, 224, 0.55);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-top: 3px;
+  }
+  .money-cell.is-value.is-expected .cell-hourly { color: rgba(95, 125, 100, 0.85); }
+  .money-breakeven {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 238, 224, 0.72);
+    margin: 0.9rem 0 0;
+    letter-spacing: 0.02em;
+  }
+  .money-breakeven strong { color: #7ba4a5; font-weight: 500; }
+  .money-total-card {
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    background: rgba(212, 85, 43, 0.06);
+    border: 1px solid rgba(212, 85, 43, 0.32);
+    max-width: 48rem;
+    margin-top: 1.5rem;
+  }
+  .money-total-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0 0 0.25rem;
+  }
+  .money-total-value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #f5eee0;
+    margin: 0;
+    line-height: 1.05;
+  }
+  .money-total-caption {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 238, 224, 0.65);
+    margin: 0.4rem 0 0;
+    letter-spacing: 0.02em;
+  }
+  .money-total-caption strong { color: #da7f4e; font-weight: 500; }
+
+  /* Money breakdown bars */
+  .breakdown-title {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 1.25rem 0 0.65rem;
+  }
+  .breakdown-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .breakdown-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: rgba(245, 238, 224, 0.75);
+  }
+  .breakdown-track {
+    position: relative;
+    height: 30px;
+    background: rgba(15, 11, 8, 0.45);
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+    border: 1px solid rgba(123, 164, 165, 0.14);
+  }
+  .breakdown-segment {
+    display: flex;
+    align-items: center;
+    padding: 0 0.55rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: rgba(15, 11, 8, 0.88);
+    font-weight: 500;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .breakdown-venue {
+    background: linear-gradient(90deg, rgba(201, 150, 71, 0.85), rgba(201, 150, 71, 0.7));
+    color: rgba(15, 11, 8, 0.9);
+  }
+  .breakdown-profit {
+    background: linear-gradient(90deg, rgba(95, 125, 100, 0.85), rgba(95, 125, 100, 0.95));
+    color: #f5eee0;
+  }
+  .breakdown-empty {
+    flex: 1;
+  }
+  .breakdown-legend {
+    display: flex; flex-wrap: wrap; gap: 0.75rem;
+    margin-top: 0.7rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(245, 238, 224, 0.6);
+    text-transform: uppercase;
+  }
+  .breakdown-legend > span { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .breakdown-legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
+  .breakdown-legend .swatch-venue { background: rgba(201, 150, 71, 0.85); }
+  .breakdown-legend .swatch-profit { background: rgba(95, 125, 100, 0.9); }
+
+  /* Ticket × Venue heatmap */
+  .heatmap-container { }
+  .heatmap-title {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    margin: 0 0 0.65rem;
+  }
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: minmax(66px, auto) repeat(4, minmax(0, 1fr));
+    gap: 2px;
+    background: rgba(15, 11, 8, 0.5);
+    padding: 2px;
+    border-radius: 6px;
+    border: 1px solid rgba(123, 164, 165, 0.14);
+  }
+  .heatmap-corner,
+  .heatmap-col-header,
+  .heatmap-row-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.5rem;
+    background: rgba(26, 20, 16, 0.7);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #7ba4a5;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .heatmap-corner {
+    font-size: 8.5px;
+    color: rgba(245, 238, 224, 0.5);
+    letter-spacing: 0.06em;
+  }
+  .heatmap-row-header {
+    justify-content: flex-end;
+  }
+  .heatmap-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.35rem;
+    gap: 2px;
+    min-height: 52px;
+    background: rgba(26, 20, 16, 0.4);
+  }
+  .heatmap-cell.is-tight  { background: rgba(201, 150, 71, 0.22); }
+  .heatmap-cell.is-fair   { background: rgba(201, 150, 71, 0.09); }
+  .heatmap-cell.is-strong { background: rgba(95, 125, 100, 0.22); }
+  .heatmap-cell .cell-profit {
+    font-family: "Rubik", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #f5eee0;
+    line-height: 1;
+  }
+  .heatmap-cell.is-strong .cell-profit { color: #a6c1aa; }
+  .heatmap-cell.is-tight  .cell-profit { color: #d4a76a; }
+  .heatmap-cell .cell-margin {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    color: rgba(245, 238, 224, 0.55);
+    letter-spacing: 0.02em;
+  }
+  .heatmap-legend {
+    display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center;
+    margin-top: 1rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(245, 238, 224, 0.6);
+    text-transform: uppercase;
+  }
+  .heatmap-legend > span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .heatmap-legend .swatch { width: 12px; height: 12px; border-radius: 2px; }
+  .heatmap-legend .swatch-tight  { background: rgba(201, 150, 71, 0.4);  border: 1px solid rgba(201, 150, 71, 0.6); }
+  .heatmap-legend .swatch-fair   { background: rgba(201, 150, 71, 0.14); border: 1px solid rgba(201, 150, 71, 0.28); }
+  .heatmap-legend .swatch-strong { background: rgba(95, 125, 100, 0.4);  border: 1px solid rgba(95, 125, 100, 0.6); }
+
+  @media (max-width: 700px) {
+    .heatmap-cell { padding: 0.35rem 0.25rem; min-height: 44px; gap: 1px; }
+    .heatmap-cell .cell-profit { font-size: 0.78rem; }
+    .heatmap-cell .cell-margin { font-size: 0.58rem; }
+    .heatmap-col-header,
+    .heatmap-row-header,
+    .heatmap-corner { font-size: 9px; padding: 0.3rem 0.25rem; }
+    .heatmap-grid { grid-template-columns: minmax(52px, auto) repeat(4, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body class="text-ivory-50 font-sans antialiased">
+
+<div id="progressBar" class="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-espresso-900/70 border-b border-terracotta-500/10">
+  <div class="max-w-[1400px] mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-2 group">
+      <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500 group-hover:shadow-[0_0_18px_rgba(212,85,43,0.7)] transition"></span>
+      <span class="font-display font-bold text-lg tracking-tight">Ogarocious</span>
+      <span class="text-dimmed text-xs">· AI Workflow Example</span>
+    </a>
+    <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
+      <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 8</span>
+      <span class="hidden md:inline">·</span>
+      <span class="hidden lg:inline" title="Timestamp of last data refresh"><span data-inject="updated">Updated Aug 4, 2026 · 9:15 AM CDT</span> · <span data-inject="rev">rev 1</span></span>
+      <span class="hidden lg:inline">·</span>
+      <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+      <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
+        <svg class="menu-hamburger" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 3h12M1 7h12M1 11h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="menu-close" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span id="menuLabel">MENU</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="sideNav" class="fixed top-0 left-0 h-screen w-[280px] hidden md:flex flex-col justify-between pt-20 pb-8 px-8 z-40 border-r border-terracotta-500/10 bg-espresso-900/60 backdrop-blur" aria-label="Sections">
+  <div>
+    <p class="text-[11px] text-slate-300 mb-4 font-medium">Sections</p>
+    <ul id="navList" class="space-y-3 text-sm"></ul>
+  </div>
+  <div class="text-[11px] text-muted leading-relaxed">
+    <p class="mb-2 font-medium text-dimmed">Ogarocious</p>
+    <p class="italic text-slate-300">Liberation Through Creation</p>
+    <p class="mt-3">Single HTML file. View source. Steal freely.</p>
+  </div>
+</nav>
+
+<div id="mobileMenu" class="drawer" role="dialog" aria-modal="true" aria-label="Sections" hidden>
+  <div class="drawer-panel">
+    <p class="drawer-label">Sections</p>
+    <ul id="mobileNavList" class="drawer-list"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll">
+
+  <!-- COVER -->
+  <section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
+    <!-- REGION:cover -->
+    <div class="ember-glow" aria-hidden="true"></div>
+    <h1 class="font-display font-extrabold text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
+      Fifteen respondents.<br/>
+      <span class="italic font-medium">Two dates.</span>
+    </h1>
+    <p class="mt-8 max-w-xl text-body text-lg leading-relaxed relative">
+      An interest form ran for two weeks. Fifteen respondents filled it out. This is what they said about the two candidate months, and which Saturday afternoon the recurring engagement should book.
+    </p>
+    <div class="mt-12 flex flex-wrap gap-3 text-xs relative">
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">15 responses</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">100% completion</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Updated Aug 4, 2026 · 9:15 AM CDT</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed font-mono">rev 1</span>
+    </div>
+    <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
+      <span class="kbd">Space</span> to advance
+    </div>
+  <!-- /REGION:cover -->
+  </section>
+
+  <!-- RECOMMENDATION -->
+  <section id="pick" data-title="The Pick" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
+    <!-- REGION:pick -->
+    <div class="ember-glow" aria-hidden="true"></div>
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm relative">The pick</h2>
+    <p class="text-dimmed mb-10 max-w-2xl relative">One late respondent filed morning-only availability and is shut out of both picked rooms, but joins the morning cohort. Date 1 evening still at 9 of 15; Date 2 evening at 10 of 15, the clearest majority in the signal.</p>
+    <div class="grid md:grid-cols-2 gap-5 max-w-4xl relative">
+      <div class="rec-card">
+        <span class="rec-tag">Month A</span>
+        <p class="rec-date">Saturday, Date 1</p>
+        <p class="rec-time">4:00 to 7:00 PM</p>
+        <p class="rec-meta"><strong>9 of 15</strong> can attend. Alone at the top for Month A (the prior Saturday evening trails at 8). Five confirmed primary-role participants (facilitator plus four respondents) with one rotating specialist. Primary/secondary role mix of 5 / 6 clears the floor cleanly. Rotation runs 5 pairs at a time with only 1 waiting.</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-tag">Month B</span>
+        <p class="rec-date">Saturday, Date 2</p>
+        <p class="rec-time">4:00 to 7:00 PM</p>
+        <p class="rec-meta"><strong>10 of 15</strong> can attend, the clearest majority in the signal. Same five primary-role participants plus the rotating specialist. Role mix of 5 / 7 is 0.71, just barely under the floor. One more primary-role participant and Date 2 clears it too.</p>
+      </div>
+    </div>
+  <!-- /REGION:pick -->
+  </section>
+
+  <!-- MONTH A AVAILABILITY -->
+  <section id="month-a" data-title="Month A" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:month-a -->
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Month A availability</h2>
+    <p class="text-dimmed mb-10 max-w-2xl">Six slots offered across three Saturdays. Two time windows each day. Date 1 evening still leads at 9 of 15. Morning slots grew after one late respondent filed morning-only availability.</p>
+    <div class="grid gap-2.5 max-w-3xl">
+      <div class="slot-row is-winner">
+        <div class="slot-label">Saturday, Date 1 · 4 to 7 PM</div>
+        <div class="slot-count">9</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div>
+      </div>
+      <div class="slot-row">
+        <div class="slot-label">Saturday, Date 1a · 4 to 7 PM</div>
+        <div class="slot-count">8</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div>
+      </div>
+      <div class="slot-row">
+        <div class="slot-label">Saturday, Date 1 · 10 AM to 1 PM</div>
+        <div class="slot-count">8</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div>
+      </div>
+      <div class="slot-row">
+        <div class="slot-label">Saturday, Date 1b · 4 to 7 PM</div>
+        <div class="slot-count">6</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div>
+      </div>
+      <div class="slot-row">
+        <div class="slot-label">Saturday, Date 1a · 10 AM to 1 PM</div>
+        <div class="slot-count">6</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div>
+      </div>
+      <div class="slot-row">
+        <div class="slot-label">Saturday, Date 1b · 10 AM to 1 PM</div>
+        <div class="slot-count">3</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 33.3%"></div></div>
+      </div>
+      <div class="slot-row">
+        <div class="slot-label">None of the Month A dates work for me</div>
+        <div class="slot-count">1</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 11.1%"></div></div>
+      </div>
+    </div>
+  <!-- /REGION:month-a -->
+  </section>
+
+  <!-- MONTH B AVAILABILITY -->
+  <section id="month-b" data-title="Month B" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:month-b -->
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Month B availability</h2>
+    <p class="text-dimmed mb-10 max-w-2xl">One Saturday offered, two time windows. Thirteen of fifteen can hit at least one of them; two are out that day entirely. Date 2 morning grew after the late respondent joined the morning cohort.</p>
+    <div class="grid gap-2.5 max-w-3xl">
+      <div class="slot-row is-winner">
+        <div class="slot-label">Saturday, Date 2 · 4 to 7 PM</div>
+        <div class="slot-count">10</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div>
+      </div>
+      <div class="slot-row">
+        <div class="slot-label">Saturday, Date 2 · 10 AM to 1 PM</div>
+        <div class="slot-count">8</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 80%"></div></div>
+      </div>
+      <div class="slot-row">
+        <div class="slot-label">Date 2 does not work for me</div>
+        <div class="slot-count">2</div>
+        <div class="slot-bar"><div class="slot-bar-fill" style="width: 20%"></div></div>
+      </div>
+    </div>
+  <!-- /REGION:month-b -->
+  </section>
+
+  <!-- PER-SLOT ROSTER -->
+  <section id="roster" data-title="Per-Slot Roster" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:roster -->
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Who's in each slot</h2>
+    <p class="text-dimmed mb-6 max-w-2xl">Each chip is a real respondent, anonymized. Primary-role participants pop; secondary-role sits in slate. Use this to pick a room, not just a headcount.</p>
+    <div class="roster-legend" aria-label="Role legend">
+      <span><span class="dot dot-lead" aria-hidden="true"></span>Primary role</span>
+      <span><span class="dot dot-both" aria-hidden="true"></span>Both</span>
+      <span><span class="dot dot-follow" aria-hidden="true"></span>Secondary role</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6 max-w-6xl">
+      <div>
+        <p class="roster-col-title">Month A</p>
+
+        <div class="roster-slot is-winner">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Sat, Date 1 · 4 to 7 PM</div>
+            <div class="roster-slot-count">9 of 15 · top pick</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip role-lead">Respondent 01 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-lead">Respondent 02 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-lead">Respondent 03 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 04 <span class="rc-tag">B · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 05 <span class="rc-tag">B · Beg</span></span>
+            <span class="roster-chip">Respondent 06 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 07 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 08 <span class="rc-tag">S · Beg</span></span>
+            <span class="roster-chip">Respondent 09 <span class="rc-tag">S · Beg</span></span>
+          </div>
+        </div>
+
+        <div class="roster-slot">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Sat, Date 1a · 4 to 7 PM</div>
+            <div class="roster-slot-count">8 of 15 · alternate</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip role-lead">Respondent 03 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 04 <span class="rc-tag">B · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 05 <span class="rc-tag">B · Beg</span></span>
+            <span class="roster-chip">Respondent 10 <span class="rc-tag">S · Int</span></span>
+            <span class="roster-chip">Respondent 06 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 07 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 08 <span class="rc-tag">S · Beg</span></span>
+            <span class="roster-chip">Respondent 09 <span class="rc-tag">S · Beg</span></span>
+          </div>
+        </div>
+
+        <div class="roster-slot">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Sat, Date 1 · 10 AM to 1 PM</div>
+            <div class="roster-slot-count">8 of 15</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip role-lead">Respondent 02 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-lead">Respondent 03 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 04 <span class="rc-tag">B · Imp</span></span>
+            <span class="roster-chip">Respondent 11 <span class="rc-tag">S · Beg</span></span>
+            <span class="roster-chip">Respondent 12 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 07 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 13 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 08 <span class="rc-tag">S · Beg</span></span>
+          </div>
+        </div>
+
+        <div class="roster-slot">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Sat, Date 1b · 4 to 7 PM</div>
+            <div class="roster-slot-count">6 of 15</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip role-both">Respondent 04 <span class="rc-tag">B · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 05 <span class="rc-tag">B · Beg</span></span>
+            <span class="roster-chip">Respondent 10 <span class="rc-tag">S · Int</span></span>
+            <span class="roster-chip">Respondent 06 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 08 <span class="rc-tag">S · Beg</span></span>
+            <span class="roster-chip">Respondent 09 <span class="rc-tag">S · Beg</span></span>
+          </div>
+        </div>
+
+        <div class="roster-slot">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Sat, Date 1a · 10 AM to 1 PM</div>
+            <div class="roster-slot-count">6 of 15</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip role-lead">Respondent 03 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip">Respondent 11 <span class="rc-tag">S · Beg</span></span>
+            <span class="roster-chip">Respondent 12 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 07 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 13 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 14 <span class="rc-tag">S · Int</span></span>
+          </div>
+        </div>
+
+        <div class="roster-slot">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Sat, Date 1b · 10 AM to 1 PM</div>
+            <div class="roster-slot-count">3 of 15</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip">Respondent 11 <span class="rc-tag">S · Beg</span></span>
+            <span class="roster-chip">Respondent 13 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 14 <span class="rc-tag">S · Int</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="roster-col-title">Month B</p>
+
+        <div class="roster-slot is-winner">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Sat, Date 2 · 4 to 7 PM</div>
+            <div class="roster-slot-count">10 of 15 · top pick</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip role-lead">Respondent 01 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-lead">Respondent 02 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-lead">Respondent 03 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 04 <span class="rc-tag">B · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 05 <span class="rc-tag">B · Beg</span></span>
+            <span class="roster-chip">Respondent 06 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 12 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 07 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 09 <span class="rc-tag">S · Beg</span></span>
+            <span class="roster-chip">Respondent 15 <span class="rc-tag">S · Int</span></span>
+          </div>
+        </div>
+
+        <div class="roster-slot">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Sat, Date 2 · 10 AM to 1 PM</div>
+            <div class="roster-slot-count">8 of 15</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip role-lead">Respondent 02 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-lead">Respondent 03 <span class="rc-tag">P · Imp</span></span>
+            <span class="roster-chip role-both">Respondent 04 <span class="rc-tag">B · Imp</span></span>
+            <span class="roster-chip">Respondent 11 <span class="rc-tag">S · Beg</span></span>
+            <span class="roster-chip">Respondent 12 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 07 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 13 <span class="rc-tag">S · Imp</span></span>
+            <span class="roster-chip">Respondent 14 <span class="rc-tag">S · Int</span></span>
+          </div>
+        </div>
+
+        <div class="roster-slot is-out">
+          <div class="roster-slot-head">
+            <div class="roster-slot-label">Date 2 does not work</div>
+            <div class="roster-slot-count">2 of 14</div>
+          </div>
+          <div class="roster-chips">
+            <span class="roster-chip">Respondent 10 <span class="rc-tag">S · Int</span></span>
+            <span class="roster-chip">Respondent 08 <span class="rc-tag">S · Beg</span></span>
+          </div>
+        </div>
+
+        <p class="mt-6 text-sm text-muted max-w-md leading-relaxed">Note: <span class="text-dimmed">Respondent 04 plans to take a primary role in the sessions</span> and shows up in almost every slot. Treat them as a confirmed second primary-role alongside Respondent 01; if they drop, most rooms lose that coverage.</p>
+      </div>
+    </div>
+  <!-- /REGION:roster -->
+  </section>
+
+  <!-- DEEPER CUTS -->
+  <section id="deeper-cuts" data-title="Deeper cuts" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:deeper-cuts -->
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Who's in what room — deeper cuts</h2>
+    <p class="text-dimmed mb-8 max-w-3xl">Beyond headcount. Three views: who attends both sessions (the retention core), how committed each person is (slots picked), and named cohorts emerging from the data.</p>
+
+    <div class="mb-8 max-w-4xl">
+      <p class="roster-col-title">The Core — attend both picked sessions</p>
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-3">
+        <span class="font-display font-bold text-5xl md:text-6xl text-terracotta-500">8 of 15</span>
+        <span class="text-dimmed">respondents can hit both Date 1 PM and Date 2 PM</span>
+      </div>
+      <div class="roster-chips" style="margin-bottom: 0.75rem;">
+        <span class="roster-chip role-lead">Respondent 01 <span class="rc-tag">P · Imp</span></span>
+        <span class="roster-chip role-lead">Respondent 02 <span class="rc-tag">P · Imp</span></span>
+        <span class="roster-chip role-lead">Respondent 03 <span class="rc-tag">P · Imp</span></span>
+        <span class="roster-chip role-both">Respondent 04 <span class="rc-tag">B · Imp</span></span>
+        <span class="roster-chip role-both">Respondent 05 <span class="rc-tag">B · Beg</span></span>
+        <span class="roster-chip">Respondent 06 <span class="rc-tag">S · Imp</span></span>
+        <span class="roster-chip">Respondent 07 <span class="rc-tag">S · Imp</span></span>
+        <span class="roster-chip">Respondent 09 <span class="rc-tag">S · Beg</span></span>
+      </div>
+      <p class="text-sm text-muted max-w-2xl leading-relaxed">Only in Date 1: <span class="text-dimmed">one respondent</span>. Only in Date 2: <span class="text-dimmed">two respondents</span>. A two-session arc has real community continuity: eight people show up twice.</p>
+    </div>
+
+    <div class="mb-8 max-w-3xl">
+      <p class="roster-col-title">Attendance depth — slots picked per respondent</p>
+      <div class="grid gap-2 mt-2">
+        <div class="slot-row is-winner"><div class="slot-label">Respondent 04</div><div class="slot-count">6</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div></div>
+        <div class="slot-row is-winner"><div class="slot-label">Respondent 07</div><div class="slot-count">6</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div></div>
+        <div class="slot-row is-winner"><div class="slot-label">Respondent 03</div><div class="slot-count">6</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 08</div><div class="slot-count">4</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 06</div><div class="slot-count">4</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 12</div><div class="slot-count">4</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 11</div><div class="slot-count">4</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 09</div><div class="slot-count">4</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 13</div><div class="slot-count">4</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 05</div><div class="slot-count">4</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 02</div><div class="slot-count">4</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 66.7%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 14</div><div class="slot-count">3</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 50%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 10</div><div class="slot-count">2</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 33.3%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 01</div><div class="slot-count">2</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 33.3%"></div></div></div>
+        <div class="slot-row"><div class="slot-label">Respondent 15</div><div class="slot-count">1</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 16.7%"></div></div></div>
+      </div>
+      <p class="mt-3 text-sm text-muted max-w-2xl leading-relaxed">Three respondents (04, 07, 03) are all-in. Respondent 01's two slots are <em>exactly</em> the picks. Their availability is inelastic, not low commitment: they're protected as long as the dates don't change. Respondent 15's single-slot pick is the only genuine low-engagement signal.</p>
+    </div>
+
+    <div class="max-w-6xl">
+      <p class="roster-col-title">Named cohorts</p>
+      <div class="grid md:grid-cols-3 gap-4 mt-2">
+        <div class="stat-tile" style="border-color: rgba(212, 85, 43, 0.42); background: rgba(212, 85, 43, 0.06);">
+          <h4 style="color: #da7f4e;">The Core · 8</h4>
+          <p class="font-display font-semibold text-lg text-ivory-50 mt-1">Retention backbone</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Attending both picked sessions. Reach them first for schedule changes; thank them in every promo.</p>
+        </div>
+        <div class="stat-tile" style="border-color: rgba(201, 150, 71, 0.36); background: rgba(201, 150, 71, 0.05);">
+          <h4 style="color: #c99647;">Morning-only cohort · 3</h4>
+          <p class="font-display font-semibold text-lg text-ivory-50 mt-1">Coherent opportunity</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Shut out from evening picks. All would fit a single Saturday-morning session (Date 2 AM already at 8). Warm list for the next date pick.</p>
+        </div>
+        <div class="stat-tile">
+          <h4>Evening shut-out · 1</h4>
+          <p class="font-display font-semibold text-lg text-ivory-50 mt-1">One respondent, prior-Saturday PM only</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Filed but can't hit Date 1 or Date 2. Different problem than the morning cohort: a separate PM Saturday would catch them, plus possibly others.</p>
+        </div>
+      </div>
+    </div>
+  <!-- /REGION:deeper-cuts -->
+  </section>
+
+  <!-- PRIMARY/SECONDARY ROLE MIX -->
+  <section id="ratio" data-title="Role Mix" data-group="Availability" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:ratio -->
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Do we have enough primary-role coverage?</h2>
+    <p class="text-dimmed mb-6 max-w-2xl">A room with too few primary-role participants punishes the secondary role: they sit idle for most of the cycle. Setting a floor keeps the room warm.</p>
+    <div class="ratio-rule">
+      <strong>The floor:</strong> at least <strong>3 primary-role participants</strong> in the room, and no worse than <strong>3 primary per 4 secondary</strong>. Math includes the facilitator (primary) and a rotating specialist (secondary, coaches primary-role participants while rotating in). Respondent 05 counted as secondary (conservative).
+    </div>
+
+    <div class="ratio-grid">
+      <div class="ratio-card is-met">
+        <p class="ratio-card-slot">Sat, Date 1 · 4 to 7 PM</p>
+        <p class="ratio-gap">Clears floor</p>
+        <p class="ratio-gap-caption">5 primary / 6 secondary is 0.83, comfortably above 3:4. Rotation runs 5 pairs with 1 waiting. Respondent 03's arrival flipped this room from "close" to "safe."</p>
+        <div class="ratio-math">
+          <div><span class="label">Now:</span> <span class="now">5 P · 6 S</span></div>
+          <div><span class="label">Target:</span> 5 P · 6 S ✓</div>
+        </div>
+      </div>
+      <div class="ratio-card">
+        <p class="ratio-card-slot">Sat, Date 2 · 4 to 7 PM</p>
+        <p class="ratio-gap">Need 1 more primary</p>
+        <p class="ratio-gap-caption">5 P / 7 S is 0.71, just barely under. Biggest room in the signal. One more primary-role participant pushes to 6 P / 7 S (0.86) with rotation of 6 pairs, 1 waiting.</p>
+        <div class="ratio-math">
+          <div><span class="label">Now:</span> <span class="now">5 P · 7 S</span></div>
+          <div><span class="label">Target:</span> 6 P · 7 S</div>
+        </div>
+      </div>
+      <div class="ratio-card">
+        <p class="ratio-card-slot">Sat, Date 1a · 4 to 7 PM · alternate</p>
+        <p class="ratio-gap">Need 3 more primary</p>
+        <p class="ratio-gap-caption">Respondents 01 and 02 aren't in this room. Only Respondent 03, Respondent 04, and the facilitator as primary. Steepest gap; Date 1 wins clearly.</p>
+        <div class="ratio-math">
+          <div><span class="label">Now:</span> <span class="now">3 P · 7 S</span></div>
+          <div><span class="label">Target:</span> 6 P · 7 S</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rotation-section">
+      <p class="rotation-header">Secondary-role participants waiting each rotation (current lineup)</p>
+
+      <div class="rotation-row">
+        <div class="rotation-row-label">Sat, Date 1 · 4–7 PM</div>
+        <div class="rotation-icons" aria-label="five active pairs and one secondary-role waiting">
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+        </div>
+        <div class="rotation-summary">5 pairs · 1 waiting</div>
+      </div>
+
+      <div class="rotation-row">
+        <div class="rotation-row-label">Sat, Date 2 · 4–7 PM</div>
+        <div class="rotation-icons" aria-label="five active pairs and two secondary-role waiting">
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+        </div>
+        <div class="rotation-summary">5 pairs · 2 waiting</div>
+      </div>
+
+      <div class="rotation-row">
+        <div class="rotation-row-label">Sat, Date 1a · 4–7 PM</div>
+        <div class="rotation-icons" aria-label="three active pairs and four secondary-role waiting">
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-pair" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+          <span class="rotation-waiting" aria-hidden="true"></span>
+        </div>
+        <div class="rotation-summary">3 pairs · 4 waiting</div>
+      </div>
+
+      <div class="rotation-legend" aria-label="Legend">
+        <span><span class="rotation-pair" aria-hidden="true"></span> active pair</span>
+        <span><span class="rotation-waiting" aria-hidden="true"></span> secondary-role waiting</span>
+      </div>
+
+      <p class="mt-4 text-sm text-muted max-w-2xl leading-relaxed">Respondent 03's arrival gets both rooms to <span class="text-dimmed">5 active pairs per rotation</span>. Date 1 sits at 5 of 6 (one waiting per rotation), the smoothest room in the whole signal. Date 2 is at 5 of 7. Recruit one more primary-role participant and Date 2 matches.</p>
+    </div>
+
+    <div class="rotation-section" style="margin-top: 2rem;">
+      <p class="rotation-header">Facilitator team (always in the room)</p>
+      <div class="grid sm:grid-cols-2 gap-3 max-w-4xl mb-6">
+        <div class="stat-tile" style="border-color: rgba(212, 85, 43, 0.42); background: rgba(212, 85, 43, 0.06);">
+          <h4 style="color: #da7f4e;">Facilitator · primary</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Facilitator</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Host and primary-role facilitator. In every room by default. Counted as a confirmed primary in the ratio math above.</p>
+        </div>
+        <div class="stat-tile" style="border-color: rgba(201, 150, 71, 0.42); background: rgba(201, 150, 71, 0.05);">
+          <h4 style="color: #c99647;">Facilitator · secondary specialist</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Rotating specialist</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Secondary-role specialist. Rotates in as a secondary to give primary-role participants 1-on-1 feedback while working live. Counted as a secondary (not a primary) in the ratio: they could cover primary in a pinch, but that would sacrifice their specialist value.</p>
+        </div>
+      </div>
+      <p class="rotation-header">Load-bearing respondents — retention priority</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 max-w-7xl">
+        <div class="stat-tile">
+          <h4>Confirmed primary · flex</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Respondent 04</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Picked <strong class="text-dimmed">6 slots</strong>. Present in every practical room. Confirmed as primary role. Anchors both recommended dates.</p>
+        </div>
+        <div class="stat-tile">
+          <h4>Dedicated primary · limited</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Respondent 01</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Only picked <strong class="text-dimmed">2 slots</strong> (both PMs, exactly the picks). No wiggle room; protect the two rooms they're in.</p>
+        </div>
+        <div class="stat-tile">
+          <h4>Dedicated primary · here-for-now</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Respondent 02</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Picked <strong class="text-dimmed">4 slots</strong>, both morning and evening on Date 1 and Date 2. But said <strong class="text-dimmed">"no thanks"</strong> to future cycles: here for these dates only.</p>
+        </div>
+        <div class="stat-tile">
+          <h4>Dedicated primary · new anchor</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Respondent 03</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Picked <strong class="text-dimmed">6 slots</strong>, every window across the three Saturdays. Third dedicated primary. Their arrival flipped Date 1 from close-to-floor to comfortably above.</p>
+        </div>
+        <div class="stat-tile">
+          <h4>Most-committed secondary</h4>
+          <p class="font-display font-semibold text-2xl text-ivory-50 mt-1">Respondent 07</p>
+          <p class="text-sm text-muted mt-2 leading-snug">Picked <strong class="text-dimmed">6 slots</strong>, tied with Respondents 04 and 03 for most. In both recommended rooms. Travels in from out-of-town.</p>
+        </div>
+      </div>
+    </div>
+  <!-- /REGION:ratio -->
+  </section>
+
+  <!-- MONEY MATH -->
+  <section id="money" data-title="Money math" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:money -->
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <span class="internal-chip" aria-label="Internal use only">Internal · Do not share</span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Does the money work?</h2>
+    <p class="text-dimmed mb-8 max-w-3xl">Surplus after venue only. Rotating-specialist fee and other costs aren't in this math yet. Modeled at $40/hour × 4 hours = $160 venue. Sensitivity: at $25/hour venue, surpluses are ~$60 higher across the board; at $50/hour, ~$40 lower.</p>
+
+    <div class="grid md:grid-cols-2 gap-5 max-w-5xl">
+      <div class="money-card">
+        <p class="money-slot-tag">Month A</p>
+        <p class="money-slot-date">Saturday, Date 1 · 4–7 PM</p>
+        <p class="money-slot-sub">Surplus after $160 venue</p>
+
+        <div class="money-matrix">
+          <div class="money-cell is-header is-corner">Scenario</div>
+          <div class="money-cell is-header">$35 ticket</div>
+          <div class="money-cell is-header">$50 ticket</div>
+
+          <div class="money-cell is-row-label">Conservative<span class="row-label-caption">7 attendees · 20% no-show</span></div>
+          <div class="money-cell is-value">$85<span class="cell-hourly">$21/hr</span></div>
+          <div class="money-cell is-value">$190<span class="cell-hourly">$48/hr</span></div>
+
+          <div class="money-cell is-row-label">Expected<span class="row-label-caption">9 attendees · committed</span></div>
+          <div class="money-cell is-value is-expected">$155<span class="cell-hourly">$39/hr</span></div>
+          <div class="money-cell is-value is-expected">$290<span class="cell-hourly">$73/hr</span></div>
+
+          <div class="money-cell is-row-label is-last-row">Optimistic<span class="row-label-caption">12 attendees · pending fills</span></div>
+          <div class="money-cell is-value is-last-row">$260<span class="cell-hourly">$65/hr</span></div>
+          <div class="money-cell is-value is-last-row">$440<span class="cell-hourly">$110/hr</span></div>
+        </div>
+
+        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 9 clears both. Hourly rate = surplus ÷ 4 delivery hours.</p>
+
+        <p class="breakdown-title">Where the money goes · Expected case</p>
+        <div class="breakdown-row">
+          <span class="breakdown-label">$35 ticket</span>
+          <div class="breakdown-track" aria-label="At $35 ticket: revenue $315, venue $160, profit $155">
+            <div class="breakdown-segment breakdown-venue" style="flex: 0 0 32%">$160</div>
+            <div class="breakdown-segment breakdown-profit" style="flex: 0 0 31%">$155</div>
+          </div>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-label">$50 ticket</span>
+          <div class="breakdown-track" aria-label="At $50 ticket: revenue $450, venue $160, profit $290">
+            <div class="breakdown-segment breakdown-venue" style="flex: 0 0 32%">$160</div>
+            <div class="breakdown-segment breakdown-profit" style="flex: 0 0 58%">$290</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="money-card">
+        <p class="money-slot-tag">Month B</p>
+        <p class="money-slot-date">Saturday, Date 2 · 4–7 PM</p>
+        <p class="money-slot-sub">Surplus after $160 venue</p>
+
+        <div class="money-matrix">
+          <div class="money-cell is-header is-corner">Scenario</div>
+          <div class="money-cell is-header">$35 ticket</div>
+          <div class="money-cell is-header">$50 ticket</div>
+
+          <div class="money-cell is-row-label">Conservative<span class="row-label-caption">8 attendees · 20% no-show</span></div>
+          <div class="money-cell is-value">$120<span class="cell-hourly">$30/hr</span></div>
+          <div class="money-cell is-value">$240<span class="cell-hourly">$60/hr</span></div>
+
+          <div class="money-cell is-row-label">Expected<span class="row-label-caption">10 attendees · committed</span></div>
+          <div class="money-cell is-value is-expected">$190<span class="cell-hourly">$48/hr</span></div>
+          <div class="money-cell is-value is-expected">$340<span class="cell-hourly">$85/hr</span></div>
+
+          <div class="money-cell is-row-label is-last-row">Optimistic<span class="row-label-caption">13 attendees · pending fills</span></div>
+          <div class="money-cell is-value is-last-row">$295<span class="cell-hourly">$74/hr</span></div>
+          <div class="money-cell is-value is-last-row">$490<span class="cell-hourly">$123/hr</span></div>
+        </div>
+
+        <p class="money-breakeven">Break-even: <strong>5 attendees at $35</strong> · <strong>4 at $50</strong>. Committed 10 clears both. Hourly rate = surplus ÷ 4 delivery hours.</p>
+
+        <p class="breakdown-title">Where the money goes · Expected case</p>
+        <div class="breakdown-row">
+          <span class="breakdown-label">$35 ticket</span>
+          <div class="breakdown-track" aria-label="At $35 ticket: revenue $350, venue $160, profit $190">
+            <div class="breakdown-segment breakdown-venue" style="flex: 0 0 32%">$160</div>
+            <div class="breakdown-segment breakdown-profit" style="flex: 0 0 38%">$190</div>
+          </div>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-label">$50 ticket</span>
+          <div class="breakdown-track" aria-label="At $50 ticket: revenue $500, venue $160, profit $340">
+            <div class="breakdown-segment breakdown-venue" style="flex: 0 0 32%">$160</div>
+            <div class="breakdown-segment breakdown-profit" style="flex: 0 0 68%">$340</div>
+          </div>
+        </div>
+
+        <div class="breakdown-legend" aria-label="Legend">
+          <span><span class="swatch swatch-venue"></span>Venue</span>
+          <span><span class="swatch swatch-profit"></span>Profit</span>
+          <span style="color: rgba(245, 238, 224, 0.45);">Bars scaled to $500 (Date 2 × $50 = full track)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TICKET × VENUE HEATMAPS -->
+    <div class="mt-8 max-w-6xl">
+      <p class="text-sm text-muted max-w-2xl mb-4 leading-relaxed">Ticket price × venue rate. Cell shows profit and margin at Expected attendance. Ochre = tight margin (&lt;50%); sage = strong (≥65%).</p>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="heatmap-container">
+          <p class="heatmap-title">Date 1 · 9 attendees · profit / margin</p>
+          <div class="heatmap-grid">
+            <div class="heatmap-corner">Venue / Ticket</div>
+            <div class="heatmap-col-header">$35</div>
+            <div class="heatmap-col-header">$40</div>
+            <div class="heatmap-col-header">$45</div>
+            <div class="heatmap-col-header">$50</div>
+
+            <div class="heatmap-row-header">$25/hr</div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$215</span><span class="cell-margin">68%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$260</span><span class="cell-margin">72%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$305</span><span class="cell-margin">75%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$350</span><span class="cell-margin">78%</span></div>
+
+            <div class="heatmap-row-header">$30/hr</div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$195</span><span class="cell-margin">62%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$240</span><span class="cell-margin">67%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$285</span><span class="cell-margin">70%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$330</span><span class="cell-margin">73%</span></div>
+
+            <div class="heatmap-row-header">$35/hr</div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$175</span><span class="cell-margin">56%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$220</span><span class="cell-margin">61%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$265</span><span class="cell-margin">65%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$310</span><span class="cell-margin">69%</span></div>
+
+            <div class="heatmap-row-header">$40/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$155</span><span class="cell-margin">49%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$200</span><span class="cell-margin">56%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$245</span><span class="cell-margin">60%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$290</span><span class="cell-margin">64%</span></div>
+
+            <div class="heatmap-row-header">$45/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$135</span><span class="cell-margin">43%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$180</span><span class="cell-margin">50%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$225</span><span class="cell-margin">56%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$270</span><span class="cell-margin">60%</span></div>
+
+            <div class="heatmap-row-header">$50/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$115</span><span class="cell-margin">37%</span></div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$160</span><span class="cell-margin">44%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$205</span><span class="cell-margin">51%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$250</span><span class="cell-margin">56%</span></div>
+          </div>
+        </div>
+
+        <div class="heatmap-container">
+          <p class="heatmap-title">Date 2 · 10 attendees · profit / margin</p>
+          <div class="heatmap-grid">
+            <div class="heatmap-corner">Venue / Ticket</div>
+            <div class="heatmap-col-header">$35</div>
+            <div class="heatmap-col-header">$40</div>
+            <div class="heatmap-col-header">$45</div>
+            <div class="heatmap-col-header">$50</div>
+
+            <div class="heatmap-row-header">$25/hr</div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$250</span><span class="cell-margin">71%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$300</span><span class="cell-margin">75%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$350</span><span class="cell-margin">78%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$400</span><span class="cell-margin">80%</span></div>
+
+            <div class="heatmap-row-header">$30/hr</div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$230</span><span class="cell-margin">66%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$280</span><span class="cell-margin">70%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$330</span><span class="cell-margin">73%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$380</span><span class="cell-margin">76%</span></div>
+
+            <div class="heatmap-row-header">$35/hr</div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$210</span><span class="cell-margin">60%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$260</span><span class="cell-margin">65%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$310</span><span class="cell-margin">69%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$360</span><span class="cell-margin">72%</span></div>
+
+            <div class="heatmap-row-header">$40/hr</div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$190</span><span class="cell-margin">54%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$240</span><span class="cell-margin">60%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$290</span><span class="cell-margin">64%</span></div>
+            <div class="heatmap-cell is-strong"><span class="cell-profit">$340</span><span class="cell-margin">68%</span></div>
+
+            <div class="heatmap-row-header">$45/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$170</span><span class="cell-margin">49%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$220</span><span class="cell-margin">55%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$270</span><span class="cell-margin">60%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$320</span><span class="cell-margin">64%</span></div>
+
+            <div class="heatmap-row-header">$50/hr</div>
+            <div class="heatmap-cell is-tight"><span class="cell-profit">$150</span><span class="cell-margin">43%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$200</span><span class="cell-margin">50%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$250</span><span class="cell-margin">56%</span></div>
+            <div class="heatmap-cell is-fair"><span class="cell-profit">$300</span><span class="cell-margin">60%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="heatmap-legend" aria-label="Margin legend">
+        <span><span class="swatch swatch-tight"></span>Tight (&lt;50%)</span>
+        <span><span class="swatch swatch-fair"></span>Fair (50–64%)</span>
+        <span><span class="swatch swatch-strong"></span>Strong (≥65%)</span>
+        <span style="color: rgba(245, 238, 224, 0.45);">Numbers = profit / margin at Expected attendance</span>
+      </div>
+    </div>
+
+    <div class="money-total-card">
+      <p class="money-total-label">Both sessions combined · Expected × $50</p>
+      <p class="money-total-value">$630 surplus · $79/hr</p>
+      <p class="money-total-caption">Across 8 delivery hours. Range: <strong>$205</strong> ($26/hr) at Conservative × $35 to <strong>$930</strong> ($116/hr) at Optimistic × $50. Hourly rate covers delivery time only, not prep, marketing, or admin. Rotating specialist's fee and other costs still to subtract.</p>
+    </div>
+  <!-- /REGION:money -->
+  </section>
+
+  <!-- TOPICS (filtered per room) -->
+  <section id="topics" data-title="Topics" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:topics -->
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Topics — per picked room</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">Filtering out respondents who can't make the picked dates. All-respondent counts inflated the ranking with votes from people who won't be in the room; here's what the actual attendees want.</p>
+    <div class="grid md:grid-cols-2 gap-6 max-w-6xl">
+      <div>
+        <p class="roster-col-title">Date 1 · 4–7 PM · 9 attendees</p>
+        <div class="ratio-rule" style="margin-bottom: 1rem;">
+          <strong>Topic A</strong> now sits alone at 9/9. Respondent 03 picked it and everyone else already had. Four topics tie at 8/9. Topic F trails at 7/9 (Respondents 02 and 03 both skipped). Strong signal to lead with Topic A.
+        </div>
+        <div class="grid gap-2.5">
+          <div class="slot-row is-winner"><div class="slot-label">Topic A</div><div class="slot-count">9 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic B</div><div class="slot-count">8 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic C</div><div class="slot-count">8 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic D</div><div class="slot-count">8 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic E</div><div class="slot-count">8 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic F</div><div class="slot-count">7 / 9</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 77.8%"></div></div></div>
+        </div>
+      </div>
+      <div>
+        <p class="roster-col-title">Date 2 · 4–7 PM · 10 attendees</p>
+        <div class="ratio-rule" style="margin-bottom: 1rem;">
+          <strong>Topic B</strong> sits alone at 9/10, with Respondent 03 the only skip. Everything else lands in a five-way tie at 8/10. Respondents 02, 03, 12, and 15 are the swing voters, each skipped different topics.
+        </div>
+        <div class="grid gap-2.5">
+          <div class="slot-row is-winner"><div class="slot-label">Topic B</div><div class="slot-count">9 / 10</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 100%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic A</div><div class="slot-count">8 / 10</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic F</div><div class="slot-count">8 / 10</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic C</div><div class="slot-count">8 / 10</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic D</div><div class="slot-count">8 / 10</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+          <div class="slot-row"><div class="slot-label">Topic E</div><div class="slot-count">8 / 10</div><div class="slot-bar"><div class="slot-bar-fill" style="width: 88.9%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  <!-- /REGION:topics -->
+  </section>
+
+  <!-- WHO -->
+  <section id="who" data-title="Who Showed Up" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:who -->
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Who filled it out</h2>
+    <p class="text-dimmed mb-10 max-w-2xl">A secondary-role-heavy improver room, mostly already in the community channel, spread across the region with a couple traveling in.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl">
+      <div class="stat-tile">
+        <h4>Role</h4>
+        <dl>
+          <div class="row"><dt>Secondary</dt><dd>10</dd></div>
+          <div class="row"><dt>Primary</dt><dd>3</dd></div>
+          <div class="row"><dt>Both</dt><dd>2</dd></div>
+        </dl>
+      </div>
+      <div class="stat-tile">
+        <h4>Level</h4>
+        <dl>
+          <div class="row"><dt>Improver</dt><dd>8</dd></div>
+          <div class="row"><dt>Beginner</dt><dd>4</dd></div>
+          <div class="row"><dt>Intermediate</dt><dd>3</dd></div>
+        </dl>
+      </div>
+      <div class="stat-tile">
+        <h4>Where they're based</h4>
+        <dl>
+          <div class="row"><dt>South</dt><dd>3</dd></div>
+          <div class="row"><dt>North</dt><dd>3</dd></div>
+          <div class="row"><dt>Central</dt><dd>3</dd></div>
+          <div class="row"><dt>Out-of-town</dt><dd>3</dd></div>
+          <div class="row"><dt>East</dt><dd>2</dd></div>
+          <div class="row"><dt>West</dt><dd>1</dd></div>
+        </dl>
+      </div>
+      <div class="stat-tile">
+        <h4>Format preference</h4>
+        <dl>
+          <div class="row"><dt>Split by level</dt><dd>7</dd></div>
+          <div class="row"><dt>No preference</dt><dd>5</dd></div>
+          <div class="row"><dt>One all-level</dt><dd>3</dd></div>
+        </dl>
+      </div>
+      <div class="stat-tile">
+        <h4>Community channel</h4>
+        <dl>
+          <div class="row"><dt>Already in</dt><dd>11</dd></div>
+          <div class="row"><dt>Wants to join</dt><dd>2</dd></div>
+          <div class="row"><dt>No thanks</dt><dd>2</dd></div>
+        </dl>
+      </div>
+      <div class="stat-tile">
+        <h4>How they heard</h4>
+        <dl>
+          <div class="row"><dt>Community channel</dt><dd>7</dd></div>
+          <div class="row"><dt>Prior session or event</dt><dd>4</dd></div>
+          <div class="row"><dt>Facilitator directly</dt><dd>3</dd></div>
+          <div class="row"><dt>Social post</dt><dd>2</dd></div>
+          <div class="row"><dt>Word of mouth</dt><dd>1</dd></div>
+        </dl>
+      </div>
+    </div>
+  <!-- /REGION:who -->
+  </section>
+
+  <!-- BREATHER: QUALITATIVE QUOTE -->
+  <section id="quote" data-title="What One Respondent Said" class="snap-slide min-h-screen flex items-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <div class="max-w-3xl">
+      <p class="font-display italic font-medium text-3xl md:text-5xl leading-tight text-ivory-50 text-shadow-warm">
+        "It would be great to grow together as a group with all levels. Also, I think some stronger foundational work is needed for some of us if we're all going to level up together."
+      </p>
+      <p class="mt-6 text-sm text-muted font-mono">One respondent · Secondary role, Improver, South</p>
+    </div>
+  </section>
+
+  <!-- TAKEAWAYS -->
+  <section id="takeaways" data-title="What to Do" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:takeaways -->
+    <span class="accent-rule" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-10 tracking-tight text-shadow-warm">What to do with this</h2>
+    <ul class="space-y-4 max-w-3xl text-lg text-body">
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Book Date 1 and Date 2, both 4 to 7 PM. Announce both dates together so the momentum carries.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Date 1a evening is a valid alternate if Date 1 falls through, but it trails Date 1 by one headcount and has only one confirmed primary-role participant (missing Respondents 01 and 02). Not a real substitute.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Agenda: on Date 1, lead with Topic A (9/9 solo). On Date 2, lead with Topic B (9/10 solo), with everything else tied at 8/10.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Date 1 role mix is safe. Date 2 still needs one more primary-role participant to clear the floor. Confirmed primary-role now: the facilitator, Respondent 01, Respondent 04, Respondent 02, Respondent 03 (Respondent 05 switches). The rotating specialist rotates in on the secondary side.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Run the room as one all-level session with a short foundations pass in the first 20 minutes. The qualitative note is a design brief, not a complaint.</span></li>
+      <li class="flex gap-4"><span class="text-terracotta-500 font-mono text-sm pt-1.5">→</span><span>Promote through the community channel first. Six of eleven heard about it there; it's the biggest lever for the next signup.</span></li>
+    </ul>
+  <!-- /REGION:takeaways -->
+  </section>
+
+  <!-- STILL WAITING -->
+  <section id="waiting" data-title="Still Waiting" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <!-- REGION:waiting -->
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">Signal is still open</h2>
+    <p class="text-dimmed mb-10 max-w-3xl">One late respondent filed on Aug 4 morning-only and joins the shut-out cohort. Four expected respondents still out, including one lapsed prior-session attendee being personally re-engaged. Four respondents are now shut out from the picked dates entirely. This deck reflects the fifteen filed responses; keep both lists warm.</p>
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl">
+      <div>
+        <p class="roster-col-title">Pending — expected but not yet filed</p>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3">
+          <div class="pending-tile"><p class="pending-tag">Pending</p><p class="pending-name">Pending 1</p></div>
+          <div class="pending-tile"><p class="pending-tag">Pending</p><p class="pending-name">Pending 2</p></div>
+          <div class="pending-tile"><p class="pending-tag">Pending</p><p class="pending-name">Pending 3</p></div>
+          <div class="pending-tile is-reaching-out"><p class="pending-tag">Reaching out</p><p class="pending-name">Lapsed 1</p></div>
+        </div>
+        <p class="mt-4 text-sm text-muted leading-relaxed">Nudge them. Rerun the analysis when they submit.</p>
+      </div>
+      <div>
+        <p class="roster-col-title">Shut out — warm list for the next run</p>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-3">
+          <div class="pending-tile is-shutout"><p class="pending-tag">Evening only</p><p class="pending-name">Respondent 10</p><p class="pending-detail">Secondary · Int</p></div>
+          <div class="pending-tile is-shutout"><p class="pending-tag">Morning only</p><p class="pending-name">Respondent 11</p><p class="pending-detail">Secondary · Beg</p></div>
+          <div class="pending-tile is-shutout"><p class="pending-tag">Morning only</p><p class="pending-name">Respondent 13</p><p class="pending-detail">Secondary · Imp</p></div>
+          <div class="pending-tile is-shutout"><p class="pending-tag">Morning only</p><p class="pending-name">Respondent 14</p><p class="pending-detail">Secondary · Int</p></div>
+        </div>
+        <p class="mt-4 text-sm text-muted leading-relaxed">Filed the form, can't make Date 1 PM or Date 2 PM. Reach out personally so they're seen. Add a matching date to the next run.</p>
+      </div>
+    </div>
+  <!-- /REGION:waiting -->
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" data-title="Ship It" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
+    <div class="ember-glow ember-glow-cta" aria-hidden="true"></div>
+    <h2 class="font-display font-extrabold text-6xl md:text-8xl tracking-tight leading-none mb-8 text-ivory-50 text-shadow-warm relative">
+      Book the room.<br/>
+      <span class="italic font-bold">Tell the community.</span>
+    </h2>
+    <div class="flex flex-wrap gap-4 mt-4 relative">
+      <a href="https://ogarocious.com/think/where-ai-actually-saves-time" class="cta-btn-primary cta-btn">Read the write-up</a>
+      <a href="https://ogarocious.com" class="cta-btn px-5 py-3 rounded-md glass text-ivory-50 hover:border-terracotta-500">ogarocious.com</a>
+    </div>
+    <p class="mt-16 text-xs text-muted font-mono relative">Ogarocious · Liberation Through Creation · Anonymized pattern example. Data shape from a real recurring-engagement interest form (<span data-inject="response-count">15 responses</span>) · <span data-inject="updated">Updated Aug 4, 2026 · 9:15 AM CDT</span> · <span data-inject="rev">rev 1</span> · Anonymized twin deck published for domain-agnostic case example.</p>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  const sections = [...document.querySelectorAll('main > section')];
+  const navList = document.getElementById('navList');
+  const mobileNavList = document.getElementById('mobileNavList');
+  const counter = document.getElementById('counter');
+  const menuBtn = document.getElementById('menuBtn');
+  const menuLabel = document.getElementById('menuLabel');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const progressBar = document.getElementById('progressBar');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const hasGroups = sections.some(s => s.dataset.group);
+  const drawerLinks = new Array(sections.length);
+
+  sections.forEach((s) => {
+    const title = s.dataset.title || s.id;
+    const desktopItem = document.createElement('li');
+    desktopItem.dataset.target = s.id;
+    desktopItem.innerHTML = `
+      <a href="#${s.id}" class="flex items-center gap-3 group">
+        <span class="nav-dot w-2 h-2 rounded-full bg-slate-400/40 group-hover:bg-terracotta-500"></span>
+        <span class="nav-label text-dimmed group-hover:text-ivory-50 text-sm">${title}</span>
+      </a>`;
+    navList.appendChild(desktopItem);
+  });
+
+  const buildDrawerLink = (s) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${s.id}`;
+    a.className = 'drawer-item';
+    a.textContent = s.dataset.title || s.id;
+    li.appendChild(a);
+    return { li, a };
+  };
+
+  if (hasGroups) {
+    const groups = new Map();
+    sections.forEach(s => {
+      const g = s.dataset.group || 'More';
+      if (!groups.has(g)) groups.set(g, []);
+      groups.get(g).push(s);
+    });
+    groups.forEach((sects, name) => {
+      const heading = document.createElement('li');
+      heading.className = 'drawer-group';
+      heading.textContent = name;
+      mobileNavList.appendChild(heading);
+      sects.forEach(s => {
+        const { li, a } = buildDrawerLink(s);
+        mobileNavList.appendChild(li);
+        drawerLinks[sections.indexOf(s)] = a;
+      });
+    });
+  } else {
+    sections.forEach((s, i) => {
+      const { li, a } = buildDrawerLink(s);
+      mobileNavList.appendChild(li);
+      drawerLinks[i] = a;
+    });
+  }
+
+  const navItems = [...navList.children];
+  const navLinks = navItems.map(n => n.querySelector('a'));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target);
+        navItems.forEach((n, i) => {
+          n.classList.toggle('nav-active', i === idx);
+          if (navLinks[i]) {
+            if (i === idx) navLinks[i].setAttribute('aria-current', 'location');
+            else navLinks[i].removeAttribute('aria-current');
+          }
+        });
+        drawerLinks.forEach((link, i) => {
+          if (link) link.classList.toggle('is-active', i === idx);
+        });
+        counter.textContent = `${idx + 1} of ${sections.length}`;
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => io.observe(s));
+
+  let ticking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progressBar.style.transform = `scaleX(${pct})`;
+    progressBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  updateProgress();
+
+  const isMenuOpen = () => !mobileMenu.hidden;
+  function openMenu() {
+    mobileMenu.hidden = false;
+    document.body.style.overflow = 'hidden';
+    menuBtn.classList.add('is-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuLabel.textContent = 'CLOSE';
+  }
+  function closeMenu() {
+    mobileMenu.hidden = true;
+    document.body.style.overflow = '';
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuLabel.textContent = 'MENU';
+  }
+  menuBtn?.addEventListener('click', () => isMenuOpen() ? closeMenu() : openMenu());
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) closeMenu();
+  });
+
+  const currentIndex = () => {
+    const y = window.scrollY + window.innerHeight * 0.5;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= y) return i;
+    }
+    return 0;
+  };
+  const go = (dir) => {
+    const i = currentIndex();
+    const next = Math.max(0, Math.min(sections.length - 1, i + dir));
+    sections[next].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+  };
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (isMenuOpen()) return;
+    if (e.key === ' ' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+    if (e.key === 'End')  { e.preventDefault(); sections[sections.length-1].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+  });
+})();
+</script>
+</body>
+</html>

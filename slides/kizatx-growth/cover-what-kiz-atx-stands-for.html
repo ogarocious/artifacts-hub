@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cover · What Kiz ATX Stands For</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik:wght@400;500;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0d1520;
+      --electric: #4fc3f7;
+      --electric-glow: rgba(79, 195, 247, 0.35);
+      --ivory: #f5f7fa;
+      --ivory-muted: rgba(245, 247, 250, 0.72);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; width: 1536px; height: 864px; overflow: hidden; background: var(--navy); }
+
+    .cover {
+      width: 1536px;
+      height: 864px;
+      position: relative;
+      overflow: hidden;
+      background: var(--navy);
+      font-family: 'Rubik', sans-serif;
+      color: var(--ivory);
+    }
+
+    .bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('blog-cover-bg-16x9.png');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    /* subtle left-side darken so type reads cleanly */
+    .type-scrim {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 900px;
+      height: 100%;
+      background: linear-gradient(to right,
+        rgba(5, 9, 20, 0.55) 0%,
+        rgba(5, 9, 20, 0.35) 40%,
+        rgba(5, 9, 20, 0.15) 75%,
+        transparent 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* bottom-fade so the italic kick line reads cleanly against the skyline */
+    .bottom-fade {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 400px;
+      background: linear-gradient(to top,
+        rgba(5, 9, 20, 0.95) 0%,
+        rgba(5, 9, 20, 0.75) 30%,
+        rgba(5, 9, 20, 0.45) 60%,
+        rgba(5, 9, 20, 0.20) 82%,
+        transparent 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      position: absolute;
+      top: 56px;
+      left: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--electric);
+      z-index: 5;
+    }
+
+    .headline {
+      position: absolute;
+      top: 200px;
+      left: 60px;
+      right: 60px;
+      font-family: 'Anton', 'Impact', sans-serif;
+      font-weight: 400;
+      font-size: 200px;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      max-width: 1200px;
+      z-index: 5;
+    }
+    .headline .accent {
+      color: var(--electric);
+      text-shadow: 0 0 32px var(--electric-glow);
+    }
+
+    .kick {
+      position: absolute;
+      bottom: 60px;
+      left: 60px;
+      right: 60px;
+      font-family: 'DM Sans', sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 1.4;
+      color: var(--ivory);
+      z-index: 6;
+      max-width: 900px;
+    }
+
+    .brand-tag {
+      position: absolute;
+      bottom: 56px;
+      right: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--electric);
+      z-index: 5;
+      text-align: right;
+      line-height: 1.6;
+    }
+    .brand-tag .site { color: var(--ivory); display: block; margin-top: 4px;}
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="bg"></div>
+    <div class="type-scrim"></div>
+    <div class="bottom-fade"></div>
+
+    <div class="eyebrow">Kiz ATX · Essays</div>
+
+    <div class="headline">
+      What Kiz ATX<br>
+      <span class="accent">Stands For.</span>
+    </div>
+
+    <div class="kick">Black-owned. Angolan-rooted. Built for the people who want more than a fun Latin dance.</div>
+
+    <div class="brand-tag">
+      @kizatx
+      <span class="site">kizatx.com</span>
+    </div>
+  </div>
+</body>
+</html>

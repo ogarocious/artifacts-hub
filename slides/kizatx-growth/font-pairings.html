@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rubik + body font pairings · Kiz ATX</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Work+Sans:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Barlow:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #0d1520;
+      --navy-deep: #060b12;
+      --electric: #4fc3f7;
+      --ivory: #f5f7fa;
+      --ivory-muted: rgba(245, 247, 250, 0.72);
+      --ivory-dim: rgba(245, 247, 250, 0.55);
+      --rule: rgba(245, 247, 250, 0.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--navy);
+      color: var(--ivory);
+      font-family: 'Rubik', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 64px 32px 96px;
+    }
+
+    header.page-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--electric);
+      margin-bottom: 16px;
+    }
+    h1.page-title {
+      font-family: 'Anton', 'Impact', sans-serif;
+      font-weight: 400;
+      font-size: 64px;
+      line-height: 0.98;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      margin-bottom: 16px;
+    }
+    h1.page-title .accent { color: var(--electric); }
+    .page-dek {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--ivory-muted);
+      max-width: 640px;
+      line-height: 1.5;
+    }
+
+    .card {
+      margin-bottom: 64px;
+      padding: 40px 40px 44px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card-name {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 800;
+      font-size: 26px;
+      color: var(--electric);
+      letter-spacing: -0.01em;
+    }
+    .card-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ivory-dim);
+      padding: 4px 10px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+    }
+    .card-notes {
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      color: var(--ivory-muted);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .sample-h2 {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--ivory);
+      margin-bottom: 20px;
+    }
+
+    /* per-font sample bodies */
+    .sample.plex   { font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+    .sample.work   { font-family: 'Work Sans', system-ui, sans-serif; }
+    .sample.dmsans { font-family: 'DM Sans', system-ui, sans-serif; }
+    .sample.barlow { font-family: 'Barlow', system-ui, sans-serif; }
+
+    .sample p {
+      font-size: 20px;
+      line-height: 1.65;
+      color: var(--ivory);
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+    .sample p em, .sample .italic {
+      font-style: italic;
+      color: var(--ivory-muted);
+    }
+
+    .kick-preview {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+    }
+    .kick-preview .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ivory-dim);
+      margin-bottom: 8px;
+    }
+    .kick-preview p {
+      font-size: 22px;
+      font-style: italic;
+      color: var(--ivory);
+      line-height: 1.4;
+    }
+
+    /* rec footer */
+    .rec {
+      margin-top: 24px;
+      padding: 32px 0 8px;
+      border-top: 1px solid var(--rule);
+    }
+    .rec .rec-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--electric);
+      margin-bottom: 10px;
+    }
+    .rec .rec-body {
+      font-family: 'Rubik', sans-serif;
+      font-size: 16px;
+      color: var(--ivory);
+      line-height: 1.55;
+    }
+    .rec .rec-body strong { color: var(--electric); font-weight: 700; }
+
+    @media (max-width: 640px) {
+      h1.page-title { font-size: 44px; }
+      .card { padding: 28px 24px 32px; }
+      .sample p { font-size: 18px; }
+      .kick-preview p { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <header class="page-header">
+      <div class="eyebrow">Kiz ATX · Design system · Type</div>
+      <h1 class="page-title">Rubik + <span class="accent">a body face.</span></h1>
+      <p class="page-dek">Four sans candidates that pair well with Rubik and have real italics (not synthetic browser-slant). Each shows a Rubik 800 heading for reference, a body paragraph, and an italic kick sample. Italic is where a body font tells you if it can carry your voice.</p>
+    </header>
+
+    <!-- ── IBM PLEX SANS ── -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-name">IBM Plex Sans</div>
+        <div class="card-badge">Google Fonts · Sans · Distinctive</div>
+      </div>
+      <p class="card-notes">Workhorse body sans with real character. Distinctive cuts on the c, g, l, and a. Slightly technical, slightly architectural. Was designed to carry IBM's whole editorial system, so it's built to do long reading without going invisible. Italic has real personality.</p>
+
+      <h2 class="sample-h2">What we owe the dance</h2>
+      <div class="sample plex">
+        <p>Kizomba is Angolan. It is also Antillean. It is also Cape Verdean. It is also, through four hundred years of colonial history, carrying <em>Portuguese language and Portuguese-diasporic voices</em>. And in its American life, it is in conversation with Black American music.</p>
+
+        <div class="kick-preview">
+          <div class="label">Italic kick sample</div>
+          <p>On origin, diaspora, and the full lineage that made this dance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WORK SANS ── -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-name">Work Sans</div>
+        <div class="card-badge">Google Fonts · Sans · Humanist</div>
+      </div>
+      <p class="card-notes">Humanist grotesque designed for on-screen reading. Warm, approachable, essayistic. Reads like a person is talking to you, not a machine. Pairs cleanly with Rubik's rounded warmth without competing. Italic is quiet and clear.</p>
+
+      <h2 class="sample-h2">What we owe the dance</h2>
+      <div class="sample work">
+        <p>Kizomba is Angolan. It is also Antillean. It is also Cape Verdean. It is also, through four hundred years of colonial history, carrying <em>Portuguese language and Portuguese-diasporic voices</em>. And in its American life, it is in conversation with Black American music.</p>
+
+        <div class="kick-preview">
+          <div class="label">Italic kick sample</div>
+          <p>On origin, diaspora, and the full lineage that made this dance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DM SANS ── -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-name">DM Sans</div>
+        <div class="card-badge">Google Fonts · Sans · Restrained</div>
+      </div>
+      <p class="card-notes">Modern geometric with the personality dial turned down. Cleanest of the four. Reads as understated and contemporary. Best pick if you want the type to disappear and let the writing lead. Slightly more austere than Rubik, which provides real hierarchy contrast.</p>
+
+      <h2 class="sample-h2">What we owe the dance</h2>
+      <div class="sample dmsans">
+        <p>Kizomba is Angolan. It is also Antillean. It is also Cape Verdean. It is also, through four hundred years of colonial history, carrying <em>Portuguese language and Portuguese-diasporic voices</em>. And in its American life, it is in conversation with Black American music.</p>
+
+        <div class="kick-preview">
+          <div class="label">Italic kick sample</div>
+          <p>On origin, diaspora, and the full lineage that made this dance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BARLOW ── -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-name">Barlow</div>
+        <div class="card-badge">Google Fonts · Sans · Slightly condensed</div>
+      </div>
+      <p class="card-notes">Slightly condensed grotesque. More space-efficient, letters pack tighter without feeling cramped. Different PROPORTION from Rubik, which is where the pairing contrast comes from. Feels editorial and functional at once. Nice italic slant.</p>
+
+      <h2 class="sample-h2">What we owe the dance</h2>
+      <div class="sample barlow">
+        <p>Kizomba is Angolan. It is also Antillean. It is also Cape Verdean. It is also, through four hundred years of colonial history, carrying <em>Portuguese language and Portuguese-diasporic voices</em>. And in its American life, it is in conversation with Black American music.</p>
+
+        <div class="kick-preview">
+          <div class="label">Italic kick sample</div>
+          <p>On origin, diaspora, and the full lineage that made this dance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendation -->
+    <div class="rec">
+      <div class="rec-label">My pick</div>
+      <div class="rec-body">
+        <strong>Work Sans</strong> for your voice. It reads warm and human, which matches how you actually write. Italic is clean without being decorative, so kick lines and deks land. It sits comfortably alongside Rubik without competing (same humanist family, different job). <strong>IBM Plex Sans</strong> is the strong #2 if you want more visible character in the body: Plex has real personality (some love it, some feel it's too technical). Skip DM Sans if you want the type to have any voice; skip Barlow unless you specifically want condensed proportions.
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
