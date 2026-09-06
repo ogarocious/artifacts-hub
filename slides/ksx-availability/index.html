@@ -1,0 +1,1217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KSX Availability Grid · Kiz Summit Exchange 2026</title>
+<meta name="description" content="Every night of the KSX run against what Cabana Club, Factory on 5th and RichesArt have actually said. Availability only. Internal. Not for distribution." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0f0b08" />
+
+<link rel="canonical" href="https://slides.ogarocious.com/ksx-availability/" />
+
+<meta property="og:site_name" content="Kiz Summit Exchange" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://slides.ogarocious.com/ksx-availability/" />
+<meta property="og:title" content="KSX Availability Grid · three venues, ten nights, no prices" />
+<meta property="og:description" content="Ten dates against three venues. Every night has cover. Not one venue has quoted." />
+<meta property="og:image" content="https://slides.ogarocious.com/ksx-availability/og.png" />
+<meta property="og:image:alt" content="KSX Availability Grid cover: 9 nights needing a room, 0 with no option, 1 venue offering all nine, 0 prices in hand." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KSX Availability Grid" />
+<meta name="twitter:description" content="Ten dates against three venues. Availability only, nothing booked." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/ksx-availability/og.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: {
+            950: '#080604', 900: '#0f0b08', 800: '#1a120c',
+            700: '#241811', 600: '#2f2118', 500: '#3d2c20',
+          },
+          crimson: {
+            300: '#e08475', 400: '#d05e4c', 500: '#c0392b',
+            600: '#9a2d21', 700: '#761f16',
+          },
+          gold: {
+            300: '#f2d896', 400: '#ecc978', 500: '#e5b95a',
+            600: '#c99e42', 700: '#a67f34',
+          },
+          ivory: {
+            50: '#faf6ee', 100: '#f5f0e8', 200: '#e6dccb', 300: '#c9bda9',
+          },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'Georgia', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  body {
+    background-color: #0f0b08;
+    background-image:
+      radial-gradient(ellipse 1200px 700px at 20% 10%, rgba(192, 57, 43, 0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 80%, rgba(229, 185, 90, 0.06), transparent 65%),
+      linear-gradient(180deg, #080604 0%, #0f0b08 40%, #0f0b08 60%, #080604 100%);
+    min-height: 100vh;
+    color: #f5f0e8;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  .text-body   { color: rgba(245, 240, 232, 0.90); }
+  .text-dimmed { color: rgba(245, 240, 232, 0.72); }
+  .text-muted  { color: rgba(245, 240, 232, 0.55); }
+  .text-deep   { color: rgba(245, 240, 232, 0.30); }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: #c0392b;
+    transform: scaleX(0); transform-origin: left center;
+    z-index: 51; pointer-events: none; will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(26, 18, 12, 0.65);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(192, 57, 43, 0.22);
+    box-shadow:
+      0 1px 0 rgba(245, 240, 232, 0.03) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(192, 57, 43, 0.42); }
+
+  .accent-rule {
+    display: inline-block; width: 48px; height: 2px;
+    background: #c0392b; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid #e5b95a;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Header (fixed top bar) */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: rgba(8, 6, 4, 0.80);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(192, 57, 43, 0.14);
+  }
+  .site-header .brand-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: inherit;
+  }
+  .site-header .brand-dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: #c0392b;
+    transition: background-color 220ms ease;
+  }
+  .site-header .brand-link:hover .brand-dot { background: #e5b95a; }
+  .site-header .brand-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e5b95a;
+  }
+  .site-header .brand-sub {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: rgba(245, 240, 232, 0.55);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .site-header .meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.72rem; color: rgba(245, 240, 232, 0.55);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .site-header .counter { color: rgba(245, 240, 232, 0.75); }
+  .site-header .sep { color: rgba(245, 240, 232, 0.25); }
+  @media (max-width: 900px) { .site-header .lg-only { display: none; } }
+  @media (max-width: 700px) { .site-header .md-only { display: none; } }
+
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.07);
+    color: #f5f0e8;
+    display: inline-block; margin: 0 1px;
+  }
+
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.85rem; border-radius: 999px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.08);
+    color: #f5f0e8;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(229, 185, 90, 0.70);
+    background: rgba(192, 57, 43, 0.14);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+  @media (min-width: 768px) { .menu-btn { display: none; } }
+
+  /* Side navigation (desktop only) */
+  .side-nav {
+    position: fixed; top: 0; left: 0; height: 100vh;
+    width: 280px;
+    padding: 5rem 1.75rem 2rem;
+    z-index: 40;
+    background: rgba(8, 6, 4, 0.60);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-right: 1px solid rgba(192, 57, 43, 0.12);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) { .side-nav { display: flex; } }
+  .side-nav .nav-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.20);
+  }
+  .side-nav .nav-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.1rem;
+  }
+  .side-nav .nav-list a {
+    display: block;
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    color: rgba(245, 240, 232, 0.60);
+    text-decoration: none;
+    font-size: 0.88rem; line-height: 1.3;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+  .side-nav .nav-list a:hover { color: #e5b95a; background: rgba(192, 57, 43, 0.08); }
+  .side-nav .nav-list .nav-active a { color: #e5b95a; background: rgba(192, 57, 43, 0.14); }
+  .side-nav .nav-foot {
+    font-size: 0.72rem; color: rgba(245, 240, 232, 0.45);
+    line-height: 1.55;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(192, 57, 43, 0.12);
+  }
+  .side-nav .nav-foot .foot-brand { color: rgba(229, 185, 90, 0.85); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.65rem; }
+
+  /* Drawer (mobile only) */
+  .drawer {
+    position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    background: rgba(8, 6, 4, 0.85);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(15, 11, 8, 0.98);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .drawer-list {
+    border-left: 1px solid rgba(192, 57, 43, 0.30);
+    padding-left: 1rem;
+    margin: 0; list-style: none;
+  }
+  .drawer-item {
+    display: block; padding: 0.85rem 0.9rem; margin-left: -0.5rem;
+    color: #f5f0e8; text-decoration: none;
+    font-size: 1.1rem; font-weight: 500; line-height: 1.3;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .drawer-item:hover, .drawer-item.is-active {
+    background: rgba(192, 57, 43, 0.14);
+    color: #e5b95a;
+  }
+
+  /* Cover TOC */
+  .deck-toc { margin-top: 2.5rem; max-width: 32rem; position: relative; z-index: 2; }
+  .deck-toc summary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.55rem 1rem;
+    background: rgba(26, 18, 12, 0.55);
+    border: 1px dashed rgba(229, 185, 90, 0.55);
+    border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(229, 185, 90, 0.95);
+    cursor: pointer; list-style: none;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .deck-toc summary::-webkit-details-marker { display: none; }
+  .deck-toc summary::before {
+    content: '▸'; font-size: 0.7rem;
+    transition: transform 200ms ease; display: inline-block;
+  }
+  .deck-toc[open] summary::before { transform: rotate(90deg); }
+  .deck-toc summary:hover { border-color: rgba(229, 185, 90, 0.95); background: rgba(26, 18, 12, 0.80); }
+  .deck-toc[open] summary { background: rgba(192, 57, 43, 0.14); border-color: rgba(229, 185, 90, 0.95); }
+  .toc-list {
+    margin-top: 1rem; padding: 1.25rem 1.5rem;
+    background: rgba(26, 18, 12, 0.75);
+    border: 1px solid rgba(192, 57, 43, 0.18);
+    border-radius: 8px; list-style: none;
+  }
+  .toc-list li {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem; padding: 0.35rem 0;
+    color: rgba(245, 240, 232, 0.85);
+  }
+  .toc-list li a {
+    color: rgba(245, 240, 232, 0.90);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(229, 185, 90, 0.35);
+    padding-bottom: 1px;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .toc-list li a:hover { color: #e5b95a; border-bottom-color: rgba(229, 185, 90, 0.95); }
+
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: #c0392b;
+  }
+
+  .h-display {
+    font-family: "Rubik", sans-serif;
+    font-weight: 800; letter-spacing: -0.01em;
+    color: #f5f0e8; line-height: 1.02;
+  }
+  .h-gold { color: #e5b95a; }
+
+  .stat-tile {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.25);
+    background: rgba(26, 18, 12, 0.70);
+  }
+  .stat-tile .label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(229, 185, 90, 0.90);
+    text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .stat-tile .value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.35rem);
+    color: #f5f0e8; line-height: 1.1;
+  }
+  .stat-tile .value.gold { color: #e5b95a; }
+  .stat-tile .value.green { color: #7fbf92; }
+  .stat-tile .value.crimson { color: #e08475; }
+  .stat-tile .sub { color: rgba(245, 240, 232, 0.65); font-size: 0.85rem; margin-top: 0.4rem; }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.28rem 0.75rem; border-radius: 999px;
+    background: rgba(26, 18, 12, 0.65);
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    color: rgba(245, 240, 232, 0.85);
+  }
+  .chip.internal {
+    border: 1px dashed rgba(229, 185, 90, 0.80);
+    background: rgba(229, 185, 90, 0.08);
+    color: #e5b95a;
+    text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600;
+  }
+
+  /* ============ STATUS SYSTEM ============ */
+  .st {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    padding: 0.26rem 0.7rem 0.26rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid;
+    font-family: "Rubik", sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    white-space: nowrap;
+  }
+  .st .dot { width: 7px; height: 7px; border-radius: 999px; flex: 0 0 auto; }
+
+  .st-go    { color: #8fcfa3; background: rgba(127, 191, 146, 0.13); border-color: rgba(127, 191, 146, 0.42); }
+  .st-go .dot { background: #7fbf92; }
+  .st-hold  { color: #ecc978; background: rgba(229, 185, 90, 0.13); border-color: rgba(229, 185, 90, 0.45); }
+  .st-hold .dot { background: #e5b95a; }
+  .st-stop  { color: #e08475; background: rgba(192, 57, 43, 0.16); border-color: rgba(192, 57, 43, 0.50); }
+  .st-stop .dot { background: #c0392b; }
+  .st-void  { color: rgba(245, 240, 232, 0.60); background: rgba(245, 240, 232, 0.05); border-color: rgba(245, 240, 232, 0.18); }
+  .st-void .dot { background: rgba(245, 240, 232, 0.42); }
+
+  .st-note {
+    display: block;
+    font-family: "Rubik", sans-serif;
+    font-size: 0.7rem; font-weight: 400; line-height: 1.35;
+    color: rgba(245, 240, 232, 0.55);
+    margin-top: 0.35rem; max-width: 17ch;
+  }
+
+  /* ============ AVAILABILITY TABLE ============ */
+  .avail-wrap {
+    border: 1px solid rgba(192, 57, 43, 0.22);
+    border-radius: 12px;
+    background: rgba(26, 18, 12, 0.55);
+    overflow: hidden;
+  }
+  .avail-scroll { overflow-x: auto; }
+  .avail { border-collapse: collapse; width: 100%; min-width: 880px; }
+  .avail thead th {
+    background: rgba(8, 6, 4, 0.75);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(229, 185, 90, 0.90);
+    text-align: left;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.32);
+    white-space: nowrap;
+  }
+  .avail thead th .who {
+    display: block;
+    font-family: "Rubik", sans-serif;
+    font-size: 0.66rem; font-weight: 400;
+    letter-spacing: 0; text-transform: none;
+    color: rgba(245, 240, 232, 0.45);
+    margin-top: 0.15rem;
+  }
+  .avail tbody td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.12);
+    vertical-align: middle;
+  }
+  .avail tbody tr:last-child td { border-bottom: 0; }
+  .avail tbody tr.is-weekend td { background: rgba(229, 185, 90, 0.045); }
+  .avail tbody tr.is-offvenue td { opacity: 0.55; }
+
+  .d-num {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1.05rem;
+    color: #f5f0e8; line-height: 1.1; white-space: nowrap;
+  }
+  .is-weekend .d-num { color: #e5b95a; }
+  .d-day {
+    display: block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.50);
+    margin-top: 0.1rem;
+  }
+  .ask {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; color: rgba(245, 240, 232, 0.88);
+    white-space: nowrap; font-variant-numeric: tabular-nums;
+  }
+  .ask .end { color: #e5b95a; font-weight: 500; }
+  .ask .heads {
+    display: block;
+    font-size: 0.65rem; color: rgba(245, 240, 232, 0.45);
+    margin-top: 0.2rem; white-space: normal;
+  }
+
+  .cov { display: flex; align-items: center; gap: 3px; }
+  .cov i {
+    width: 14px; height: 6px; border-radius: 2px;
+    background: rgba(245, 240, 232, 0.14); display: block;
+  }
+  .cov i.on { background: #7fbf92; }
+  .cov i.maybe { background: #e5b95a; }
+  .cov b {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem; font-weight: 700;
+    color: rgba(245, 240, 232, 0.55);
+    margin-left: 0.4rem;
+  }
+
+  /* Responsive: table collapses to one card per night */
+  @media (max-width: 860px) {
+    .avail-scroll { overflow-x: visible; }
+    .avail { min-width: 0; display: block; }
+    .avail thead { display: none; }
+    .avail tbody { display: block; }
+    .avail tbody tr {
+      display: block;
+      border: 1px solid rgba(192, 57, 43, 0.22);
+      border-radius: 10px;
+      background: rgba(26, 18, 12, 0.60);
+      padding: 0.35rem 1rem 0.6rem;
+      margin-bottom: 0.85rem;
+    }
+    .avail tbody tr.is-weekend {
+      border-color: rgba(229, 185, 90, 0.34);
+      background: rgba(229, 185, 90, 0.05);
+    }
+    .avail tbody tr.is-weekend td { background: none; }
+    .avail tbody td {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 0.85rem;
+      align-items: baseline;
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed rgba(192, 57, 43, 0.14);
+    }
+    .avail tbody td:last-child { border-bottom: 0; }
+    .avail tbody td::before {
+      content: attr(data-lab);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(229, 185, 90, 0.80);
+      padding-top: 0.25rem;
+    }
+    .avail tbody td.cell-date {
+      display: flex; align-items: baseline; gap: 0.6rem;
+      border-bottom: 1px solid rgba(192, 57, 43, 0.22);
+      padding-top: 0.75rem;
+    }
+    .avail tbody td.cell-date::before { display: none; }
+    .avail tbody td.cell-date .d-day { display: inline; margin-top: 0; }
+    .ask, .ask .heads { white-space: normal; }
+    .st-note { max-width: none; }
+  }
+
+  /* ============ READOUT CARDS ============ */
+  .readout {
+    padding: 1.4rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.20);
+    background: rgba(26, 18, 12, 0.62);
+    display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .readout .tag {
+    align-self: flex-start;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 4px;
+  }
+  .tag-go   { color: #8fcfa3; background: rgba(127, 191, 146, 0.14); }
+  .tag-hold { color: #ecc978; background: rgba(229, 185, 90, 0.14); }
+  .tag-stop { color: #e08475; background: rgba(192, 57, 43, 0.18); }
+  .readout h3 {
+    font-family: "Rubik", sans-serif; font-weight: 700;
+    font-size: 1.05rem; line-height: 1.25; color: #f5f0e8; margin: 0;
+  }
+  .readout p {
+    margin: 0; font-size: 0.92rem; line-height: 1.6;
+    color: rgba(245, 240, 232, 0.78);
+  }
+  .readout p strong { color: #f5f0e8; font-weight: 600; }
+
+  /* ============ VENUE CARDS ============ */
+  .vcard {
+    padding: 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.22);
+    background: rgba(26, 18, 12, 0.62);
+    display: flex; flex-direction: column; gap: 1.1rem;
+  }
+  .vcard.is-lead { border-color: rgba(229, 185, 90, 0.55); }
+  .vcard .vname {
+    font-family: "Rubik", sans-serif; font-weight: 700;
+    font-size: 1.15rem; color: #f5f0e8; line-height: 1.2;
+  }
+  .vcard .vwho {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.66rem; letter-spacing: 0.08em;
+    color: rgba(245, 240, 232, 0.50); margin-top: 0.2rem;
+  }
+  .vspec { display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
+  .vspec > div {
+    display: flex; justify-content: space-between; gap: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(192, 57, 43, 0.14);
+    font-size: 0.85rem;
+  }
+  .vspec > div:first-child { border-top: 0; padding-top: 0; }
+  .vspec dt { color: rgba(245, 240, 232, 0.52); flex: 0 0 auto; }
+  .vspec dd {
+    margin: 0; text-align: right;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem; font-weight: 500; color: #f5f0e8;
+  }
+  .vspec dd.v-go { color: #8fcfa3; }
+  .vspec dd.v-hold { color: #ecc978; }
+  .vspec dd.v-stop { color: #e08475; }
+  .vnote {
+    font-size: 0.85rem; line-height: 1.55;
+    color: rgba(245, 240, 232, 0.72);
+    background: rgba(8, 6, 4, 0.45);
+    border-left: 2px solid rgba(192, 57, 43, 0.45);
+    padding: 0.75rem 0.9rem; border-radius: 0 6px 6px 0;
+  }
+  .vcard.is-lead .vnote { border-left-color: rgba(229, 185, 90, 0.70); }
+  .vnote strong { color: #f5f0e8; font-weight: 600; }
+
+  /* ============ SOURCE LIST ============ */
+  .src-list { list-style: none; padding: 0; margin: 0; }
+  .src-list li {
+    display: grid; grid-template-columns: 10rem 1fr;
+    gap: 1.25rem; padding: 1.1rem 0;
+    border-bottom: 1px dashed rgba(192, 57, 43, 0.16);
+  }
+  .src-list li:last-child { border-bottom: 0; }
+  .src-list .src-key {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    color: #e5b95a; font-weight: 600; padding-top: 0.15rem;
+  }
+  .src-list .src-key span {
+    display: block; color: rgba(245, 240, 232, 0.42);
+    font-weight: 400; letter-spacing: 0.06em; margin-top: 0.25rem;
+  }
+  .src-list .src-body { color: rgba(245, 240, 232, 0.82); line-height: 1.6; font-size: 0.92rem; }
+  .src-list .src-body strong { color: #f5f0e8; font-weight: 600; }
+  .conf {
+    display: inline-block; margin-top: 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.18rem 0.5rem; border-radius: 3px; font-weight: 700;
+  }
+  .conf-hi { color: #8fcfa3; background: rgba(127, 191, 146, 0.14); }
+  .conf-mid { color: #ecc978; background: rgba(229, 185, 90, 0.14); }
+  @media (max-width: 700px) {
+    .src-list li { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+
+  /* ============ OPEN / LOG LISTS ============ */
+  .ask-list { list-style: none; padding: 0; margin: 0; }
+  .ask-list li {
+    display: grid; grid-template-columns: 10rem 1fr;
+    gap: 1rem; padding: 1rem 0;
+    border-bottom: 1px dashed rgba(192, 57, 43, 0.14);
+  }
+  .ask-list li:last-child { border-bottom: 0; }
+  .ask-list .marker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.10em;
+    color: #e5b95a; font-weight: 600; padding-top: 0.15rem;
+  }
+  .ask-list .ask-body { color: rgba(245, 240, 232, 0.82); line-height: 1.6; font-size: 0.92rem; }
+  .ask-list .ask-body strong { color: #f5f0e8; font-weight: 600; }
+  @media (max-width: 700px) {
+    .ask-list li { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+
+  .log-list { list-style: none; padding: 0; margin: 0; }
+  .log-list li {
+    display: grid; grid-template-columns: 7rem 1fr;
+    gap: 1rem; padding: 0.7rem 0;
+    border-bottom: 1px dashed rgba(192, 57, 43, 0.12);
+    font-size: 0.88rem;
+  }
+  .log-list li:last-child { border-bottom: 0; }
+  .log-list .log-date {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: rgba(229, 185, 90, 0.85); padding-top: 0.15rem;
+  }
+  .log-list .log-body { color: rgba(245, 240, 232, 0.78); line-height: 1.55; }
+
+  .fine { font-size: 0.85rem; line-height: 1.6; color: rgba(245, 240, 232, 0.60); }
+  .fine strong { color: rgba(245, 240, 232, 0.88); font-weight: 600; }
+</style>
+</head>
+<body class="font-sans">
+
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a class="brand-link" href="#cover">
+    <span class="brand-dot"></span>
+    <span class="brand-name">KSX</span>
+    <span class="brand-sub md-only">/ Availability</span>
+  </a>
+  <div class="meta">
+    <span class="counter md-only"><span id="slideIdx">01</span> / <span id="slideTotal">07</span></span>
+    <span class="sep md-only">·</span>
+    <span class="lg-only">updated <span data-inject="updated">2026-09-06</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only">rev <span data-inject="rev">1</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only"><span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">
+      <span class="menu-hamburger">≡ menu</span>
+      <span class="menu-close">× close</span>
+    </button>
+  </div>
+</header>
+
+<nav class="side-nav" aria-label="Deck sections">
+  <div>
+    <div class="nav-label">Sections</div>
+    <ul class="nav-list" id="sideNavList"></ul>
+  </div>
+  <div class="nav-foot">
+    <div class="foot-brand">Kiz Summit Exchange</div>
+    Availability grid · rev <span data-inject="rev">1</span>
+    <br /><span class="text-deep">Internal · Do not distribute</span>
+  </div>
+</nav>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-panel">
+    <div class="drawer-label">Sections</div>
+    <ul class="drawer-list" id="drawerList"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll">
+
+  <!-- Cover -->
+  <section id="cover" class="snap-slide min-h-screen flex items-center px-6 md:px-14 pt-24 pb-16" data-title="Cover">
+    <div class="max-w-5xl w-full">
+      <span class="accent-rule"></span>
+      <div class="eyebrow mb-4">KSX Availability Grid</div>
+      <h1 class="h-display text-[clamp(2.4rem,5.5vw,4.4rem)] mb-6">
+        Three venues.<br />
+        Ten nights.<br />
+        Nobody has quoted.
+      </h1>
+      <p class="text-body text-lg md:text-xl max-w-3xl leading-relaxed">
+        Every date in the run against what Cabana Club, Factory on 5th and RichesArt have
+        actually said. For the first time in this search, no night is uncovered. Also for the
+        first time, the thing blocking a decision is not availability.
+      </p>
+
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+        <div class="stat-tile">
+          <div class="label">Nights needing a room</div>
+          <div class="value">9</div>
+          <div class="sub">Oct 31 to Nov 8</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Nights with no option</div>
+          <div class="value green">0</div>
+          <div class="sub">first time true</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Venues offering all nine</div>
+          <div class="value gold">1</div>
+          <div class="sub">RichesArt</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">Firm prices in hand</div>
+          <div class="value crimson">0</div>
+          <div class="sub">out of three</div>
+        </div>
+      </div>
+
+      <details class="deck-toc">
+        <summary>▸ Contents</summary>
+        <ol class="toc-list">
+          <li><a href="#grid">The grid</a></li>
+          <li><a href="#decides">What the grid decides</a></li>
+          <li><a href="#rooms">The three rooms</a></li>
+          <li><a href="#sources">Where each answer came from</a></li>
+          <li><a href="#open">Still open</a></li>
+          <li><a href="#log">Update log</a></li>
+        </ol>
+      </details>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <span class="chip internal">Internal · Do not share with venues</span>
+        <span class="chip">Source: venues.md · Armature</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- The grid -->
+  <section id="grid" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-20" data-title="The grid">
+    <div class="max-w-6xl w-full">
+      <div class="eyebrow mb-3">Availability only</div>
+      <h2 class="h-display text-[clamp(1.8rem,3.6vw,2.9rem)] mb-4">Ten nights, three answers each</h2>
+      <p class="text-dimmed max-w-3xl mb-6 leading-relaxed">
+        Gold rows are the weekend and holiday nights carrying up to 125 people. Hours and end
+        times come from <span class="font-mono text-[0.85em] text-ivory-200">schedule-times.md</span>
+        and are the ask, not anything a venue has confirmed.
+      </p>
+
+      <div class="flex flex-wrap gap-2.5 mb-6 items-center">
+        <span class="chip">Key</span>
+        <span class="st st-go"><span class="dot"></span>Available</span>
+        <span class="st st-hold"><span class="dot"></span>Conditional</span>
+        <span class="st st-stop"><span class="dot"></span>Not offered</span>
+        <span class="st st-void"><span class="dot"></span>Not answered</span>
+      </div>
+
+      <div class="avail-wrap">
+        <div class="avail-scroll">
+          <table class="avail">
+            <thead>
+              <tr>
+                <th scope="col">Night</th>
+                <th scope="col">The ask</th>
+                <th scope="col">Cabana Club<span class="who">Jana Wester · 4 Sept</span></th>
+                <th scope="col">Factory on 5th<span class="who">Kara · handwritten</span></th>
+                <th scope="col">RichesArt<span class="who">Daniela · 4 Sept</span></th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="is-weekend">
+                <td class="cell-date"><span class="d-num">Oct 31</span><span class="d-day">Sat · Halloween</span></td>
+                <td data-lab="The ask"><span class="ask">9:00pm to <span class="end">2:00am</span><span class="heads">5.0 hrs · up to 125</span></span></td>
+                <td data-lab="Cabana"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Factory"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="RichesArt"><span class="st st-hold"><span class="dot"></span>Conditional</span><span class="st-note">Said no on the call, then agreed to price it</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i class="maybe"></i><b>2+1</b></span></td>
+              </tr>
+
+              <tr class="is-weekend">
+                <td class="cell-date"><span class="d-num">Nov 1</span><span class="d-day">Sun</span></td>
+                <td data-lab="The ask"><span class="ask">7:00pm to <span class="end">11:00pm</span><span class="heads">4.0 hrs · up to 125</span></span></td>
+                <td data-lab="Cabana"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Factory"><span class="st st-void"><span class="dot"></span>Not answered</span></td>
+                <td data-lab="RichesArt"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i></i><b>2</b></span></td>
+              </tr>
+
+              <tr>
+                <td class="cell-date"><span class="d-num">Nov 2</span><span class="d-day">Mon</span></td>
+                <td data-lab="The ask"><span class="ask">7:00pm to <span class="end">12:00am</span><span class="heads">5.0 hrs · about 55</span></span></td>
+                <td data-lab="Cabana"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Factory"><span class="st st-void"><span class="dot"></span>Not answered</span></td>
+                <td data-lab="RichesArt"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i></i><b>2</b></span></td>
+              </tr>
+
+              <tr>
+                <td class="cell-date"><span class="d-num">Nov 3</span><span class="d-day">Tue</span></td>
+                <td data-lab="The ask"><span class="ask">7:00pm to <span class="end">12:00am</span><span class="heads">5.0 hrs · about 55</span></span></td>
+                <td data-lab="Cabana"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Factory"><span class="st st-hold"><span class="dot"></span>Conditional</span><span class="st-note">Only if the Tuesday session moves to Monday</span></td>
+                <td data-lab="RichesArt"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i class="maybe"></i><b>2+1</b></span></td>
+              </tr>
+
+              <tr>
+                <td class="cell-date"><span class="d-num">Nov 4</span><span class="d-day">Wed</span></td>
+                <td data-lab="The ask"><span class="ask">7:00pm to <span class="end">12:00am</span><span class="heads">5.0 hrs · about 55</span></span></td>
+                <td data-lab="Cabana"><span class="st st-stop"><span class="dot"></span>Not offered</span></td>
+                <td data-lab="Factory"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="RichesArt"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i></i><b>2</b></span></td>
+              </tr>
+
+              <tr>
+                <td class="cell-date"><span class="d-num">Nov 5</span><span class="d-day">Thu</span></td>
+                <td data-lab="The ask"><span class="ask">6:30pm to <span class="end">11:00pm</span><span class="heads">4.5 hrs · about 55</span></span></td>
+                <td data-lab="Cabana"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Factory"><span class="st st-stop"><span class="dot"></span>Booked</span></td>
+                <td data-lab="RichesArt"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i></i><b>2</b></span></td>
+              </tr>
+
+              <tr class="is-weekend">
+                <td class="cell-date"><span class="d-num">Nov 6</span><span class="d-day">Fri</span></td>
+                <td data-lab="The ask"><span class="ask">7:00pm to <span class="end">2:00am</span><span class="heads">7.0 hrs · up to 125</span></span></td>
+                <td data-lab="Cabana"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Factory"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="RichesArt"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i class="on"></i><b>3</b></span></td>
+              </tr>
+
+              <tr class="is-weekend">
+                <td class="cell-date"><span class="d-num">Nov 7</span><span class="d-day">Sat · biggest day</span></td>
+                <td data-lab="The ask"><span class="ask">12:00pm to <span class="end">2:00am</span><span class="heads">11.0 hrs across 3 blocks · up to 125</span></span></td>
+                <td data-lab="Cabana"><span class="st st-stop"><span class="dot"></span>Not offered</span></td>
+                <td data-lab="Factory"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="RichesArt"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i></i><b>2</b></span></td>
+              </tr>
+
+              <tr class="is-weekend">
+                <td class="cell-date"><span class="d-num">Nov 8</span><span class="d-day">Sun</span></td>
+                <td data-lab="The ask"><span class="ask">12:00pm to <span class="end">12:00am</span><span class="heads">8.0 hrs across 2 blocks · up to 125</span></span></td>
+                <td data-lab="Cabana"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Factory"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="RichesArt"><span class="st st-go"><span class="dot"></span>Available</span></td>
+                <td data-lab="Options"><span class="cov"><i class="on"></i><i class="on"></i><i class="on"></i><b>3</b></span></td>
+              </tr>
+
+              <tr class="is-offvenue">
+                <td class="cell-date"><span class="d-num">Nov 9</span><span class="d-day">Mon</span></td>
+                <td data-lab="The ask"><span class="ask">8:00am to 9:30am<span class="heads">off venue, no rental needed</span></span></td>
+                <td data-lab="Cabana"><span class="st st-void"><span class="dot"></span>Not asked</span></td>
+                <td data-lab="Factory"><span class="st st-stop"><span class="dot"></span>Booked</span></td>
+                <td data-lab="RichesArt"><span class="st st-void"><span class="dot"></span>Not asked</span></td>
+                <td data-lab="Options"><span class="cov"><b>n/a</b></span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p class="fine mt-5 max-w-4xl">
+        <strong>Headcounts differ by venue.</strong> Cabana and Factory were told up to 125 on
+        weekends and about 55 on weeknights. RichesArt was told 50 to 60 weeknights and up to
+        100 weekends. Any like for like price comparison has to correct for that.
+      </p>
+    </div>
+  </section>
+
+  <!-- What it decides -->
+  <section id="decides" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-20" data-title="What it decides">
+    <div class="max-w-6xl w-full">
+      <div class="eyebrow mb-3">Read the grid</div>
+      <h2 class="h-display text-[clamp(1.8rem,3.6vw,2.9rem)] mb-8">What the grid decides, and what it does not</h2>
+
+      <div class="grid md:grid-cols-2 gap-5">
+
+        <div class="readout">
+          <span class="tag tag-go">Solved</span>
+          <h3>Every night now has at least two options</h3>
+          <p>The holes do not overlap. Cabana's two refusals, <strong>Nov 4 and Nov 7</strong>, are
+          both covered by Factory and RichesArt. Factory's one booking inside the run,
+          <strong>Nov 5</strong>, is covered by Cabana and RichesArt. Sat Nov 7 was the biggest
+          open risk in this search and it now has two venues behind it.</p>
+        </div>
+
+        <div class="readout">
+          <span class="tag tag-hold">The real question</span>
+          <h3>The only venue that can take the whole run may be too small</h3>
+          <p>RichesArt is the single room that could hold all nine nights. Its main floor measures
+          about <strong>1,050 sq ft</strong> off the floor plan, against a brief of 1,700 to 2,000
+          sq ft of usable open floor. Those are the same venue. That tension is the decision, not
+          a detail.</p>
+        </div>
+
+        <div class="readout">
+          <span class="tag tag-hold">Where to push</span>
+          <h3>Nov 6 and Nov 8 are the only genuinely contested nights</h3>
+          <p>All three venues are open on both, so those are the two dates where quotes actually
+          compete against each other. <strong>Oct 31 joins them</strong> if Daniela's conditional
+          turns into a yes, which would make Halloween the most competitive night of the run.</p>
+        </div>
+
+        <div class="readout">
+          <span class="tag tag-stop">Blocking everything</span>
+          <h3>Not one venue has given a price</h3>
+          <p>Cabana wants top choice dates before quoting and has not replied since 4 Sept. Factory
+          sits at $200/hr from the file, never confirmed for this booking. RichesArt's proposal,
+          built around the $7,000 figure, has not arrived.
+          <strong>Availability without pricing cannot be decided on.</strong></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- The three rooms -->
+  <section id="rooms" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-20" data-title="The three rooms">
+    <div class="max-w-6xl w-full">
+      <div class="eyebrow mb-3">Side by side</div>
+      <h2 class="h-display text-[clamp(1.8rem,3.6vw,2.9rem)] mb-8">The three rooms</h2>
+
+      <div class="grid md:grid-cols-3 gap-5">
+
+        <div class="vcard">
+          <div>
+            <div class="vname">Cabana Club</div>
+            <div class="vwho">Clubhouse only · Govalle</div>
+          </div>
+          <dl class="vspec">
+            <div><dt>Latest end</dt><dd class="v-go">2:00am</dd></div>
+            <div><dt>Floor</dt><dd class="v-go">Wood, walked it</dd></div>
+            <div><dt>Usable floor</dt><dd class="v-hold">Unreliable</dd></div>
+            <div><dt>Price</dt><dd class="v-hold">No quote</dd></div>
+            <div><dt>Nights offered</dt><dd>7 of 9</dd></div>
+          </dl>
+          <p class="vnote">Published square footage cannot be trusted: the event deck gives
+          <strong>four different indoor figures</strong> for one building. Dry event, so the
+          beverage minimum is waived for a rental fee instead.
+          <strong>No reply since 4 Sept; follow up text sent 6 Sept.</strong></p>
+        </div>
+
+        <div class="vcard">
+          <div>
+            <div class="vname">Factory on 5th</div>
+            <div class="vwho">Kara · East Austin</div>
+          </div>
+          <dl class="vspec">
+            <div><dt>Latest end</dt><dd class="v-go">2:00am hard cap</dd></div>
+            <div><dt>Floor</dt><dd>Walkthrough done</dd></div>
+            <div><dt>Usable floor</dt><dd>~1,700 sq ft</dd></div>
+            <div><dt>Price</dt><dd class="v-hold">$200/hr, unconfirmed</dd></div>
+            <div><dt>Nights offered</dt><dd>6 of 9</dd></div>
+          </dl>
+          <p class="vnote">The 2:00am cap is set by lease and zoning and <strong>cannot flex</strong>,
+          which is fine because nothing in the run goes past it. Closest of the three to the floor
+          size the event actually needs. <strong>Nov 1 and Nov 2 were never answered.</strong></p>
+        </div>
+
+        <div class="vcard is-lead">
+          <div>
+            <div class="vname">RichesArt Gallery</div>
+            <div class="vwho">Daniela · 2511 E 6th</div>
+          </div>
+          <dl class="vspec">
+            <div><dt>Latest end</dt><dd class="v-go">No cap</dd></div>
+            <div><dt>Floor</dt><dd class="v-go">Confirmed suitable</dd></div>
+            <div><dt>Usable floor</dt><dd class="v-stop">~1,050 sq ft</dd></div>
+            <div><dt>Price</dt><dd class="v-hold">$7,000 named, pending</dd></div>
+            <div><dt>Nights offered</dt><dd class="v-go">9 of 9</dd></div>
+          </dl>
+          <p class="vnote">The only venue in the search with <strong>no curfew at all</strong>, rates
+          rising after 1am, and only three hours of the whole run fall past 1am. Also the only one
+          that could run every night in one room. The floor plan is what put the size question on
+          the table.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <section id="sources" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-20" data-title="Where the answers came from">
+    <div class="max-w-4xl w-full">
+      <div class="eyebrow mb-3">Provenance</div>
+      <h2 class="h-display text-[clamp(1.8rem,3.6vw,2.9rem)] mb-4">Where each answer came from</h2>
+      <p class="text-dimmed mb-8 max-w-2xl leading-relaxed">
+        The three columns of the grid are not equally solid. One is written, one is a photograph
+        of somebody else's notebook, one is a phone call. Weight them accordingly.
+      </p>
+
+      <ul class="src-list">
+        <li>
+          <div class="src-key">Cabana Club<span>4 Sept, email</span></div>
+          <div class="src-body">
+            Jana Wester listed the open dates in writing:
+            <strong>10/31, 11/1, 11/2, 11/3, 11/5, 11/6 and 11/8</strong>. Nov 4 and Nov 7 were
+            simply absent from the list, with no reason given. The 2:00am answer came in the same
+            email.
+            <span class="conf conf-hi">Written, verbatim</span>
+          </div>
+        </li>
+        <li>
+          <div class="src-key">Factory on 5th<span>undated, photographed 6 Sept</span></div>
+          <div class="src-body">
+            Kara's handwritten notes. Halloween marked available, both Saturdays called out
+            separately, Nov 5 and Nov 9 marked booked, and a note reading
+            <strong>"tues can be moved monday possibly"</strong>. Nov 1 and Nov 2 appear nowhere,
+            which is why they sit as unanswered rather than refused.
+            <span class="conf conf-mid">Second hand, unconfirmed</span>
+          </div>
+        </li>
+        <li>
+          <div class="src-key">RichesArt<span>4 Sept, call plus text</span></div>
+          <div class="src-body">
+            Daniela confirmed <strong>all of Nov 1 to 8</strong> on the call. She said she did not
+            think she could do Halloween, then texted afterwards that she would include it in the
+            proposal for review. That is why Oct 31 reads conditional and not yes.
+            <span class="conf conf-mid">Verbal, proposal pending</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Still open -->
+  <section id="open" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-20" data-title="Still open">
+    <div class="max-w-4xl w-full">
+      <div class="eyebrow mb-3">Next actions</div>
+      <h2 class="h-display text-[clamp(1.8rem,3.6vw,2.9rem)] mb-8">Still open</h2>
+
+      <ul class="ask-list">
+        <li>
+          <div class="marker">Cabana</div>
+          <div class="ask-body">Five questions sent 4 Sept are unanswered: the weekly Clubhouse
+          calendar and whether it collides with the run, how recurring dance nights are structured
+          against a private event, whether the fee varies by day, whether there is a multi night
+          rate, and what the beverage minimum would have been.
+          <strong>Follow up text sent 6 Sept.</strong></div>
+        </li>
+        <li>
+          <div class="marker">Factory</div>
+          <div class="ask-body">Confirm the full date list, get an answer on
+          <strong>Nov 1 and Nov 2</strong>, and find out whether moving the Tuesday session to
+          Monday is real or a maybe. Text drafted, not yet sent.</div>
+        </li>
+        <li>
+          <div class="marker">RichesArt</div>
+          <div class="ask-body">Proposal has not arrived. When it does, the questions are whether
+          the vintage store and the turf area are inside the rental, the ceiling height, and
+          <strong>usable open floor with furniture cleared</strong>. Anything above about 1,300 sq
+          ft for the main room contradicts their own floor plan.</div>
+        </li>
+        <li>
+          <div class="marker">All three</div>
+          <div class="ask-body">Nov 7 and Nov 8 each have a daytime block and a night block with a
+          gap between. A venue that charges continuous hours bills
+          <strong>7 hours more</strong> across those two days than the programme uses. Ask about
+          split day booking before comparing hourly rates.</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Update log -->
+  <section id="log" class="snap-slide min-h-screen flex items-center px-6 md:px-14 py-20" data-title="Update log">
+    <div class="max-w-4xl w-full">
+      <div class="eyebrow mb-3">Revisions</div>
+      <h2 class="h-display text-[clamp(1.8rem,3.6vw,2.9rem)] mb-8">Update log</h2>
+
+      <ul class="log-list">
+        <li>
+          <div class="log-date">6 Sept</div>
+          <div class="log-body"><strong>rev 1.</strong> Deck created. Cabana Club added to
+          <span class="font-mono text-[0.85em]">venues.md</span> and the Notion venue board for the
+          first time. RichesArt floor plan measured, main room comes out at about 1,050 sq ft and
+          the 2,550 sq ft listing figure looks like gross ground floor footprint including the
+          vintage store. Kara's availability notes photographed and transcribed.</div>
+        </li>
+        <li>
+          <div class="log-date">4 Sept</div>
+          <div class="log-body">Jana Wester replies with Cabana availability and the 2:00am
+          Clubhouse answer. Daniela confirms RichesArt for Nov 1 to 8 on the call, Halloween left
+          conditional.</div>
+        </li>
+      </ul>
+
+      <p class="fine mt-8 max-w-3xl">
+        <strong>Clocks fall back at 2:00am on Sun Nov 1</strong>, which is Halloween night. A social
+        ending at 2:00am that night runs five real hours from a 10:00pm start, not four. Sunset also
+        moves to 5:38pm from Nov 1 onward, so every outdoor block after that date has to be a
+        daytime block.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="chip internal">Internal · Do not share with venues</span>
+        <span class="chip">Nothing booked · nothing signed</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    var sections = Array.from(document.querySelectorAll('main section.snap-slide'));
+    var progressBar = document.getElementById('progressBar');
+    var slideIdx = document.getElementById('slideIdx');
+    var slideTotal = document.getElementById('slideTotal');
+    var sideNavList = document.getElementById('sideNavList');
+    var drawerList = document.getElementById('drawerList');
+    var drawer = document.getElementById('drawer');
+    var menuBtn = document.getElementById('menuBtn');
+
+    if (slideTotal) slideTotal.textContent = String(sections.length).padStart(2, '0');
+
+    sections.forEach(function (s, i) {
+      var id = s.id;
+      var title = s.getAttribute('data-title') || id;
+      var li = document.createElement('li');
+      li.dataset.section = id;
+      var a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = (String(i + 1).padStart(2, '0')) + ' · ' + title;
+      li.appendChild(a);
+      sideNavList.appendChild(li);
+
+      var da = document.createElement('a');
+      da.href = '#' + id;
+      da.className = 'drawer-item';
+      da.dataset.section = id;
+      da.textContent = title;
+      da.addEventListener('click', function () {
+        drawer.hidden = true;
+        menuBtn.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+      drawerList.appendChild(da);
+    });
+
+    var current = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var idx = sections.indexOf(entry.target);
+        if (idx < 0) return;
+        current = idx;
+        slideIdx.textContent = String(idx + 1).padStart(2, '0');
+        var pct = sections.length > 1 ? (idx / (sections.length - 1)) : 1;
+        progressBar.style.transform = 'scaleX(' + pct + ')';
+        Array.from(sideNavList.children).forEach(function (li) {
+          li.classList.toggle('nav-active', li.dataset.section === entry.target.id);
+        });
+        Array.from(drawerList.children).forEach(function (a) {
+          a.classList.toggle('is-active', a.dataset.section === entry.target.id);
+        });
+      });
+    }, { threshold: [0.35, 0.55] });
+    sections.forEach(function (s) { io.observe(s); });
+
+    if (menuBtn) {
+      menuBtn.addEventListener('click', function () {
+        var open = drawer.hidden === false;
+        drawer.hidden = open;
+        menuBtn.classList.toggle('is-open', !open);
+        menuBtn.setAttribute('aria-expanded', String(!open));
+      });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.target && ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(e.target.tagName) >= 0) return;
+      var key = e.key;
+      var target = null;
+      if (key === 'ArrowDown' || key === ' ' || key === 'PageDown') { target = sections[Math.min(current + 1, sections.length - 1)]; e.preventDefault(); }
+      else if (key === 'ArrowUp' || key === 'PageUp') { target = sections[Math.max(current - 1, 0)]; e.preventDefault(); }
+      else if (key === 'Home') { target = sections[0]; e.preventDefault(); }
+      else if (key === 'End') { target = sections[sections.length - 1]; e.preventDefault(); }
+      else if (key === 'Escape' && !drawer.hidden) { drawer.hidden = true; menuBtn.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+</script>
+
+</body>
+</html>
