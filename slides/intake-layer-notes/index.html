@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Intake Layer Notes · Ogarocious</title>
+<meta name="description" content="Notes on Kova’s intake layer ahead of a call: what the site promises, where per-firm onboarding cost actually lives, and one call traced end to end into GHL." />
+<link rel="canonical" href="https://slides.ogarocious.com/intake-layer-notes/" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#1f1b15" />
+
+<!-- Open Graph. Update https://slides.ogarocious.com/intake-layer-notes/og.png to the per-artifact og.png if custom, else keep default. -->
+<meta property="og:site_name" content="Ogarocious" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://slides.ogarocious.com/intake-layer-notes/" />
+<meta property="og:title" content="Intake Layer Notes · Ogarocious" />
+<meta property="og:description" content="Notes on Kova’s intake layer ahead of a call: what the site promises, where per-firm onboarding cost actually lives, and one call traced end to end into GHL." />
+<meta property="og:image" content="https://slides.ogarocious.com/intake-layer-notes/og.png" />
+<meta property="og:image:alt" content="Firm one is a build. Firm ten should be a form. Notes on Kova’s intake layer." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Intake Layer Notes · Ogarocious" />
+<meta name="twitter:description" content="Notes on Kova’s intake layer ahead of a call: what the site promises, where per-firm onboarding cost actually lives, and one call traced end to end into GHL." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/intake-layer-notes/og.png" />
+
+<!-- Icons (relative to subdomain root) -->
+<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png" />
+
+<!-- Structured data (Article schema for rich results) -->
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Intake Layer Notes",
+  "description": "Notes on Kova’s intake layer ahead of a call: what the site promises, where per-firm onboarding cost actually lives, and one call traced end to end into GHL.",
+  "url": "https://slides.ogarocious.com/intake-layer-notes/",
+  "image": "https://slides.ogarocious.com/intake-layer-notes/og.png",
+  "author": { "@type": "Person", "name": "Charles Ogar", "url": "https://ogarocious.com" },
+  "publisher": { "@type": "Organization", "name": "Ogarocious", "url": "https://ogarocious.com" },
+  "datePublished": "2026-09-07"
+}</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // Diaspora Modern brand tokens. Source: ogarocious_portfolio/app/frontend/src/theme/theme.ts
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: { 950: '#0a0705', 900: '#0f0b08', 800: '#1a1410', 700: '#1f1b15', 600: '#312d23' },
+          ivory: { 50: '#f5eee0', 100: '#d8d1c2', 200: '#b5ae9f', 300: '#8f8878' },
+          terracotta: {
+            50: '#fbeee6', 100: '#f4d5c0', 200: '#ebb99a', 300: '#e19c74',
+            400: '#da7f4e', 500: '#d4552b', 600: '#b84421', 700: '#952f0f',
+            800: '#732208', 900: '#4f1500',
+          },
+          slate: {
+            50: '#eaefef', 100: '#cddad9', 200: '#adbfbf', 300: '#8ba5a5',
+            400: '#7ba4a5', 500: '#669090', 600: '#4e7676', 700: '#3b5d5d',
+            800: '#2a4545', 900: '#1b2e2e',
+          },
+          ochre: { 50: '#faf1e0', 400: '#c99647', 500: '#b8843d', 600: '#996d31' },
+          sage:  { 50: '#e8eee9', 400: '#5f7d64', 500: '#4a6b4e', 600: '#3a563c' },
+          coral: { 50: '#fdeae4', 400: '#eb6f4f', 500: '#e85d3c', 600: '#c94826' },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body {
+    /* Base lifted from espresso.900 to espresso.700 (still palette-legal). Warmer brown, not near-black. */
+    background-color: #1f1b15;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.83  0 0 0 0 0.33  0 0 0 0 0.17  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      linear-gradient(180deg, #0f0b08 0%, #1f1b15 50%, #0f0b08 100%);
+    background-blend-mode: soft-light, normal;
+    min-height: 100vh;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .timeline-step, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+
+  .text-body   { color: rgba(245, 238, 224, 0.90); }
+  .text-dimmed { color: rgba(245, 238, 224, 0.72); }
+  .text-muted  { color: rgba(245, 238, 224, 0.55); }
+
+  /* Scroll progress bar. Fixed top of viewport, above the header (z-51 > z-50). */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #d4552b;
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 51;
+    pointer-events: none;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(26, 20, 16, 0.55);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(212, 85, 43, 0.14);
+    box-shadow:
+      0 1px 0 rgba(245, 238, 224, 0.04) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(212, 85, 43, 0.28); }
+  .glass.glass-tech { border-color: rgba(123, 164, 165, 0.32); }
+  .glass.glass-tech:hover { border-color: rgba(123, 164, 165, 0.52); }
+
+  .ember-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 560px at 22% 42%, rgba(212, 85, 43, 0.22), rgba(212, 85, 43, 0.06) 45%, transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ember-glow-cta {
+    background: radial-gradient(ellipse 800px 500px at 78% 60%, rgba(212, 85, 43, 0.20), rgba(184, 132, 61, 0.08) 42%, transparent 70%);
+  }
+
+  .text-shadow-warm {
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 8px 30px rgba(212, 85, 43, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+
+  :focus-visible {
+    outline: 2px solid #d4552b;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .nav-dot { transition: background-color 180ms ease; }
+  .nav-active .nav-dot { background: #d4552b; }
+  .nav-active .nav-label { color: #f5eee0; }
+
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07); color: #f5eee0;
+  }
+
+  /* Menu button: icon + label pill. Swaps hamburger/close via .is-open */
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(123, 164, 165, 0.30);
+    background: rgba(123, 164, 165, 0.07);
+    color: #f5eee0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(212, 85, 43, 0.42);
+    background: rgba(212, 85, 43, 0.08);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+
+  .accent-rule {
+    display: inline-block; width: 40px; height: 2px;
+    background: #d4552b; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+  .accent-rule-tech { background: #7ba4a5; }
+
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ""; position: absolute; left: 50%; top: 24px; bottom: 24px; width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(123,164,165,0.55) 15%, rgba(123,164,165,0.55) 85%, transparent);
+    transform: translateX(-0.5px);
+  }
+  .timeline-step {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: start;
+    padding-block: 1.5rem;
+  }
+  .timeline-marker {
+    grid-column: 2;
+    align-self: start;
+    margin-top: 0.4rem;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #0f0b08; border: 2px solid #7ba4a5;
+    box-shadow: 0 0 0 4px rgba(123, 164, 165, 0.14);
+  }
+  .timeline-step[data-align="left"]  .timeline-content { grid-column: 1; text-align: right; justify-self: end; }
+  .timeline-step[data-align="right"] .timeline-content { grid-column: 3; text-align: left;  justify-self: start; }
+  .timeline-content { max-width: 22rem; }
+  .timeline-num {
+    font-family: "JetBrains Mono", monospace; font-size: 12px; color: #7ba4a5;
+    letter-spacing: 0.08em; display: block; margin-bottom: 0.4rem;
+  }
+  @media (max-width: 768px) {
+    .timeline::before { left: 13px; }
+    .timeline-step { grid-template-columns: 28px 1fr; gap: 1rem; }
+    .timeline-marker { grid-column: 1; margin-top: 0.5rem; }
+    .timeline-step[data-align="left"]  .timeline-content,
+    .timeline-step[data-align="right"] .timeline-content { grid-column: 2; text-align: left; justify-self: stretch; max-width: none; }
+  }
+
+  .cta-btn-primary {
+    background: #d4552b; color: #0f0b08; font-weight: 600;
+    padding: 0.85rem 1.4rem; border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  }
+  .cta-btn-primary:hover { background: #da7f4e; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); }
+
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  /* Mobile drawer: fixed panel BELOW the header (top: 56px). Header stays visible + clickable. */
+  .drawer {
+    position: fixed;
+    top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    background: rgba(10, 7, 5, 0.72);
+    backdrop-filter: blur(4px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(15, 11, 8, 0.985);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .drawer-list {
+    border-left: 1px solid rgba(123, 164, 165, 0.28);
+    padding-left: 1rem;
+    margin: 0;
+    list-style: none;
+  }
+  .drawer-item {
+    display: block;
+    padding: 0.85rem 0.9rem;
+    margin-left: -0.5rem;
+    color: #f5eee0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.3;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .drawer-item:hover { color: #d4552b; }
+  .drawer-item.is-active {
+    background: rgba(212, 85, 43, 0.14);
+    color: #d4552b;
+  }
+  .drawer-item:focus-visible {
+    outline: none;
+    background: rgba(212, 85, 43, 0.10);
+    color: #d4552b;
+  }
+  .drawer-group {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: #7ba4a5;
+    padding: 1.75rem 0 0.4rem;
+    margin-top: 0.75rem;
+    border-top: 1px solid rgba(123, 164, 165, 0.15);
+    list-style: none;
+  }
+  .drawer-list > .drawer-group:first-child {
+    border-top: none; padding-top: 0; margin-top: 0;
+  }
+
+  /* Copyable prompt blocks (used by the optional PROMPTS section) */
+  .prompt-wrap { margin-inline: auto; }
+  .prompt-labels {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.6rem; padding-inline: 0.25rem;
+  }
+  .prompt-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.14em; color: #7ba4a5;
+    text-transform: uppercase;
+  }
+  .prompt-hint {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.10em;
+    color: rgba(245, 238, 224, 0.55);
+    transition: color 200ms ease;
+  }
+  .prompt-hint.is-copied { color: #d4552b; }
+  .prompt-block {
+    position: relative;
+    cursor: pointer;
+    padding: 1.25rem 3rem 1.25rem 1.5rem;
+    border-radius: 8px;
+    outline: none;
+  }
+  .prompt-block.glass.glass-tech:hover,
+  .prompt-block.glass.glass-tech:focus-visible {
+    border-color: rgba(212, 85, 43, 0.42);
+  }
+  .prompt-block.is-copied.glass.glass-tech {
+    border-color: rgba(212, 85, 43, 0.60);
+  }
+  .prompt-code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 13px; line-height: 1.55;
+    color: rgba(245, 238, 224, 0.88);
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0;
+  }
+  .prompt-copy-icon {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.95rem;
+    width: 16px; height: 16px;
+    color: rgba(245, 238, 224, 0.42);
+    transition: color 200ms ease;
+    pointer-events: none;
+  }
+  .prompt-block:hover .prompt-copy-icon,
+  .prompt-block:focus-visible .prompt-copy-icon { color: #7ba4a5; }
+  .prompt-copy-icon.copy-done { display: none; color: #d4552b; }
+  .prompt-block.is-copied .prompt-copy-icon.copy-idle { display: none; }
+  .prompt-block.is-copied .prompt-copy-icon.copy-done { display: inline-block; }
+  .prompt-label-alt {
+    color: rgba(245, 238, 224, 0.55);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body class="text-ivory-50 font-sans antialiased">
+
+<!-- Scroll progress bar -->
+<div id="progressBar" class="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-espresso-900/70 border-b border-terracotta-500/10">
+  <div class="max-w-[1400px] mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-2 group">
+      <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500 group-hover:shadow-[0_0_18px_rgba(212,85,43,0.7)] transition"></span>
+      <span class="font-display font-bold text-lg tracking-tight">Ogarocious</span>
+      <span class="text-dimmed text-xs">· Intake Layer Notes</span>
+    </a>
+    <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
+      <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 9</span>
+      <span class="hidden md:inline">·</span>
+      <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+      <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
+        <svg class="menu-hamburger" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 3h12M1 7h12M1 11h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="menu-close" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span id="menuLabel">MENU</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="sideNav" class="fixed top-0 left-0 h-screen w-[280px] hidden md:flex flex-col justify-between pt-20 pb-8 px-8 z-40 border-r border-terracotta-500/10 bg-espresso-900/60 backdrop-blur" aria-label="Sections">
+  <div>
+    <p class="text-[11px] text-slate-300 mb-4 font-medium">Sections</p>
+    <ul id="navList" class="space-y-3 text-sm"></ul>
+  </div>
+  <div class="text-[11px] text-muted leading-relaxed">
+    <p class="mb-2 font-medium text-dimmed">Ogarocious</p>
+    <p class="italic text-slate-300">Liberation Through Creation</p>
+    <p class="mt-3">Single HTML file. View source. Steal freely.</p>
+  </div>
+</nav>
+
+<div id="mobileMenu" class="drawer" role="dialog" aria-modal="true" aria-label="Sections" hidden>
+  <div class="drawer-panel">
+    <p class="drawer-label">Sections</p>
+    <ul id="mobileNavList" class="drawer-list"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll">
+
+  <!-- COVER -->
+  <section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
+    <div class="ember-glow" aria-hidden="true"></div>
+    <p class="text-slate-300 font-mono text-xs tracking-[0.18em] mb-6 relative">NOTES FOR ADAM · KOVA</p>
+    <h1 class="font-display font-extrabold text-5xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl text-ivory-50 text-shadow-warm relative">
+      Firm one is a build.<br/>
+      <span class="italic font-medium">Firm ten should be a form.</span>
+    </h1>
+    <p class="mt-8 max-w-xl text-body text-lg leading-relaxed relative">
+      Written the night before we talk. No pitch and no price in here. Just what I read on your site, how I would think about the CRM problem, and the questions I want to ask you at 11:30.
+    </p>
+    <div class="mt-12 flex flex-wrap gap-3 text-xs relative">
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Written Sun Sep 7, evening</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">Clio, Lawmatics, GHL</span>
+      <span class="px-3 py-1.5 rounded-full glass glass-tech text-dimmed">6 minute read</span>
+    </div>
+    <div class="absolute bottom-8 left-6 md:left-20 text-muted text-xs flex items-center gap-2">
+      <span class="kbd">Space</span> to advance
+    </div>
+  </section>
+
+  <!-- 1 · YOUR SITE -->
+  <section id="site" data-title="Your site" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-6 tracking-tight text-shadow-warm">What your site promises</h2>
+    <p class="text-dimmed mb-10 max-w-2xl">I read the whole thing before writing any of this. Three promises do the heavy lifting.</p>
+
+    <div class="grid md:grid-cols-3 gap-5 max-w-5xl">
+      <div class="glass rounded-lg p-6">
+        <p class="font-mono text-[11px] tracking-[0.14em] text-slate-300 mb-3">SPEED</p>
+        <p class="font-display font-semibold text-xl mb-2 text-ivory-50">Live in days, not months.</p>
+        <p class="text-sm text-body">Three steps: you learn the firm, you configure and test, they go live.</p>
+      </div>
+      <div class="glass rounded-lg p-6">
+        <p class="font-mono text-[11px] tracking-[0.14em] text-slate-300 mb-3">FIT</p>
+        <p class="font-display font-semibold text-xl mb-2 text-ivory-50">No rip and replace.</p>
+        <p class="text-sm text-body">Kova drops into the stack the firm already runs. Nothing gets migrated.</p>
+      </div>
+      <div class="glass rounded-lg p-6">
+        <p class="font-mono text-[11px] tracking-[0.14em] text-slate-300 mb-3">REACH</p>
+        <p class="font-display font-semibold text-xl mb-2 text-ivory-50">Twenty plus systems.</p>
+        <p class="text-sm text-body">Clio, MyCase, PracticePanther, Filevine, Captorra, Lawmatics, HighLevel, Salesforce, HubSpot and more on the wall.</p>
+      </div>
+    </div>
+
+    <p class="mt-12 max-w-3xl text-body text-lg leading-relaxed">
+      Those are the right promises for this market. Together they also describe the single most expensive product to deliver: bespoke fit, in days, across a long list of destinations.
+    </p>
+  </section>
+
+  <!-- 2 · THE NUMBER -->
+  <section id="margin" data-title="The real number" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <p class="font-display italic text-2xl md:text-3xl text-dimmed max-w-3xl mb-8 leading-snug">
+      You already said the part most people miss: booking the appointment and handing the firm a spreadsheet to re-key would look amateur at your price point. Agreed. Here is what sits underneath that.
+    </p>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-6 tracking-tight text-shadow-warm">The number is firm ten, not firm one</h2>
+    <p class="text-body mb-10 max-w-3xl leading-relaxed">
+      At your numbers, per firm, per month, the revenue side is fine. The thing that decides whether Kova is a company or a very good freelance gig is what the tenth onboarding costs you. Not in dollars first. In your evenings.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-5 max-w-4xl">
+      <div class="glass rounded-lg p-7">
+        <p class="font-mono text-[11px] tracking-[0.14em] text-terracotta-400 mb-4">BESPOKE PER FIRM</p>
+        <p class="text-body mb-5 text-sm leading-relaxed">Each new firm is a fresh integration project. New fields, new routing rules, new edge cases, a new round trip with the offshore team.</p>
+        <ul class="space-y-2 text-sm text-dimmed font-mono">
+          <li>Firm 1 &nbsp;<span class="text-ivory-50">full build</span></li>
+          <li>Firm 5 &nbsp;<span class="text-ivory-50">full build</span></li>
+          <li>Firm 10 <span class="text-ivory-50">full build</span></li>
+        </ul>
+        <p class="mt-5 text-sm text-body">Your cost per client stays flat. Your margin is capped by your calendar, and growth makes it worse instead of better.</p>
+      </div>
+      <div class="glass glass-tech rounded-lg p-7">
+        <p class="font-mono text-[11px] tracking-[0.14em] text-slate-300 mb-4">SHARED SUBSTRATE</p>
+        <p class="text-body mb-5 text-sm leading-relaxed">One intake model, built once. Each new firm is practice areas, calendars, routing rules and field mappings filled in against it.</p>
+        <ul class="space-y-2 text-sm text-dimmed font-mono">
+          <li>Firm 1 &nbsp;<span class="text-ivory-50">full build</span></li>
+          <li>Firm 5 &nbsp;<span class="text-ivory-50">configuration</span></li>
+          <li>Firm 10 <span class="text-ivory-50">configuration</span></li>
+        </ul>
+        <p class="mt-5 text-sm text-body">Cost per client falls with every firm you add. "Live in days" stops being a marketing line and becomes a fact about how the thing is built.</p>
+      </div>
+    </div>
+
+    <p class="mt-10 max-w-3xl text-body leading-relaxed">
+      Same wall of twenty logos. In the first case it is a liability, because every logo is a promise someone has to build under pressure. In the second it is the moat.
+    </p>
+  </section>
+
+  <!-- 3 · WHERE THE COST LIVES -->
+  <section id="decisions" data-title="Where the cost lives" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-6 tracking-tight text-shadow-warm">The cost is not the API call</h2>
+    <p class="text-body mb-10 max-w-3xl leading-relaxed">
+      Pushing a record into Clio or GHL is a couple of hours of work. What eats the week is deciding what the record should say before you send it, and what happens when the caller does not cooperate. You put it well: the logic has to be thought through first.
+    </p>
+
+    <div class="max-w-4xl grid md:grid-cols-2 gap-x-10 gap-y-5">
+      <div class="grid grid-cols-[auto_1fr] gap-4">
+        <span class="text-terracotta-500 pt-1" aria-hidden="true">◆</span>
+        <div><p class="font-display font-semibold text-ivory-50">New lead or existing client</p><p class="text-sm text-body">Two totally different records, two different destinations, and the caller will not announce which one they are.</p></div>
+      </div>
+      <div class="grid grid-cols-[auto_1fr] gap-4">
+        <span class="text-terracotta-500 pt-1" aria-hidden="true">◆</span>
+        <div><p class="font-display font-semibold text-ivory-50">Which matter type</p><p class="text-sm text-body">"My mom passed and there is a house" is estate. Sometimes it is probate litigation. The firm cares about the difference.</p></div>
+      </div>
+      <div class="grid grid-cols-[auto_1fr] gap-4">
+        <span class="text-terracotta-500 pt-1" aria-hidden="true">◆</span>
+        <div><p class="font-display font-semibold text-ivory-50">Whose calendar</p><p class="text-sm text-body">Matter type maps to an attorney, attorney maps to a calendar, and the mapping is different at every firm.</p></div>
+      </div>
+      <div class="grid grid-cols-[auto_1fr] gap-4">
+        <span class="text-terracotta-500 pt-1" aria-hidden="true">◆</span>
+        <div><p class="font-display font-semibold text-ivory-50">Conflict check</p><p class="text-sm text-body">If the opposing party is already a client, that consult should not get booked. This one has real consequences.</p></div>
+      </div>
+      <div class="grid grid-cols-[auto_1fr] gap-4">
+        <span class="text-terracotta-500 pt-1" aria-hidden="true">◆</span>
+        <div><p class="font-display font-semibold text-ivory-50">Fuzzy identity</p><p class="text-sm text-body">A caller says "Rob Miller" and the CRM holds Robert Miller, Roberta Miller and R. Miller. Match, create, or ask.</p></div>
+      </div>
+      <div class="grid grid-cols-[auto_1fr] gap-4">
+        <span class="text-terracotta-500 pt-1" aria-hidden="true">◆</span>
+        <div><p class="font-display font-semibold text-ivory-50">Who catches the fallback</p><p class="text-sm text-body">When the agent cannot resolve it, something has to hold the call rather than drop it. That path needs an owner.</p></div>
+      </div>
+    </div>
+
+    <p class="mt-12 max-w-3xl text-body leading-relaxed">
+      Every one of these is the same question at every firm. The answers differ. That split is exactly what makes it buildable once and configurable after.
+    </p>
+  </section>
+
+  <!-- 4 · WORKED EXAMPLE -->
+  <section id="worked" data-title="One call, traced" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <span class="accent-rule accent-rule-tech" aria-hidden="true"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm">One call, all the way through</h2>
+    <p class="text-dimmed mb-10 max-w-2xl">Using the estate planning inquiry from your own homepage. Traced into GHL, because GHL is the one I run in production and can be held to.</p>
+
+    <div class="grid lg:grid-cols-[1.1fr_1fr] gap-6 max-w-6xl w-full">
+      <div class="glass rounded-lg p-6 overflow-x-auto">
+        <p class="font-mono text-[11px] tracking-[0.14em] text-slate-300 mb-4">ONE CANONICAL RECORD</p>
+<pre class="font-mono text-[12.5px] leading-relaxed text-body whitespace-pre">{
+  <span class="text-terracotta-400">caller</span>:      { name, phone, email }
+  <span class="text-terracotta-400">intent</span>:      new_client | existing | other
+  <span class="text-terracotta-400">matter_type</span>: estate_planning
+  <span class="text-terracotta-400">confidence</span>:  0.0 to 1.0
+  <span class="text-terracotta-400">urgency</span>:     routine | deadline | emergency
+  <span class="text-terracotta-400">assigned_to</span>: resolved from matter_type
+  <span class="text-terracotta-400">conflict</span>:    clear | flagged | unchecked
+  <span class="text-terracotta-400">booking</span>:     { slot, calendar_id, confirmed }
+  <span class="text-terracotta-400">transcript</span>:  url
+  <span class="text-terracotta-400">fallback</span>:    null | reason
+}</pre>
+        <p class="mt-5 text-sm text-body">The agent's only job is to fill this in honestly, including the confidence score and the parts it could not resolve. Everything downstream reads from here.</p>
+      </div>
+
+      <div class="glass glass-tech rounded-lg p-6">
+        <p class="font-mono text-[11px] tracking-[0.14em] text-slate-300 mb-4">WHERE IT LANDS IN GHL</p>
+        <table class="w-full text-sm">
+          <tbody class="align-top">
+            <tr class="border-b border-slate-400/15"><td class="py-2.5 pr-4 font-mono text-[12px] text-terracotta-400">caller</td><td class="py-2.5 text-body">Contact, created or matched on phone first, not name</td></tr>
+            <tr class="border-b border-slate-400/15"><td class="py-2.5 pr-4 font-mono text-[12px] text-terracotta-400">matter_type</td><td class="py-2.5 text-body">Custom field plus a tag, so pipelines and automations can both read it</td></tr>
+            <tr class="border-b border-slate-400/15"><td class="py-2.5 pr-4 font-mono text-[12px] text-terracotta-400">intent</td><td class="py-2.5 text-body">Opportunity in the intake pipeline, stage set by intent</td></tr>
+            <tr class="border-b border-slate-400/15"><td class="py-2.5 pr-4 font-mono text-[12px] text-terracotta-400">booking</td><td class="py-2.5 text-body">Appointment on the resolved calendar, not a generic one</td></tr>
+            <tr class="border-b border-slate-400/15"><td class="py-2.5 pr-4 font-mono text-[12px] text-terracotta-400">transcript</td><td class="py-2.5 text-body">Note on the contact, so staff see it without leaving the record</td></tr>
+            <tr><td class="py-2.5 pr-4 font-mono text-[12px] text-terracotta-400">fallback</td><td class="py-2.5 text-body">Task assigned to a human, with the reason attached</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="mt-8 max-w-3xl text-body leading-relaxed">
+      Clio and Lawmatics take the same record. Contact becomes a Clio contact and a matter, or a Lawmatics contact and a pipeline entry. The record does not change. Only the adapter does. That is the whole idea, and it is why the tenth firm is cheaper than the first.
+    </p>
+  </section>
+
+  <!-- 5 · WHEN IT GOES WRONG -->
+  <section id="ambiguity" data-title="When it is unclear" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-6 tracking-tight text-shadow-warm">The four branches that decide trust</h2>
+    <p class="text-body mb-10 max-w-3xl leading-relaxed">
+      A demo call goes clean. Real calls do not. What a firm is actually buying is what happens on the messy ones, and this is where an intake layer either earns the retainer or quietly loses it.
+    </p>
+
+    <div class="max-w-4xl space-y-4">
+      <div class="glass rounded-lg p-5 grid md:grid-cols-[1fr_1.4fr] gap-4 items-start">
+        <p class="font-display font-semibold text-lg text-ivory-50">Partial name match</p>
+        <p class="text-sm text-body">Do not guess. Write the contact as new, tag it <span class="font-mono text-[12px] text-slate-300">possible_duplicate</span>, link the candidates, and let a human merge. A wrong merge in a legal CRM is much worse than a duplicate.</p>
+      </div>
+      <div class="glass rounded-lg p-5 grid md:grid-cols-[1fr_1.4fr] gap-4 items-start">
+        <p class="font-display font-semibold text-lg text-ivory-50">Low confidence on matter type</p>
+        <p class="text-sm text-body">Book the consult anyway, route to the firm's default intake attorney, and flag it. Never lose the appointment over a classification you can fix in ten seconds.</p>
+      </div>
+      <div class="glass rounded-lg p-5 grid md:grid-cols-[1fr_1.4fr] gap-4 items-start">
+        <p class="font-display font-semibold text-lg text-ivory-50">Possible conflict</p>
+        <p class="text-sm text-body">Capture everything, book nothing, notify immediately. This is the one branch where the safe default is to stop, and the firm will want to hear you say that out loud.</p>
+      </div>
+      <div class="glass rounded-lg p-5 grid md:grid-cols-[1fr_1.4fr] gap-4 items-start">
+        <p class="font-display font-semibold text-lg text-ivory-50">The write fails</p>
+        <p class="text-sm text-body">Queue and retry, and if it still fails, the record surfaces somewhere a person will actually look. A call that got answered but never landed is worse than a missed call, because nobody knows it happened.</p>
+      </div>
+    </div>
+
+    <p class="mt-10 max-w-3xl text-body leading-relaxed">
+      Four rules, written once, inherited by every firm after. The firm-specific part is only who gets notified and what the defaults are.
+    </p>
+  </section>
+
+  <!-- 6 · PROOF -->
+  <section id="proof" data-title="Why me" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-6 tracking-tight text-shadow-warm">Why I can build this part</h2>
+    <p class="text-body mb-10 max-w-3xl leading-relaxed">
+      I spent the last stretch as the entire technical team for an organization that had none. Solo, nine months, all of it integration and data modeling work.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-5 max-w-4xl mb-10">
+      <div class="glass rounded-lg p-6">
+        <p class="font-display font-semibold text-lg text-ivory-50 mb-2">50 n8n workflows in production</p>
+        <p class="text-sm text-body">Booking, reporting, notification, sync. Same tool you are already using, at volume, with real people depending on it.</p>
+      </div>
+      <div class="glass rounded-lg p-6">
+        <p class="font-display font-semibold text-lg text-ivory-50 mb-2">Salesforce integration, custom SOQL</p>
+        <p class="text-sm text-body">A three tier record hierarchy mapped and kept in sync against a separate system of record. This is the same shape as your CRM problem.</p>
+      </div>
+      <div class="glass rounded-lg p-6">
+        <p class="font-display font-semibold text-lg text-ivory-50 mb-2">A messy dataset made trustworthy</p>
+        <p class="text-sm text-body">597 records reconciled down to 313 clean ones, with the duplicate and merge rules written to survive the people who came after me.</p>
+      </div>
+      <div class="glass rounded-lg p-6">
+        <p class="font-display font-semibold text-lg text-ivory-50 mb-2">GHL running in my own stack today</p>
+        <p class="text-sm text-body">Not a tutorial. I invoice through it and I have written against its API. I know where it is pleasant and where it is not.</p>
+      </div>
+    </div>
+
+    <div class="glass glass-tech rounded-lg p-7 max-w-3xl">
+      <p class="font-mono text-[11px] tracking-[0.14em] text-slate-300 mb-3">THE HONEST PART</p>
+      <p class="text-body leading-relaxed">
+        I have never built a voice agent. I said that on Friday and it is still true today. I think it is the smaller half of this problem. Retell and the prompting are yours, you have already shipped that, and you are better at it than I would be for a while. The half I am offering to own is everything after the call ends, which is the half you said you did not want to own.
+      </p>
+    </div>
+  </section>
+
+  <!-- 7 · ON THE CALL -->
+  <section id="presales" data-title="On sales calls" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10">
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-8 tracking-tight text-shadow-warm">On the sales calls too</h2>
+    <div class="grid md:grid-cols-2 gap-10 max-w-4xl text-body leading-relaxed">
+      <p>
+        You said it is good to have a technical person on the call telling the firm what is and is not possible. I agree, and I would go further. It matters most that the person saying yes on the call is the same person who has to build it on Monday.
+      </p>
+      <p>
+        That wall of twenty logos is set up for exactly one failure: a firm asks about Filevine, someone says yes because the logo is on the site, and now it exists as a promise before it exists as software. If I am on the call, I do not let that happen, because I am the one who eats it.
+      </p>
+    </div>
+    <p class="mt-10 max-w-3xl text-lg text-body leading-relaxed">
+      Same person on the call and on the build is not two jobs. It is the thing that keeps the "live in days" claim honest as you add firms.
+    </p>
+  </section>
+
+  <!-- 8 · QUESTIONS -->
+  <section id="questions" data-title="Tomorrow, 11:30" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-terracotta-500/10 relative overflow-hidden">
+    <div class="ember-glow ember-glow-cta" aria-hidden="true"></div>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-warm relative">What I want to ask you</h2>
+    <p class="text-dimmed mb-10 max-w-2xl relative">Everything above is what I could work out from the outside. These are the things only you know, and the answers change what I would build first.</p>
+
+    <ol class="max-w-3xl space-y-4 relative">
+      <li class="grid grid-cols-[auto_1fr] gap-5"><span class="font-mono text-xs text-slate-300 pt-1.5">01</span><p class="text-body text-lg">How much of the second firm's setup was copy and paste from the first?</p></li>
+      <li class="grid grid-cols-[auto_1fr] gap-5"><span class="font-mono text-xs text-slate-300 pt-1.5">02</span><p class="text-body text-lg">Of Clio, Lawmatics and GHL, which are actually live right now and which are promised?</p></li>
+      <li class="grid grid-cols-[auto_1fr] gap-5"><span class="font-mono text-xs text-slate-300 pt-1.5">03</span><p class="text-body text-lg">What breaks most often today, and how do you find out that it broke?</p></li>
+      <li class="grid grid-cols-[auto_1fr] gap-5"><span class="font-mono text-xs text-slate-300 pt-1.5">04</span><p class="text-body text-lg">When the agent cannot resolve a caller, where does that call go right now?</p></li>
+      <li class="grid grid-cols-[auto_1fr] gap-5"><span class="font-mono text-xs text-slate-300 pt-1.5">05</span><p class="text-body text-lg">Onboarding a firm today, wall clock, from signed to live. What is the real number?</p></li>
+      <li class="grid grid-cols-[auto_1fr] gap-5"><span class="font-mono text-xs text-slate-300 pt-1.5">06</span><p class="text-body text-lg">What does firm ten look like to you? Same product, or a different one?</p></li>
+      <li class="grid grid-cols-[auto_1fr] gap-5"><span class="font-mono text-xs text-slate-300 pt-1.5">07</span><p class="text-body text-lg">What is your timeline out of the day job, and what has to be true for it?</p></li>
+    </ol>
+
+    <p class="mt-12 max-w-2xl text-body text-lg relative">See you at 11:30.</p>
+    <p class="mt-16 text-xs text-muted font-mono relative">Charles Ogar · Ogarocious · Liberation Through Creation</p>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  const sections = [...document.querySelectorAll('main > section')];
+  const navList = document.getElementById('navList');
+  const mobileNavList = document.getElementById('mobileNavList');
+  const counter = document.getElementById('counter');
+  const menuBtn = document.getElementById('menuBtn');
+  const menuLabel = document.getElementById('menuLabel');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const progressBar = document.getElementById('progressBar');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const hasGroups = sections.some(s => s.dataset.group);
+  const drawerLinks = new Array(sections.length);
+
+  sections.forEach((s) => {
+    const title = s.dataset.title || s.id;
+    const desktopItem = document.createElement('li');
+    desktopItem.dataset.target = s.id;
+    desktopItem.innerHTML = `
+      <a href="#${s.id}" class="flex items-center gap-3 group">
+        <span class="nav-dot w-2 h-2 rounded-full bg-slate-400/40 group-hover:bg-terracotta-500"></span>
+        <span class="nav-label text-dimmed group-hover:text-ivory-50 text-sm">${title}</span>
+      </a>`;
+    navList.appendChild(desktopItem);
+  });
+
+  const buildDrawerLink = (s) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${s.id}`;
+    a.className = 'drawer-item';
+    a.textContent = s.dataset.title || s.id;
+    li.appendChild(a);
+    return { li, a };
+  };
+
+  if (hasGroups) {
+    const groups = new Map();
+    sections.forEach(s => {
+      const g = s.dataset.group || 'More';
+      if (!groups.has(g)) groups.set(g, []);
+      groups.get(g).push(s);
+    });
+    groups.forEach((sects, name) => {
+      const heading = document.createElement('li');
+      heading.className = 'drawer-group';
+      heading.textContent = name;
+      mobileNavList.appendChild(heading);
+      sects.forEach(s => {
+        const { li, a } = buildDrawerLink(s);
+        mobileNavList.appendChild(li);
+        drawerLinks[sections.indexOf(s)] = a;
+      });
+    });
+  } else {
+    sections.forEach((s, i) => {
+      const { li, a } = buildDrawerLink(s);
+      mobileNavList.appendChild(li);
+      drawerLinks[i] = a;
+    });
+  }
+
+  const navItems = [...navList.children];
+  const navLinks = navItems.map(n => n.querySelector('a'));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target);
+        navItems.forEach((n, i) => {
+          n.classList.toggle('nav-active', i === idx);
+          if (navLinks[i]) {
+            if (i === idx) navLinks[i].setAttribute('aria-current', 'location');
+            else navLinks[i].removeAttribute('aria-current');
+          }
+        });
+        drawerLinks.forEach((link, i) => {
+          if (link) link.classList.toggle('is-active', i === idx);
+        });
+        counter.textContent = `${idx + 1} of ${sections.length}`;
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => io.observe(s));
+
+  // Scroll progress bar (rAF-throttled, transform-only)
+  let ticking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progressBar.style.transform = `scaleX(${pct})`;
+    progressBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  updateProgress();
+
+  // Mobile drawer sits BELOW the header (not a modal dialog), so header stays clickable.
+  const isMenuOpen = () => !mobileMenu.hidden;
+  function openMenu() {
+    mobileMenu.hidden = false;
+    document.body.style.overflow = 'hidden';
+    menuBtn.classList.add('is-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuLabel.textContent = 'CLOSE';
+  }
+  function closeMenu() {
+    mobileMenu.hidden = true;
+    document.body.style.overflow = '';
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuLabel.textContent = 'MENU';
+  }
+  menuBtn?.addEventListener('click', () => isMenuOpen() ? closeMenu() : openMenu());
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) closeMenu();
+  });
+
+  const currentIndex = () => {
+    const y = window.scrollY + window.innerHeight * 0.5;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= y) return i;
+    }
+    return 0;
+  };
+  const go = (dir) => {
+    const i = currentIndex();
+    const next = Math.max(0, Math.min(sections.length - 1, i + dir));
+    sections[next].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+  };
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (isMenuOpen()) return;
+    if (e.key === ' ' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+    if (e.key === 'End')  { e.preventDefault(); sections[sections.length-1].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+  });
+
+  // Click-to-copy for prompt blocks (optional PROMPTS section). No-op if none present.
+  document.querySelectorAll('.prompt-block').forEach(block => {
+    const code = block.querySelector('.prompt-code');
+    const hint = block.parentElement.querySelector('.prompt-hint');
+    let resetTimer = null;
+    const doCopy = async () => {
+      const text = code.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      block.classList.add('is-copied');
+      if (hint) {
+        hint.textContent = 'COPIED ✓';
+        hint.classList.add('is-copied');
+      }
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => {
+        block.classList.remove('is-copied');
+        if (hint) {
+          hint.textContent = hint.dataset.hintOriginal || '';
+          hint.classList.remove('is-copied');
+        }
+      }, 1500);
+    };
+    block.addEventListener('click', doCopy);
+    block.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doCopy(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
