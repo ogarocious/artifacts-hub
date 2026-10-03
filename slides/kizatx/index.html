@@ -539,6 +539,21 @@
     .log-list li { grid-template-columns: 1fr; gap: 0.15rem; }
   }
 </style>
+<!-- PEOPLE:CSS -->
+<style>
+  .pg-scroll { overflow: auto; max-height: 68vh; }
+  .pg { display: grid; gap: 0; min-width: 34rem; font-family: "JetBrains Mono", ui-monospace, monospace; }
+  .pg > div { height: 1.3rem; display: flex; align-items: center; justify-content: center; border-bottom: 1px dashed rgba(79,195,247,0.07); }
+  .pg .pg-name { justify-content: flex-start; font-family: "Rubik", sans-serif; font-size: 0.78rem; color: rgba(245,247,250,0.85); white-space: nowrap; overflow: hidden; position: sticky; left: 0; background: rgba(13,21,32,0.95); z-index: 1; padding-right: 0.5rem; }
+  .pg .pg-head { position: sticky; top: 0; z-index: 2; background: rgba(13,21,32,0.98); font-size: 0.62rem; color: rgba(245,247,250,0.6); flex-direction: column; height: 2.4rem; line-height: 1.1; }
+  .pg .pg-head span { color: #4fc3f7; font-size: 0.56rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .pg .pg-name.pg-head { z-index: 3; }
+  .pg .pg-count { font-size: 0.72rem; color: rgba(245,247,250,0.72); }
+  .pg .pg-month { border-left: 1px solid rgba(79,195,247,0.18); }
+  .pg .pg-skip, .pg-skip-swatch { background-image: repeating-linear-gradient(135deg, rgba(148,163,184,0.18) 0 2px, transparent 2px 6px); }
+  .pg-dot { width: 0.7rem; height: 0.7rem; border-radius: 999px; display: inline-block; }
+</style>
+<!-- /PEOPLE:CSS -->
 </head>
 <body class="font-sans text-ivory-50 antialiased">
 
@@ -551,9 +566,9 @@
     <span class="brand-sub md-only">· Residency Pulse</span>
   </a>
   <div class="meta">
-    <span class="counter" id="counter" aria-live="polite">1 of 11</span>
+    <span class="counter" id="counter" aria-live="polite">1 of 15</span>
     <span class="sep md-only">·</span>
-    <span class="md-only" title="Last data refresh"><span data-inject="updated">Updated 2026-09-03</span> · <span data-inject="rev">rev 7</span></span>
+    <span class="md-only" title="Last data refresh"><span data-inject="updated">Updated 2026-10-03</span> · <span data-inject="rev">rev 8</span></span>
     <span class="sep lg-only">·</span>
     <span class="lg-only"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
     <button id="menuBtn" class="menu-btn" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
@@ -589,7 +604,7 @@
   <div class="max-w-5xl relative">
     <span class="accent-rule"></span>
     <div class="font-mono text-xs tracking-[0.22em] text-electric-500 uppercase mb-4">
-      Residency Pulse · April → August 2026
+      Residency Pulse · April → September 2026
     </div>
     <h1 class="font-display font-extrabold text-5xl md:text-7xl leading-[0.98] tracking-tight text-ivory-50 text-shadow-cool mb-8">
       Kiz ATX × Esquina Tango
@@ -601,24 +616,24 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
       <div class="stat-tile">
-        <div class="label">Pay per class</div>
-        <div class="value text-positive-400">+12%</div>
-        <div class="sub">$90.69 → $94.36 → $101.40 · up every month</div>
+        <div class="label">Pay per class, running avg</div>
+        <div class="value text-positive-400">$92.49</div>
+        <div class="sub">Jun–Sep · steady at $92–96 since July</div>
       </div>
       <div class="stat-tile">
-        <div class="label">Room, sustained</div>
-        <div class="value text-electric-400">15.6</div>
-        <div class="sub">Aug avg · held July's +49% jump</div>
+        <div class="label">Core regulars</div>
+        <div class="value text-electric-400">8</div>
+        <div class="sub">10+ classes since June</div>
       </div>
       <div class="stat-tile">
-        <div class="label">Peak class</div>
-        <div class="value text-electric-400">19</div>
-        <div class="sub">Jul 19 & Aug 9</div>
+        <div class="label">Came once</div>
+        <div class="value text-electric-400">36</div>
+        <div class="sub">of 64 people · the second visit is the gap</div>
       </div>
     </div>
 
     <div class="mt-10 text-muted text-xs font-mono tracking-wider uppercase">
-      Not for distribution · Charles Ogar · Last update 2026-09-03
+      Not for distribution · Charles Ogar · Last update 2026-10-03
     </div>
 
     <details class="deck-toc" data-toc="deck">
@@ -633,6 +648,11 @@
         <li class="toc-sub"><a href="#table">Full data table</a></li>
         <li class="toc-sub"><a href="#room">What the payout implies</a></li>
         <li class="toc-sub"><a href="#ancillary">Ancillary revenue</a></li>
+        <li class="toc-group">The People</li>
+        <li class="toc-sub"><a href="#people">Once or stay</a></li>
+        <li class="toc-sub"><a href="#grid">Who came when</a></li>
+        <li class="toc-sub"><a href="#core">The core</a></li>
+        <li class="toc-sub"><a href="#drifted">Who stopped coming</a></li>
         <li class="toc-group">Signal</li>
         <li class="toc-sub"><a href="#unknowns">What we don't know</a></li>
         <li class="toc-sub"><a href="#log">Update log</a></li>
@@ -649,25 +669,23 @@
 
     <div class="space-y-5 text-body text-lg md:text-xl leading-relaxed max-w-3xl">
       <p>
-        <strong class="text-electric-400">The room got bigger, and held.</strong>
-        June's 10.2 average jumped to 15.2 in July (+49%), then August held at 15.6 across a 5-Sunday month.
-        The bigger room is now the normal, not a spike.
+        <strong class="text-electric-400">The room grew, then settled.</strong>
+        June's 10.2 average jumped to 15.2 in July and held at 15.6 in August. September came in at 13.3 across
+        3 classes (Sep 6 skipped for Labor Day).
       </p>
       <p>
-        <strong class="text-electric-400">Pay per class keeps climbing.</strong>
-        Normalized for Sundays taught: $90.69 (Jun) → $94.36 (Jul) → $101.40 (Aug). Up every month.
-        That, not the raw monthly total, is the honest growth line.
+        <strong class="text-electric-400">Judge pay on the running average.</strong>
+        Unlimited-pass money settles about a month late, so single months swing: August's $101.40 carried July's catch-up,
+        September's $77.56 is likely missing its share. Averaged, pay has held at $92–96 per class since July.
       </p>
       <p>
-        <strong class="text-electric-400">The "gap" is solved.</strong>
-        July's flat payout on a fuller room looked alarming. Michelle confirmed pay is per-visit value
-        (not cash-basis), and the dip was mix: more free intros and unlimited / heavy-pass users.
-        August's rev/check-in recovered to $13.00.
+        <strong class="text-electric-400">The growth lever is the second visit.</strong>
+        Of 64 people since June, 36 came once and only 3 came exactly twice. Whoever comes back usually stays.
+        August brought 18 newcomers and only 2 returned.
       </p>
       <p>
-        <strong class="text-electric-400">August's $506.98 is partly the calendar.</strong>
-        Five Sundays instead of four. On its own the per-class rate still rose +7.5% Jul→Aug, so the growth
-        is real underneath the extra week.
+        <strong class="text-electric-400">September dipped on lost regulars, not fewer newcomers.</strong>
+        Twelve people with 3+ classes weren't seen in September, including drop-in regulars, the best-paying visit type.
       </p>
     </div>
   </div>
@@ -729,9 +747,16 @@
           </div>
           <div class="bar-total">$506.98</div>
         </div>
+        <div class="bar-chart">
+          <div class="bar-month">Sept</div>
+          <div class="bar-track">
+            <div class="bar-fill stack-kizomba" style="width: 42.3%;">$232.69</div>
+          </div>
+          <div class="bar-total">$232.69</div>
+        </div>
       </div>
 
-      <div class="mt-8 pt-6 border-t border-electric-500/10 grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+      <div class="mt-8 pt-6 border-t border-electric-500/10 grid grid-cols-2 md:grid-cols-6 gap-4 text-sm">
         <div>
           <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Apr → May</div>
           <span class="delta delta-pos">▲ +21.1%</span>
@@ -749,12 +774,16 @@
           <span class="delta delta-pos">▲ +34.3%</span>
         </div>
         <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Aug → Sep</div>
+          <span class="delta delta-neg">▼ −54.1%</span>
+        </div>
+        <div>
           <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Apr → Aug (total)</div>
           <span class="delta delta-pos">▲ +123.0%</span>
         </div>
       </div>
       <p class="text-muted text-xs mt-4 font-mono">
-        Scale: $0 → $550. August is a 5-Sunday month, so its raw total is partly calendar — the $/class trend on the next slide is the honest read. Deltas above are residency-only.
+        Scale: $0 → $550. August had 5 Sundays and September 3, so raw totals are partly calendar — the $/class trend on the next slide is the honest read. Deltas above are residency-only.
       </p>
     </div>
   </div>
@@ -790,28 +819,31 @@
               <text x="10" y="234">$0</text>
             </g>
             <!-- Apr..Aug. y = 230 - (val/600)*200; x = 70,162,254,346,438 -->
-            <polyline points="70,154.2 162,138.3 254,109.1 346,104.2 438,61.0"
+            <polyline points="70,154.2 150,138.2 230,109.1 310,104.2 390,61.0 470,152.4"
                       fill="none" stroke="#4fc3f7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
             <g fill="#4fc3f7">
-              <circle cx="70"  cy="154.2" r="5" />
-              <circle cx="162" cy="138.3" r="5" />
-              <circle cx="254" cy="109.1" r="5" />
-              <circle cx="346" cy="104.2" r="5" />
-              <circle cx="438" cy="61.0"  r="5" />
+              <circle cx="70" cy="154.2" r="5" />
+              <circle cx="150" cy="138.2" r="5" />
+              <circle cx="230" cy="109.1" r="5" />
+              <circle cx="310" cy="104.2" r="5" />
+              <circle cx="390" cy="61.0" r="5" />
+              <circle cx="470" cy="152.4" r="5" />
             </g>
             <g font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(245,247,250,0.72)" text-anchor="middle">
-              <text x="70"  y="252">Apr</text>
-              <text x="162" y="252">May</text>
-              <text x="254" y="252">Jun</text>
-              <text x="346" y="252">Jul</text>
-              <text x="438" y="252">Aug</text>
+              <text x="70" y="252">Apr</text>
+              <text x="150" y="252">May</text>
+              <text x="230" y="252">Jun</text>
+              <text x="310" y="252">Jul</text>
+              <text x="390" y="252">Aug</text>
+              <text x="470" y="252">Sep</text>
             </g>
             <g font-family="JetBrains Mono, monospace" font-size="10" fill="#f5f7fa" text-anchor="middle">
-              <text x="70"  y="143">$227</text>
-              <text x="162" y="127">$275</text>
-              <text x="254" y="98">$363</text>
-              <text x="346" y="93">$377</text>
-              <text x="438" y="50">$507</text>
+              <text x="70" y="143.2">$227</text>
+              <text x="150" y="127.19999999999999">$275</text>
+              <text x="230" y="98.1">$363</text>
+              <text x="310" y="93.2">$377</text>
+              <text x="390" y="50.0">$507</text>
+              <text x="470" y="141.4">$233</text>
             </g>
           </svg>
         </div>
@@ -820,6 +852,7 @@
           <span class="delta delta-pos">May→Jun ▲ +31.8%</span>
           <span class="delta delta-pos">Jun→Jul ▲ +4.0%</span>
           <span class="delta delta-pos">Jul→Aug ▲ +34.3%</span>
+          <span class="delta delta-neg">Aug→Sep ▼ −54.1%</span>
         </div>
       </div>
 
@@ -843,28 +876,31 @@
               <text x="10" y="234">$0</text>
             </g>
             <!-- $/class Apr..Aug. y = 230 - (val/120)*200; x = 70,162,254,346,438 -->
-            <polyline points="70,103.7 162,115.3 254,78.9 346,72.7 438,61.0"
+            <polyline points="70,103.7 150,115.3 230,78.8 310,72.7 390,61.0 470,100.7"
                       fill="none" stroke="#86efac" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
             <g fill="#86efac">
-              <circle cx="70"  cy="103.7" r="5" />
-              <circle cx="162" cy="115.3" r="5" />
-              <circle cx="254" cy="78.9"  r="5" />
-              <circle cx="346" cy="72.7"  r="5" />
-              <circle cx="438" cy="61.0"  r="5" />
+              <circle cx="70" cy="103.7" r="5" />
+              <circle cx="150" cy="115.3" r="5" />
+              <circle cx="230" cy="78.8" r="5" />
+              <circle cx="310" cy="72.7" r="5" />
+              <circle cx="390" cy="61.0" r="5" />
+              <circle cx="470" cy="100.7" r="5" />
             </g>
             <g font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(245,247,250,0.72)" text-anchor="middle">
-              <text x="70"  y="252">Apr</text>
-              <text x="162" y="252">May</text>
-              <text x="254" y="252">Jun</text>
-              <text x="346" y="252">Jul</text>
-              <text x="438" y="252">Aug</text>
+              <text x="70" y="252">Apr</text>
+              <text x="150" y="252">May</text>
+              <text x="230" y="252">Jun</text>
+              <text x="310" y="252">Jul</text>
+              <text x="390" y="252">Aug</text>
+              <text x="470" y="252">Sep</text>
             </g>
             <g font-family="JetBrains Mono, monospace" font-size="10" fill="#f5f7fa" text-anchor="middle">
-              <text x="70"  y="93">$75.78</text>
-              <text x="162" y="104">$68.81</text>
-              <text x="254" y="68">$90.69</text>
-              <text x="346" y="62">$94.36</text>
-              <text x="438" y="50">$101.40</text>
+              <text x="70" y="92.7">$75.78</text>
+              <text x="150" y="104.3">$68.81</text>
+              <text x="230" y="67.8">$90.69</text>
+              <text x="310" y="61.7">$94.36</text>
+              <text x="390" y="50.0">$101.40</text>
+              <text x="470" y="89.7">$77.56</text>
             </g>
           </svg>
         </div>
@@ -873,6 +909,7 @@
           <span class="delta delta-pos">May→Jun ▲ +31.8%</span>
           <span class="delta delta-pos">Jun→Jul ▲ +4.0%</span>
           <span class="delta delta-pos">Jul→Aug ▲ +7.5%</span>
+          <span class="delta delta-neg">Aug→Sep ▼ −23.5%</span>
         </div>
       </div>
     </div>
@@ -880,8 +917,8 @@
     <div class="mt-6 glass rounded-xl p-5 max-w-4xl">
       <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-2">Why the two charts diverge</div>
       <p class="text-dimmed leading-relaxed">
-        April had 3 Sundays (skipped Easter), May–July 4 each, August 5. Raw dollars conflate calendar with performance;
-        $/class isolates it. Two tells: Apr→May raw shows +21% but per-class is a −9% dip; Jul→Aug raw shows +34% but per-class is a truer +7.5%.
+        April had 3 Sundays (skipped Easter), May–July 4 each, August 5, September 3 (skipped Labor Day). Raw dollars conflate calendar with performance;
+        $/class isolates it. Two tells: Apr→May raw shows +21% but per-class is a −9% dip; Jul→Aug raw shows +34% but per-class is a truer +7.5%. September's per-class dip is mostly unlimited-pass money that settles a month late; the running average since June is $92.49.
       </p>
     </div>
   </div>
@@ -893,10 +930,10 @@
     <span class="accent-rule"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">The room got bigger</h2>
     <p class="text-dimmed text-lg mb-8 max-w-3xl">
-      Real per-class check-ins from Esquina Tango's exports (June 1 – August 31, 2026). Not modeled, not inferred.
+      Real per-class check-ins from Esquina Tango's exports (June through September 2026). Not modeled, not inferred. Sep 6 skipped for Labor Day.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
       <div class="stat-tile">
         <div class="label">June avg class size</div>
         <div class="value">10.2</div>
@@ -911,6 +948,11 @@
         <div class="label">August avg class size</div>
         <div class="value text-positive-400">15.6</div>
         <div class="sub">78 across 5 classes · held</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">September avg class size</div>
+        <div class="value">13.3</div>
+        <div class="sub">40 across 3 classes · lost regulars</div>
       </div>
     </div>
 
@@ -1042,6 +1084,35 @@
           </div>
           <div class="bar-total">18</div>
         </div>
+        <div class="bar-chart">
+          <div class="bar-month">Sep 13</div>
+          <div class="bar-track">
+            <div class="bar-fill stack-kizomba" style="width: 20%;">4</div>
+            <div class="bar-fill" style="width: 20%; background: linear-gradient(90deg, #a5e2fb, #7dd6fa); color: #0d1520;">4</div>
+            <div class="bar-fill" style="width: 10%; background: linear-gradient(90deg, #86efac, #4ade80); color: #0d1520;">2</div>
+            <div class="bar-fill" style="width: 20%; background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0d1520;">4</div>
+          </div>
+          <div class="bar-total">14</div>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-month">Sep 20</div>
+          <div class="bar-track">
+            <div class="bar-fill stack-kizomba" style="width: 10%;">2</div>
+            <div class="bar-fill" style="width: 35%; background: linear-gradient(90deg, #a5e2fb, #7dd6fa); color: #0d1520;">7</div>
+            <div class="bar-fill" style="width: 10%; background: linear-gradient(90deg, #86efac, #4ade80); color: #0d1520;">2</div>
+            <div class="bar-fill" style="width: 15%; background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0d1520;">3</div>
+          </div>
+          <div class="bar-total">14</div>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-month">Sep 27</div>
+          <div class="bar-track">
+            <div class="bar-fill stack-kizomba" style="width: 10%;">2</div>
+            <div class="bar-fill" style="width: 45%; background: linear-gradient(90deg, #a5e2fb, #7dd6fa); color: #0d1520;">9</div>
+            <div class="bar-fill" style="width: 5%; background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0d1520;">1</div>
+          </div>
+          <div class="bar-total">12</div>
+        </div>
       </div>
 
       <div class="mt-6 pt-6 border-t border-electric-500/10 text-dimmed text-sm leading-relaxed">
@@ -1049,7 +1120,8 @@
           <strong class="text-electric-400">Composition is stable; growth is a bigger room.</strong>
           Passes stayed ~55% and drop-ins ~30% through August, not a mix shift. But August's fullest nights
           (Aug 9, Aug 30) carried more free intros and comps, which pay $0 and pull rev/head down even as the
-          room grows — the same effect that made July look thin.
+          room grows, the same effect that made July look thin. September's smaller rooms came from regulars who
+          stopped coming, not from fewer newcomers (see The People).
         </p>
       </div>
     </div>
@@ -1189,6 +1261,10 @@
           per-visit pay model working: a fuller room padded with free intros and low-value unlimited passes books
           less per head. August's payout jumped +34% (five Sundays) and rev/head recovered to $13.00.
         </p>
+        <p class="mt-3 text-muted text-sm">
+          September (3 Sundays, 40 check-ins, $232.69) is on the table slide. It stays off this chart because a
+          3-Sunday month with a late unlimited-pass settlement would read as a collapse that isn't there.
+        </p>
       </div>
     </div>
   </div>
@@ -1205,7 +1281,7 @@
 
     <div class="glass rounded-2xl p-6 md:p-8 overflow-x-auto">
       <table class="data-table">
-        <caption>Monthly Kizomba residency · April–August 2026</caption>
+        <caption>Monthly Kizomba residency · April–September 2026</caption>
         <thead>
           <tr>
             <th>Month</th>
@@ -1275,6 +1351,28 @@
             <td class="num">19</td>
             <td class="num">$13.00</td>
           </tr>
+          <tr>
+            <td>September 2026</td>
+            <td class="num">3</td>
+            <td class="num">$232.69</td>
+            <td class="num">$77.56</td>
+            <td class="num"><span class="delta delta-neg">−54.1%</span></td>
+            <td class="num">40</td>
+            <td class="num">13.3</td>
+            <td class="num">14</td>
+            <td class="num"><span class="delta delta-neg">$11.63</span></td>
+          </tr>
+          <tr class="highlight">
+            <td>Running avg, Jun–Sep</td>
+            <td class="num">16</td>
+            <td class="num">$1,479.85</td>
+            <td class="num">$92.49</td>
+            <td class="num">·</td>
+            <td class="num">220</td>
+            <td class="num">13.8</td>
+            <td class="num">19</td>
+            <td class="num">$13.45</td>
+          </tr>
         </tbody>
       </table>
 
@@ -1284,7 +1382,9 @@
         <div>April skipped Easter Sunday (Apr 5).</div>
         <div>May skipped Memorial Day Sunday (May 24).</div>
         <div>July $ includes +$49 correction for 7/5 attendance.</div>
-        <div>August was a 5-Sunday month (5 classes) — compare $/class, not monthly totals, across months.</div>
+        <div>August was a 5-Sunday month (5 classes). Compare $/class, not monthly totals, across months.</div>
+        <div>September skipped Labor Day Sunday (Sep 6); 3 classes.</div>
+        <div>Unlimited-pass value settles about a month late, so judge pay on the running average.</div>
         <div>Jun 7 taught solo by Alina (Charles was out); other 7 classes taught by Charles.</div>
         <div>Payout to Charles = 50% of gross (studio split).</div>
         <div>April/May attendance estimated at June's measured $8.85/check-in rate.</div>
@@ -1355,6 +1455,13 @@
             <td class="num">$1,013.96</td>
             <td class="num"><span class="delta delta-pos">$13.00</span></td>
           </tr>
+          <tr>
+            <td>September 2026</td>
+            <td class="num">40</td>
+            <td class="num">$232.69</td>
+            <td class="num">$465.38</td>
+            <td class="num"><span class="delta delta-neg">$11.63</span></td>
+          </tr>
         </tbody>
       </table>
 
@@ -1411,13 +1518,17 @@
             <span class="text-dimmed">July</span>
             <span class="font-mono text-muted">·</span>
           </div>
-          <div class="flex justify-between items-baseline py-2">
+          <div class="flex justify-between items-baseline py-2 border-b border-electric-500/10">
             <span class="text-dimmed">August</span>
+            <span class="font-mono text-muted">·</span>
+          </div>
+          <div class="flex justify-between items-baseline py-2">
+            <span class="text-dimmed">September</span>
             <span class="font-mono text-muted">·</span>
           </div>
         </div>
         <div class="mt-4 pt-4 border-t border-electric-500/10 flex justify-between items-baseline">
-          <span class="font-mono text-xs uppercase tracking-wider text-electric-400">5-mo total</span>
+          <span class="font-mono text-xs uppercase tracking-wider text-electric-400">6-mo total</span>
           <span class="font-mono text-lg text-ivory-50">$62.50</span>
         </div>
       </div>
@@ -1441,27 +1552,281 @@
             <span class="text-dimmed">July</span>
             <span class="font-mono text-muted">·</span>
           </div>
-          <div class="flex justify-between items-baseline py-2">
+          <div class="flex justify-between items-baseline py-2 border-b border-electric-500/10">
             <span class="text-dimmed">August</span>
+            <span class="font-mono text-muted">·</span>
+          </div>
+          <div class="flex justify-between items-baseline py-2">
+            <span class="text-dimmed">September</span>
             <span class="font-mono text-muted">·</span>
           </div>
         </div>
         <div class="mt-4 pt-4 border-t border-electric-500/10 flex justify-between items-baseline">
-          <span class="font-mono text-xs uppercase tracking-wider text-electric-400">5-mo total</span>
+          <span class="font-mono text-xs uppercase tracking-wider text-electric-400">6-mo total</span>
           <span class="font-mono text-lg text-ivory-50">$25.50</span>
         </div>
       </div>
     </div>
 
     <div class="mt-6 glass rounded-xl p-5 max-w-4xl">
-      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-2">All-in Esquina Tango revenue, 5 months</div>
+      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-2">All-in Esquina Tango revenue, 6 months</div>
       <div class="flex items-baseline gap-4 flex-wrap">
-        <div class="font-display font-bold text-4xl text-ivory-50">$1,837.74</div>
-        <div class="text-dimmed">$1,749.74 Kizomba + $62.50 Privates + $25.50 Photo Shoot</div>
+        <div class="font-display font-bold text-4xl text-ivory-50">$2,070.43</div>
+        <div class="text-dimmed">$1,982.43 Kizomba + $62.50 Privates + $25.50 Photo Shoot</div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- PEOPLE:START -->
+<!-- PEOPLE 1. ONCE OR STAY -->
+<section id="people" data-title="Once or stay" data-group="The People" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">People come once, or they stay</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      16 Sundays, 220 check-ins, 64 different people (Jun 7 to Sep 27).
+      Almost nobody comes exactly twice. A second visit usually turns into a regular.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="stat-tile"><div class="label">Came once</div><div class="value">36</div><div class="sub">of 64 people</div></div>
+      <div class="stat-tile"><div class="label">Came exactly twice</div><div class="value text-electric-400">3</div><div class="sub">the step that decides it</div></div>
+      <div class="stat-tile"><div class="label">Core, 10+ classes</div><div class="value text-positive-400">8</div><div class="sub">the floor every Sunday stands on</div></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">People by classes attended</div>
+        <div class="space-y-3">
+        <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;">
+          <div class="bar-month">1</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 100.0%;">36</div></div>
+          <div class="bar-total">36</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;">
+          <div class="bar-month">2</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 8.3%;">3</div></div>
+          <div class="bar-total">3</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;">
+          <div class="bar-month">3–4</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 19.4%;">7</div></div>
+          <div class="bar-total">7</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;">
+          <div class="bar-month">5–9</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 27.8%;">10</div></div>
+          <div class="bar-total">10</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;">
+          <div class="bar-month">10+</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 22.2%;">8</div></div>
+          <div class="bar-total">8</div>
+        </div>
+        </div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Did first-timers come back?</div>
+        <table class="data-table">
+          <thead><tr><th>First visit</th><th class="num">New</th><th class="num">Came back</th><th class="num">Rate</th></tr></thead>
+          <tbody><tr><td>June<span class="text-muted text-xs"> · includes Apr/May regulars</span></td><td class="num">21</td><td class="num">18</td><td class="num">86%</td></tr><tr><td>July</td><td class="num">12</td><td class="num">6</td><td class="num">50%</td></tr><tr><td>August</td><td class="num">18</td><td class="num">2</td><td class="num">11%</td></tr><tr><td>September<span class="text-muted text-xs"> · too early to tell</span></td><td class="num">13</td><td class="num">2</td><td class="num">15%</td></tr></tbody>
+        </table>
+        <p class="text-dimmed text-sm leading-relaxed mt-4">
+          The number to move each month. Free intros that turned into paying students: 6 of 22.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE 2. ATTENDANCE GRID -->
+<section id="grid" data-title="Who came when" data-group="The People" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Who came when</h2>
+    <p class="text-dimmed text-lg mb-6 max-w-3xl">
+      One row per person, one column per Sunday, colored by how they paid. Solid rows are regulars, single dots are one-time visits,
+      and rows that stop are people who drifted off. Sorted by classes attended.
+    </p>
+    <div class="glass rounded-2xl p-4 md:p-6">
+      <div class="legend mb-4">
+        <span class="chip"><span class="swatch" style="background: #4fc3f7; border-radius:999px;"></span>Drop-in</span>        <span class="chip"><span class="swatch" style="border:2px solid #a5e2fb; border-radius:999px;"></span>5/10-class pass</span>        <span class="chip"><span class="swatch" style="background: #86efac; border-radius:999px;"></span>Unlimited</span>        <span class="chip"><span class="swatch" style="background: #fbbf24; border-radius:999px;"></span>Free / comp</span>
+        <span class="chip"><span class="swatch pg-skip-swatch"></span>No class</span>
+      </div>
+      <div class="pg-scroll">
+        <div class="pg" style="grid-template-columns: 7.5rem repeat(17, minmax(1.35rem, 1fr)) 2rem;">
+          <div class="pg-name pg-head"></div><div class="pg-head pg-month" title="Taught by Alina">7<span>Jun</span></div><div class="pg-head">14<span></span></div><div class="pg-head">21<span></span></div><div class="pg-head">28<span></span></div><div class="pg-head pg-month">5<span>Jul</span></div><div class="pg-head">12<span></span></div><div class="pg-head">19<span></span></div><div class="pg-head">26<span></span></div><div class="pg-head pg-month">2<span>Aug</span></div><div class="pg-head">9<span></span></div><div class="pg-head">16<span></span></div><div class="pg-head">23<span></span></div><div class="pg-head">30<span></span></div><div class="pg-head pg-skip pg-month" title="Labor Day, no class">6<span>Sep</span></div><div class="pg-head">13<span></span></div><div class="pg-head">20<span></span></div><div class="pg-head">27<span></span></div><div class="pg-head pg-count">#</div>
+          <div class="pg-name">Duane V.</div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 7: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 14: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 21: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 28: Drop-in"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 5: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 12: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 19: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 26: Drop-in"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 9: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 16: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 23: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 30: Drop-in"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Sep 13: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Sep 20: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Sep 27: Drop-in"></span></div><div class="pg-count">15</div><div class="pg-name">Lia H.</div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#fbbf24;" title="Jun 7: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jun 14: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jun 21: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#fbbf24;" title="Jul 5: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jul 19: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jul 26: Free / comp"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#fbbf24;" title="Aug 2: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 16: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 23: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 30: Free / comp"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Sep 13: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Sep 20: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Sep 27: Free / comp"></span></div><div class="pg-count">13</div><div class="pg-name">Trenton H.</div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 14: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 21: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 28: Drop-in"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 19: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 2: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 16: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 23: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 13: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 20: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">12</div><div class="pg-name">Annastatia S.</div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 7: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 14: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 21: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 5: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 9: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 16: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 23: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 20: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">11</div><div class="pg-name">Anvita J.</div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 7: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 14: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 28: 5/10-class pass"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 5: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 19: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 9: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 23: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">11</div><div class="pg-name">Claudia Z.</div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 7: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 28: 5/10-class pass"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 5: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 9: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 16: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 23: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 13: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 20: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">11</div><div class="pg-name">Renier R.</div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 7: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 14: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 21: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 5: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 2: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 13: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 20: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">10</div><div class="pg-name">Christina B.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 5: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 19: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 2: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 9: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 16: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 20: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">10</div><div class="pg-name">Aysha U.</div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 14: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 21: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 28: 5/10-class pass"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 5: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 19: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 16: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 23: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">8</div><div class="pg-name">Christian J.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 21: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 28: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 2: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 9: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 23: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">8</div><div class="pg-name">Nadine L.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 28: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 19: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 9: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 16: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 13: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">8</div><div class="pg-name">Felisberto P.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jul 12: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 19: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 26: Drop-in"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 2: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 9: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 16: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 23: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">7</div><div class="pg-name">Ace J.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 21: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 28: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 2: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 9: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">6</div><div class="pg-name">Aman B.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 9: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 16: 5/10-class pass"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 23: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 20: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-count">6</div><div class="pg-name">Victoria N.</div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 7: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 14: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 19: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 26: Drop-in"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 9: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">5</div><div class="pg-name">Saul C.</div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 14: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 2: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 9: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 16: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 23: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">5</div><div class="pg-name">Manish K.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jun 28: Free / comp"></span></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 5: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 12: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 19: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 26: Drop-in"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">5</div><div class="pg-name">Barton L.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Jul 19: Unlimited"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#86efac;" title="Aug 2: Unlimited"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Aug 16: Unlimited"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Aug 23: Unlimited"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Aug 30: Unlimited"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">5</div><div class="pg-name">Devin G.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 28: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 12: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">4</div><div class="pg-name">Rick G.</div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 7: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 19: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 26: Drop-in"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">3</div><div class="pg-name">Tess W.</div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 7: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 14: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 19: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">3</div><div class="pg-name">Emily J.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 28: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 26: 5/10-class pass"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">3</div><div class="pg-name">Taisa T.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jul 12: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Jul 19: Unlimited"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Jul 26: Unlimited"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">3</div><div class="pg-name">Patricia F.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 26: Drop-in"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 16: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Sep 13: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">3</div><div class="pg-name">Juliana F.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 9: Free / comp"></span></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 16: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 20: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-count">3</div><div class="pg-name">AJ A.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 2: Drop-in"></span></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 9: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">2</div><div class="pg-name">David A.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Sep 13: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">2</div><div class="pg-name">Lexi G.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Sep 13: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Sep 27: 5/10-class pass"></span></div><div class="pg-count">2</div><div class="pg-name">Daniel E.</div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jun 14: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Carolyn H.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jun 28: Drop-in"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Mercedez M.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jun 28: Free / comp"></span></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Emily A.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Jul 5: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Derricka D.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Jul 19: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Laci L.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jul 19: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Loren M.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jul 19: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Oleksandr D.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Jul 19: Unlimited"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Sephora D.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Jul 19: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Gabriel S.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"><span class="pg-dot" style="background:#fbbf24;" title="Aug 2: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Angela H.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 9: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Jory J.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 9: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Loraine H.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 9: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Paula G.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 9: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Toni B.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 9: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">David P.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 16: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Frank H.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 16: 5/10-class pass"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Hannah C.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 23: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Ximena A.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 23: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Callie N.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Aug 30: Drop-in"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Derrick R.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="border:2px solid #a5e2fb;" title="Aug 30: 5/10-class pass"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Eleanor R.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 30: Free / comp"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Michael M.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 30: Free / comp"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">OM M.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 30: Free / comp"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Sterling T.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Aug 30: Free / comp"></span></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Ajay M.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Sep 13: Unlimited"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Abigail T.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Sep 13: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Micaela S.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Sep 13: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Michelle C.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Sep 13: Unlimited"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Zaeem A.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Sep 13: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Claire M.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Sep 20: Unlimited"></span></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Manuela S.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Sep 20: Drop-in"></span></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Nicky O.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Sep 20: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Samuel A.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#fbbf24;" title="Sep 20: Free / comp"></span></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Vic O.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#86efac;" title="Sep 20: Unlimited"></span></div><div class="pg-cell"></div><div class="pg-count">1</div><div class="pg-name">Liz S.</div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell pg-skip pg-month"></div><div class="pg-cell"></div><div class="pg-cell"></div><div class="pg-cell"><span class="pg-dot" style="background:#4fc3f7;" title="Sep 27: Drop-in"></span></div><div class="pg-count">1</div>
+        </div>
+      </div>
+      <p class="text-muted text-xs mt-4 font-mono">
+        Jun 7 taught by Alina. Sep 6 skipped (Labor Day). Names shortened to first name + last initial.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE 3. THE CORE + HOW THEY PAY -->
+<section id="core" data-title="The core" data-group="The People" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">The core</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      Who has come the most, and how people pay. 8 people have 10+ classes; they carry roughly
+      42% of every check-in.
+    </p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Most classes attended · Jun 7 to Sep 27, 16 classes</div>
+        <div class="space-y-2">
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Duane V.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 100.0%;">15</div></div>
+          <div class="bar-total">15</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Lia H.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 86.7%;">13</div></div>
+          <div class="bar-total">13</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Trenton H.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 80.0%;">12</div></div>
+          <div class="bar-total">12</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Annastatia S.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 73.3%;">11</div></div>
+          <div class="bar-total">11</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Anvita J.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 73.3%;">11</div></div>
+          <div class="bar-total">11</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Claudia Z.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 73.3%;">11</div></div>
+          <div class="bar-total">11</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Renier R.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 66.7%;">10</div></div>
+          <div class="bar-total">10</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Christina B.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 66.7%;">10</div></div>
+          <div class="bar-total">10</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Aysha U.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 53.3%;">8</div></div>
+          <div class="bar-total">8</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Christian J.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 53.3%;">8</div></div>
+          <div class="bar-total">8</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Nadine L.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 53.3%;">8</div></div>
+          <div class="bar-total">8</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Felisberto P.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 46.7%;">7</div></div>
+          <div class="bar-total">7</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Ace J.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 40.0%;">6</div></div>
+          <div class="bar-total">6</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Aman B.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 40.0%;">6</div></div>
+          <div class="bar-total">6</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8rem 1fr 3rem;">
+          <div class="bar-month">Victoria N.</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 33.3%;">5</div></div>
+          <div class="bar-total">5</div>
+        </div>
+        </div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">People by how they usually pay</div>
+        <div class="space-y-3">
+        <div class="bar-chart" style="grid-template-columns: 8.5rem 1fr 3rem;">
+          <div class="bar-month">Drop-in</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 100.0%;">19</div></div>
+          <div class="bar-total">19</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8.5rem 1fr 3rem;">
+          <div class="bar-month">5/10-class pass</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 100.0%;">19</div></div>
+          <div class="bar-total">19</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8.5rem 1fr 3rem;">
+          <div class="bar-month">Unlimited</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 36.8%;">7</div></div>
+          <div class="bar-total">7</div>
+        </div>
+        <div class="bar-chart" style="grid-template-columns: 8.5rem 1fr 3rem;">
+          <div class="bar-month">Free / comp</div>
+          <div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 100.0%;">19</div></div>
+          <div class="bar-total">19</div>
+        </div>
+        </div>
+        <div class="mt-6 pt-6 border-t border-electric-500/10 text-dimmed text-sm leading-relaxed space-y-3">
+          <p><strong class="text-electric-400">Drop-ins pay the most per visit</strong> ($10 to Charles at full price), passes $6–8, free intros $0.</p>
+          <p><strong class="text-electric-400">Free intro to paid:</strong> 6 of 22
+            (Manish K., Felisberto P., Taisa T., Juliana F., David A., Lexi G.).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE 4. WHO STOPPED COMING -->
+<section id="drifted" data-title="Who drifted" data-group="The People" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Who stopped coming</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">
+      "Stopped" means not seen at Kizomba in the last 3 classes (since Sep 13). Passes work across all Esquina
+      group classes, so some of these people may still be dancing tango.
+    </p>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Regulars who drifted</div>
+        <div class="font-display font-bold text-4xl text-ivory-50 mb-3">12</div>
+        <p class="text-muted text-xs mb-4">3+ classes, then gone. Highest-value people to bring back.</p>
+        <ul class="space-y-1 text-sm">
+          <li class="flex justify-between"><span class="text-body">Aysha U.</span><span class="font-mono text-muted text-xs">8 · last Aug 30</span></li>          <li class="flex justify-between"><span class="text-body">Christian J.</span><span class="font-mono text-muted text-xs">8 · last Aug 30</span></li>          <li class="flex justify-between"><span class="text-body">Felisberto P.</span><span class="font-mono text-muted text-xs">7 · last Aug 23</span></li>          <li class="flex justify-between"><span class="text-body">Victoria N.</span><span class="font-mono text-muted text-xs">5 · last Aug 9</span></li>          <li class="flex justify-between"><span class="text-body">Saul C.</span><span class="font-mono text-muted text-xs">5 · last Aug 23</span></li>          <li class="flex justify-between"><span class="text-body">Manish K.</span><span class="font-mono text-muted text-xs">5 · last Jul 26</span></li>          <li class="flex justify-between"><span class="text-body">Barton L.</span><span class="font-mono text-muted text-xs">5 · last Aug 30</span></li>          <li class="flex justify-between"><span class="text-body">Devin G.</span><span class="font-mono text-muted text-xs">4 · last Aug 30</span></li>          <li class="flex justify-between"><span class="text-body">Rick G.</span><span class="font-mono text-muted text-xs">3 · last Jul 26</span></li>          <li class="flex justify-between"><span class="text-body">Tess W.</span><span class="font-mono text-muted text-xs">3 · last Jul 19</span></li>          <li class="flex justify-between"><span class="text-body">Emily J.</span><span class="font-mono text-muted text-xs">3 · last Aug 30</span></li>          <li class="flex justify-between"><span class="text-body">Taisa T.</span><span class="font-mono text-muted text-xs">3 · last Jul 26</span></li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Came twice</div>
+        <div class="font-display font-bold text-4xl text-ivory-50 mb-3">3</div>
+        <ul class="space-y-1 text-sm mb-6">
+          <li class="flex justify-between"><span class="text-body">AJ A.</span><span class="font-mono text-muted text-xs">last Aug 9</span></li>          <li class="flex justify-between"><span class="text-body">David A.</span><span class="font-mono text-muted text-xs">still coming</span></li>          <li class="flex justify-between"><span class="text-body">Lexi G.</span><span class="font-mono text-muted text-xs">still coming</span></li>
+        </ul>
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Came once, recently</div>
+        <div class="font-display font-bold text-2xl text-ivory-50 mb-2">11</div>
+        <p class="text-dimmed text-sm leading-relaxed">Abigail T., Ajay M., Micaela S., Michelle C., Zaeem A. (visiting), Claire M., Manuela S., Nicky O., Samuel A., Vic O., Liz S.. Still in the window to come back.</p>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-1">Came once, never came back</div>
+        <div class="font-display font-bold text-4xl text-ivory-50 mb-3">25</div>
+        <p class="text-dimmed text-sm leading-relaxed">Daniel E., Carolyn H., Mercedez M., Emily A., Derricka D., Laci L., Loren M., Oleksandr D., Sephora D., Gabriel S., Angela H., Jory J., Loraine H., Paula G., Toni B., David P., Frank H., Hannah C., Ximena A., Callie N., Derrick R., Eleanor R., Michael M., OM M., Sterling T..</p>
+        <p class="text-muted text-xs mt-4">Includes visitors from out of town. Name-level data arrives only with the month-end report, so this is an after-the-fact list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- PEOPLE:END -->
 
 <!-- 8. WHAT WE DON'T KNOW -->
 <section id="unknowns" data-title="Unknowns" data-group="Signal" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
@@ -1487,6 +1852,22 @@
             <strong>Is the 50/50 split cash-basis or per-check-in value?</strong>
             Answered by Michelle (Sep 2026): it's <em>per-visit value</em>. Each check-in is worth 50% of that
             person's per-class price. The rev/head dip was mix (free intros + unlimited / heavy passes), not cash timing.
+          </div>
+        </li>
+        <li>
+          <span class="marker text-positive-400">Resolved</span>
+          <div class="body">
+            <strong>Why single months swing.</strong>
+            Unlimited-pass value settles about a month after the pass period, so July ran low and August carried the
+            catch-up. September's $77.56/class likely lands its share in October. Use the running average.
+          </div>
+        </li>
+        <li>
+          <span class="marker">Watch</span>
+          <div class="body">
+            <strong>Second-visit rate.</strong>
+            Share of each month's first-timers who come back. August: 2 of 18. This is the number that tells
+            whether room clips, follow-up, and arc framing are working.
           </div>
         </li>
         <li>
@@ -1528,6 +1909,16 @@
 
     <div class="glass rounded-2xl p-6 md:p-8">
       <ul class="log-list">
+        <li>
+          <span class="date">2026-10-03</span>
+          <span class="note">
+            Rev 8: added September (3 Sundays, Sep 6 skipped for Labor Day; 40 check-ins, $232.69, $77.56/class).
+            Reframed pay around the running average ($92.49/class Jun–Sep) since unlimited-pass money settles a month late.
+            New "The People" section from name-level exports (Jun–Sep, 64 people): visit ladder, return rate by first-visit
+            month, attendance grid, core regulars, and who stopped coming. Names shown as first name + last initial.
+            Merged duplicate accounts (Trenton H., Ace/Grace J.).
+          </span>
+        </li>
         <li>
           <span class="date">2026-09-03</span>
           <span class="note">
@@ -1577,8 +1968,9 @@
     <div class="mt-10 glass rounded-xl p-5 max-w-3xl">
       <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-2">Update ritual</div>
       <p class="text-dimmed leading-relaxed">
-        When the monthly payout email arrives from Michelle: forward it to Claude with "add to Esquina Tango pulse" and
-        this deck gets a new row, updated deltas, and a new log entry.
+        When the monthly payout email and check-in export arrive from Michelle: send both to Claude with "add to Esquina Tango pulse".
+        The export goes into <code class="text-electric-400">Armature/dance/esquina-residency/checkins/</code>, the People slides
+        rebuild from it (<code class="text-electric-400">build_people_slides.py</code>), and the ledger gets a new row, deltas, and a log entry.
       </p>
     </div>
   </div>
