@@ -542,6 +542,13 @@
 <!-- PEOPLE:CSS -->
 <style>
   .pg-scroll { overflow: auto; max-height: 68vh; }
+  .kpi-tile { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+  .kpi-row { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; }
+  .kpi-spark { width: 100%; height: auto; display: block; overflow: visible; }
+  .kpi-hero .kpi-spark { max-width: 640px; }
+  .kpi-hero .value { font-size: clamp(2.2rem, 4vw, 3rem); }
+  .kpi-axis { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9px; fill: rgba(245,247,250,0.5); }
+  .kpi-pt:hover circle:last-of-type { r: 5.5; }
   .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   .table-scroll .data-table td, .table-scroll .data-table th { white-space: nowrap; }
   main section > div { min-width: 0; max-width: 100%; }
@@ -570,7 +577,7 @@
     <span class="brand-sub md-only">· Charles &amp; Alina</span>
   </a>
   <div class="meta">
-    <span class="counter" id="counter" aria-live="polite">1 of 19</span>
+    <span class="counter" id="counter" aria-live="polite">1 of 20</span>
     <span class="sep md-only">·</span>
     <span class="md-only" title="Last data refresh"><span data-inject="updated">Updated 2026-10-03</span> · <span data-inject="rev">rev 9</span></span>
     <span class="sep lg-only">·</span>
@@ -643,6 +650,7 @@
     <details class="deck-toc" data-toc="deck">
       <summary>Contents</summary>
       <ol class="toc-list">
+        <li><a href="#kpis">Monthly KPIs</a></li>
         <li><a href="#read">The read</a></li>
         <li class="toc-group">The Ledger</li>
         <li class="toc-sub"><a href="#monthly">Monthly $</a></li>
@@ -669,6 +677,64 @@
     </details>
   </div>
 </section>
+
+<!-- KPI:START -->
+<!-- KPIS -->
+<section id="kpis" data-title="Monthly KPIs" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Monthly KPIs</h2>
+    <p class="text-dimmed text-lg mb-6 max-w-3xl">
+      Six numbers, checked when Esquina's month-end report lands. The first one matters most: everything else grows when first-timers come back.
+    </p>
+    <div class="stat-tile kpi-tile kpi-hero">
+        <div class="label">Second-visit rate</div>
+        <div class="kpi-row"><div class="value">17% <span class="text-muted text-xs">(Aug)</span></div><span class="delta delta-neg">▼ 33 pts</span></div>
+        <svg class="kpi-spark" viewBox="0 0 560 120" role="img" aria-label="Trend Jun 76%, Jul 50%, Aug 17%"><line x1="10" y1="108" x2="550" y2="108" stroke="rgba(79,195,247,0.12)" stroke-width="1"/><line x1="10" y1="71.5" x2="550" y2="71.5" stroke="rgba(245,247,250,0.55)" stroke-width="1.5" stroke-dasharray="4 4"/><text x="550" y="67.5" text-anchor="end" class="kpi-axis">target 35%</text><polyline fill="none" stroke="#4fc3f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="10.0,19.3 190.0,52.5 370.0,94.7"/><g class="kpi-pt"><circle cx="10.0" cy="19.3" r="9" fill="transparent"/><circle cx="10.0" cy="19.3" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jun: 76%</title></g><g class="kpi-pt"><circle cx="190.0" cy="52.5" r="9" fill="transparent"/><circle cx="190.0" cy="52.5" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jul: 50%</title></g><g class="kpi-pt"><circle cx="370.0" cy="94.7" r="9" fill="transparent"/><circle cx="370.0" cy="94.7" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Aug: 17%</title></g><text x="10.0" y="119" text-anchor="middle" class="kpi-axis">Jun</text><text x="190.0" y="119" text-anchor="middle" class="kpi-axis">Jul</text><text x="370.0" y="119" text-anchor="middle" class="kpi-axis">Aug</text><circle cx="550.0" cy="108" r="3.5" fill="none" stroke="rgba(245,247,250,0.4)" stroke-width="1.5"><title>Sep: too early to tell</title></circle><text x="550.0" y="119" text-anchor="middle" class="kpi-axis">Sep</text></svg>
+        <div class="sub">First-timers who came back within their next 4 classes. Aug: 2 of 12. Target 35% by December. June is inflated by spring regulars; the latest month is too early to judge.</div>
+      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+      <div class="stat-tile kpi-tile">
+        <div class="label">New people</div>
+        <div class="kpi-row"><div class="value">13</div><span class="delta delta-neg">▼ 5</span></div>
+        <svg class="kpi-spark" viewBox="0 0 180 60" role="img" aria-label="Trend Jun 21, Jul 12, Aug 18, Sep 13"><line x1="10" y1="48" x2="170" y2="48" stroke="rgba(79,195,247,0.12)" stroke-width="1"/><polyline fill="none" stroke="#4fc3f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="10.0,12.4 63.3,41.6 116.7,22.1 170.0,38.4"/><g class="kpi-pt"><circle cx="10.0" cy="12.4" r="9" fill="transparent"/><circle cx="10.0" cy="12.4" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jun: 21</title></g><g class="kpi-pt"><circle cx="63.3" cy="41.6" r="9" fill="transparent"/><circle cx="63.3" cy="41.6" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jul: 12</title></g><g class="kpi-pt"><circle cx="116.7" cy="22.1" r="9" fill="transparent"/><circle cx="116.7" cy="22.1" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Aug: 18</title></g><g class="kpi-pt"><circle cx="170.0" cy="38.4" r="9" fill="transparent"/><circle cx="170.0" cy="38.4" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Sep: 13</title></g><text x="10.0" y="59" text-anchor="middle" class="kpi-axis">Jun</text><text x="63.3" y="59" text-anchor="middle" class="kpi-axis">Jul</text><text x="116.7" y="59" text-anchor="middle" class="kpi-axis">Aug</text><text x="170.0" y="59" text-anchor="middle" class="kpi-axis">Sep</text></svg>
+        <div class="sub">First-ever Kizomba check-in. June includes spring regulars.</div>
+      </div>
+      <div class="stat-tile kpi-tile">
+        <div class="label">Monthly regulars</div>
+        <div class="kpi-row"><div class="value">9</div><span class="delta delta-pos">▲ 1</span></div>
+        <svg class="kpi-spark" viewBox="0 0 180 60" role="img" aria-label="Trend Jun 7, Jul 10, Aug 8, Sep 9"><line x1="10" y1="48" x2="170" y2="48" stroke="rgba(79,195,247,0.12)" stroke-width="1"/><polyline fill="none" stroke="#4fc3f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="10.0,41.6 63.3,12.4 116.7,31.9 170.0,22.1"/><g class="kpi-pt"><circle cx="10.0" cy="41.6" r="9" fill="transparent"/><circle cx="10.0" cy="41.6" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jun: 7</title></g><g class="kpi-pt"><circle cx="63.3" cy="12.4" r="9" fill="transparent"/><circle cx="63.3" cy="12.4" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jul: 10</title></g><g class="kpi-pt"><circle cx="116.7" cy="31.9" r="9" fill="transparent"/><circle cx="116.7" cy="31.9" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Aug: 8</title></g><g class="kpi-pt"><circle cx="170.0" cy="22.1" r="9" fill="transparent"/><circle cx="170.0" cy="22.1" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Sep: 9</title></g><text x="10.0" y="59" text-anchor="middle" class="kpi-axis">Jun</text><text x="63.3" y="59" text-anchor="middle" class="kpi-axis">Jul</text><text x="116.7" y="59" text-anchor="middle" class="kpi-axis">Aug</text><text x="170.0" y="59" text-anchor="middle" class="kpi-axis">Sep</text></svg>
+        <div class="sub">At every class that month, or all but one.</div>
+      </div>
+      <div class="stat-tile kpi-tile">
+        <div class="label">People per class</div>
+        <div class="kpi-row"><div class="value">13.3</div><span class="delta delta-neg">▼ 2.3</span></div>
+        <svg class="kpi-spark" viewBox="0 0 180 60" role="img" aria-label="Trend Jun 10.2, Jul 15.2, Aug 15.6, Sep 13.3"><line x1="10" y1="48" x2="170" y2="48" stroke="rgba(79,195,247,0.12)" stroke-width="1"/><polyline fill="none" stroke="#4fc3f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="10.0,41.6 63.3,14.3 116.7,12.4 170.0,24.8"/><g class="kpi-pt"><circle cx="10.0" cy="41.6" r="9" fill="transparent"/><circle cx="10.0" cy="41.6" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jun: 10.2</title></g><g class="kpi-pt"><circle cx="63.3" cy="14.3" r="9" fill="transparent"/><circle cx="63.3" cy="14.3" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jul: 15.2</title></g><g class="kpi-pt"><circle cx="116.7" cy="12.4" r="9" fill="transparent"/><circle cx="116.7" cy="12.4" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Aug: 15.6</title></g><g class="kpi-pt"><circle cx="170.0" cy="24.8" r="9" fill="transparent"/><circle cx="170.0" cy="24.8" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Sep: 13.3</title></g><text x="10.0" y="59" text-anchor="middle" class="kpi-axis">Jun</text><text x="63.3" y="59" text-anchor="middle" class="kpi-axis">Jul</text><text x="116.7" y="59" text-anchor="middle" class="kpi-axis">Aug</text><text x="170.0" y="59" text-anchor="middle" class="kpi-axis">Sep</text></svg>
+        <div class="sub">Average check-ins per Sunday.</div>
+      </div>
+      <div class="stat-tile kpi-tile">
+        <div class="label">Pay per class, running avg</div>
+        <div class="kpi-row"><div class="value">$92.49</div><span class="delta delta-neg">▼ $3.44</span></div>
+        <svg class="kpi-spark" viewBox="0 0 180 60" role="img" aria-label="Trend Jun $90.69, Jul $92.52, Aug $95.94, Sep $92.49"><line x1="10" y1="48" x2="170" y2="48" stroke="rgba(79,195,247,0.12)" stroke-width="1"/><polyline fill="none" stroke="#4fc3f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="10.0,41.6 63.3,31.4 116.7,12.4 170.0,31.6"/><g class="kpi-pt"><circle cx="10.0" cy="41.6" r="9" fill="transparent"/><circle cx="10.0" cy="41.6" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jun: $90.69</title></g><g class="kpi-pt"><circle cx="63.3" cy="31.4" r="9" fill="transparent"/><circle cx="63.3" cy="31.4" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jul: $92.52</title></g><g class="kpi-pt"><circle cx="116.7" cy="12.4" r="9" fill="transparent"/><circle cx="116.7" cy="12.4" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Aug: $95.94</title></g><g class="kpi-pt"><circle cx="170.0" cy="31.6" r="9" fill="transparent"/><circle cx="170.0" cy="31.6" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Sep: $92.49</title></g><text x="10.0" y="59" text-anchor="middle" class="kpi-axis">Jun</text><text x="63.3" y="59" text-anchor="middle" class="kpi-axis">Jul</text><text x="116.7" y="59" text-anchor="middle" class="kpi-axis">Aug</text><text x="170.0" y="59" text-anchor="middle" class="kpi-axis">Sep</text></svg>
+        <div class="sub">Esquina payout to date ÷ classes to date.</div>
+      </div>
+      <div class="stat-tile kpi-tile">
+        <div class="label">Teaching income</div>
+        <div class="kpi-row"><div class="value">$1,393</div><span class="delta delta-pos">▲ $246</span></div>
+        <svg class="kpi-spark" viewBox="0 0 180 60" role="img" aria-label="Trend Jun $963, Jul $1,437, Aug $1,147, Sep $1,393"><line x1="10" y1="48" x2="170" y2="48" stroke="rgba(79,195,247,0.12)" stroke-width="1"/><polyline fill="none" stroke="#4fc3f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="10.0,41.6 63.3,12.4 116.7,30.3 170.0,15.1"/><g class="kpi-pt"><circle cx="10.0" cy="41.6" r="9" fill="transparent"/><circle cx="10.0" cy="41.6" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jun: $963</title></g><g class="kpi-pt"><circle cx="63.3" cy="12.4" r="9" fill="transparent"/><circle cx="63.3" cy="12.4" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Jul: $1,437</title></g><g class="kpi-pt"><circle cx="116.7" cy="30.3" r="9" fill="transparent"/><circle cx="116.7" cy="30.3" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Aug: $1,147</title></g><g class="kpi-pt"><circle cx="170.0" cy="15.1" r="9" fill="transparent"/><circle cx="170.0" cy="15.1" r="4" fill="#4fc3f7" stroke="#0d1520" stroke-width="2"/><title>Sep: $1,393</title></g><text x="10.0" y="59" text-anchor="middle" class="kpi-axis">Jun</text><text x="63.3" y="59" text-anchor="middle" class="kpi-axis">Jul</text><text x="116.7" y="59" text-anchor="middle" class="kpi-axis">Aug</text><text x="170.0" y="59" text-anchor="middle" class="kpi-axis">Sep</text></svg>
+        <div class="sub">Esquina + workshops after $240 rent + privates sold.</div>
+      </div>
+    </div>
+    <details class="mt-6 glass rounded-xl p-4">
+      <summary class="font-mono text-xs uppercase tracking-wider text-electric-400 cursor-pointer">Show as table</summary>
+      <div class="table-scroll mt-4"><table class="data-table">
+        <thead><tr><th>Month</th><th class="num">Second visit</th><th class="num">New</th><th class="num">Regulars</th><th class="num">Per class</th><th class="num">Pay/class (run.)</th><th class="num">Income</th></tr></thead>
+        <tbody><tr><td>Jun</td><td class="num">76% (16/21)</td><td class="num">21</td><td class="num">7</td><td class="num">10.2</td><td class="num">$90.69</td><td class="num">$963</td></tr><tr><td>Jul</td><td class="num">50% (6/12)</td><td class="num">12</td><td class="num">10</td><td class="num">15.2</td><td class="num">$92.52</td><td class="num">$1,437</td></tr><tr><td>Aug</td><td class="num">17% (2/12)</td><td class="num">18</td><td class="num">8</td><td class="num">15.6</td><td class="num">$95.94</td><td class="num">$1,147</td></tr><tr><td>Sep</td><td class="num">too early</td><td class="num">13</td><td class="num">9</td><td class="num">13.3</td><td class="num">$92.49</td><td class="num">$1,393</td></tr></tbody>
+      </table></div>
+    </details>
+  </div>
+</section>
+<!-- KPI:END -->
 
 <!-- 2. THE READ -->
 <section id="read" data-title="The Read" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
@@ -1849,7 +1915,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
       <div class="stat-tile"><div class="label">Attendees</div><div class="value">27</div><div class="sub">19 different people · 8 came to both</div></div>
       <div class="stat-tile"><div class="label">Also Sunday students</div><div class="value text-electric-400">16 of 19</div><div class="sub">workshop-only: Kurt D., Vikram G., Mee L.</div></div>
-      <div class="stat-tile"><div class="label">Ticket gross</div><div class="value text-positive-400">$1,080</div><div class="sub">before studio rent and the split with Alina</div></div>
+      <div class="stat-tile"><div class="label">Ticket gross</div><div class="value text-positive-400">$1,080</div><div class="sub">about $600–660 after rent ($210–240 per workshop). Alina currently teaches unpaid.</div></div>
     </div>
     <div class="glass rounded-2xl p-6 md:p-8">
       <div class="table-scroll"><table class="data-table">
@@ -1900,17 +1966,17 @@
       <div class="glass rounded-2xl p-6 lg:col-span-3">
         <div class="legend mb-5">
           <span class="chip"><span class="swatch" style="background: linear-gradient(90deg, #2196c9, #4fc3f7);"></span>Esquina (your 50%) · $1,480</span>
-          <span class="chip"><span class="swatch" style="background: linear-gradient(90deg, #fbbf24, #f59e0b);"></span>Workshops (gross) · $1,080</span>
+          <span class="chip"><span class="swatch" style="background: linear-gradient(90deg, #fbbf24, #f59e0b);"></span>Workshops (before rent) · $1,080</span>
           <span class="chip"><span class="swatch" style="background: linear-gradient(90deg, #86efac, #4ade80);"></span>Privates (sold) · $2,860</span>
         </div>
         <div class="space-y-4"><div class="bar-chart"><div class="bar-month">Jun</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 20.2%;">$363</div><div class="bar-fill stack-private" style="width: 33.4%;">$600</div></div><div class="bar-total">$963</div></div><div class="bar-chart"><div class="bar-month">Jul</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 21.0%;">$377</div><div class="bar-fill stack-private" style="width: 59.0%;">$1,060</div></div><div class="bar-total">$1,437</div></div><div class="bar-chart"><div class="bar-month">Aug</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 28.2%;">$507</div><div class="bar-fill stack-photo" style="width: 29.0%;">$520</div><div class="bar-fill stack-private" style="width: 20.0%;">$360</div></div><div class="bar-total">$1,387</div></div><div class="bar-chart"><div class="bar-month">Sep</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width: 13.0%;">$233</div><div class="bar-fill stack-photo" style="width: 31.2%;">$560</div><div class="bar-fill stack-private" style="width: 46.8%;">$840</div></div><div class="bar-total">$1,633</div></div></div>
-        <p class="text-muted text-xs mt-5 font-mono">Total $5,420. Privates count when the package is bought, not when lessons are taught. Workshop dollars are gross, before rent and the split with Alina.</p>
+        <p class="text-muted text-xs mt-5 font-mono">Total $5,420. Privates count when the package is bought, not when lessons are taught. Workshop dollars are gross, before about $210–240 rent per workshop.</p>
       </div>
       <div class="glass rounded-2xl p-6 lg:col-span-2">
         <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Most invested students</div>
         <div class="table-scroll"><table class="data-table">
           <thead><tr><th>Student</th><th class="num">Sundays</th><th class="num">Workshops</th><th class="num">Private pkgs</th><th class="num">KSX</th></tr></thead>
-          <tbody><tr><td>Trenton H.</td><td class="num">12</td><td class="num">1</td><td class="num">2</td><td class="num">·</td></tr><tr><td>Lia H.</td><td class="num">13</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Saul C.</td><td class="num">5</td><td class="num">2</td><td class="num">1</td><td class="num">✓</td></tr><tr><td>Duane V.</td><td class="num">15</td><td class="num">2</td><td class="num">0</td><td class="num">·</td></tr><tr><td>Renier R.</td><td class="num">10</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Nadine L.</td><td class="num">8</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Christina B.</td><td class="num">10</td><td class="num">1</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Claudia Z.</td><td class="num">11</td><td class="num">2</td><td class="num">0</td><td class="num">·</td></tr><tr><td>Anvita J.</td><td class="num">11</td><td class="num">0</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Ace J.</td><td class="num">6</td><td class="num">1</td><td class="num">0</td><td class="num">✓</td></tr></tbody>
+          <tbody><tr><td>Trenton H.</td><td class="num">12</td><td class="num">1</td><td class="num">2</td><td class="num">·</td></tr><tr><td>Lia H.</td><td class="num">13</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Saul C.</td><td class="num">5</td><td class="num">2</td><td class="num">1</td><td class="num">✓</td></tr><tr><td>Duane V.</td><td class="num">15</td><td class="num">2</td><td class="num">0</td><td class="num">·</td></tr><tr><td>Renier R.</td><td class="num">10</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Nadine L.</td><td class="num">8</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Christina B.</td><td class="num">10</td><td class="num">1</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Claudia Z.</td><td class="num">11</td><td class="num">2</td><td class="num">0</td><td class="num">·</td></tr><tr><td>Anvita J.</td><td class="num">11</td><td class="num">0</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Annastatia S.</td><td class="num">11</td><td class="num">1</td><td class="num">0</td><td class="num">·</td></tr></tbody>
         </table></div>
       </div>
     </div>
@@ -1923,18 +1989,18 @@
     <span class="accent-rule"></span>
     <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Kiz Summit Exchange, so far</h2>
     <p class="text-dimmed text-lg mb-8 max-w-3xl">
-      Passes sold Sep 10 to Oct 2. About half come from the Kiz ATX room; the other half are new to us.
+      Passes sold Sep 10 to Oct 2. 10 buyers already come to Kiz ATX classes. The rest are not in our class data, and many of them live outside Austin.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
       <div class="stat-tile"><div class="label">Passes sold</div><div class="value">22</div><div class="sub">$4,668 in pass sales</div></div>
       <div class="stat-tile"><div class="label">From Kiz ATX</div><div class="value text-electric-400">10</div><div class="sub">took a Sunday class, workshop, or private</div></div>
-      <div class="stat-tile"><div class="label">New to Kiz ATX</div><div class="value text-positive-400">12</div><div class="sub">never in our class data</div></div>
+      <div class="stat-tile"><div class="label">Not in our class data</div><div class="value text-positive-400">12</div><div class="sub">mix of local and out-of-town</div></div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div class="glass rounded-2xl p-6">
         <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">By pass</div>
         <div class="table-scroll"><table class="data-table"><thead><tr><th>Pass</th><th class="num">Sold</th><th class="num">Revenue</th></tr></thead><tbody><tr><td>Founding Ten</td><td class="num">12</td><td class="num">$2,388</td></tr><tr><td>Through the Gate</td><td class="num">10</td><td class="num">$2,280</td></tr></tbody></table></div>
-        <p class="text-dimmed text-sm leading-relaxed mt-4"><strong class="text-electric-400">New faces to welcome into Sundays:</strong> Jessica K., Tammy C., Reid B., Nadia S., Anna D., Skittles K., Vrinda M., John M., Kristen T., Amen J., Emily L., Andre P.</p>
+        <p class="text-dimmed text-sm leading-relaxed mt-4"><strong class="text-electric-400">Not in our class data:</strong> Jessica K., Tammy C., Reid B., Nadia S., Anna D., Skittles K., Vrinda M., John M., Kristen T., Amen J., Emily L., Andre P.. Only the Austin locals here are Sunday prospects.</p>
       </div>
       <div class="glass rounded-2xl p-6">
         <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Kiz ATX students who bought a pass</div>
@@ -2032,7 +2098,7 @@
             Rev 9: new "Beyond Esquina" section. Workshops (Shadow Position Aug 29, 13 incl. 2 Venmo; Axis Play Sep 12, 14;
             $1,080 gross), private lessons from WCWD ($2,860, 4 students), the whole picture of Jun–Sep teaching income
             ($5,420), and KSX passes so far (22 sold, $4,668, 10 from Kiz ATX). Renamed to Kiz ATX Pulse. Drift slide now flags people who still came
-            to a workshop or bought KSX. Deck audience: Charles and Alina.
+            to a workshop or bought KSX. Added a Monthly KPIs slide (second-visit rate as the lead metric, plus new people, monthly regulars, people per class, running pay per class, teaching income), regenerated by build_people_slides.py. Deck audience: Charles and Alina.
           </span>
         </li>
         <li>
