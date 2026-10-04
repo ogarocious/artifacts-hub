@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kiz ATX × Esquina Tango — Residency Pulse</title>
-<meta name="description" content="Internal residency tracker: monthly payouts, per-class growth, and reverse-math on the room. Not for distribution." />
+<title>Kiz ATX Pulse</title>
+<meta name="description" content="Internal Kiz ATX tracker: Sunday classes at Esquina Tango, workshops, private lessons, and KSX. Not for distribution." />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="theme-color" content="#0d1520" />
 
@@ -13,16 +13,16 @@
 <meta property="og:site_name" content="Kiz ATX" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://slides.ogarocious.com/kizatx/" />
-<meta property="og:title" content="Kiz ATX × Esquina Tango · Residency Pulse" />
-<meta property="og:description" content="Monthly payouts, per-class growth, and reverse-math on the Sunday residency. Internal ledger." />
+<meta property="og:title" content="Kiz ATX Pulse" />
+<meta property="og:description" content="Sunday classes, workshops, private lessons, and KSX. Internal Kiz ATX tracker." />
 <meta property="og:image" content="https://slides.ogarocious.com/kizatx/og.png" />
-<meta property="og:image:alt" content="Kiz ATX × Esquina Tango residency pulse cover: +49% attendance month-over-month, peak class of 19 on July 19, revenue per check-in dropped 30 percent from $17.70 to $12.37." />
+<meta property="og:image:alt" content="Kiz ATX Pulse cover: internal tracker for Sunday classes, workshops, private lessons, and KSX." />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Kiz ATX × Esquina Tango · Residency Pulse" />
-<meta name="twitter:description" content="Monthly payouts, per-class growth, and reverse-math on the Sunday residency. Internal ledger." />
+<meta name="twitter:title" content="Kiz ATX Pulse" />
+<meta name="twitter:description" content="Sunday classes, workshops, private lessons, and KSX. Internal Kiz ATX tracker." />
 <meta name="twitter:image" content="https://slides.ogarocious.com/kizatx/og.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -542,6 +542,10 @@
 <!-- PEOPLE:CSS -->
 <style>
   .pg-scroll { overflow: auto; max-height: 68vh; }
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+  .table-scroll .data-table td, .table-scroll .data-table th { white-space: nowrap; }
+  main section > div { min-width: 0; max-width: 100%; }
+  .glass { min-width: 0; }
   .pg { display: grid; gap: 0; min-width: 34rem; font-family: "JetBrains Mono", ui-monospace, monospace; }
   .pg > div { height: 1.3rem; display: flex; align-items: center; justify-content: center; border-bottom: 1px dashed rgba(79,195,247,0.07); }
   .pg .pg-name { justify-content: flex-start; font-family: "Rubik", sans-serif; font-size: 0.78rem; color: rgba(245,247,250,0.85); white-space: nowrap; overflow: hidden; position: sticky; left: 0; background: rgba(13,21,32,0.95); z-index: 1; padding-right: 0.5rem; }
@@ -562,8 +566,8 @@
 <header class="site-header">
   <a href="#cover" class="brand-link">
     <span class="brand-dot"></span>
-    <span class="brand-name">Kiz ATX × Esquina Tango</span>
-    <span class="brand-sub md-only">· Residency Pulse</span>
+    <span class="brand-name">Kiz ATX Pulse</span>
+    <span class="brand-sub md-only">· Charles &amp; Alina</span>
   </a>
   <div class="meta">
     <span class="counter" id="counter" aria-live="polite">1 of 19</span>
@@ -584,7 +588,7 @@
     <ul id="navList" class="nav-list"></ul>
   </div>
   <div class="nav-foot">
-    <p class="foot-brand">Kiz ATX × Esquina Tango</p>
+    <p class="foot-brand">Kiz ATX Pulse</p>
     <p>Internal ledger.<br />Not for distribution.</p>
     <p style="margin-top: 0.5rem;">Single HTML file. Updated by hand.</p>
   </div>
@@ -604,14 +608,14 @@
   <div class="max-w-5xl relative">
     <span class="accent-rule"></span>
     <div class="font-mono text-xs tracking-[0.22em] text-electric-500 uppercase mb-4">
-      Residency Pulse · April → September 2026
+      Kiz ATX · April → September 2026
     </div>
     <h1 class="font-display font-extrabold text-5xl md:text-7xl leading-[0.98] tracking-tight text-ivory-50 text-shadow-cool mb-8">
-      Kiz ATX × Esquina Tango
+      Kiz ATX Pulse
     </h1>
     <p class="text-body text-lg md:text-xl max-w-3xl leading-relaxed mb-10">
-      Internal ledger for the Sunday residency. Monthly payouts from Michelle, normalized for Sundays taught,
-      cross-referenced against the pricing sheet to reverse-engineer what the room actually looked like.
+      One view of Kiz ATX teaching: Sunday classes at Esquina Tango, specialty workshops, private lessons,
+      and Kiz Summit Exchange. Who comes, who comes back, and what it all brings in.
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
@@ -1428,7 +1432,7 @@
 
     <div class="glass rounded-2xl p-6 md:p-8">
       <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">The gap, month over month</div>
-      <table class="data-table">
+      <div class="table-scroll"><table class="data-table">
         <thead>
           <tr>
             <th>Month</th>
@@ -1468,7 +1472,7 @@
             <td class="num"><span class="delta delta-neg">$11.63</span></td>
           </tr>
         </tbody>
-      </table>
+      </table></div>
 
       <div class="mt-6 pt-6 border-t border-electric-500/10 text-dimmed leading-relaxed space-y-3">
         <p>
@@ -1631,10 +1635,10 @@
       </div>
       <div class="glass rounded-2xl p-6">
         <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Did first-timers come back?</div>
-        <table class="data-table">
+        <div class="table-scroll"><table class="data-table">
           <thead><tr><th>First visit</th><th class="num">New</th><th class="num">Came back</th><th class="num">Rate</th></tr></thead>
           <tbody><tr><td>June<span class="text-muted text-xs"> · includes Apr/May regulars</span></td><td class="num">21</td><td class="num">18</td><td class="num">86%</td></tr><tr><td>July</td><td class="num">12</td><td class="num">6</td><td class="num">50%</td></tr><tr><td>August</td><td class="num">18</td><td class="num">2</td><td class="num">11%</td></tr><tr><td>September<span class="text-muted text-xs"> · too early to tell</span></td><td class="num">13</td><td class="num">2</td><td class="num">15%</td></tr></tbody>
-        </table>
+        </table></div>
         <p class="text-dimmed text-sm leading-relaxed mt-4">
           The number to move each month. Free intros that turned into paying students: 6 of 22.
         </p>
@@ -1848,10 +1852,10 @@
       <div class="stat-tile"><div class="label">Ticket gross</div><div class="value text-positive-400">$1,080</div><div class="sub">before studio rent and the split with Alina</div></div>
     </div>
     <div class="glass rounded-2xl p-6 md:p-8">
-      <table class="data-table">
+      <div class="table-scroll"><table class="data-table">
         <thead><tr><th>Workshop</th><th>Date</th><th class="num">Attendees</th><th class="num">Leads / follows</th><th class="num">Gross</th></tr></thead>
         <tbody><tr><td>Shadow Position</td><td>Aug 29</td><td class="num">13</td><td class="num">6 / 5</td><td class="num">$520</td></tr><tr><td>Axis Play</td><td>Sep 12</td><td class="num">14</td><td class="num">7 / 7</td><td class="num">$560</td></tr></tbody>
-      </table>
+      </table></div>
       <div class="mt-6 pt-6 border-t border-electric-500/10 text-dimmed text-sm leading-relaxed space-y-3">
         <p><strong class="text-electric-400">Workshops are where the committed go deeper.</strong> Came to both: Duane V., Lia H., Nadine L., Saul C., Renier R., Claudia Z., Christian J., Aysha U.</p>
         <p><strong class="text-electric-400">They also catch people who skip Sundays.</strong> Aysha U., Christian J., Saul C., Manish K., Devin G., Emily J. stopped coming to Sundays but still showed up for a workshop.</p>
@@ -1904,10 +1908,10 @@
       </div>
       <div class="glass rounded-2xl p-6 lg:col-span-2">
         <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Most invested students</div>
-        <table class="data-table">
+        <div class="table-scroll"><table class="data-table">
           <thead><tr><th>Student</th><th class="num">Sundays</th><th class="num">Workshops</th><th class="num">Private pkgs</th><th class="num">KSX</th></tr></thead>
-          <tbody><tr><td>Trenton H.</td><td class="num">12</td><td class="num">1</td><td class="num">2</td><td class="num">·</td></tr><tr><td>Lia H.</td><td class="num">13</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Saul C.</td><td class="num">5</td><td class="num">2</td><td class="num">1</td><td class="num">✓</td></tr><tr><td>Renier R.</td><td class="num">10</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Duane V.</td><td class="num">15</td><td class="num">2</td><td class="num">0</td><td class="num">·</td></tr><tr><td>Nadine L.</td><td class="num">8</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Christina B.</td><td class="num">10</td><td class="num">1</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Claudia Z.</td><td class="num">11</td><td class="num">2</td><td class="num">0</td><td class="num">·</td></tr><tr><td>Anvita J.</td><td class="num">11</td><td class="num">0</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Annastatia S.</td><td class="num">11</td><td class="num">1</td><td class="num">0</td><td class="num">·</td></tr></tbody>
-        </table>
+          <tbody><tr><td>Trenton H.</td><td class="num">12</td><td class="num">1</td><td class="num">2</td><td class="num">·</td></tr><tr><td>Lia H.</td><td class="num">13</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Saul C.</td><td class="num">5</td><td class="num">2</td><td class="num">1</td><td class="num">✓</td></tr><tr><td>Duane V.</td><td class="num">15</td><td class="num">2</td><td class="num">0</td><td class="num">·</td></tr><tr><td>Renier R.</td><td class="num">10</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Nadine L.</td><td class="num">8</td><td class="num">2</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Christina B.</td><td class="num">10</td><td class="num">1</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Claudia Z.</td><td class="num">11</td><td class="num">2</td><td class="num">0</td><td class="num">·</td></tr><tr><td>Anvita J.</td><td class="num">11</td><td class="num">0</td><td class="num">0</td><td class="num">✓</td></tr><tr><td>Ace J.</td><td class="num">6</td><td class="num">1</td><td class="num">0</td><td class="num">✓</td></tr></tbody>
+        </table></div>
       </div>
     </div>
   </div>
@@ -1929,7 +1933,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div class="glass rounded-2xl p-6">
         <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">By pass</div>
-        <table class="data-table"><thead><tr><th>Pass</th><th class="num">Sold</th><th class="num">Revenue</th></tr></thead><tbody><tr><td>Founding Ten</td><td class="num">12</td><td class="num">$2,388</td></tr><tr><td>Through the Gate</td><td class="num">10</td><td class="num">$2,280</td></tr></tbody></table>
+        <div class="table-scroll"><table class="data-table"><thead><tr><th>Pass</th><th class="num">Sold</th><th class="num">Revenue</th></tr></thead><tbody><tr><td>Founding Ten</td><td class="num">12</td><td class="num">$2,388</td></tr><tr><td>Through the Gate</td><td class="num">10</td><td class="num">$2,280</td></tr></tbody></table></div>
         <p class="text-dimmed text-sm leading-relaxed mt-4"><strong class="text-electric-400">New faces to welcome into Sundays:</strong> Jessica K., Tammy C., Reid B., Nadia S., Anna D., Skittles K., Vrinda M., John M., Kristen T., Amen J., Emily L., Andre P.</p>
       </div>
       <div class="glass rounded-2xl p-6">
@@ -2027,7 +2031,7 @@
           <span class="note">
             Rev 9: new "Beyond Esquina" section. Workshops (Shadow Position Aug 29, 13 incl. 2 Venmo; Axis Play Sep 12, 14;
             $1,080 gross), private lessons from WCWD ($2,860, 4 students), the whole picture of Jun–Sep teaching income
-            ($5,420), and KSX passes so far (22 sold, $4,668, 10 from Kiz ATX). Drift slide now flags people who still came
+            ($5,420), and KSX passes so far (22 sold, $4,668, 10 from Kiz ATX). Renamed to Kiz ATX Pulse. Drift slide now flags people who still came
             to a workshop or bought KSX. Deck audience: Charles and Alina.
           </span>
         </li>
@@ -2090,7 +2094,7 @@
     <div class="mt-10 glass rounded-xl p-5 max-w-3xl">
       <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-2">Update ritual</div>
       <p class="text-dimmed leading-relaxed">
-        When the monthly payout email and check-in export arrive from Michelle: send both to Claude with "add to Esquina Tango pulse".
+        When the monthly payout email and check-in export arrive from Michelle: send both to Claude with "add to Kiz ATX Pulse".
         The export goes into <code class="text-electric-400">Armature/dance/esquina-residency/checkins/</code>, the People slides
         rebuild from it (<code class="text-electric-400">build_people_slides.py</code>), and the ledger gets a new row, deltas, and a log entry.
       </p>
