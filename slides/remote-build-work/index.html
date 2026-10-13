@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Remote Build Work · Ogarocious</title>
+<meta name="description" content="Charles Ogar, full-stack product engineer. What I have built, how I grew, and how to work with me remotely." />
+<link rel="canonical" href="https://slides.ogarocious.com/remote-build-work/" />
+<meta name="theme-color" content="#1a1410" />
+
+<meta property="og:site_name" content="Ogarocious" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://slides.ogarocious.com/remote-build-work/" />
+<meta property="og:title" content="Remote Build Work · Ogarocious" />
+<meta property="og:description" content="Charles Ogar, full-stack product engineer. What I have built, how I grew, and how to work with me remotely." />
+<meta property="og:image" content="https://slides.ogarocious.com/remote-build-work/og.png" />
+<meta property="og:image:alt" content="Charles Ogar. Full-stack product engineer. I build it, ship it, and keep it running." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Remote Build Work · Ogarocious" />
+<meta name="twitter:description" content="Charles Ogar, full-stack product engineer. What I have built, how I grew, and how to work with me remotely." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/remote-build-work/og.png" />
+
+<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png" />
+
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Remote Build Work",
+  "description": "Charles Ogar, full-stack product engineer. What I have built, how I grew, and how to work with me remotely.",
+  "url": "https://slides.ogarocious.com/remote-build-work/",
+  "image": "https://slides.ogarocious.com/remote-build-work/og.png",
+  "author": { "@type": "Person", "name": "Charles Ogar", "url": "https://ogarocious.com" },
+  "publisher": { "@type": "Organization", "name": "Ogarocious", "url": "https://ogarocious.com" },
+  "datePublished": "2026-10-13"
+}</script>
+
+<!--
+  Remote Build Work. Ported from the claude.ai Slides deck (2026-10-13).
+  Type: Bricolage Grotesque headings (trial for Ogarocious, see Armature memory), Geist body.
+  Palette: Diaspora Modern. Rule for this deck: slate teal always means tools.
+-->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          espresso: { 950: '#0a0705', 900: '#0f0b08', 800: '#1a1410', 700: '#1f1b15', 600: '#312d23' },
+          ivory: { 50: '#f5eee0' },
+          terracotta: { 400: '#da7f4e', 500: '#d4552b', 600: '#b84421' },
+          slate: { 300: '#8ba5a5', 400: '#7ba4a5' },
+        },
+        fontFamily: {
+          display: ['"Bricolage Grotesque"', 'system-ui', '-apple-system', 'sans-serif'],
+          sans:    ['"Geist"', 'system-ui', '-apple-system', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { background-color: #1a1410; color: #f5eee0; font-family: "Geist", system-ui, sans-serif; min-height: 100vh; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+
+  .slide-a { background: #0f0b08; }
+  .slide-b { background: #1a1410; }
+
+  .text-dimmed { color: rgba(245, 238, 224, 0.72); }
+  .text-meta   { color: rgba(245, 238, 224, 0.60); }
+  .text-muted  { color: rgba(245, 238, 224, 0.50); }
+  .tools       { color: #7ba4a5; font-weight: 500; letter-spacing: 0.01em; }
+
+  .rule-top    { border-top: 1px solid rgba(212, 85, 43, 0.30); }
+  .rule-strong { border-top: 2px solid #d4552b; }
+
+  .h-slide { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; letter-spacing: -0.02em; line-height: 1.06; text-wrap: balance; }
+
+  ::selection { background: rgba(212, 85, 43, 0.35); color: #f5eee0; }
+  :focus-visible { outline: 2px solid #d4552b; outline-offset: 3px; border-radius: 2px; }
+  a.inline-link { color: #da7f4e; text-decoration: underline; text-decoration-color: rgba(218, 127, 78, 0.4); text-underline-offset: 4px; }
+  a.inline-link:hover { text-decoration-color: #da7f4e; }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px; background: #d4552b;
+    transform: scaleX(0); transform-origin: left center; z-index: 51; pointer-events: none; will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) { .progress-bar { transition: transform 80ms linear; } }
+
+  .nav-dot { transition: background-color 180ms ease; }
+  .nav-active .nav-dot { background: #d4552b; }
+  .nav-active .nav-label { color: #f5eee0; }
+
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(123, 164, 165, 0.30); background: rgba(123, 164, 165, 0.07); color: #f5eee0;
+  }
+
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.85rem; border-radius: 999px;
+    border: 1px solid rgba(123, 164, 165, 0.30); background: rgba(123, 164, 165, 0.07); color: #f5eee0;
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; cursor: pointer;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible { border-color: rgba(212, 85, 43, 0.42); background: rgba(212, 85, 43, 0.08); }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+
+  .drawer { position: fixed; top: 56px; left: 0; right: 0; bottom: 0; z-index: 45; background: rgba(10, 7, 5, 0.72); backdrop-filter: blur(4px); overflow-y: auto; }
+  .drawer[hidden] { display: none; }
+  .drawer-panel { background: rgba(15, 11, 8, 0.985); padding: 1.75rem 1.5rem 3rem; min-height: 100%; }
+  .drawer-label { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.16em; color: #7ba4a5; padding-bottom: 0.5rem; }
+  .drawer-list { border-left: 1px solid rgba(123, 164, 165, 0.28); padding-left: 1rem; margin: 0; list-style: none; }
+  .drawer-item { display: block; padding: 0.85rem 0.9rem; margin-left: -0.5rem; color: #f5eee0; text-decoration: none; font-size: 1.2rem; font-weight: 500; line-height: 1.3; border-radius: 6px; }
+  .drawer-item:hover { color: #d4552b; }
+  .drawer-item.is-active { background: rgba(212, 85, 43, 0.14); color: #d4552b; }
+
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 5rem 4rem; } }
+</style>
+</head>
+<body class="text-ivory-50 font-sans antialiased">
+
+<div id="progressBar" class="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-espresso-900/70 border-b border-terracotta-500/10">
+  <div class="max-w-[1400px] mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-2 group">
+      <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500"></span>
+      <span class="font-display font-bold text-lg tracking-tight">Ogarocious</span>
+      <span class="text-dimmed text-xs hidden sm:inline">· Remote Build Work</span>
+    </a>
+    <div class="flex items-center gap-3 md:gap-5 text-xs text-dimmed">
+      <span id="counter" class="tabular-nums text-slate-300 hidden md:inline" aria-live="polite">1 of 7</span>
+      <span class="hidden md:inline">·</span>
+      <span class="hidden md:inline"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+      <button id="menuBtn" class="menu-btn md:hidden" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false">
+        <svg class="menu-hamburger" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 3h12M1 7h12M1 11h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="menu-close" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span id="menuLabel">MENU</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="sideNav" class="fixed top-0 left-0 h-screen w-[280px] hidden md:flex flex-col justify-between pt-20 pb-8 px-8 z-40 border-r border-terracotta-500/10 bg-espresso-900/60 backdrop-blur" aria-label="Sections">
+  <div>
+    <p class="text-[11px] text-slate-300 mb-4 font-medium">Sections</p>
+    <ul id="navList" class="space-y-3 text-sm"></ul>
+  </div>
+  <div class="text-[11px] text-muted leading-relaxed">
+    <p class="mb-2 font-medium text-dimmed">Charles Ogar</p>
+    <p><a class="inline-link" href="mailto:charles@ogarocious.com">charles@ogarocious.com</a></p>
+    <p class="mt-3 italic text-slate-300">Liberation Through Creation</p>
+  </div>
+</nav>
+
+<div id="mobileMenu" class="drawer" role="dialog" aria-modal="true" aria-label="Sections" hidden>
+  <div class="drawer-panel">
+    <p class="drawer-label">Sections</p>
+    <ul id="mobileNavList" class="drawer-list"></ul>
+  </div>
+</div>
+
+<main class="md:pl-[280px] snap-y-scroll">
+
+  <!-- Cover -->
+  <section id="cover" data-title="Charles Ogar" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 pt-14 relative">
+    <h1 class="h-slide text-6xl sm:text-7xl md:text-[8.5rem] leading-none" style="letter-spacing:-0.03em">Charles Ogar<span class="text-terracotta-500">.</span></h1>
+    <p class="mt-8 text-xl md:text-3xl text-dimmed leading-snug max-w-3xl">Full-stack product engineer.<br>I build it, ship it, and keep it running.</p>
+    <p class="mt-6 tools text-base md:text-lg">Rails · React · Stripe · n8n · Salesforce · Claude</p>
+    <p class="absolute bottom-8 left-6 md:left-20 text-muted text-xs">Available for remote build work · Austin, TX · <span class="kbd">Space</span> to advance</p>
+  </section>
+
+  <!-- WhereCanWeDance -->
+  <section id="wcwd" data-title="WhereCanWeDance" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">A live ticketing platform, built and run by one person</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">WhereCanWeDance, live at <a class="inline-link" href="https://wherecanwedance.com" target="_blank" rel="noopener">wherecanwedance.com</a></p>
+    <p class="mt-2 tools text-sm md:text-base">Rails 8 · React · PostgreSQL · Stripe Connect · DigitalOcean</p>
+    <div class="mt-14 md:mt-20 grid md:grid-cols-2 gap-x-14 gap-y-10 max-w-5xl">
+      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Payments</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Stripe Connect payouts to organizers, platform fee splits, refunds, and installment plans.</p></div>
+      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Ticketing</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Multi-tier passes, promo and access codes, capacity caps, and ticket transfers.</p></div>
+      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Event day</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">QR check-in with name search at the door, plus post-event surveys for organizers.</p></div>
+      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Running it</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Deploys, production support, and fixing live payment issues the same day buyers hit them.</p></div>
+    </div>
+  </section>
+
+  <!-- How I grew -->
+  <section id="grew" data-title="How I grew" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">Self-taught, one discipline at a time</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">Each step dated to the commit that introduced it in the WhereCanWeDance repo</p>
+    <p class="mt-2 tools text-sm md:text-base">Rails · RSpec · React · TypeScript · Claude Code</p>
+    <ol class="mt-14 md:mt-20 max-w-5xl">
+      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline"><span class="font-display font-bold text-lg md:text-2xl text-muted">2022</span><span class="text-meta md:text-xl">Make it work: plain Rails, no tests, no types</span></li>
+      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline"><span class="font-display font-bold text-lg md:text-2xl text-dimmed">Oct 2023</span><span class="md:text-xl">First service object: real structure arrives</span></li>
+      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline"><span class="font-display font-bold text-lg md:text-2xl text-dimmed">Nov 2024</span><span class="md:text-xl">First automated test: testing becomes the habit</span></li>
+      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline"><span class="font-display font-bold text-lg md:text-2xl text-dimmed">Feb 2025</span><span class="md:text-xl">First React component: TypeScript joins the stack</span></li>
+      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline border-b border-terracotta-500/30"><span class="font-display font-bold text-lg md:text-2xl text-terracotta-500">2026</span><span class="md:text-xl">Tests first, at real speed: 5,700+ automated tests, AI-assisted</span></li>
+    </ol>
+  </section>
+
+  <!-- Nonprofit operations -->
+  <section id="ops" data-title="Nonprofit operations" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">The operations system a <span class="whitespace-nowrap">10-person</span> team ran on every day</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">Texas workforce nonprofit, 2025 to 2026, as the only technical person</p>
+    <p class="mt-2 tools text-sm md:text-base">n8n · Notion · Salesforce · Google Workspace · OpenAI · Claude</p>
+    <div class="mt-14 md:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10 max-w-6xl">
+      <div class="rule-top pt-6"><p class="font-display font-bold text-5xl md:text-7xl text-terracotta-500 leading-none tabular-nums" style="letter-spacing:-0.03em">50</p><p class="mt-3 text-dimmed md:text-lg leading-snug">automated workflows in n8n</p></div>
+      <div class="rule-top pt-6"><p class="font-display font-bold text-5xl md:text-7xl text-terracotta-500 leading-none tabular-nums" style="letter-spacing:-0.03em">38</p><p class="mt-3 text-dimmed md:text-lg leading-snug">connected Notion databases, synced with Salesforce</p></div>
+      <div class="rule-top pt-6"><p class="font-display font-bold text-5xl md:text-7xl text-terracotta-500 leading-none tabular-nums" style="letter-spacing:-0.03em">313</p><p class="mt-3 text-dimmed md:text-lg leading-snug">clean client records, from 597 with 85% duplicates</p></div>
+      <div class="rule-top pt-6"><p class="font-display font-bold text-5xl md:text-7xl text-terracotta-500 leading-none" style="letter-spacing:-0.03em">6 AM</p><p class="mt-3 text-dimmed md:text-lg leading-snug">AI briefing for every staff member, from 7 databases</p></div>
+    </div>
+    <p class="mt-12 text-muted text-xs">Figures from my own build records</p>
+  </section>
+
+  <!-- CDL Legal -->
+  <section id="legal" data-title="CDL Legal" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">The technical lead for a <span class="whitespace-nowrap">legal-sector</span> client, start to finish</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">CDL Legal · Feb to Jul 2026</p>
+    <p class="mt-2 tools text-sm md:text-base">Strapi · AWS · React · Next.js · Salesforce · Figma</p>
+    <div class="mt-14 md:mt-20 grid md:grid-cols-3 gap-x-10 gap-y-10 max-w-6xl">
+      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Website rebuild</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Moved the public site onto Strapi, a headless CMS hosted on AWS, so the team could edit content themselves.</p></div>
+      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Salesforce + React</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Connected the front end to the client's Salesforce data.</p></div>
+      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Design system</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Turned Figma designs into a reusable component library.</p></div>
+    </div>
+    <p class="mt-12 md:text-xl leading-relaxed max-w-3xl">Monthly contract, fully remote. Sole technical contributor, working with the client's staff and leadership to their deadlines.</p>
+  </section>
+
+  <!-- Services -->
+  <section id="help" data-title="How I can help" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">Three ways I can help, all remote</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">Best fit: teams that need tech built but have no engineers of their own</p>
+    <div class="mt-14 md:mt-20 grid md:grid-cols-3 gap-x-10 gap-y-12 max-w-6xl">
+      <div class="rule-strong pt-7"><h3 class="font-display font-bold text-2xl md:text-3xl">Contract builds</h3><p class="mt-2 tools text-sm">Rails · React · PostgreSQL · Stripe</p><p class="mt-3 text-dimmed md:text-lg leading-relaxed">Features or a whole app. Scoped up front, shipped, and handed over with tests and docs.</p></div>
+      <div class="rule-strong pt-7"><h3 class="font-display font-bold text-2xl md:text-3xl">Fractional tech lead</h3><p class="mt-2 tools text-sm">GitHub · DigitalOcean · AWS</p><p class="mt-3 text-dimmed md:text-lg leading-relaxed">Own a product's technical side part time: roadmap, code, deploys, and vendors.</p></div>
+      <div class="rule-strong pt-7"><h3 class="font-display font-bold text-2xl md:text-3xl">Automation and AI</h3><p class="mt-2 tools text-sm">n8n · Notion · Salesforce · Claude</p><p class="mt-3 text-dimmed md:text-lg leading-relaxed">Workflows and AI tools that take manual work off a team's plate.</p></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" data-title="Let's talk" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 py-24" style="background:#b84421">
+    <h2 class="h-slide text-6xl sm:text-7xl md:text-[8rem] leading-none" style="letter-spacing:-0.03em">Let's talk.</h2>
+    <p class="mt-8 text-xl md:text-3xl flex flex-wrap gap-x-4 gap-y-2">
+      <a class="underline decoration-ivory-50/40 underline-offset-8 hover:decoration-ivory-50" href="mailto:charles@ogarocious.com">charles@ogarocious.com</a>
+      <span aria-hidden="true" class="opacity-60 hidden sm:inline">·</span>
+      <a class="underline decoration-ivory-50/40 underline-offset-8 hover:decoration-ivory-50" href="https://linkedin.com/in/ogarocious" target="_blank" rel="noopener">linkedin.com/in/ogarocious</a>
+    </p>
+    <div class="mt-16 md:mt-24 grid md:grid-cols-3 gap-x-10 gap-y-10 max-w-6xl">
+      <div class="pt-6" style="border-top:2px solid rgba(245,238,224,0.6)"><h3 class="font-display font-bold text-2xl md:text-3xl">Project</h3><p class="mt-2 md:text-lg leading-relaxed">Fixed scope and fixed price, agreed before I start.</p></div>
+      <div class="pt-6" style="border-top:2px solid rgba(245,238,224,0.6)"><h3 class="font-display font-bold text-2xl md:text-3xl">Monthly</h3><p class="mt-2 md:text-lg leading-relaxed">A set block of hours each month for ongoing work.</p></div>
+      <div class="pt-6" style="border-top:2px solid rgba(245,238,224,0.6)"><h3 class="font-display font-bold text-2xl md:text-3xl">Overflow</h3><p class="mt-2 md:text-lg leading-relaxed">Studios and agencies can bring me in when they have more work than people.</p></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  const sections = [...document.querySelectorAll('main > section')];
+  const navList = document.getElementById('navList');
+  const mobileNavList = document.getElementById('mobileNavList');
+  const counter = document.getElementById('counter');
+  const menuBtn = document.getElementById('menuBtn');
+  const menuLabel = document.getElementById('menuLabel');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const progressBar = document.getElementById('progressBar');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const drawerLinks = [];
+
+  sections.forEach((s) => {
+    const title = s.dataset.title || s.id;
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="#${s.id}" class="flex items-center gap-3 group"><span class="nav-dot w-2 h-2 rounded-full bg-slate-400/40 group-hover:bg-terracotta-500"></span><span class="nav-label text-dimmed group-hover:text-ivory-50 text-sm">${title}</span></a>`;
+    navList.appendChild(li);
+    const mli = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${s.id}`; a.className = 'drawer-item'; a.textContent = title;
+    mli.appendChild(a); mobileNavList.appendChild(mli); drawerLinks.push(a);
+  });
+
+  const navItems = [...navList.children];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const idx = sections.indexOf(entry.target);
+      navItems.forEach((n, i) => {
+        n.classList.toggle('nav-active', i === idx);
+        const link = n.querySelector('a');
+        if (i === idx) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
+      });
+      drawerLinks.forEach((link, i) => link.classList.toggle('is-active', i === idx));
+      counter.textContent = `${idx + 1} of ${sections.length}`;
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => io.observe(s));
+
+  let ticking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progressBar.style.transform = `scaleX(${pct})`;
+    progressBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; } }, { passive: true });
+  updateProgress();
+
+  const isMenuOpen = () => !mobileMenu.hidden;
+  function openMenu() { mobileMenu.hidden = false; document.body.style.overflow = 'hidden'; menuBtn.classList.add('is-open'); menuBtn.setAttribute('aria-expanded', 'true'); menuLabel.textContent = 'CLOSE'; }
+  function closeMenu() { mobileMenu.hidden = true; document.body.style.overflow = ''; menuBtn.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); menuLabel.textContent = 'MENU'; }
+  menuBtn?.addEventListener('click', () => isMenuOpen() ? closeMenu() : openMenu());
+  mobileMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isMenuOpen()) closeMenu(); });
+
+  const currentIndex = () => {
+    const y = window.scrollY + window.innerHeight * 0.5;
+    for (let i = sections.length - 1; i >= 0; i--) { if (sections[i].offsetTop <= y) return i; }
+    return 0;
+  };
+  const go = (dir) => {
+    const next = Math.max(0, Math.min(sections.length - 1, currentIndex() + dir));
+    sections[next].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+  };
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (isMenuOpen()) return;
+    if (e.key === ' ' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth' }); }
+    if (e.key === 'End') { e.preventDefault(); sections[sections.length - 1].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth' }); }
+  });
+})();
+</script>
+</body>
+</html>
