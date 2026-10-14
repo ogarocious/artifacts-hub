@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
 <title>Remote Build Work · Ogarocious</title>
-<meta name="description" content="Charles Ogar, full-stack product engineer. What I have built, how I grew, and how to work with me remotely." />
+<meta name="description" content="AI and automation that take repetitive work off small teams, without hiring an engineer. Proof, how it works, and ways to start." />
 <link rel="canonical" href="https://slides.ogarocious.com/remote-build-work/" />
 <meta name="theme-color" content="#1a1410" />
 
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://slides.ogarocious.com/remote-build-work/" />
 <meta property="og:title" content="Remote Build Work · Ogarocious" />
-<meta property="og:description" content="Charles Ogar, full-stack product engineer. What I have built, how I grew, and how to work with me remotely." />
+<meta property="og:description" content="AI and automation that take repetitive work off small teams, without hiring an engineer. Proof, how it works, and ways to start." />
 <meta property="og:image" content="https://slides.ogarocious.com/remote-build-work/og.png" />
 <meta property="og:image:alt" content="Charles Ogar. Full-stack product engineer. I build it, ship it, and keep it running." />
 <meta property="og:image:width" content="1200" />
@@ -21,7 +21,7 @@
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Remote Build Work · Ogarocious" />
-<meta name="twitter:description" content="Charles Ogar, full-stack product engineer. What I have built, how I grew, and how to work with me remotely." />
+<meta name="twitter:description" content="AI and automation that take repetitive work off small teams, without hiring an engineer. Proof, how it works, and ways to start." />
 <meta name="twitter:image" content="https://slides.ogarocious.com/remote-build-work/og.png" />
 
 <link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
@@ -31,7 +31,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Remote Build Work",
-  "description": "Charles Ogar, full-stack product engineer. What I have built, how I grew, and how to work with me remotely.",
+  "description": "AI and automation that take repetitive work off small teams, without hiring an engineer. Proof, how it works, and ways to start.",
   "url": "https://slides.ogarocious.com/remote-build-work/",
   "image": "https://slides.ogarocious.com/remote-build-work/og.png",
   "author": { "@type": "Person", "name": "Charles Ogar", "url": "https://ogarocious.com" },
@@ -87,6 +87,12 @@
 
   .h-slide { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; letter-spacing: -0.02em; line-height: 1.06; text-wrap: balance; }
 
+  .cta-primary { display:inline-flex; align-items:center; background:#d4552b; color:#0f0b08; font-weight:600; padding:0.95rem 1.4rem; border-radius:8px; transition:background-color 160ms ease; }
+  .cta-primary:hover { background:#da7f4e; }
+  .cta-ivory { display:inline-flex; align-items:center; justify-content:center; background:#f5eee0; color:#4f1500; font-weight:600; padding:0.95rem 1.4rem; border-radius:8px; }
+  .cta-ivory:hover { background:#ffffff; }
+  .cta-outline { display:inline-flex; align-items:center; justify-content:center; color:#f5eee0; font-weight:500; padding:0.95rem 1.4rem; border-radius:8px; border:1px solid rgba(245,238,224,0.6); }
+  .cta-outline:hover { border-color:#f5eee0; }
   ::selection { background: rgba(212, 85, 43, 0.35); color: #f5eee0; }
   :focus-visible { outline: 2px solid #d4552b; outline-offset: 3px; border-radius: 2px; }
   a.inline-link { color: #da7f4e; text-decoration: underline; text-decoration-color: rgba(218, 127, 78, 0.4); text-underline-offset: 4px; }
@@ -175,92 +181,128 @@
 
 <main class="md:pl-[280px] snap-y-scroll">
 
-  <!-- Cover -->
-  <section id="cover" data-title="Charles Ogar" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 pt-14 relative">
-    <h1 class="h-slide text-6xl sm:text-7xl md:text-[8.5rem] leading-none" style="letter-spacing:-0.03em">Charles Ogar<span class="text-terracotta-500">.</span></h1>
-    <p class="mt-8 text-xl md:text-3xl text-dimmed leading-snug max-w-3xl">Full-stack product engineer.<br>I build it, ship it, and keep it running.</p>
-    <p class="mt-6 tools text-base md:text-lg">Rails · React · Stripe · n8n · Salesforce · Claude</p>
-    <p class="absolute bottom-8 left-6 md:left-20 text-muted text-xs">Available for remote build work · Austin, TX · <span class="kbd">Space</span> to advance</p>
+  <!-- Cover: outcome promise -->
+  <section id="cover" data-title="Start here" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 pt-14 relative">
+    <h1 class="h-slide text-5xl sm:text-6xl md:text-[6.5rem] leading-none max-w-5xl" style="letter-spacing:-0.03em">Your team gets its hours back<span class="text-terracotta-500">.</span></h1>
+    <p class="mt-8 text-xl md:text-3xl text-dimmed leading-snug max-w-3xl">I build the AI and automation that take repetitive work off small teams, without you hiring an engineer. Then I keep it running.</p>
+    <p class="mt-6 tools text-base md:text-lg">n8n · Salesforce · Notion · Rails · React · Claude</p>
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a class="cta-primary" href="/ai-scorecard/?src=deck">Take the free 3-minute scorecard</a>
+    </div>
+    <p class="absolute bottom-8 left-6 md:left-20 text-muted text-xs">Charles Ogar · Austin, TX · working remotely · <span class="kbd">Space</span> to advance</p>
   </section>
 
-  <!-- WhereCanWeDance -->
-  <section id="wcwd" data-title="WhereCanWeDance" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
-    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">A live ticketing platform, built and run by one person</h2>
+  <!-- Nonprofit: outcomes, before and after -->
+  <section id="ops" data-title="Nonprofit operations" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">One morning email replaced seven tools for a <span class="whitespace-nowrap">10-person</span> team</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">Texas workforce nonprofit, 2025 to 2026, as the only technical person</p>
+    <p class="mt-2 tools text-sm md:text-base">n8n · Notion · Salesforce · Google Workspace · OpenAI · Claude</p>
+    <div class="mt-12 md:mt-16 max-w-5xl">
+      <div class="rule-top grid md:grid-cols-[12rem_1fr_1fr] gap-x-8 gap-y-2 py-5">
+        <p class="font-display font-bold text-lg md:text-xl">Mornings</p>
+        <p class="text-meta md:text-lg"><span class="text-muted text-sm block">Before</span>Staff opened up to seven tools to piece together their day</p>
+        <p class="md:text-lg"><span class="text-terracotta-400 text-sm block">After</span>One personalized AI briefing in every inbox at 6 AM</p>
+      </div>
+      <div class="rule-top grid md:grid-cols-[12rem_1fr_1fr] gap-x-8 gap-y-2 py-5">
+        <p class="font-display font-bold text-lg md:text-xl">Client follow-up</p>
+        <p class="text-meta md:text-lg"><span class="text-muted text-sm block">Before</span>Weekly client emails were failing with no alert</p>
+        <p class="md:text-lg"><span class="text-terracotta-400 text-sm block">After</span>309 personalized emails in one weekly cycle, checked against the logs</p>
+      </div>
+      <div class="rule-top grid md:grid-cols-[12rem_1fr_1fr] gap-x-8 gap-y-2 py-5">
+        <p class="font-display font-bold text-lg md:text-xl">Client records</p>
+        <p class="text-meta md:text-lg"><span class="text-muted text-sm block">Before</span>597 records, 85% duplicates, so some clients got two or three emails</p>
+        <p class="md:text-lg"><span class="text-terracotta-400 text-sm block">After</span>313 clean records, one email each</p>
+      </div>
+      <div class="rule-top border-b border-terracotta-500/30 grid md:grid-cols-[12rem_1fr_1fr] gap-x-8 gap-y-2 py-5">
+        <p class="font-display font-bold text-lg md:text-xl">Signed documents</p>
+        <p class="text-meta md:text-lg"><span class="text-muted text-sm block">Before</span>Copied and filed by hand</p>
+        <p class="md:text-lg"><span class="text-terracotta-400 text-sm block">After</span>Filed automatically, onboarding started within seconds of signing</p>
+      </div>
+    </div>
+    <p class="mt-8 text-muted text-xs">About ten months of work · figures from my own build records</p>
+  </section>
+
+  <!-- WhereCanWeDance: capability -->
+  <section id="wcwd" data-title="WhereCanWeDance" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">Nearly $10,000 in live payments, on a platform one person built and runs</h2>
     <p class="mt-5 text-meta text-base md:text-lg">WhereCanWeDance, live at <a class="inline-link" href="https://wherecanwedance.com" target="_blank" rel="noopener">wherecanwedance.com</a></p>
     <p class="mt-2 tools text-sm md:text-base">Rails 8 · React · PostgreSQL · Stripe Connect · DigitalOcean</p>
-    <div class="mt-14 md:mt-20 grid md:grid-cols-2 gap-x-14 gap-y-10 max-w-5xl">
-      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Payments</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Stripe Connect payouts to organizers, platform fee splits, refunds, and installment plans.</p></div>
-      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Ticketing</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Multi-tier passes, promo and access codes, capacity caps, and ticket transfers.</p></div>
-      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Event day</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">QR check-in with name search at the door, plus post-event surveys for organizers.</p></div>
-      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Running it</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Deploys, production support, and fixing live payment issues the same day buyers hit them.</p></div>
+    <div class="mt-12 md:mt-16 grid md:grid-cols-2 gap-x-14 gap-y-8 max-w-5xl">
+      <div class="rule-top pt-5"><h3 class="font-display font-bold text-xl md:text-2xl">Payments</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Stripe Connect payouts to organizers, platform fee splits, refunds, and installment plans.</p></div>
+      <div class="rule-top pt-5"><h3 class="font-display font-bold text-xl md:text-2xl">Ticketing</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Multi-tier passes, promo and access codes, capacity caps, and ticket transfers.</p></div>
+      <div class="rule-top pt-5"><h3 class="font-display font-bold text-xl md:text-2xl">Event day</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">QR check-in with name search at the door, plus post-event surveys for organizers.</p></div>
+      <div class="rule-top pt-5"><h3 class="font-display font-bold text-xl md:text-2xl">Running it</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Deploys, production support, and fixing live payment issues the same day buyers hit them.</p></div>
     </div>
+    <p class="mt-10 md:text-xl leading-relaxed max-w-3xl">If I can run live payments, payouts, and door check-in for real events, your intake form, client portal, or internal tool is well within range.</p>
   </section>
 
-  <!-- How I grew -->
-  <section id="grew" data-title="How I grew" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
-    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">Self-taught, one discipline at a time</h2>
-    <p class="mt-5 text-meta text-base md:text-lg">Each step dated to the commit that introduced it in the WhereCanWeDance repo</p>
-    <p class="mt-2 tools text-sm md:text-base">Rails · RSpec · React · TypeScript · Claude Code</p>
-    <ol class="mt-14 md:mt-20 max-w-5xl">
-      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline"><span class="font-display font-bold text-lg md:text-2xl text-muted">2022</span><span class="text-meta md:text-xl">Make it work: plain Rails, no tests, no types</span></li>
-      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline"><span class="font-display font-bold text-lg md:text-2xl text-dimmed">Oct 2023</span><span class="md:text-xl">First service object: real structure arrives</span></li>
-      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline"><span class="font-display font-bold text-lg md:text-2xl text-dimmed">Nov 2024</span><span class="md:text-xl">First automated test: testing becomes the habit</span></li>
-      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline"><span class="font-display font-bold text-lg md:text-2xl text-dimmed">Feb 2025</span><span class="md:text-xl">First React component: TypeScript joins the stack</span></li>
-      <li class="rule-top grid grid-cols-[7rem_1fr] md:grid-cols-[11rem_1fr] gap-4 py-5 items-baseline border-b border-terracotta-500/30"><span class="font-display font-bold text-lg md:text-2xl text-terracotta-500">2026</span><span class="md:text-xl">Tests first, at real speed: 5,700+ automated tests, AI-assisted</span></li>
+  <!-- CDL Legal: trust -->
+  <section id="legal" data-title="CDL Legal" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">A <span class="whitespace-nowrap">legal-sector</span> team that can update its own website</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">CDL Legal · Feb to Jul 2026 · monthly contract, fully remote</p>
+    <p class="mt-2 tools text-sm md:text-base">Strapi · AWS · React · Next.js · Salesforce · Figma</p>
+    <div class="mt-12 md:mt-16 grid md:grid-cols-3 gap-x-10 gap-y-8 max-w-6xl">
+      <div class="rule-top pt-5"><h3 class="font-display font-bold text-xl md:text-2xl">Website rebuild</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">The team edits its own content in Strapi, a headless CMS on AWS, without waiting on a developer.</p></div>
+      <div class="rule-top pt-5"><h3 class="font-display font-bold text-xl md:text-2xl">Salesforce + React</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">The site reads from the client's Salesforce data.</p></div>
+      <div class="rule-top pt-5"><h3 class="font-display font-bold text-xl md:text-2xl">Design system</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">New pages come together from a reusable component library built from Figma.</p></div>
+    </div>
+    <p class="mt-10 md:text-xl leading-relaxed max-w-3xl">Sole technical contributor, working with the client's staff and leadership to their deadlines.</p>
+  </section>
+
+  <!-- How we'd work -->
+  <section id="how" data-title="How we'd work" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">Every project starts with one number</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">So you can see, in your own numbers, whether it worked</p>
+    <ol class="mt-12 md:mt-16 grid md:grid-cols-2 gap-x-14 gap-y-8 max-w-5xl">
+      <li class="rule-top pt-5"><p class="font-display font-bold text-terracotta-500 text-lg">1</p><h3 class="font-display font-bold text-xl md:text-2xl mt-1">Pick the number</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">We choose one business number to move and measure where it stands today.</p></li>
+      <li class="rule-top pt-5"><p class="font-display font-bold text-terracotta-500 text-lg">2</p><h3 class="font-display font-bold text-xl md:text-2xl mt-1">Define done</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">We write down what finished looks like before I build anything.</p></li>
+      <li class="rule-top pt-5"><p class="font-display font-bold text-terracotta-500 text-lg">3</p><h3 class="font-display font-bold text-xl md:text-2xl mt-1">Build and hand over</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">I build it, test it, and put it in your team's hands.</p></li>
+      <li class="rule-top pt-5"><p class="font-display font-bold text-terracotta-500 text-lg">4</p><h3 class="font-display font-bold text-xl md:text-2xl mt-1">You own it</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">The code, accounts, and docs are yours. Keep me on monthly if you want it to keep improving.</p></li>
     </ol>
   </section>
 
-  <!-- Nonprofit operations -->
-  <section id="ops" data-title="Nonprofit operations" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
-    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">The operations system a <span class="whitespace-nowrap">10-person</span> team ran on every day</h2>
-    <p class="mt-5 text-meta text-base md:text-lg">Texas workforce nonprofit, 2025 to 2026, as the only technical person</p>
-    <p class="mt-2 tools text-sm md:text-base">n8n · Notion · Salesforce · Google Workspace · OpenAI · Claude</p>
-    <div class="mt-14 md:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10 max-w-6xl">
-      <div class="rule-top pt-6"><p class="font-display font-bold text-5xl md:text-7xl text-terracotta-500 leading-none tabular-nums" style="letter-spacing:-0.03em">50</p><p class="mt-3 text-dimmed md:text-lg leading-snug">automated workflows in n8n</p></div>
-      <div class="rule-top pt-6"><p class="font-display font-bold text-5xl md:text-7xl text-terracotta-500 leading-none tabular-nums" style="letter-spacing:-0.03em">38</p><p class="mt-3 text-dimmed md:text-lg leading-snug">connected Notion databases, synced with Salesforce</p></div>
-      <div class="rule-top pt-6"><p class="font-display font-bold text-5xl md:text-7xl text-terracotta-500 leading-none tabular-nums" style="letter-spacing:-0.03em">313</p><p class="mt-3 text-dimmed md:text-lg leading-snug">clean client records, from 597 with 85% duplicates</p></div>
-      <div class="rule-top pt-6"><p class="font-display font-bold text-5xl md:text-7xl text-terracotta-500 leading-none" style="letter-spacing:-0.03em">6 AM</p><p class="mt-3 text-dimmed md:text-lg leading-snug">AI briefing for every staff member, from 7 databases</p></div>
-    </div>
-    <p class="mt-12 text-muted text-xs">Figures from my own build records</p>
-  </section>
-
-  <!-- CDL Legal -->
-  <section id="legal" data-title="CDL Legal" class="snap-slide slide-a min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
-    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">The technical lead for a <span class="whitespace-nowrap">legal-sector</span> client, start to finish</h2>
-    <p class="mt-5 text-meta text-base md:text-lg">CDL Legal · Feb to Jul 2026</p>
-    <p class="mt-2 tools text-sm md:text-base">Strapi · AWS · React · Next.js · Salesforce · Figma</p>
-    <div class="mt-14 md:mt-20 grid md:grid-cols-3 gap-x-10 gap-y-10 max-w-6xl">
-      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Website rebuild</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Moved the public site onto Strapi, a headless CMS hosted on AWS, so the team could edit content themselves.</p></div>
-      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Salesforce + React</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Connected the front end to the client's Salesforce data.</p></div>
-      <div class="rule-top pt-6"><h3 class="font-display font-bold text-xl md:text-2xl">Design system</h3><p class="mt-2 text-dimmed md:text-lg leading-relaxed">Turned Figma designs into a reusable component library.</p></div>
-    </div>
-    <p class="mt-12 md:text-xl leading-relaxed max-w-3xl">Monthly contract, fully remote. Sole technical contributor, working with the client's staff and leadership to their deadlines.</p>
-  </section>
-
-  <!-- Services -->
-  <section id="help" data-title="How I can help" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
-    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">Three ways I can help, all remote</h2>
-    <p class="mt-5 text-meta text-base md:text-lg">Best fit: teams that need tech built but have no engineers of their own</p>
-    <div class="mt-14 md:mt-20 grid md:grid-cols-3 gap-x-10 gap-y-12 max-w-6xl">
-      <div class="rule-strong pt-7"><h3 class="font-display font-bold text-2xl md:text-3xl">Contract builds</h3><p class="mt-2 tools text-sm">Rails · React · PostgreSQL · Stripe</p><p class="mt-3 text-dimmed md:text-lg leading-relaxed">Features or a whole app. Scoped up front, shipped, and handed over with tests and docs.</p></div>
-      <div class="rule-strong pt-7"><h3 class="font-display font-bold text-2xl md:text-3xl">Fractional tech lead</h3><p class="mt-2 tools text-sm">GitHub · DigitalOcean · AWS</p><p class="mt-3 text-dimmed md:text-lg leading-relaxed">Own a product's technical side part time: roadmap, code, deploys, and vendors.</p></div>
-      <div class="rule-strong pt-7"><h3 class="font-display font-bold text-2xl md:text-3xl">Automation and AI</h3><p class="mt-2 tools text-sm">n8n · Notion · Salesforce · Claude</p><p class="mt-3 text-dimmed md:text-lg leading-relaxed">Workflows and AI tools that take manual work off a team's plate.</p></div>
+  <!-- Offer ladder -->
+  <section id="start" data-title="Ways to start" class="snap-slide slide-b min-h-screen flex flex-col justify-center px-6 md:px-20 py-24 border-t border-terracotta-500/10">
+    <h2 class="h-slide text-4xl md:text-6xl max-w-4xl">Start small. Go further only if it pays off.</h2>
+    <p class="mt-5 text-meta text-base md:text-lg">Each step tells you whether the next one is worth it</p>
+    <div class="mt-12 md:mt-16 grid md:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-10 max-w-6xl">
+      <div class="rule-strong pt-6">
+        <p class="text-meta text-sm">Free · 3 minutes</p>
+        <h3 class="font-display font-bold text-2xl md:text-3xl mt-1">Scorecard</h3>
+        <p class="mt-3 text-dimmed md:text-lg leading-relaxed">See where AI would save your team the most time, right now.</p>
+        <a class="inline-link mt-3 inline-block" href="/ai-scorecard/?src=deck">Take it</a>
+      </div>
+      <div class="rule-strong pt-6">
+        <p class="text-meta text-sm">$200 · 5 business days</p>
+        <h3 class="font-display font-bold text-2xl md:text-3xl mt-1">Mini-Audit</h3>
+        <p class="mt-3 text-dimmed md:text-lg leading-relaxed">A one-page scorecard of your real routines, a recorded walkthrough, and one clear next step. Credited in full if you go ahead within 30 days.</p>
+      </div>
+      <div class="rule-strong pt-6">
+        <p class="text-meta text-sm">$3,500 to $5,000 · fixed scope</p>
+        <h3 class="font-display font-bold text-2xl md:text-3xl mt-1">One build</h3>
+        <p class="mt-3 text-dimmed md:text-lg leading-relaxed">A Distill Deck that turns scattered input into a decision, or an Intake and Onboarding Sprint that runs your follow-ups for you.</p>
+      </div>
+      <div class="rule-strong pt-6">
+        <p class="text-meta text-sm">From $3,000/mo for nonprofits</p>
+        <h3 class="font-display font-bold text-2xl md:text-3xl mt-1">Monthly partner</h3>
+        <p class="mt-3 text-dimmed md:text-lg leading-relaxed">Ongoing builds across your operations, one number at a time.</p>
+      </div>
     </div>
   </section>
 
   <!-- Contact -->
   <section id="contact" data-title="Let's talk" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 py-24" style="background:#b84421">
     <h2 class="h-slide text-6xl sm:text-7xl md:text-[8rem] leading-none" style="letter-spacing:-0.03em">Let's talk.</h2>
-    <p class="mt-8 text-xl md:text-3xl flex flex-wrap gap-x-4 gap-y-2">
+    <p class="mt-8 text-xl md:text-3xl leading-snug max-w-3xl">Start with the free scorecard, or book 15 minutes and tell me what eats your team's week.</p>
+    <div class="mt-10 flex flex-col sm:flex-row gap-3">
+      <a class="cta-ivory" href="/ai-scorecard/?src=deck">Take the free scorecard</a>
+      <a class="cta-outline" href="https://cal.com/ogarocious/15min" target="_blank" rel="noopener">Book a 15-minute call</a>
+    </div>
+    <p class="mt-10 text-lg md:text-xl flex flex-wrap gap-x-4 gap-y-2">
       <a class="underline decoration-ivory-50/40 underline-offset-8 hover:decoration-ivory-50" href="mailto:charles@ogarocious.com">charles@ogarocious.com</a>
       <span aria-hidden="true" class="opacity-60 hidden sm:inline">·</span>
       <a class="underline decoration-ivory-50/40 underline-offset-8 hover:decoration-ivory-50" href="https://linkedin.com/in/ogarocious" target="_blank" rel="noopener">linkedin.com/in/ogarocious</a>
     </p>
-    <div class="mt-16 md:mt-24 grid md:grid-cols-3 gap-x-10 gap-y-10 max-w-6xl">
-      <div class="pt-6" style="border-top:2px solid rgba(245,238,224,0.6)"><h3 class="font-display font-bold text-2xl md:text-3xl">Project</h3><p class="mt-2 md:text-lg leading-relaxed">Fixed scope and fixed price, agreed before I start.</p></div>
-      <div class="pt-6" style="border-top:2px solid rgba(245,238,224,0.6)"><h3 class="font-display font-bold text-2xl md:text-3xl">Monthly</h3><p class="mt-2 md:text-lg leading-relaxed">A set block of hours each month for ongoing work.</p></div>
-      <div class="pt-6" style="border-top:2px solid rgba(245,238,224,0.6)"><h3 class="font-display font-bold text-2xl md:text-3xl">Overflow</h3><p class="mt-2 md:text-lg leading-relaxed">Studios and agencies can bring me in when they have more work than people.</p></div>
-    </div>
   </section>
 
 </main>

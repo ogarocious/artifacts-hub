@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Workflow Scorecard · Ogarocious</title>
+<meta name="description" content="A free 3-minute scorecard. Find out where AI and automation would save your team the most time, and what it would take." />
+<link rel="canonical" href="https://slides.ogarocious.com/ai-scorecard/" />
+<meta name="theme-color" content="#1a1410" />
+
+<meta property="og:site_name" content="Ogarocious" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://slides.ogarocious.com/ai-scorecard/" />
+<meta property="og:title" content="AI Workflow Scorecard · Ogarocious" />
+<meta property="og:description" content="A free 3-minute scorecard. Find out where AI and automation would save your team the most time, and what it would take." />
+<meta property="og:image" content="https://slides.ogarocious.com/ai-scorecard/og.png" />
+<meta property="og:image:alt" content="AI Workflow Scorecard. Find the hours your team could get back. Free, 3 minutes." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Workflow Scorecard · Ogarocious" />
+<meta name="twitter:description" content="A free 3-minute scorecard. Find out where AI and automation would save your team the most time, and what it would take." />
+<meta name="twitter:image" content="https://slides.ogarocious.com/ai-scorecard/og.png" />
+
+<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png" />
+
+<!--
+  AI Workflow Scorecard (lead magnet). Mirrors the paid Mini-Audit rubric in
+  Armature/work-career/templates/ai-audit-working-template.md: 4 domains x 3 criteria,
+  each 0/1/2, one "hurts most" weight, same routing rules. Scoring runs in the browser.
+  "Email me my results" opens Tally form b5Bo7e with the scores as hidden fields.
+-->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        espresso: { 900: '#0f0b08', 800: '#1a1410', 700: '#1f1b15', 600: '#312d23' },
+        ivory: { 50: '#f5eee0' },
+        terracotta: { 400: '#da7f4e', 500: '#d4552b', 600: '#b84421' },
+        slate: { 400: '#7ba4a5' },
+      },
+      fontFamily: {
+        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+        sans: ['"Geist"', 'system-ui', 'sans-serif'],
+      },
+    } },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  body { background: #1a1410; color: #f5eee0; font-family: "Geist", system-ui, sans-serif; min-height: 100vh; }
+  .h-display { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; letter-spacing: -0.02em; line-height: 1.06; text-wrap: balance; }
+  .text-dimmed { color: rgba(245, 238, 224, 0.72); }
+  .text-meta { color: rgba(245, 238, 224, 0.60); }
+  .text-muted { color: rgba(245, 238, 224, 0.50); }
+  .tools { color: #7ba4a5; }
+  .rule-top { border-top: 1px solid rgba(212, 85, 43, 0.30); }
+  ::selection { background: rgba(212, 85, 43, 0.35); color: #f5eee0; }
+  :focus-visible { outline: 2px solid #d4552b; outline-offset: 3px; border-radius: 4px; }
+
+  .opt { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem; border-radius: 10px; cursor: pointer;
+         border: 1px solid rgba(245, 238, 224, 0.12); background: rgba(49, 45, 35, 0.35); transition: border-color 160ms ease, background-color 160ms ease; }
+  .opt:hover { border-color: rgba(212, 85, 43, 0.45); }
+  .opt input { position: absolute; opacity: 0; pointer-events: none; }
+  .opt .dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(245, 238, 224, 0.35); flex: none; }
+  .opt:has(input:checked) { border-color: #d4552b; background: rgba(212, 85, 43, 0.12); }
+  .opt:has(input:checked) .dot { border-color: #d4552b; background: #d4552b; box-shadow: inset 0 0 0 3px #1a1410; }
+  .opt:has(input:focus-visible) { outline: 2px solid #d4552b; outline-offset: 2px; }
+
+  .bar { height: 10px; border-radius: 999px; background: rgba(245, 238, 224, 0.10); overflow: hidden; }
+  .bar > span { display: block; height: 100%; border-radius: 999px; background: #7ba4a5; transition: width 600ms cubic-bezier(.2,.8,.2,1); }
+  .bar.lead > span { background: #d4552b; }
+
+  .btn-primary { display: inline-flex; align-items: center; justify-content: center; background: #d4552b; color: #0f0b08; font-weight: 600;
+                 padding: 0.95rem 1.4rem; border-radius: 8px; transition: background-color 160ms ease; }
+  .btn-primary:hover { background: #da7f4e; }
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; color: #f5eee0; font-weight: 500; padding: 0.95rem 1.4rem;
+               border-radius: 8px; border: 1px solid rgba(245, 238, 224, 0.25); transition: border-color 160ms ease; }
+  .btn-ghost:hover { border-color: #d4552b; }
+  .btn-primary[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: rgba(245,238,224,0.06); z-index: 50; }
+  .progress > span { display: block; height: 100%; width: 0; background: #d4552b; transition: width 200ms ease; }
+  @media (prefers-reduced-motion: reduce) { .bar > span, .progress > span { transition: none; } }
+</style>
+</head>
+<body class="antialiased">
+<div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
+
+<header class="max-w-3xl mx-auto px-5 md:px-8 pt-6 flex items-center justify-between text-sm">
+  <a href="https://ogarocious.com" class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-terracotta-500"></span><span class="font-display font-bold text-lg">Ogarocious</span></a>
+  <span class="text-muted">Free · about 3 minutes</span>
+</header>
+
+<main class="max-w-3xl mx-auto px-5 md:px-8 pb-24">
+
+  <section id="intro" class="pt-16 md:pt-24 pb-12">
+    <h1 class="h-display text-5xl md:text-7xl">Find the hours your team could get back.</h1>
+    <p class="mt-6 text-xl md:text-2xl text-dimmed leading-snug max-w-2xl">Answer 14 quick questions about how your team works. You'll see where AI and automation would help most, roughly how much time it could free up, and what it would take.</p>
+    <p class="mt-5 text-meta">No email needed to see your results. Built on the same scorecard I use in paid audits.</p>
+    <a href="#q-start" class="btn-primary mt-10">Start the scorecard</a>
+  </section>
+
+  <form id="scorecard" class="space-y-14" novalidate>
+    <div id="q-start"></div>
+  </form>
+
+  <div class="mt-14 flex flex-col sm:flex-row sm:items-center gap-4">
+    <a href="#results" id="seeResults" class="btn-primary" aria-disabled="true">See my results</a>
+    <p id="remaining" class="text-meta text-sm" aria-live="polite">14 questions left</p>
+  </div>
+
+  <section id="results" class="hidden mt-20 pt-14 rule-top" aria-live="polite">
+    <p class="tools font-medium">Your results</p>
+    <h2 id="rHeadline" class="h-display text-4xl md:text-6xl mt-3"></h2>
+    <p id="rSub" class="mt-5 text-xl text-dimmed leading-snug max-w-2xl"></p>
+
+    <div class="mt-12 grid md:grid-cols-2 gap-x-12 gap-y-8">
+      <div>
+        <p class="text-meta text-sm">Opportunity score</p>
+        <p class="font-display font-bold text-6xl md:text-7xl text-terracotta-500 leading-none mt-2"><span id="rTotal">0</span><span class="text-3xl text-muted"> / 24</span></p>
+      </div>
+      <div>
+        <p class="text-meta text-sm">Time your team spends on these routines</p>
+        <p class="font-display font-bold text-6xl md:text-7xl leading-none mt-2"><span id="rHours">0</span><span class="text-3xl text-muted"> hrs/yr</span></p>
+        <p id="rDollars" class="mt-2 text-meta text-sm"></p>
+      </div>
+    </div>
+
+    <div class="mt-12 space-y-6" id="rBars"></div>
+
+    <div class="mt-14 rule-top pt-10">
+      <p class="text-meta text-sm">What I'd look at first</p>
+      <h3 id="rRecTitle" class="h-display text-3xl md:text-4xl mt-2"></h3>
+      <p id="rRecBody" class="mt-4 text-lg text-dimmed leading-relaxed max-w-2xl"></p>
+      <p id="rRecPrice" class="mt-3 tools font-medium"></p>
+    </div>
+
+    <div id="auditBox" class="mt-14 rounded-2xl p-7 md:p-10" style="background:#312d23;border:1px solid rgba(212,85,43,0.25)">
+      <h3 class="h-display text-3xl md:text-4xl">Want the full picture?</h3>
+      <p class="mt-4 text-lg text-dimmed leading-relaxed max-w-2xl">The <b class="text-ivory-50">AI Workflow Mini-Audit</b> goes deeper on your actual routines: a one-page scorecard, a recorded walkthrough, and one specific next step, delivered in 5 business days.</p>
+      <ul class="mt-5 space-y-2 text-dimmed">
+        <li><span class="text-terracotta-400">·</span> $200, credited in full if you move forward within 30 days</li>
+        <li><span class="text-terracotta-400">·</span> If AI isn't worth it for you yet, I'll say so plainly</li>
+      </ul>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a id="ctaBook" class="btn-primary" href="https://cal.com/ogarocious/15min" target="_blank" rel="noopener">Book a 15-minute call</a>
+        <a id="ctaEmail" class="btn-ghost" href="https://tally.so/r/b5Bo7e" target="_blank" rel="noopener">Email me my results</a>
+      </div>
+      <p class="mt-6 text-sm text-meta">See what a finished deliverable looks like: <a class="text-terracotta-400 underline underline-offset-4" href="/ai-workflow-example/">15 survey responses turned into a ready-to-run plan</a>.</p>
+    </div>
+
+    <p id="skipNote" class="hidden mt-10 text-dimmed">Curious what this looks like when it does fit? <a class="text-terracotta-400 underline underline-offset-4" href="/ai-workflow-example/">See a finished example</a>.</p>
+    <p class="mt-10 text-sm text-muted leading-relaxed max-w-2xl">This scorecard is a quick self-check, not an audit. Hours are a rough estimate from your answer to the time question. Charles Ogar · <a class="underline underline-offset-4" href="mailto:charles@ogarocious.com">charles@ogarocious.com</a></p>
+  </section>
+</main>
+
+<script>
+(() => {
+  const DOMAINS = {
+    synthesis: { name: 'Turning input into decisions', short: 'Synthesis' },
+    automation: { name: 'Repetitive routines and follow-ups', short: 'Automation' },
+    reporting: { name: 'Recurring reports', short: 'Reporting' },
+    depth: { name: 'Room for ongoing help', short: 'Depth' },
+  };
+  const SCALE = [['No', 0], ['Somewhat', 1], ['Yes, very much', 2]];
+  const QUESTIONS = [
+    { d: 'synthesis', q: 'Do you collect input from several people on a regular schedule?', hint: 'Surveys, feedback forms, check-ins, applications, interest forms.' },
+    { d: 'synthesis', q: 'Does someone turn that input into a spreadsheet, doc, or summary by hand?' },
+    { d: 'synthesis', q: 'Does that summary feed a real decision, like what to run, who to fund, or what to change?' },
+    { d: 'automation', q: 'Do you have weekly or monthly routines that take more than a couple of hours each time?', hint: 'Follow-ups, reminders, onboarding steps, filing signed documents.' },
+    { d: 'automation', q: 'Do those routines follow mostly the same steps every time?' },
+    { d: 'automation', q: 'Are clients, staff, or partners waiting on those routines to get done?' },
+    { d: 'reporting', q: 'Do you pull the same numbers from the same places every week or month?' },
+    { d: 'reporting', q: 'Do you rewrite the same kind of update or commentary each time?' },
+    { d: 'reporting', q: 'Would your team or board read a live report if it stayed current on its own?' },
+    { d: 'depth', q: 'Do two or more of the situations above show up in your work at the same time?' },
+    { d: 'depth', q: 'Would one connected system work better for you than another separate tool?' },
+    { d: 'depth', q: 'Is there someone on your side who could explain how things work today to an outside partner?' },
+  ];
+  const PAIN = [['synthesis', 'Turning everyone\'s input into a decision'], ['automation', 'Repetitive routines and follow-ups'], ['reporting', 'Putting together the same reports again and again']];
+  const HOURS = [['Under 5 hours a month', 3], ['5 to 15 hours a month', 10], ['15 to 40 hours a month', 27], ['More than 40 hours a month', 50]];
+  const RATE = 40;
+  const TOTAL_Q = QUESTIONS.length + 2;
+
+  const form = document.getElementById('scorecard');
+  const groups = [['synthesis', 'Input and decisions'], ['automation', 'Routines and follow-ups'], ['reporting', 'Reports'], ['depth', 'Your setup']];
+
+  const optHTML = (name, value, label) =>
+    `<label class="opt"><input type="radio" name="${name}" value="${value}"><span class="dot" aria-hidden="true"></span><span>${label}</span></label>`;
+
+  let html = '';
+  let n = 0;
+  groups.forEach(([d, title]) => {
+    html += `<fieldset class="space-y-10"><legend class="h-display text-2xl md:text-3xl mb-8">${title}</legend>`;
+    QUESTIONS.forEach((item, i) => {
+      if (item.d !== d) return;
+      n += 1;
+      html += `<div role="radiogroup" aria-labelledby="l${i}"><p id="l${i}" class="text-lg md:text-xl font-medium leading-snug"><span class="text-muted mr-2">${n}.</span>${item.q}</p>${item.hint ? `<p class="mt-1 text-meta text-sm">${item.hint}</p>` : ''}<div class="mt-4 grid sm:grid-cols-3 gap-3">${SCALE.map(([l, v]) => optHTML('q' + i, v, l)).join('')}</div></div>`;
+    });
+    html += `</fieldset>`;
+  });
+  html += `<fieldset class="space-y-10"><legend class="h-display text-2xl md:text-3xl mb-8">Last two</legend>`;
+  html += `<div role="radiogroup" aria-labelledby="lpain"><p id="lpain" class="text-lg md:text-xl font-medium leading-snug"><span class="text-muted mr-2">13.</span>Which of these hurts most right now?</p><div class="mt-4 grid gap-3">${PAIN.map(([v, l]) => optHTML('pain', v, l)).join('')}</div></div>`;
+  html += `<div role="radiogroup" aria-labelledby="lhours"><p id="lhours" class="text-lg md:text-xl font-medium leading-snug"><span class="text-muted mr-2">14.</span>Roughly how much team time goes to these routines?</p><div class="mt-4 grid sm:grid-cols-2 gap-3">${HOURS.map(([l, v]) => optHTML('hours', v, l)).join('')}</div></div>`;
+  html += `</fieldset>`;
+  form.insertAdjacentHTML('beforeend', html);
+
+  const seeBtn = document.getElementById('seeResults');
+  const remaining = document.getElementById('remaining');
+  const progressFill = document.getElementById('progressFill');
+
+  const read = () => {
+    const fd = new FormData(form);
+    const answers = QUESTIONS.map((_, i) => fd.get('q' + i));
+    return { answers, pain: fd.get('pain'), hours: fd.get('hours') };
+  };
+  const answeredCount = (s) => s.answers.filter(a => a !== null).length + (s.pain ? 1 : 0) + (s.hours ? 1 : 0);
+
+  form.addEventListener('change', () => {
+    const s = read();
+    const done = answeredCount(s);
+    const left = TOTAL_Q - done;
+    progressFill.style.width = `${(done / TOTAL_Q) * 100}%`;
+    remaining.textContent = left === 0 ? 'All set' : `${left} question${left === 1 ? '' : 's'} left`;
+    seeBtn.setAttribute('aria-disabled', left === 0 ? 'false' : 'true');
+  });
+
+  const score = (s) => {
+    const sub = { synthesis: 0, automation: 0, reporting: 0, depth: 0 };
+    QUESTIONS.forEach((item, i) => { sub[item.d] += Number(s.answers[i]); });
+    const total = sub.synthesis + sub.automation + sub.reporting + sub.depth;
+    const weight = { synthesis: 1, automation: 1, reporting: 1 };
+    weight[s.pain] = 3;
+    const opp = ['synthesis', 'automation', 'reporting'];
+    const eligible = opp.filter(d => sub[d] >= 5)
+      .sort((a, b) => (sub[b] * weight[b]) - (sub[a] * weight[a]) || sub[b] - sub[a] || weight[b] - weight[a]);
+    const atFour = opp.filter(d => sub[d] >= 4);
+    let rec;
+    if (total < 10) rec = 'skip';
+    else if (sub.depth >= 5 && total >= 16) rec = 'retainer';
+    else if (atFour.length >= 2) rec = 'multi';
+    else if (eligible.length) rec = eligible[0];
+    else rec = 'pilot';
+    const lead = eligible[0] || [...opp].sort((a, b) => (sub[b] * weight[b]) - (sub[a] * weight[a]))[0];
+    return { sub, total, weight, rec, lead };
+  };
+
+  const REC = {
+    synthesis: { t: 'A live decision page for your team', b: 'You gather input from people and someone turns it into a decision by hand. A Distill Deck turns those responses into one live page with the math already done, so the decision is clear without the spreadsheet marathon.', p: 'Usually a Distill Deck, $3,500' },
+    automation: { t: 'Routines that run themselves', b: 'You repeat the same follow-ups, filing, and onboarding steps every cycle, and people wait on them. A Client Intake and Onboarding Sprint builds 4 to 6 automations so those steps happen on time without someone pushing them.', p: 'Usually the Intake and Onboarding Sprint, $5,000' },
+    reporting: { t: 'One report that stays current on its own', b: 'You rebuild the same report from the same sources each cycle. Built once, it can pull fresh numbers itself and stay ready for whoever reads it.', p: 'Usually a scoped reporting project, $3,000 to $5,000' },
+    retainer: { t: 'An ongoing technical partner', b: 'Several of these show up at once and you have someone who can hand off context. That is the setup where steady monthly help beats one project at a time, starting with whatever hurts most.', p: 'Usually a monthly partnership, from $3,000/mo for nonprofits' },
+    multi: { t: 'More than one opportunity', b: 'Two or more areas scored high. I would start with the one you said hurts most, then line up the next one.', p: 'Usually one project first, then monthly help' },
+    pilot: { t: 'Start with one small pilot', b: 'There is real opportunity here but no single area stands out yet. A small, tightly scoped pilot is the honest next step before anything bigger.', p: 'Scoped to fit, after the audit' },
+    skip: { t: 'Honestly, AI probably isn\'t your best investment right now', b: 'Your answers don\'t show the kind of repeated, hours-heavy work where AI pays off. Keep doing what works, and come back if a routine starts eating time you can\'t spare.', p: 'No next step needed' },
+  };
+
+  seeBtn.addEventListener('click', (e) => {
+    const s = read();
+    if (answeredCount(s) < TOTAL_Q) { e.preventDefault(); return; }
+    const r = score(s);
+    const hoursYr = Number(s.hours) * 12;
+    document.getElementById('rTotal').textContent = r.total;
+    document.getElementById('rHours').textContent = `~${hoursYr.toLocaleString()}`;
+    document.getElementById('rDollars').textContent = `About $${(hoursYr * RATE).toLocaleString()} a year if an hour of staff time costs $${RATE}.`;
+
+    const headline = r.total >= 16 ? 'Strong fit. There is real time to win back.' : r.total >= 10 ? 'Good fit, in the right spot.' : 'Light fit for now.';
+    document.getElementById('rHeadline').textContent = headline;
+    document.getElementById('rSub').textContent = r.rec === 'skip'
+      ? 'That is useful to know. Not every team needs AI yet.'
+      : `Your biggest opportunity is ${DOMAINS[r.lead].name.toLowerCase()}.`;
+
+    document.getElementById('rBars').innerHTML = ['synthesis', 'automation', 'reporting', 'depth'].map(d => {
+      const isLead = d === r.lead && r.rec !== 'skip';
+      return `<div><div class="flex justify-between items-baseline"><p class="font-medium">${DOMAINS[d].name}${isLead ? ' <span class="text-terracotta-400 text-sm ml-1">top opportunity</span>' : ''}</p><p class="text-meta tabular-nums">${r.sub[d]} / 6</p></div><div class="bar mt-2 ${isLead ? 'lead' : ''}"><span style="width:0%" data-w="${(r.sub[d] / 6) * 100}"></span></div></div>`;
+    }).join('');
+
+    const rec = REC[r.rec];
+    document.getElementById('rRecTitle').textContent = rec.t;
+    document.getElementById('rRecBody').textContent = rec.b;
+    document.getElementById('rRecPrice').textContent = rec.p;
+    document.getElementById('auditBox').classList.toggle('hidden', r.rec === 'skip');
+    document.getElementById('skipNote').classList.toggle('hidden', r.rec !== 'skip');
+
+    const params = new URLSearchParams({
+      total: r.total, synthesis: r.sub.synthesis, automation: r.sub.automation, reporting: r.sub.reporting, depth: r.sub.depth,
+      pain: s.pain, hours: hoursYr, top: r.rec, answers: s.answers.join(''), source: new URLSearchParams(location.search).get('src') || 'direct',
+    });
+    document.getElementById('ctaEmail').href = `https://tally.so/r/b5Bo7e?${params.toString()}`;
+
+    const results = document.getElementById('results');
+    results.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      results.querySelectorAll('.bar > span').forEach(el => { el.style.width = el.dataset.w + '%'; });
+      results.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    });
+    e.preventDefault();
+  });
+})();
+</script>
+</body>
+</html>
