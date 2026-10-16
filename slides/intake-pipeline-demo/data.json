@@ -1,0 +1,1351 @@
+{
+  "version": 1,
+  "title": "Client intake pipeline",
+  "asOf": "2026-10-09",
+  "sampleData": true,
+  "sources": [
+    "Web form",
+    "Referral",
+    "Event",
+    "Phone/DM"
+  ],
+  "milestones": [
+    {
+      "key": "contact",
+      "label": "First contact"
+    },
+    {
+      "key": "followup",
+      "label": "First follow-up sent"
+    },
+    {
+      "key": "reply",
+      "label": "First reply"
+    },
+    {
+      "key": "orientation",
+      "label": "Orientation attended"
+    },
+    {
+      "key": "docsSent",
+      "label": "Documents sent"
+    },
+    {
+      "key": "signed",
+      "label": "Signed"
+    },
+    {
+      "key": "started",
+      "label": "Started"
+    }
+  ],
+  "steps": [
+    {
+      "label": "Contact to follow-up",
+      "short": "Waiting on first follow-up",
+      "target": 1,
+      "owner": "Intake",
+      "notify": "Slack #intake"
+    },
+    {
+      "label": "Follow-up to reply",
+      "short": "Waiting on their reply",
+      "target": 3,
+      "owner": "Intake",
+      "notify": "Text to intake lead"
+    },
+    {
+      "label": "Reply to orientation",
+      "short": "Waiting on orientation",
+      "target": 7,
+      "owner": "Intake",
+      "notify": "Reminder email to client"
+    },
+    {
+      "label": "Orientation to docs sent",
+      "short": "Waiting on documents to go out",
+      "target": 2,
+      "owner": "Services",
+      "notify": "Slack #services"
+    },
+    {
+      "label": "Docs sent to signed",
+      "short": "Waiting on signature",
+      "target": 5,
+      "owner": "Intake",
+      "notify": "Reminder email to client + Slack #intake"
+    },
+    {
+      "label": "Signed to started",
+      "short": "Waiting on onboarding tasks",
+      "target": 7,
+      "owner": "Services",
+      "notify": "Slack to the task owner"
+    }
+  ],
+  "checkin": {
+    "label": "Check-in interval",
+    "short": "Due for a check-in",
+    "target": 14,
+    "owner": "Services",
+    "notify": "Email to the assigned coach"
+  },
+  "taskRule": {
+    "days": 3,
+    "notify": "Slack to the task owner, copy to team lead"
+  },
+  "clients": [
+    {
+      "id": "c01",
+      "name": "Maria Alvarez",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-09-25T17:31Z",
+        "followup": "2026-09-26T01:31Z",
+        "reply": "2026-09-28T08:48Z",
+        "orientation": "2026-10-05T21:52Z",
+        "docsSent": "2026-10-06T12:01Z",
+        "signed": "2026-10-08T16:17Z"
+      },
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": false
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "name": "James Okafor",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-10-03T01:52Z",
+        "followup": "2026-10-03T05:19Z",
+        "reply": "2026-10-06T21:05Z"
+      },
+      "tasks": []
+    },
+    {
+      "id": "c03",
+      "name": "Aisha Chen",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-10-07T14:14Z"
+      },
+      "tasks": []
+    },
+    {
+      "id": "c04",
+      "name": "Daniel Brooks",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-08-20T03:07Z",
+        "followup": "2026-08-21T00:02Z",
+        "reply": "2026-08-25T10:09Z",
+        "orientation": "2026-09-01T09:57Z",
+        "docsSent": "2026-09-03T19:18Z",
+        "signed": "2026-09-08T18:31Z",
+        "started": "2026-09-22T20:58Z"
+      },
+      "lastCheckin": "2026-10-06T20:58Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "name": "Priya Patel",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-08-22T01:43Z",
+        "followup": "2026-08-23T03:00Z",
+        "reply": "2026-08-26T11:54Z",
+        "orientation": "2026-09-02T03:23Z",
+        "docsSent": "2026-09-03T09:59Z",
+        "signed": "2026-09-05T22:36Z",
+        "started": "2026-09-08T06:43Z"
+      },
+      "lastCheckin": "2026-09-29T06:43Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "name": "Marcus Nguyen",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-09-22T17:39Z",
+        "followup": "2026-09-23T22:11Z",
+        "reply": "2026-09-25T17:44Z",
+        "orientation": "2026-10-02T16:42Z",
+        "docsSent": "2026-10-03T09:14Z",
+        "signed": "2026-10-05T21:15Z"
+      },
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": false
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c07",
+      "name": "Elena Ramirez",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-09-01T18:51Z",
+        "followup": "2026-09-02T19:50Z",
+        "reply": "2026-09-07T04:32Z",
+        "orientation": "2026-09-16T01:01Z",
+        "docsSent": "2026-09-18T07:33Z",
+        "signed": "2026-09-19T13:01Z",
+        "started": "2026-09-30T18:02Z"
+      },
+      "lastCheckin": "2026-10-07T18:02Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c08",
+      "name": "Tomás Kim",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-09-15T10:21Z",
+        "followup": "2026-09-16T10:37Z",
+        "reply": "2026-09-17T10:19Z",
+        "orientation": "2026-09-21T11:24Z",
+        "docsSent": "2026-09-23T09:33Z",
+        "signed": "2026-09-24T13:53Z",
+        "started": "2026-10-07T15:39Z"
+      },
+      "lastCheckin": "2026-10-07T15:39Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c09",
+      "name": "Grace Haddad",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-08-23T09:52Z",
+        "followup": "2026-08-24T22:43Z",
+        "reply": "2026-08-27T12:29Z",
+        "orientation": "2026-09-04T11:10Z",
+        "docsSent": "2026-09-05T19:09Z",
+        "signed": "2026-09-11T17:04Z",
+        "started": "2026-09-22T04:23Z"
+      },
+      "lastCheckin": "2026-10-06T04:23Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c10",
+      "name": "Kwame Mensah",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-09-25T00:58Z",
+        "followup": "2026-09-25T09:28Z",
+        "reply": "2026-09-28T23:27Z",
+        "orientation": "2026-10-01T00:01Z",
+        "docsSent": "2026-10-02T18:39Z",
+        "signed": "2026-10-05T01:43Z"
+      },
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c11",
+      "name": "Sofia Rossi",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-09-07T17:40Z",
+        "followup": "2026-09-08T05:06Z",
+        "reply": "2026-09-09T02:40Z",
+        "orientation": "2026-09-11T19:33Z",
+        "docsSent": "2026-09-13T13:06Z",
+        "signed": "2026-09-14T13:20Z",
+        "started": "2026-09-26T23:11Z"
+      },
+      "lastCheckin": "2026-10-03T23:11Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c12",
+      "name": "Andre Walker",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-10-07T06:16Z"
+      },
+      "tasks": []
+    },
+    {
+      "id": "c13",
+      "name": "Lena Ortiz",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-09-17T23:32Z",
+        "followup": "2026-09-21T03:01Z",
+        "reply": "2026-09-22T08:08Z",
+        "orientation": "2026-10-01T00:42Z",
+        "docsSent": "2026-10-01T19:10Z",
+        "signed": "2026-10-05T16:08Z"
+      },
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": false
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c14",
+      "name": "Omar Bello",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-10-03T11:43Z",
+        "followup": "2026-10-03T19:12Z",
+        "reply": "2026-10-05T17:29Z",
+        "orientation": "2026-10-08T08:17Z"
+      },
+      "tasks": []
+    },
+    {
+      "id": "c15",
+      "name": "Rachel Fischer",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-09-07T04:32Z",
+        "followup": "2026-09-08T11:12Z",
+        "reply": "2026-09-09T14:30Z",
+        "orientation": "2026-09-15T23:20Z",
+        "docsSent": "2026-09-18T10:07Z",
+        "signed": "2026-09-23T22:10Z",
+        "started": "2026-09-27T13:18Z"
+      },
+      "lastCheckin": "2026-10-04T13:18Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c16",
+      "name": "Diego Silva",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-07-12T10:57Z",
+        "followup": "2026-07-13T17:36Z",
+        "reply": "2026-07-14T23:17Z",
+        "orientation": "2026-07-20T18:51Z",
+        "docsSent": "2026-07-22T09:35Z",
+        "signed": "2026-07-27T04:37Z",
+        "started": "2026-08-11T16:10Z"
+      },
+      "lastCheckin": "2026-09-22T16:10Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c17",
+      "name": "Hana Tanaka",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-08-04T10:03Z",
+        "followup": "2026-08-10T15:18Z",
+        "reply": "2026-08-11T16:11Z",
+        "orientation": "2026-08-16T15:02Z",
+        "docsSent": "2026-08-18T10:38Z",
+        "signed": "2026-08-24T02:30Z",
+        "started": "2026-09-06T03:33Z"
+      },
+      "lastCheckin": "2026-10-04T03:33Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c18",
+      "name": "Victor Morales",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-08-18T16:09Z",
+        "followup": "2026-08-22T17:05Z",
+        "reply": "2026-08-24T09:28Z",
+        "orientation": "2026-08-29T07:02Z",
+        "docsSent": "2026-08-30T19:48Z",
+        "signed": "2026-09-02T01:20Z",
+        "started": "2026-09-14T08:17Z"
+      },
+      "lastCheckin": "2026-10-05T08:17Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c19",
+      "name": "Nia Adeyemi",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-10-02T03:20Z",
+        "followup": "2026-10-02T08:02Z",
+        "reply": "2026-10-03T00:49Z"
+      },
+      "tasks": []
+    },
+    {
+      "id": "c20",
+      "name": "Sam Reyes",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-09-18T09:17Z",
+        "followup": "2026-09-18T20:06Z",
+        "reply": "2026-09-19T18:17Z",
+        "orientation": "2026-09-21T21:06Z",
+        "docsSent": "2026-09-23T14:47Z",
+        "signed": "2026-09-29T17:15Z",
+        "started": "2026-10-03T00:09Z"
+      },
+      "lastCheckin": "2026-10-03T00:09Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c21",
+      "name": "Jordan Alvarez",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-09-08T16:43Z",
+        "followup": "2026-09-08T22:10Z",
+        "reply": "2026-09-11T00:37Z",
+        "orientation": "2026-09-19T21:28Z",
+        "docsSent": "2026-09-22T01:52Z",
+        "signed": "2026-09-28T11:27Z"
+      },
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": false
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c22",
+      "name": "Camille Okafor",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-09-02T01:43Z",
+        "followup": "2026-09-02T14:53Z",
+        "reply": "2026-09-03T10:09Z",
+        "orientation": "2026-09-08T21:45Z",
+        "docsSent": "2026-09-11T05:34Z",
+        "signed": "2026-09-14T21:10Z",
+        "started": "2026-09-28T05:49Z"
+      },
+      "lastCheckin": "2026-10-05T05:49Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c23",
+      "name": "Ravi Chen",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-09-04T12:10Z",
+        "followup": "2026-09-05T13:23Z",
+        "reply": "2026-09-08T19:16Z",
+        "orientation": "2026-09-14T03:01Z",
+        "docsSent": "2026-09-15T14:45Z",
+        "signed": "2026-09-20T19:07Z",
+        "started": "2026-10-02T22:13Z"
+      },
+      "lastCheckin": "2026-10-02T22:13Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c24",
+      "name": "Talia Brooks",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-08-01T05:15Z",
+        "followup": "2026-08-02T06:03Z",
+        "reply": "2026-08-04T09:37Z",
+        "orientation": "2026-08-07T18:24Z",
+        "docsSent": "2026-08-09T19:57Z",
+        "signed": "2026-08-14T00:50Z",
+        "started": "2026-09-01T23:55Z"
+      },
+      "lastCheckin": "2026-10-06T23:55Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c25",
+      "name": "Isaac Patel",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-07-23T04:32Z",
+        "followup": "2026-07-23T12:38Z",
+        "reply": "2026-07-25T07:17Z",
+        "orientation": "2026-07-30T05:14Z",
+        "docsSent": "2026-08-01T06:56Z",
+        "signed": "2026-08-07T10:06Z",
+        "started": "2026-08-11T19:58Z"
+      },
+      "lastCheckin": "2026-10-06T19:58Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c26",
+      "name": "Mei Nguyen",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-09-15T20:39Z",
+        "followup": "2026-09-16T12:10Z",
+        "reply": "2026-09-17T08:35Z",
+        "orientation": "2026-09-23T21:08Z",
+        "docsSent": "2026-09-24T12:00Z",
+        "signed": "2026-09-30T15:15Z"
+      },
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": false
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c27",
+      "name": "Noah Ramirez",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-09-08T03:53Z",
+        "followup": "2026-09-08T20:52Z",
+        "reply": "2026-09-11T13:43Z",
+        "orientation": "2026-09-16T22:00Z",
+        "docsSent": "2026-09-18T12:03Z",
+        "signed": "2026-09-21T04:45Z",
+        "started": "2026-10-06T17:27Z"
+      },
+      "lastCheckin": "2026-10-06T17:27Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c28",
+      "name": "Zara Kim",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-08-25T00:22Z",
+        "followup": "2026-08-25T08:53Z",
+        "reply": "2026-08-29T11:32Z",
+        "orientation": "2026-09-06T16:19Z",
+        "docsSent": "2026-09-08T08:17Z",
+        "signed": "2026-09-11T05:42Z",
+        "started": "2026-09-24T00:28Z"
+      },
+      "lastCheckin": "2026-10-08T00:28Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c29",
+      "name": "Luis Haddad",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-09-08T19:04Z",
+        "followup": "2026-09-09T15:18Z",
+        "reply": "2026-09-12T04:07Z",
+        "orientation": "2026-09-16T07:22Z",
+        "docsSent": "2026-09-17T03:06Z",
+        "signed": "2026-09-19T09:45Z",
+        "started": "2026-10-01T07:30Z"
+      },
+      "lastCheckin": "2026-10-08T07:30Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c30",
+      "name": "Imani Mensah",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-07-16T08:10Z",
+        "followup": "2026-07-17T15:16Z",
+        "reply": "2026-07-20T01:15Z",
+        "orientation": "2026-07-27T15:53Z",
+        "docsSent": "2026-07-29T14:07Z",
+        "signed": "2026-08-05T10:04Z",
+        "started": "2026-08-08T12:18Z"
+      },
+      "lastCheckin": "2026-09-19T12:18Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c31",
+      "name": "Felix Rossi",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-10-01T10:13Z",
+        "followup": "2026-10-02T04:00Z",
+        "reply": "2026-10-06T05:40Z"
+      },
+      "tasks": []
+    },
+    {
+      "id": "c32",
+      "name": "Ana Walker",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-10-07T16:22Z",
+        "followup": "2026-10-08T02:14Z"
+      },
+      "tasks": []
+    },
+    {
+      "id": "c33",
+      "name": "Theo Ortiz",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-08-19T04:10Z",
+        "followup": "2026-08-19T14:47Z",
+        "reply": "2026-08-22T02:28Z",
+        "orientation": "2026-08-26T13:07Z",
+        "docsSent": "2026-08-27T15:05Z",
+        "signed": "2026-09-02T19:22Z",
+        "started": "2026-09-21T12:58Z"
+      },
+      "lastCheckin": "2026-10-05T12:58Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c34",
+      "name": "Yara Bello",
+      "source": "Web form",
+      "milestones": {
+        "contact": "2026-08-15T23:57Z",
+        "followup": "2026-08-16T11:28Z",
+        "reply": "2026-08-20T09:11Z",
+        "orientation": "2026-08-25T14:28Z",
+        "docsSent": "2026-08-27T00:07Z",
+        "signed": "2026-08-30T22:39Z",
+        "started": "2026-09-19T21:19Z"
+      },
+      "lastCheckin": "2026-09-19T21:19Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c35",
+      "name": "Ben Fischer",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-09-28T13:08Z",
+        "followup": "2026-10-02T16:46Z",
+        "reply": "2026-10-06T17:10Z"
+      },
+      "tasks": []
+    },
+    {
+      "id": "c36",
+      "name": "Leah Silva",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-09-11T09:31Z",
+        "followup": "2026-09-16T03:41Z",
+        "reply": "2026-09-20T05:19Z",
+        "orientation": "2026-09-27T20:03Z",
+        "docsSent": "2026-09-28T20:32Z",
+        "signed": "2026-10-03T07:09Z"
+      },
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": false
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c37",
+      "name": "Kofi Tanaka",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-08-25T01:53Z",
+        "followup": "2026-08-30T21:09Z",
+        "reply": "2026-09-01T14:18Z",
+        "orientation": "2026-09-04T11:41Z",
+        "docsSent": "2026-09-06T11:41Z",
+        "signed": "2026-09-11T13:39Z",
+        "started": "2026-10-02T16:43Z"
+      },
+      "lastCheckin": "2026-10-09T16:43Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c38",
+      "name": "Iris Morales",
+      "source": "Phone/DM",
+      "milestones": {
+        "contact": "2026-09-08T13:02Z",
+        "followup": "2026-09-09T01:52Z",
+        "reply": "2026-09-10T10:20Z",
+        "orientation": "2026-09-19T03:23Z",
+        "docsSent": "2026-09-21T06:56Z",
+        "signed": "2026-09-24T12:01Z"
+      },
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": false
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c39",
+      "name": "Mateo Adeyemi",
+      "source": "Referral",
+      "milestones": {
+        "contact": "2026-07-25T06:16Z",
+        "followup": "2026-07-25T13:37Z",
+        "reply": "2026-07-29T14:26Z",
+        "orientation": "2026-08-05T07:09Z",
+        "docsSent": "2026-08-07T10:10Z",
+        "signed": "2026-08-11T07:42Z",
+        "started": "2026-08-28T03:15Z"
+      },
+      "lastCheckin": "2026-10-09T03:15Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "c40",
+      "name": "Simone Reyes",
+      "source": "Event",
+      "milestones": {
+        "contact": "2026-08-15T14:57Z",
+        "followup": "2026-08-19T20:15Z",
+        "reply": "2026-08-22T04:45Z",
+        "orientation": "2026-08-28T11:47Z",
+        "docsSent": "2026-08-29T13:43Z",
+        "signed": "2026-09-03T01:15Z",
+        "started": "2026-09-08T17:09Z"
+      },
+      "lastCheckin": "2026-10-06T17:09Z",
+      "tasks": [
+        {
+          "team": "Intake",
+          "name": "Send welcome packet",
+          "done": true
+        },
+        {
+          "team": "Intake",
+          "name": "Schedule first 1:1",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Set up accounts and access",
+          "done": true
+        },
+        {
+          "team": "Services",
+          "name": "Assign training plan",
+          "done": true
+        }
+      ]
+    }
+  ]
+}

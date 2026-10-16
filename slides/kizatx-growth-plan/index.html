@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kiz ATX Growth Plan</title>
+<meta name="description" content="Plan to turn first-timers into regulars: Level 1 and Level 2 Sundays, helpers, and Crew Points, built on four months of attendance data." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0d1520" />
+
+<link rel="canonical" href="https://slides.ogarocious.com/kizatx-growth-plan/" />
+
+<meta property="og:site_name" content="Kiz ATX" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://slides.ogarocious.com/kizatx-growth-plan/" />
+<meta property="og:title" content="Kiz ATX Growth Plan" />
+<meta property="og:description" content="Get first-timers back for a second class. Internal plan." />
+
+<meta property="og:image:alt" content="Kiz ATX Growth Plan cover." />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Kiz ATX Growth Plan" />
+<meta name="twitter:description" content="Get first-timers back for a second class. Internal plan." />
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: {
+            950: '#060a10', 900: '#0d1520', 800: '#131e2c',
+            700: '#1c2a3d', 600: '#263547', 500: '#334a63',
+          },
+          electric: {
+            300: '#a5e2fb', 400: '#7dd6fa', 500: '#4fc3f7',
+            600: '#2196c9', 700: '#0e77a3',
+          },
+          ivory: {
+            50: '#f5f7fa', 100: '#e2e8f0', 200: '#c9d0d9', 300: '#94a3b8',
+          },
+          positive: { 400: '#86efac', 500: '#4ade80', 600: '#22c55e' },
+          negative: { 400: '#fca5a5', 500: '#f87171', 600: '#ef4444' },
+        },
+        fontFamily: {
+          display: ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          sans:    ['"Rubik"', 'system-ui', '-apple-system', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  body {
+    background-color: #0d1520;
+    background-image:
+      radial-gradient(ellipse 1200px 700px at 20% 10%, rgba(79, 195, 247, 0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 80%, rgba(79, 195, 247, 0.06), transparent 65%),
+      linear-gradient(180deg, #060a10 0%, #0d1520 40%, #0d1520 60%, #060a10 100%);
+    min-height: 100vh;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .glass, .cta-btn { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  }
+
+  .snap-y-scroll { scroll-snap-type: y proximity; }
+  .snap-slide    { scroll-snap-align: start; scroll-snap-stop: always; }
+  @media (max-width: 768px) { .snap-slide { min-height: auto; padding-block: 4rem; } }
+
+  .text-body   { color: rgba(245, 247, 250, 0.90); }
+  .text-dimmed { color: rgba(245, 247, 250, 0.72); }
+  .text-muted  { color: rgba(245, 247, 250, 0.55); }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: #4fc3f7;
+    transform: scaleX(0); transform-origin: left center;
+    z-index: 51; pointer-events: none; will-change: transform;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar { transition: transform 80ms linear; }
+  }
+
+  .glass {
+    background: rgba(19, 30, 44, 0.55);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(79, 195, 247, 0.14);
+    box-shadow:
+      0 1px 0 rgba(245, 247, 250, 0.04) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+      0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .glass:hover { border-color: rgba(79, 195, 247, 0.30); }
+
+  .text-shadow-cool {
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 8px 30px rgba(79, 195, 247, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+
+  :focus-visible {
+    outline: 2px solid #4fc3f7;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .accent-rule {
+    display: inline-block; width: 40px; height: 2px;
+    background: #4fc3f7; border-radius: 1px; margin-bottom: 1.75rem;
+  }
+
+  /* Header (fixed top bar) */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: rgba(6, 10, 16, 0.75);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(79, 195, 247, 0.10);
+  }
+  .site-header .brand-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: inherit;
+  }
+  .site-header .brand-dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: #4fc3f7;
+    transition: box-shadow 220ms ease;
+  }
+  .site-header .brand-link:hover .brand-dot {
+    box-shadow: 0 0 18px rgba(79, 195, 247, 0.7);
+  }
+  .site-header .brand-name {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: -0.01em;
+    color: #f5f7fa;
+  }
+  .site-header .brand-sub {
+    font-size: 0.75rem; color: rgba(245, 247, 250, 0.55);
+  }
+  .site-header .meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.72rem; color: rgba(245, 247, 250, 0.55);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .site-header .counter { color: rgba(245, 247, 250, 0.72); }
+  .site-header .sep { color: rgba(245, 247, 250, 0.25); }
+  @media (max-width: 900px) { .site-header .lg-only { display: none; } }
+  @media (max-width: 700px) { .site-header .md-only { display: none; } }
+
+  /* Keyboard chip */
+  .kbd {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(79, 195, 247, 0.30);
+    background: rgba(79, 195, 247, 0.07);
+    color: #f5f7fa;
+    display: inline-block;
+    margin: 0 1px;
+  }
+
+  /* Menu button (mobile only) */
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.85rem; border-radius: 999px;
+    border: 1px solid rgba(79, 195, 247, 0.28);
+    background: rgba(79, 195, 247, 0.06);
+    color: #f5f7fa;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible {
+    border-color: rgba(79, 195, 247, 0.55);
+    background: rgba(79, 195, 247, 0.10);
+  }
+  .menu-btn .menu-close { display: none; }
+  .menu-btn.is-open .menu-hamburger { display: none; }
+  .menu-btn.is-open .menu-close { display: inline; }
+  @media (min-width: 1024px) { .menu-btn { display: none; } }
+
+  /* Side navigation (desktop only) */
+  .side-nav {
+    position: fixed; top: 0; left: 0; height: 100vh;
+    width: 280px;
+    padding: 5rem 1.75rem 2rem;
+    z-index: 40;
+    background: rgba(6, 10, 16, 0.55);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-right: 1px solid rgba(79, 195, 247, 0.10);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media (min-width: 1024px) { .side-nav { display: flex; } }
+  .side-nav .nav-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(79, 195, 247, 0.85);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(79, 195, 247, 0.14);
+  }
+  .side-nav .nav-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.1rem;
+  }
+  .side-nav .nav-list a {
+    display: block;
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    color: rgba(245, 247, 250, 0.60);
+    text-decoration: none;
+    font-size: 0.88rem; line-height: 1.3;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+  .side-nav .nav-list a:hover {
+    color: #4fc3f7;
+    background: rgba(79, 195, 247, 0.06);
+  }
+  .side-nav .nav-list .nav-active a {
+    color: #4fc3f7;
+    background: rgba(79, 195, 247, 0.10);
+  }
+  .side-nav .nav-group {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9px; letter-spacing: 0.14em;
+    color: rgba(245, 247, 250, 0.35);
+    text-transform: uppercase;
+    padding: 0.85rem 0.65rem 0.25rem;
+    list-style: none;
+  }
+  .side-nav .nav-foot {
+    font-size: 0.72rem; color: rgba(245, 247, 250, 0.45);
+    line-height: 1.55;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(79, 195, 247, 0.10);
+  }
+  .side-nav .nav-foot .foot-brand { color: rgba(245, 247, 250, 0.72); font-weight: 500; }
+
+  /* Drawer (mobile only) */
+  .drawer {
+    position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    background: rgba(6, 10, 16, 0.85);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+  }
+  .drawer[hidden] { display: none; }
+  .drawer-panel {
+    background: rgba(13, 21, 32, 0.98);
+    padding: 1.75rem 1.5rem 3rem;
+    min-height: 100%;
+  }
+  .drawer-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(79, 195, 247, 0.85);
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .drawer-list {
+    border-left: 1px solid rgba(79, 195, 247, 0.28);
+    padding-left: 1rem;
+    margin: 0;
+    list-style: none;
+  }
+  .drawer-item {
+    display: block; padding: 0.85rem 0.9rem; margin-left: -0.5rem;
+    color: #f5f7fa; text-decoration: none;
+    font-size: 1.1rem; font-weight: 500; line-height: 1.3;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .drawer-item:hover, .drawer-item.is-active {
+    background: rgba(79, 195, 247, 0.12);
+    color: #4fc3f7;
+  }
+  .drawer-group {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(79, 195, 247, 0.65);
+    text-transform: uppercase;
+    padding: 1.25rem 0.4rem 0.5rem;
+    margin-left: -1rem;
+    list-style: none;
+  }
+
+  /* Cover TOC */
+  .deck-toc {
+    margin-top: 2.5rem;
+    max-width: 32rem;
+    position: relative;
+    z-index: 2;
+  }
+  .deck-toc summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 1rem;
+    background: rgba(13, 21, 32, 0.55);
+    border: 1px dashed rgba(79, 195, 247, 0.5);
+    border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(165, 226, 251, 0.95);
+    cursor: pointer;
+    list-style: none;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .deck-toc summary::-webkit-details-marker { display: none; }
+  .deck-toc summary::before {
+    content: '▸';
+    font-size: 0.7rem;
+    transition: transform 200ms ease;
+    display: inline-block;
+  }
+  .deck-toc[open] summary::before { transform: rotate(90deg); }
+  .deck-toc summary:hover {
+    border-color: rgba(79, 195, 247, 0.85);
+    background: rgba(13, 21, 32, 0.75);
+  }
+  .deck-toc[open] summary {
+    background: rgba(79, 195, 247, 0.10);
+    border-color: rgba(79, 195, 247, 0.85);
+  }
+  .toc-list {
+    margin-top: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(13, 21, 32, 0.75);
+    border: 1px solid rgba(79, 195, 247, 0.14);
+    border-radius: 8px;
+    list-style: none;
+  }
+  .toc-list li {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem;
+    padding: 0.35rem 0;
+    color: rgba(245, 247, 250, 0.8);
+  }
+  .toc-list li a {
+    color: rgba(245, 247, 250, 0.85);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(79, 195, 247, 0.3);
+    padding-bottom: 1px;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .toc-list li a:hover {
+    color: #a5e2fb;
+    border-bottom-color: rgba(79, 195, 247, 0.85);
+  }
+  .toc-list .toc-group {
+    padding: 0.5rem 0 0.25rem;
+    color: rgba(165, 226, 251, 0.75);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .toc-list .toc-sub {
+    padding-left: 1.25rem;
+    color: rgba(245, 247, 250, 0.7);
+  }
+
+  /* Data tiles */
+  .stat-tile {
+    padding: 1.35rem 1.5rem; border-radius: 12px;
+    border: 1px solid rgba(79, 195, 247, 0.20);
+    background: rgba(19, 30, 44, 0.55);
+  }
+  .stat-tile .label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(79, 195, 247, 0.85);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .stat-tile .value {
+    font-family: "Rubik", sans-serif;
+    font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.25rem);
+    color: #f5f7fa; line-height: 1.1;
+  }
+  .stat-tile .sub { color: rgba(245, 247, 250, 0.65); font-size: 0.85rem; margin-top: 0.4rem; }
+
+  /* Delta pills */
+  .delta {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.15rem 0.55rem; border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; font-weight: 500;
+  }
+  .delta-pos { background: rgba(74, 222, 128, 0.14); color: #86efac; border: 1px solid rgba(74, 222, 128, 0.30); }
+  .delta-neg { background: rgba(248, 113, 113, 0.14); color: #fca5a5; border: 1px solid rgba(248, 113, 113, 0.30); }
+  .delta-neu { background: rgba(148, 163, 184, 0.10); color: rgba(245, 247, 250, 0.65); border: 1px solid rgba(148, 163, 184, 0.20); }
+
+  /* Bar chart */
+  .bar-chart {
+    display: grid;
+    grid-template-columns: 4rem 1fr 6rem;
+    gap: 0.75rem 1rem;
+    align-items: center;
+  }
+  .bar-track {
+    height: 26px; border-radius: 6px;
+    background: rgba(79, 195, 247, 0.06);
+    border: 1px solid rgba(79, 195, 247, 0.10);
+    overflow: hidden; display: flex;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(79, 195, 247, 0.55), rgba(125, 214, 250, 0.90));
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; color: #0d1520; font-weight: 600;
+  }
+  .bar-fill.stack-kizomba { background: linear-gradient(90deg, #2196c9, #4fc3f7); }
+  .bar-fill.stack-private { background: linear-gradient(90deg, #86efac, #4ade80); color: #0d1520; }
+  .bar-fill.stack-photo   { background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0d1520; }
+  .bar-month {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem; color: rgba(245, 247, 250, 0.72);
+  }
+  .bar-total {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.9rem; color: #f5f7fa;
+    text-align: right;
+  }
+  @media (max-width: 700px) {
+    .bar-chart { grid-template-columns: 3.5rem 1fr 5rem; gap: 0.4rem 0.6rem; }
+  }
+
+  /* Line chart (SVG) */
+  .line-chart-wrap { position: relative; }
+  .line-chart { width: 100%; height: auto; display: block; }
+
+  /* Tables */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem;
+  }
+  .data-table thead th {
+    text-align: left; padding: 0.75rem 0.85rem;
+    font-size: 0.7rem; letter-spacing: 0.14em;
+    color: rgba(79, 195, 247, 0.85);
+    text-transform: uppercase; font-weight: 500;
+    border-bottom: 1px solid rgba(79, 195, 247, 0.20);
+  }
+  .data-table td {
+    padding: 0.7rem 0.85rem;
+    color: rgba(245, 247, 250, 0.88);
+    border-bottom: 1px dashed rgba(79, 195, 247, 0.10);
+  }
+  .data-table tr:last-child td { border-bottom: 0; }
+  .data-table tr.highlight td {
+    background: rgba(79, 195, 247, 0.06);
+    color: #f5f7fa;
+  }
+  .data-table td.num { text-align: right; }
+  .data-table caption {
+    caption-side: top; text-align: left;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.14em;
+    color: rgba(79, 195, 247, 0.80);
+    text-transform: uppercase;
+    padding-bottom: 0.6rem;
+  }
+
+  /* Legend chips */
+  .legend { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .legend .chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.2rem 0.65rem; border-radius: 999px;
+    background: rgba(19, 30, 44, 0.6);
+    border: 1px solid rgba(79, 195, 247, 0.16);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    color: rgba(245, 247, 250, 0.82);
+  }
+  .legend .swatch {
+    display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+  }
+
+  /* Ask / open-questions list */
+  .ask-list { list-style: none; padding: 0; margin: 0; }
+  .ask-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px dashed rgba(79, 195, 247, 0.10);
+  }
+  .ask-list li:last-child { border-bottom: 0; }
+  .ask-list .marker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.14em;
+    color: #4fc3f7; text-transform: uppercase;
+    padding-top: 0.15rem;
+  }
+  .ask-list .body { color: rgba(245, 247, 250, 0.85); line-height: 1.55; }
+  .ask-list .body strong { color: #f5f7fa; }
+
+  /* Update log */
+  .log-list { list-style: none; padding: 0; margin: 0; }
+  .log-list li {
+    display: grid; grid-template-columns: 8rem 1fr; gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px dashed rgba(79, 195, 247, 0.10);
+  }
+  .log-list li:last-child { border-bottom: 0; }
+  .log-list .date {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem; color: rgba(79, 195, 247, 0.85);
+    padding-top: 0.1rem;
+  }
+  .log-list .note { color: rgba(245, 247, 250, 0.85); line-height: 1.5; }
+  @media (max-width: 640px) {
+    .log-list li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+  .table-scroll .data-table td.num, .table-scroll .data-table th.num { white-space: nowrap; }
+  main section > div { min-width: 0; max-width: 100%; }
+  .glass { min-width: 0; }
+  .funnel { display: grid; gap: 0.6rem; }
+  .funnel-row { display: grid; grid-template-columns: minmax(8rem, 13rem) 1fr 4rem; gap: 0.75rem; align-items: center; }
+  .funnel-row .bar-track { height: 34px; }
+  .funnel-row .lbl { color: rgba(245,247,250,0.88); font-size: 0.92rem; line-height: 1.25; }
+  .funnel-row .lbl small { display: block; color: rgba(245,247,250,0.55); font-size: 0.74rem; }
+  .funnel-row .pct { font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: rgba(245,247,250,0.72); text-align: right; }
+  @media (max-width: 640px) { .funnel-row { grid-template-columns: 1fr 4rem; } .funnel-row .bar-track { grid-column: 1 / -1; grid-row: 2; } }
+  .sched { display: grid; gap: 0.75rem; }
+  .sched-row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding: 1rem 1.1rem; border-radius: 12px; border: 1px solid rgba(79,195,247,0.18); background: rgba(19,30,44,0.55); }
+  .sched-row .t { font-family: "JetBrains Mono", monospace; color: #4fc3f7; font-size: 0.85rem; padding-top: 0.15rem; }
+  .sched-row h3 { font-weight: 600; color: #f5f7fa; margin-bottom: 0.2rem; }
+  @media (max-width: 640px) { .sched-row { grid-template-columns: 1fr; gap: 0.3rem; } }
+  .tag { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.1rem 0.5rem; border-radius: 999px; border: 1px solid rgba(251,191,36,0.4); color: #fcd34d; background: rgba(251,191,36,0.08); vertical-align: middle; }
+  .tag.ok { border-color: rgba(74,222,128,0.35); color: #86efac; background: rgba(74,222,128,0.08); }
+</style>
+
+</head>
+<body class="font-sans text-ivory-50 antialiased">
+
+<div class="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+<header class="site-header">
+  <a href="#cover" class="brand-link">
+    <span class="brand-dot"></span>
+    <span class="brand-name">Kiz ATX Growth Plan</span>
+    <span class="brand-sub md-only">· Charles &amp; Alina</span>
+  </a>
+  <div class="meta">
+    <span class="counter" id="counter" aria-live="polite">1 of 13</span>
+    <span class="sep md-only">·</span>
+    <span class="md-only" title="Last data refresh"><span data-inject="updated">Draft 2026-10-04</span> · <span data-inject="rev">rev 1</span></span>
+    <span class="sep lg-only">·</span>
+    <span class="lg-only"><span class="kbd">Space</span> next · <span class="kbd">↑</span><span class="kbd">↓</span> nav</span>
+    <button id="menuBtn" class="menu-btn" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+      <span class="menu-hamburger">MENU</span>
+      <span class="menu-close">CLOSE</span>
+    </button>
+  </div>
+</header>
+
+<nav id="sideNav" class="side-nav" aria-label="Sections">
+  <div>
+    <p class="nav-label">Sections</p>
+    <ul id="navList" class="nav-list"></ul>
+  </div>
+  <div class="nav-foot">
+    <p class="foot-brand">Kiz ATX Growth Plan</p>
+    <p>Internal plan.<br />Not for distribution.</p>
+    <p style="margin-top: 0.5rem;">Single HTML file. Updated by hand.</p>
+  </div>
+</nav>
+
+<div id="mobileMenu" class="drawer" role="dialog" aria-modal="true" aria-label="Sections" hidden>
+  <div class="drawer-panel">
+    <p class="drawer-label">Sections</p>
+    <ul id="mobileNavList" class="drawer-list"></ul>
+  </div>
+</div>
+
+<main class="lg:pl-[280px] snap-y-scroll" style="padding-top: 3.5rem;">
+
+<!-- 1. COVER -->
+<section id="cover" data-title="Cover" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden">
+  <div class="max-w-5xl relative">
+    <span class="accent-rule"></span>
+    <div class="font-mono text-xs tracking-[0.22em] text-electric-500 uppercase mb-4">Kiz ATX · Growth plan · Draft for Charles &amp; Alina</div>
+    <h1 class="font-display font-extrabold text-5xl md:text-7xl leading-[0.98] tracking-tight text-ivory-50 text-shadow-cool mb-8">Get them back for the second class</h1>
+    <p class="text-body text-lg md:text-xl max-w-3xl leading-relaxed mb-10">
+      Sunday class is where everyone finds Kiz ATX. Six months of data say the people who stay go on to workshops and
+      privates, and most people never make it to class two. This plan focuses on that one step.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
+      <div class="stat-tile"><div class="label">Came once</div><div class="value">48 of 82</div><div class="sub">Sunday attendees, Apr–Sep</div></div>
+      <div class="stat-tile"><div class="label">Second-visit rate</div><div class="value text-electric-400">9%</div><div class="sub">August first-timers back within 4 classes (1 of 11)</div></div>
+      <div class="stat-tile"><div class="label">Regulars → workshop</div><div class="value text-positive-400">13 of 20</div><div class="sub">people with 5+ Sundays bought a workshop</div></div>
+    </div>
+    <div class="mt-10 text-muted text-xs font-mono tracking-wider uppercase">Not for distribution · Data: slides.ogarocious.com/kizatx · Apr–Sep 2026 · updated 2026-10-05</div>
+  </div>
+</section>
+
+<!-- 2. FUNNEL -->
+<section id="funnel" data-title="The funnel" data-group="The case" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Sunday is the front door</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Everyone who came to a Sunday class from April through September, and how far they went.</p>
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <div class="funnel">
+        <div class="funnel-row"><div class="lbl">Came to a Sunday<small>first touch</small></div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width:100%;">82</div></div><div class="pct">100%</div></div>
+        <div class="funnel-row"><div class="lbl">Came back<small>2+ Sundays</small></div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width:41.5%;">34</div></div><div class="pct">41%</div></div>
+        <div class="funnel-row"><div class="lbl">Became a regular<small>5+ Sundays</small></div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width:24.4%;">20</div></div><div class="pct">24%</div></div>
+        <div class="funnel-row"><div class="lbl">Bought a workshop<small>$40 pass</small></div><div class="bar-track"><div class="bar-fill stack-photo" style="width:20.7%;">17</div></div><div class="pct">21%</div></div>
+        <div class="funnel-row"><div class="lbl">Bought privates<small>$100 to $840</small></div><div class="bar-track"><div class="bar-fill stack-private" style="width:6%;">3</div></div><div class="pct">4%</div></div>
+      </div>
+      <div class="mt-6 pt-6 border-t border-electric-500/10 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-dimmed leading-relaxed">
+        <p><strong class="text-electric-400">Workshops come from regulars.</strong> 13 of 20 regulars bought one. Only 3 of 14 people with 2 to 4 Sundays did, and 1 of 48 one-timers.</p>
+        <p><strong class="text-electric-400">Privates come from the core.</strong> Two of the three Sunday students who bought privates (Trenton, Saul) are regulars who also did workshops. The third, Anyi, is a long-time private student.</p>
+        <p><strong class="text-electric-400">So the top step decides the rest.</strong> Every extra person who comes back a second time feeds every stage below it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. THE CLIFF -->
+<section id="cliff" data-title="Where we lose people" data-group="The case" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">People come once, or they stay</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Almost nobody comes exactly twice. The drop happens between class one and class two.</p>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">People by Sundays attended</div>
+        <div class="space-y-3">
+          <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;"><div class="bar-month">1</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width:100%;">48</div></div><div class="bar-total">48</div></div>
+          <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;"><div class="bar-month">2</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width:12.5%;">6</div></div><div class="bar-total">6</div></div>
+          <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;"><div class="bar-month">3–4</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width:16.7%;">8</div></div><div class="bar-total">8</div></div>
+          <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;"><div class="bar-month">5–9</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width:20.8%;">10</div></div><div class="bar-total">10</div></div>
+          <div class="bar-chart" style="grid-template-columns: 4rem 1fr 3rem;"><div class="bar-month">10+</div><div class="bar-track"><div class="bar-fill stack-kizomba" style="width:20.8%;">10</div></div><div class="bar-total">10</div></div>
+        </div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">First-timers back within 4 classes</div>
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>First visit</th><th class="num">Came back</th><th class="num">Rate</th></tr></thead>
+          <tbody>
+            <tr><td>April <span class="text-muted text-xs">(first month of data, inflated)</span></td><td class="num">12 / 19</td><td class="num">63%</td></tr>
+            <tr><td>May</td><td class="num">8 / 17</td><td class="num">47%</td></tr>
+            <tr><td>June</td><td class="num">5 / 7</td><td class="num">71%</td></tr>
+            <tr><td>July</td><td class="num">4 / 10</td><td class="num">40%</td></tr>
+            <tr class="highlight"><td>August</td><td class="num">1 / 11</td><td class="num">9%</td></tr>
+            <tr><td>September</td><td class="num">too early</td><td class="num">·</td></tr>
+          </tbody>
+        </table></div>
+        <p class="text-dimmed text-sm leading-relaxed mt-4">The data shows <em>that</em> people leave, not <em>why</em>. We already dance with everyone and give tips at the practica, and people still don't return. Our best guess is structural: one all-levels class can't be beginner-friendly and still challenge the regulars. That's a hypothesis to test with the one-timer replies, the Sundays survey, and the Level 1 trial, not a known cause.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. VALUE LADDER -->
+<section id="value" data-title="What a regular is worth" data-group="The case" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">What one more regular is worth</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Each step down the funnel is worth more to Kiz ATX. Numbers are Charles's take, Jun–Sep.</p>
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <div class="table-scroll"><table class="data-table">
+        <thead><tr><th>Step</th><th class="num">Value</th><th>Basis</th></tr></thead>
+        <tbody>
+          <tr><td>One Sunday visit</td><td class="num">$6–10</td><td>50% of the pass or drop-in price</td></tr>
+          <tr><td>A regular, per month</td><td class="num">~$24</td><td>~3 Sundays a month on a 5-class pass</td></tr>
+          <tr><td>A workshop seat</td><td class="num">~$22</td><td>$1,080 tickets − $480 rent ÷ 27 seats (Alina currently unpaid)</td></tr>
+          <tr class="highlight"><td>A private package</td><td class="num">$360–840</td><td>4-pack $360 · 12-pack $840</td></tr>
+        </tbody>
+      </table></div>
+      <p class="text-dimmed leading-relaxed mt-6">Privates were 53% of Jun–Sep teaching income ($2,860 of ~$5,400), but they only come from people who first became regulars. Moving the second-visit rate from August's 9% back to 35% (May was 47%) roughly quadruples the people entering the part of the funnel where workshops and privates happen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. NEW SUNDAY -->
+<section id="sunday" data-title="The new Sunday" data-group="The plan" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">The new Sunday</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Level 2 first, then Level 1 with helpers, then everyone into the practica. Pending Esquina's OK on the longer room booking.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div class="sched lg:col-span-3">
+        <div class="sched-row"><div class="t">5:30–6:30</div><div><h3>Level 2</h3><p class="text-dimmed text-sm">Regulars. The month's arc at Level 2 depth. Same start time as today.</p></div></div>
+        <div class="sched-row"><div class="t">6:30–7:30</div><div><h3>Level 1 + helpers</h3><p class="text-dimmed text-sm">Beginners arrive. Level 2 dancers stay free as helpers, rotate partners, and balance leads and follows.</p></div></div>
+        <div class="sched-row"><div class="t">7:30–9:00</div><div><h3>Practica</h3><p class="text-dimmed text-sm">Everyone. Beginners end their class straight into the social, dancing with people who know what they're doing.</p></div></div>
+      </div>
+      <div class="glass rounded-2xl p-6 lg:col-span-2 text-sm text-dimmed leading-relaxed space-y-3">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400">Why this order</div>
+        <p><strong class="text-ivory-50">Beginners never leave before the practica.</strong> That is where belonging happens.</p>
+        <p><strong class="text-ivory-50">No blind leading the blind.</strong> New dancers partner with experienced ones, so they level up faster.</p>
+        <p><strong class="text-ivory-50">Helpers get value too:</strong> a free review of the basics, and Crew Points.</p>
+        <p><strong class="text-ivory-50">Watch:</strong> 3.5 hours is a long Sunday for helpers. Aim for 4 to 6 reliable ones, not everyone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. LEVEL 1 PATH -->
+<section id="path" data-title="Level 1 path" data-group="The plan" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">A path beginners can see</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Our working idea: beginners don't know what they don't know, so tips and perks may not land. A visible 4-week path gives them a reason to come back: finishing something they started. The November series tests it.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="stat-tile"><div class="label">Week 1 · start here</div><div class="value text-electric-400">Walk</div><div class="sub">Embrace, connection, walking together</div></div>
+      <div class="stat-tile"><div class="label">Week 2</div><div class="value">Basics</div><div class="sub">Basic steps and saida</div></div>
+      <div class="stat-tile"><div class="label">Week 3</div><div class="value">Turns</div><div class="sub">Turns and simple combinations</div></div>
+      <div class="stat-tile"><div class="label">Week 4</div><div class="value text-positive-400">Dance</div><div class="sub">Put it together, then a full song in the practica</div></div>
+    </div>
+    <div class="glass rounded-xl p-5 mt-6 text-dimmed leading-relaxed">
+      <strong class="text-electric-400">Give next week's hook before they leave:</strong> "Next Sunday we build on today's step." Put the 4-week path on the flyer, the WhatsApp intro, and the sign-in. Week topics are a sample; Charles and Alina set the real ones. October's arc (Elevation &amp; Leg Lifts) runs Oct 4–25; no class Nov 1 or 8 (KSX), back Nov 15.
+    </div>
+  </div>
+</section>
+
+<!-- 7. CREW POINTS -->
+<section id="points" data-title="Crew Points" data-group="The plan" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Crew Points</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Points reward the things that grow the community: helping, bringing people who stay, and going deeper. Weights marked <span class="tag">proposed</span> are still open.</p>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Earn</div>
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>Action</th><th class="num">Points</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Help in Level 1 (max 1 per Sunday)</td><td class="num">1</td><td><span class="tag ok">agreed</span></td></tr>
+            <tr><td>Bring someone new to class</td><td class="num">1</td><td><span class="tag ok">agreed</span></td></tr>
+            <tr class="highlight"><td>They come back for a 2nd class</td><td class="num">+1</td><td><span class="tag ok">agreed</span></td></tr>
+            <tr><td>Buy a workshop pass</td><td class="num">1</td><td><span class="tag">proposed</span></td></tr>
+            <tr><td>Buy a private package</td><td class="num">2</td><td><span class="tag">proposed</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="text-muted text-xs mt-4">"New" = never checked into a Kiz ATX class or workshop before. Points expire after 6 months.</p>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-4">Redeem</div>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between gap-4 border-b border-electric-500/10 pb-2"><span class="text-body">8 points</span><span class="text-dimmed text-right">Private credit: 30-min solo, or a semi-private hour with another credit holder (Charles approves pairings)</span></div>
+          <div class="flex justify-between gap-4 border-b border-electric-500/10 pb-2"><span class="text-body">16 points</span><span class="text-dimmed text-right">Full 1-hour solo private</span></div>
+          <div class="flex justify-between gap-4"><span class="text-body">Separate</span><span class="text-dimmed text-right">$70 intro private for regulars (normally $100)</span></div>
+        </div>
+        <div class="mt-6 pt-4 border-t border-electric-500/10 text-dimmed text-sm leading-relaxed">
+          <strong class="text-electric-400">Cost check.</strong> 8 points ≈ 30 min of Charles's time (~$48 at the $95 rate), so 1 point ≈ $6.
+          A workshop pass at 1 point gives back ~15% of a $40 ticket; a private package at 2 points gives back ~3% of $360.
+          That's why purchases earn less than helping and referrals. With 4 helpers, rewards cost about 1 hour a month.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7b. PERKS MENU -->
+<section id="perks" data-title="Perks to decide" data-group="The plan" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Perks to decide</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Four kinds of perks, kept separate on purpose. We go through them one at a time; nothing below the agreed lines is locked.</p>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-3">1. Helping out <span class="tag ok">agreed</span></div>
+        <p class="text-dimmed text-sm leading-relaxed">1 Crew Point per Sunday helping in Level 1 (max 1 per Sunday). Helpers also attend Level 1 free. 8 points = a private credit.</p>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-3">2. Bringing people <span class="tag ok">agreed</span></div>
+        <p class="text-dimmed text-sm leading-relaxed">1 point when someone new comes, +1 when they come back. Weighs the same as helping. The return bonus filters out visitors on its own.</p>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-3">3. Showing up (attendance milestones) <span class="tag">open</span></div>
+        <p class="text-dimmed text-sm leading-relaxed mb-3">Regular attendance does <strong class="text-ivory-50">not</strong> earn points (the core already comes; points would just cost Charles's time). Milestones instead:</p>
+        <div class="table-scroll"><table class="data-table" style="min-width: 22rem;">
+          <thead><tr><th>When</th><th>Idea</th></tr></thead>
+          <tbody>
+            <tr><td>2nd, 3rd visit</td><td>Still open. Welcome dances and tips already happen, so a perk isn't the lever here; the Level 1 path is.</td></tr>
+            <tr><td>5th visit</td><td>Unlocks the $70 intro private</td></tr>
+            <tr><td>10 classes</td><td>Kiz ATX T-shirt + shout-out</td></tr>
+            <tr><td>25 classes</td><td>Free workshop ticket</td></tr>
+            <tr><td>50 classes</td><td>Founding Crew title (TBD)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-3">4. Private lesson pricing <span class="tag">open</span></div>
+        <div class="table-scroll"><table class="data-table" style="min-width: 22rem;">
+          <thead><tr><th>Offer</th><th class="num">Price</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Intro private for regulars</td><td class="num">$70 (vs $100)</td><td><span class="tag ok">liked</span></td></tr>
+            <tr><td>Member 4-pack</td><td class="num">$320 (vs $360)</td><td><span class="tag">idea</span></td></tr>
+            <tr><td>Semi-private, 2 people</td><td class="num">$130 / hr</td><td><span class="tag">idea</span></td></tr>
+            <tr><td>Points on a package</td><td class="num">2 pts</td><td><span class="tag">proposed</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="text-muted text-xs mt-3">Ruled out: recap videos (already free after every class), KSX discounts (KSX is a one-time 2026 event).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. TRACKING -->
+<section id="tracking" data-title="How we track it" data-group="The plan" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">How we track it</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Esquina's report arrives a month late and only covers Sundays. Points and follow-up need same-day data.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6 text-sm text-dimmed leading-relaxed space-y-3">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400">Now: sign-in at the door</div>
+        <p>A QR form or sheet: name, contact, "who brought you?", helper today?</p>
+        <p>Doubles as the first-timer contact list, so follow-up happens within 48 hours, not a month later.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 text-sm text-dimmed leading-relaxed space-y-3">
+        <div class="font-mono text-xs uppercase tracking-wider text-electric-400">Next: WhereCanWeDance check-in</div>
+        <p>Students scan a Kiz ATX QR and check in on WCWD (they still pay Esquina). WCWD already has ticket check-in codes to build on.</p>
+        <p>MVP: QR check-in, referral attribution, organizer-marked helpers, points history, organizer-approved rewards. Workshop and private purchases add points automatically later.</p>
+        <p><strong class="text-ivory-50">Done =</strong> 4 Sundays of check-ins captured and points awarded with no spreadsheet. Useful to other organizers once it works for Kiz ATX.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. TARGETS -->
+<section id="targets" data-title="Targets" data-group="Measure it" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">How we'll know it works</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">One lead number, tracked monthly on the Kiz ATX Pulse deck. The rest follow from it.</p>
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <div class="table-scroll"><table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Now</th><th class="num">Target</th><th>By</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td>Second-visit rate</td><td class="num">9% (Aug)</td><td class="num">35%</td><td>December</td></tr>
+          <tr><td>Monthly regulars</td><td class="num">9</td><td class="num">12+</td><td>Q1 2027</td></tr>
+          <tr><td>People per class</td><td class="num">13.3</td><td class="num">15+</td><td>Q1 2027</td></tr>
+          <tr><td>Reliable Level 1 helpers</td><td class="num">0</td><td class="num">4–6</td><td>Launch</td></tr>
+          <tr><td>Free intro → paid</td><td class="num">11 / 36</td><td class="num">1 in 3</td><td>Q1 2027</td></tr>
+        </tbody>
+      </table></div>
+      <p class="text-dimmed text-sm leading-relaxed mt-4">If the second-visit rate hasn't moved after two months of the new format, change the format before adding more perks.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9b. EXPERIMENTS -->
+<section id="experiments" data-title="Experiments &amp; questions" data-group="Measure it" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Experiments &amp; questions</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Small tests, each with one number to watch. Run them before locking in perks or building software.</p>
+    <div class="glass rounded-2xl p-6 md:p-8 mb-6">
+      <div class="table-scroll"><table class="data-table" style="min-width: 42rem;">
+        <thead><tr><th>Test</th><th>When</th><th>Watch</th><th>Works if</th></tr></thead>
+        <tbody>
+          <tr><td>Ask the 25 one-timers why they didn't return</td><td>Oct</td><td>Reply themes</td><td>One reason clearly leads</td></tr>
+          <tr><td>Door sign-in + message every first-timer within 48 hours</td><td>Oct 4 on</td><td>First-timers who return</td><td>Beats August's 9% before the format change</td></tr>
+          <tr><td>"Come at 5:25" beginner on-ramp (already in the October reel comment)</td><td>Oct</td><td>How many use it, and do they return</td><td>Users return more than non-users</td></tr>
+          <tr><td>One room clip a week (real students dancing)</td><td>Oct</td><td>"How did you hear about us?" at sign-in</td><td>New people cite Instagram</td></tr>
+          <tr><td>Helper trial in the current class (2 to 3 core, no format change)</td><td>Oct 18, 25</td><td>Helper feedback, first-timer return</td><td>Helpers want to keep doing it</td></tr>
+          <tr class="highlight"><td>Level 2 → Level 1 → practica, 4-week Level 1 series</td><td>Nov 15 – Dec 6</td><td>Second-visit rate</td><td>35% or higher</td></tr>
+          <tr><td>$70 intro private offer to regulars</td><td>Nov – Dec</td><td>Bookings</td><td>3 or more in 6 weeks</td></tr>
+          <tr><td>Monthly workshop pilot, tied to the arc</td><td>Q1 2027</td><td>Attendees per workshop</td><td>12+; two misses → every 6 weeks</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <div class="font-mono text-xs uppercase tracking-wider text-electric-400 mb-3">Questions we can't answer from the data yet</div>
+      <ul class="ask-list">
+        <li><span class="marker">Why</span><div class="body"><strong>Why do first-timers not come back?</strong> Level, timing, price, distance, partner nerves, or just life. The one-timer replies answer this.</div></li>
+        <li><span class="marker">Esquina</span><div class="body"><strong>Do our students take other Esquina classes?</strong> Passes work studio-wide, so "stopped coming" may mean "switched to tango." Ask Michelle.</div></li>
+        <li><span class="marker">Format</span><div class="body"><strong>Does a 3.5-hour Sunday cost us Level 2 turnout?</strong> Watch Level 2 headcount for the first month.</div></li>
+        <li><span class="marker">Points</span><div class="body"><strong>Do points change behavior, or just reward people who'd help anyway?</strong> Count referrals and redemptions after 2 months.</div></li>
+        <li><span class="marker">Who</span><div class="body"><strong>How many free intros are locals vs visitors?</strong> Add "Do you live in Austin?" to the sign-in.</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10. TIMELINE -->
+<section id="timeline" data-title="Timeline" data-group="Measure it" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-6xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Timeline</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">Test with the people we have, launch after KSX, review before the new year.</p>
+    <div class="sched">
+      <div class="sched-row"><div class="t">October</div><div><h3>Ask and listen</h3><p class="text-dimmed text-sm">Ask the 25 one-timers why they didn't return. Get Alina's and the core's take. Email Michelle about the longer Sunday and helper check-ins. Start the door sign-in and filming room clips.</p></div></div>
+      <div class="sched-row"><div class="t">Oct 30 – Nov 9</div><div><h3>KSX</h3><p class="text-dimmed text-sm">Note which buyers are Austin locals; only they are Sunday prospects.</p></div></div>
+      <div class="sched-row"><div class="t">Nov 15</div><div><h3>Launch</h3><p class="text-dimmed text-sm">Level 2 → Level 1 → practica, if Esquina agrees. First 4-week Level 1 series: Nov 15, 22, 29, Dec 6. Crew Points start.</p></div></div>
+      <div class="sched-row"><div class="t">Early Dec</div><div><h3>Quarterly survey</h3><p class="text-dimmed text-sm">Sundays, workshops, KSX, format, workshop frequency for 2027.</p></div></div>
+      <div class="sched-row"><div class="t">Late Dec</div><div><h3>Review</h3><p class="text-dimmed text-sm">Second-visit rate for the first series. Decide Q1: monthly workshop pilot, points weights, WCWD check-in build.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. OPEN DECISIONS -->
+<section id="decisions" data-title="Open decisions" data-group="Measure it" class="snap-slide min-h-screen flex flex-col justify-center px-6 md:px-20 border-t border-electric-500/10">
+  <div class="max-w-5xl">
+    <span class="accent-rule"></span>
+    <h2 class="font-display font-bold text-4xl md:text-6xl mb-4 tracking-tight text-shadow-cool">Open decisions</h2>
+    <p class="text-dimmed text-lg mb-8 max-w-3xl">What still needs a call before launch.</p>
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <ul class="ask-list">
+        <li><span class="marker">Esquina</span><div class="body"><strong>Room 5:30–9:00, helper check-ins, two classes in their system.</strong> How do helper visits and the 50/50 split work?</div></li>
+        <li><span class="marker">Alina</span><div class="body"><strong>Who teaches which level,</strong> and does the order work for her?</div></li>
+        <li><span class="marker">Perks</span><div class="body"><strong>Point weights for workshop passes and private packages, attendance milestones, and private lesson pricing.</strong> See "Perks to decide." Go through them one at a time.</div></li>
+        <li><span class="marker">Tracking</span><div class="body"><strong>Sign-in sheet now, WCWD check-in later?</strong> Scope the WCWD MVP after the first month.</div></li>
+        <li><span class="marker">Ask first</span><div class="body"><strong>Wait for the one-timer replies.</strong> If the main reason is timing or price, the format alone won't fix it.</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  const sections     = [...document.querySelectorAll('section.snap-slide')];
+  const navList      = document.getElementById('navList');
+  const mobileNavList = document.getElementById('mobileNavList');
+  const progressBar  = document.querySelector('.progress-bar');
+  const counter      = document.getElementById('counter');
+  const menuBtn      = document.getElementById('menuBtn');
+  const mobileMenu   = document.getElementById('mobileMenu');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const hasGroups    = sections.some(s => s.dataset.group);
+
+  const navLinks     = new Array(sections.length);
+  const drawerLinks  = new Array(sections.length);
+
+  // Build sidebar nav (flat)
+  sections.forEach((s, i) => {
+    const li = document.createElement('li');
+    const a  = document.createElement('a');
+    a.href = '#' + s.id;
+    a.textContent = s.dataset.title || s.id;
+    li.appendChild(a);
+    navList.appendChild(li);
+    navLinks[i] = li;
+  });
+
+  // Build mobile drawer nav (grouped where applicable)
+  const buildDrawerLink = (s) => {
+    const li = document.createElement('li');
+    const a  = document.createElement('a');
+    a.href = '#' + s.id;
+    a.textContent = s.dataset.title || s.id;
+    a.className = 'drawer-item';
+    li.appendChild(a);
+    return { li, a };
+  };
+  if (hasGroups) {
+    const groupMap = new Map();
+    const ungrouped = [];
+    sections.forEach(s => {
+      if (s.dataset.group) {
+        if (!groupMap.has(s.dataset.group)) groupMap.set(s.dataset.group, []);
+        groupMap.get(s.dataset.group).push(s);
+      } else {
+        ungrouped.push(s);
+      }
+    });
+    ungrouped.forEach(s => {
+      const { li, a } = buildDrawerLink(s);
+      mobileNavList.appendChild(li);
+      drawerLinks[sections.indexOf(s)] = a;
+    });
+    groupMap.forEach((sects, name) => {
+      const heading = document.createElement('li');
+      heading.className = 'drawer-group';
+      heading.textContent = name;
+      mobileNavList.appendChild(heading);
+      sects.forEach(s => {
+        const { li, a } = buildDrawerLink(s);
+        mobileNavList.appendChild(li);
+        drawerLinks[sections.indexOf(s)] = a;
+      });
+    });
+  } else {
+    sections.forEach((s, i) => {
+      const { li, a } = buildDrawerLink(s);
+      mobileNavList.appendChild(li);
+      drawerLinks[i] = a;
+    });
+  }
+
+  // Active-state observer
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target);
+        navLinks.forEach((li, i) => {
+          if (li) li.classList.toggle('nav-active', i === idx);
+        });
+        drawerLinks.forEach((link, i) => {
+          if (link) link.classList.toggle('is-active', i === idx);
+        });
+        if (counter) counter.textContent = `${idx + 1} of ${sections.length}`;
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => io.observe(s));
+
+  // Progress bar
+  let ticking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progressBar.style.transform = `scaleX(${pct})`;
+    progressBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  updateProgress();
+
+  // Menu toggle
+  const isMenuOpen = () => !mobileMenu.hidden;
+  function openMenu() {
+    mobileMenu.hidden = false;
+    document.body.style.overflow = 'hidden';
+    menuBtn.classList.add('is-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    mobileMenu.hidden = true;
+    document.body.style.overflow = '';
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn?.addEventListener('click', () => isMenuOpen() ? closeMenu() : openMenu());
+  mobileMenu?.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' || e.target === mobileMenu) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) closeMenu();
+  });
+
+  // Keyboard nav
+  const currentIndex = () => {
+    const y = window.scrollY + window.innerHeight * 0.5;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= y) return i;
+    }
+    return 0;
+  };
+  const go = (dir) => {
+    const i = currentIndex();
+    const next = Math.max(0, Math.min(sections.length - 1, i + dir));
+    sections[next].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+  };
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (isMenuOpen()) return;
+    if (e.key === ' ' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); sections[0].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+    if (e.key === 'End')  { e.preventDefault(); sections[sections.length-1].scrollIntoView({behavior: reduceMotion.matches ? 'auto' : 'smooth'}); }
+  });
+})();
+</script>
+</body>
+</html>

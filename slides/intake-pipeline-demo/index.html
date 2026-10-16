@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Intake Pipeline Demo · Ogarocious</title>
+<meta name="description" content="Demo dashboard: where every client is between first contact and fully onboarded, where the pipeline stalls, and what gets flagged. Sample data." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#1f1b15" />
+<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #1f1b15; --bg-deep: #0f0b08; --panel: rgba(15, 11, 8, 0.55); --line: rgba(245, 238, 224, 0.09);
+    --ink: #f5eee0; --ink-2: #d8d1c2; --ink-3: #b5ae9f; --ink-4: #8f8878;
+    --accent: #d4552b; --accent-soft: rgba(212, 85, 43, 0.14);
+    --teal: #7ba4a5; --ochre: #c99647; --sage: #7fa585;
+    --heat-0: #312d23; --heat-1: #4f1500; --heat-2: #732208; --heat-3: #952f0f; --heat-4: #b84421;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background-color: var(--bg);
+    background-image: linear-gradient(180deg, #0f0b08 0%, #1f1b15 45%, #0f0b08 100%);
+    background-attachment: fixed;
+    color: var(--ink); font-family: Rubik, system-ui, sans-serif; font-size: 14px; line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  button, select, input { font: inherit; color: inherit; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 16px 48px; }
+
+  /* Top bar */
+  .topbar { position: sticky; top: 0; z-index: 20; background: rgba(15, 11, 8, 0.86); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .topbar-inner { max-width: 1320px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .brand-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px rgba(212, 85, 43, 0.6); flex: none; }
+  .topbar h1 { font-size: 16px; font-weight: 600; margin: 0; }
+  .chip { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-3); white-space: nowrap; }
+  .chip-demo { border-color: rgba(201, 150, 71, 0.4); color: var(--ochre); }
+  .topbar .spacer { flex: 1; }
+  .rules-btn { background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; cursor: pointer; color: var(--ink-2); }
+  .rules-btn:hover, .rules-btn[aria-expanded="true"] { border-color: var(--accent); color: var(--ink); }
+
+  /* Filters */
+  .filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end; padding: 16px 0 6px; }
+  .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .field label { font-size: 12px; color: var(--ink-4); }
+  .field select { background: var(--bg-deep); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; min-width: 170px; max-width: 100%; }
+  .field select:focus-visible, .seg button:focus-visible, .rules-btn:focus-visible, tr[tabindex]:focus-visible, .heat td button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; max-width: 100%; scrollbar-width: none; }
+  .seg::-webkit-scrollbar { display: none; }
+  .seg button { background: transparent; border: 0; padding: 7px 11px; cursor: pointer; color: var(--ink-3); border-right: 1px solid var(--line); white-space: nowrap; flex: none; }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); }
+  .reset { background: none; border: 0; color: var(--ink-4); text-decoration: underline; cursor: pointer; padding: 7px 2px; }
+  .reset:hover { color: var(--ink); }
+  .active-filters { font-size: 12px; color: var(--ink-4); min-height: 18px; padding-bottom: 10px; }
+
+  /* Grid */
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .grid-main { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 12px; margin-top: 12px; }
+  .grid-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin-top: 12px; }
+  @media (max-width: 980px) { .grid-main, .grid-2 { grid-template-columns: minmax(0, 1fr); } .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; min-width: 0; }
+  .card h2 { font-size: 14px; font-weight: 600; margin: 0 0 2px; }
+  .card .sub { font-size: 12px; color: var(--ink-4); margin: 0 0 14px; }
+
+  .kpi .label { font-size: 12px; color: var(--ink-3); }
+  .kpi .value { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; margin-top: 4px; }
+  .kpi .value small { font-size: 14px; font-weight: 400; color: var(--ink-3); margin-left: 4px; }
+  .kpi .note { font-size: 12px; color: var(--ink-4); margin-top: 2px; }
+
+  /* Gap chart */
+  .gapchart { position: relative; }
+  .gap-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) 88px; align-items: center; gap: 10px; height: 34px; }
+  .gap-row .name { font-size: 12px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gap-row .track { position: relative; height: 100%; }
+  .gap-row .bar { position: absolute; left: 0; top: 9px; height: 16px; border-radius: 0 4px 4px 0; background: var(--teal); cursor: pointer; transition: opacity .15s; }
+  .gap-row .bar.over { background: var(--ochre); }
+  .gap-row .target { position: absolute; top: 4px; width: 2px; height: 26px; background: var(--ink); border-radius: 1px; pointer-events: none; }
+  .gap-row .val { font-size: 12px; color: var(--ink-2); text-align: right; white-space: nowrap; }
+  .gap-row.is-dim .bar { opacity: 0.35; }
+  .gap-row.is-focus .name { color: var(--ink); font-weight: 600; }
+  .gridlines { position: absolute; inset: 0 98px 22px 160px; pointer-events: none; }
+  .gridlines span { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
+  .axis { position: relative; margin-left: 160px; margin-right: 98px; height: 20px; font-size: 11px; color: var(--ink-4); }
+  .axis span { position: absolute; transform: translateX(-50%); top: 4px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-3); margin-top: 10px; }
+  .legend i { display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  .legend i.tgt { width: 2px; height: 12px; background: var(--ink); border-radius: 1px; vertical-align: -2px; }
+  .callout { margin-top: 14px; padding: 10px 12px; border-left: 2px solid var(--ochre); background: rgba(201, 150, 71, 0.07); border-radius: 0 8px 8px 0; font-size: 13px; color: var(--ink-2); }
+
+  /* Flags */
+  .flags { list-style: none; margin: 0; padding: 0; max-height: 420px; overflow-y: auto; }
+  .flags li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .flags li:last-child { border-bottom: 0; }
+  .flags li:hover .who { color: var(--accent); }
+  .flags .ico { color: var(--ochre); font-size: 14px; line-height: 1.3; }
+  .flags .who { font-weight: 500; }
+  .flags .what { font-size: 12px; color: var(--ink-3); }
+  .flags .notify { font-size: 11px; color: var(--ink-4); margin-top: 2px; }
+  .empty { color: var(--ink-4); font-size: 13px; padding: 18px 0; text-align: center; }
+
+  /* Heat table */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; }
+  .heat th, .heat td { padding: 0; font-size: 12px; text-align: center; }
+  .heat th { color: var(--ink-3); font-weight: 500; padding: 6px 4px; white-space: nowrap; }
+  .heat th.rowh { text-align: left; color: var(--ink-2); padding-right: 10px; }
+  .heat td { padding: 2px; }
+  .heat td button { width: 100%; min-width: 64px; border: 0; border-radius: 4px; padding: 8px 4px; cursor: pointer; color: var(--ink); font-weight: 500; }
+  .heat td button:hover { outline: 1px solid var(--ink-3); }
+  .heat td button.sel { outline: 2px solid var(--accent); }
+  .heat td button.na { cursor: default; color: var(--ink-4); background: transparent; font-weight: 400; }
+  .heat-legend { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-4); margin-top: 10px; flex-wrap: wrap; }
+  .heat-legend i { width: 22px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  /* Funnel */
+  .funnel-row { display: grid; grid-template-columns: 130px minmax(0, 1fr) 44px; gap: 10px; align-items: center; height: 28px; }
+  .funnel-row .name { font-size: 12px; color: var(--ink-2); }
+  .funnel-row .track { height: 14px; position: relative; }
+  .funnel-row .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 4px 4px 0; background: var(--teal); }
+  .funnel-row .n { font-size: 12px; text-align: right; color: var(--ink-2); }
+
+  /* Client table */
+  .clients th { text-align: left; font-size: 12px; font-weight: 500; color: var(--ink-4); padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; cursor: pointer; user-select: none; }
+  .clients th[aria-sort="ascending"]::after { content: " ↑"; } .clients th[aria-sort="descending"]::after { content: " ↓"; }
+  .clients td { padding: 9px 10px; border-bottom: 1px solid var(--line); font-size: 13px; white-space: nowrap; }
+  .clients tbody tr { cursor: pointer; }
+  .clients tbody tr:hover td { background: rgba(245, 238, 224, 0.03); }
+  .clients tbody tr.sel td { background: var(--accent-soft); }
+  .status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
+  .status .d { width: 8px; height: 8px; border-radius: 50%; }
+  .status.stalled .d { background: var(--ochre); } .status.ok .d { background: var(--sage); } .status.done .d { background: var(--teal); }
+
+  /* Client timeline: stays in view beside the long client table */
+  #detail { position: sticky; top: 72px; align-self: start; max-height: calc(100vh - 88px); overflow-y: auto; }
+  @media (max-width: 980px) { #detail { position: static; max-height: none; } }
+  .tl-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .tl-head .meta { font-size: 12px; color: var(--ink-3); }
+  .tl { list-style: none; margin: 14px 0 0; padding: 0; }
+  .tl li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; position: relative; padding-bottom: 12px; }
+  .tl li::before { content: ""; position: absolute; left: 7px; top: 14px; bottom: -2px; width: 2px; background: var(--line); }
+  .tl li:last-child::before { display: none; }
+  .tl .node { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--teal); background: var(--bg-deep); margin-top: 1px; }
+  .tl .node.done { background: var(--teal); }
+  .tl .node.wait { border-color: var(--ochre); border-style: dashed; }
+  .tl .node.future { border-color: var(--ink-4); opacity: 0.5; }
+  .tl .step { font-weight: 500; }
+  .tl .when { font-size: 12px; color: var(--ink-3); }
+  .tl .gap { font-size: 12px; color: var(--ink-4); margin-top: 2px; }
+  .tl .gap b { font-weight: 500; color: var(--ink-2); }
+  .tl .gap.over b { color: var(--ochre); }
+  .tasks { list-style: none; padding: 0; margin: 6px 0 0; }
+  .tasks li { display: flex; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .tasks li:last-child { border-bottom: 0; }
+  .tasks .team { font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-3); white-space: nowrap; }
+  .tasks .box { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--ink-4); flex: none; }
+  .tasks .box.done { background: var(--teal); border-color: var(--teal); }
+  .tasks .late { margin-left: auto; font-size: 12px; color: var(--ochre); white-space: nowrap; }
+
+  /* Rules popover */
+  .rules { position: absolute; right: 16px; top: 54px; width: min(420px, calc(100vw - 32px)); background: #16120d; border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); display: none; z-index: 30; }
+  .rules.open { display: block; }
+  .rules h3 { margin: 0 0 4px; font-size: 14px; }
+  .rules p { margin: 0 0 10px; font-size: 12px; color: var(--ink-3); }
+  .rules ul { list-style: none; padding: 0; margin: 0; }
+  .rules li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .rules li:last-child { border-bottom: 0; }
+  .rules .to { display: block; font-size: 12px; color: var(--ink-4); margin-top: 2px; }
+
+  /* Tooltip */
+  .tip { position: fixed; z-index: 50; pointer-events: none; background: #16120d; border: 1px solid rgba(245,238,224,0.18); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--ink-2); max-width: 260px; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+  .tip b { color: var(--ink); font-weight: 600; }
+
+  .foot { margin-top: 28px; font-size: 12px; color: var(--ink-4); }
+  @media (max-width: 560px) {
+    .gap-row { grid-template-columns: 104px minmax(0, 1fr) 70px; gap: 6px; }
+    .gridlines { left: 110px; right: 76px; } .axis { margin-left: 110px; margin-right: 76px; }
+    .funnel-row { grid-template-columns: 96px minmax(0, 1fr) 36px; }
+    .kpi .value { font-size: 22px; }
+    .field select { min-width: 0; width: 100%; } .field { flex: 1 1 140px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand-dot" aria-hidden="true"></span>
+    <h1>Client intake pipeline</h1>
+    <span class="chip chip-demo">Sample data</span>
+    <span class="chip mono" id="asof"></span>
+    <span class="spacer"></span>
+    <button class="rules-btn" id="rulesBtn" aria-expanded="false" aria-controls="rules">Notification rules</button>
+  </div>
+  <div class="rules" id="rules" role="dialog" aria-label="Notification rules">
+    <h3>What gets flagged, and who hears about it</h3>
+    <p>Checked every morning. Each flag goes to the person who can fix it, not to everyone.</p>
+    <ul id="rulesList"></ul>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="filters" role="group" aria-label="Filters">
+    <div class="field"><label for="fClient">Client</label><select id="fClient"></select></div>
+    <div class="field"><label for="fStep">Timeline step</label><select id="fStep"></select></div>
+    <div class="field"><label>Contact source</label><div class="seg" id="fSource"></div></div>
+    <div class="field"><label>Status</label><div class="seg" id="fStatus"></div></div>
+    <div class="field"><label>First contact</label><div class="seg" id="fRange"></div></div>
+    <button class="reset" id="reset">Clear filters</button>
+  </div>
+  <div class="active-filters" id="activeFilters" aria-live="polite"></div>
+
+  <section class="kpis" aria-label="Summary">
+    <div class="card kpi"><div class="label">Clients in view</div><div class="value" id="kTotal"></div><div class="note" id="kTotalNote"></div></div>
+    <div class="card kpi"><div class="label">Stalled right now</div><div class="value" id="kStalled"></div><div class="note">Waiting longer than the step's target</div></div>
+    <div class="card kpi"><div class="label" id="kSpeedLabel"></div><div class="value" id="kSpeed"></div><div class="note" id="kSpeedNote"></div></div>
+    <div class="card kpi"><div class="label" id="kTotalTimeLabel"></div><div class="value" id="kTotalTime"></div><div class="note" id="kTotalTimeNote"></div></div>
+  </section>
+
+  <section class="grid-main">
+    <div class="card">
+      <h2>Where clients get stuck</h2>
+      <p class="sub">Median days in each step against its target, counting clients still waiting. Click a bar to filter by that step.</p>
+      <div class="gapchart" id="gapChart"></div>
+      <div class="legend"><span><i style="background:var(--teal)"></i>Within target</span><span><i style="background:var(--ochre)"></i>Over target</span><span><i class="tgt"></i>Target</span></div>
+      <div class="callout" id="bottleneck"></div>
+    </div>
+    <div class="card">
+      <h2>Flags</h2>
+      <p class="sub">Clients waiting past target, worst first. These are the notifications that would go out today.</p>
+      <ul class="flags" id="flags"></ul>
+    </div>
+  </section>
+
+  <section class="grid-2">
+    <div class="card">
+      <h2>Slowest steps by contact source</h2>
+      <p class="sub">Median days per step. Darker means further over target. Click a cell to filter.</p>
+      <div class="table-scroll"><table class="heat" id="heat"></table></div>
+      <div class="heat-legend"><span>Within target</span><i style="background:var(--heat-0)"></i><i style="background:var(--heat-1)"></i><i style="background:var(--heat-2)"></i><i style="background:var(--heat-3)"></i><i style="background:var(--heat-4)"></i><span>3× target or more</span></div>
+    </div>
+    <div class="card">
+      <h2>How far clients have gotten</h2>
+      <p class="sub">Clients who have reached each milestone.</p>
+      <div id="funnel"></div>
+    </div>
+  </section>
+
+  <section class="grid-main">
+    <div class="card">
+      <h2>Clients</h2>
+      <p class="sub" id="clientsSub">Click a client to see their timeline.</p>
+      <div class="table-scroll">
+        <table class="clients" id="clients">
+          <thead><tr>
+            <th data-k="name" scope="col">Client</th><th data-k="source" scope="col">Source</th><th data-k="stepIdx" scope="col">Waiting on</th>
+            <th data-k="waiting" scope="col">Days waiting</th><th data-k="statusRank" scope="col">Status</th><th data-k="owner" scope="col">Owner</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card" id="detail" aria-live="polite"></div>
+  </section>
+
+  <p class="foot">Demo built by Ogarocious with made-up clients and dates. In a real build, every date is written to the client's record automatically as they move through intake, so this view keeps itself current.</p>
+</main>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+(async () => {
+  const DAY = 86400000;
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+
+  // Which data file to read: data.json beside this page, or ?data=<name>.json
+  // for another client's copy. Only plain relative .json paths are accepted.
+  const requested = new URLSearchParams(location.search).get('data');
+  const dataPath = requested && /^[\w-]+(\/[\w-]+)*\.json$/.test(requested) ? requested : 'data.json';
+  const fail = msg => {
+    document.querySelector('main').innerHTML = `<div class="card" style="margin-top:24px"><h2>Could not load the pipeline data</h2><p class="sub" style="margin:6px 0 0">${esc(msg)}</p></div>`;
+  };
+  let data;
+  try {
+    const res = await fetch(dataPath, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`${dataPath} returned ${res.status}.`);
+    data = await res.json();
+  } catch (e) {
+    fail(`${e.message} The page has to be served over http(s); opening the HTML file directly will not load the data.`);
+    return;
+  }
+  const problem = validate(data);
+  if (problem) { fail(`${dataPath}: ${problem} See DATA.md for the format.`); return; }
+
+  function validate(d) {
+    if (!d || typeof d !== 'object') return 'the file is not a JSON object.';
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d.asOf || '')) return '"asOf" must be a date like 2026-10-09.';
+    if (!Array.isArray(d.milestones) || d.milestones.length < 2) return '"milestones" needs at least two entries.';
+    if (d.milestones.some(m => !m || !m.key || !m.label)) return 'every milestone needs a "key" and a "label".';
+    if (!Array.isArray(d.steps) || d.steps.length !== d.milestones.length - 1) return `"steps" needs exactly ${d.milestones.length - 1} ${d.milestones.length === 2 ? 'entry' : 'entries'}, one per gap between milestones.`;
+    if (d.steps.some(st => !st || !st.label || !(Number(st.target) > 0))) return 'every step needs a "label" and a positive "target" in days.';
+    if (d.checkin && !(Number(d.checkin.target) > 0)) return '"checkin.target" must be a positive number of days.';
+    if (!Array.isArray(d.clients)) return '"clients" must be a list.';
+    const first = d.milestones[0].key;
+    const bad = d.clients.findIndex(c => !c || !c.name || !c.milestones || isNaN(new Date(c.milestones[first])));
+    if (bad !== -1) return `client #${bad + 1} needs a "name" and a valid "${first}" date.`;
+    return null;
+  }
+
+  const TODAY = new Date(`${data.asOf}T12:00:00`);
+  const MILESTONES = data.milestones.map(m => m.label);
+  const GAP_COUNT = MILESTONES.length - 1;
+  // The second-to-last milestone (e.g. "Signed") is where onboarding tasks
+  // get created, and the step after it is the one those tasks can block.
+  const ONBOARD = GAP_COUNT - 1;
+  const CHECKIN = data.checkin || null;
+  const TASK_DAYS = data.taskRule ? Number(data.taskRule.days) : 3;
+  const LAST_STEP = CHECKIN || { label: 'Started', short: 'Fully started', target: Infinity, owner: '', notify: '' };
+  const STEPS = [...data.steps, LAST_STEP].map(st => ({ ...st, target: Number(st.target), short: st.short || st.label, owner: st.owner || '', notify: st.notify || '' }));
+  const SOURCES = [...new Set([...(data.sources || []), ...data.clients.map(c => c.source || 'Unknown')])];
+
+  const clients = data.clients.map((raw, i) => {
+    // Milestones count only in order: the first missing or future date ends the chain.
+    const dates = [];
+    for (const m of data.milestones) {
+      const d = raw.milestones[m.key] ? new Date(raw.milestones[m.key]) : null;
+      if (!d || isNaN(d) || d > TODAY) break;
+      dates.push(d);
+    }
+    const reached = dates.length - 1;
+    const started = reached === GAP_COUNT;
+    const lastCheckin = started && raw.lastCheckin && !isNaN(new Date(raw.lastCheckin)) ? new Date(raw.lastCheckin) : null;
+    const stepIdx = started ? GAP_COUNT : reached;
+    const since = started ? (lastCheckin || dates[GAP_COUNT]) : dates[reached];
+    const waiting = Math.max(0, (TODAY - since) / DAY);
+    const step = STEPS[stepIdx];
+    const stalled = waiting > step.target;
+    const tasks = Array.isArray(raw.tasks) ? raw.tasks.map(t => ({ team: String(t.team || ''), name: String(t.name || ''), done: !!t.done })) : [];
+    return {
+      id: i, name: String(raw.name), source: raw.source || 'Unknown', dates, reached, started, lastCheckin,
+      stepIdx, waiting, stalled, owner: step.owner,
+      status: started && !stalled ? 'Started' : stalled ? 'Stalled' : 'On track',
+      statusRank: stalled ? 0 : started ? 2 : 1, tasks,
+    };
+  });
+
+  $('kSpeedLabel').textContent = `Median time: ${STEPS[0].label.toLowerCase()}`;
+  $('kSpeedNote').textContent = `Target: within ${STEPS[0].target} day${STEPS[0].target === 1 ? '' : 's'}`;
+  $('kTotalTimeLabel').textContent = `Median ${MILESTONES[0].toLowerCase()} to ${MILESTONES[GAP_COUNT].toLowerCase()}`;
+  document.title = `${data.title || 'Client intake pipeline'} · Ogarocious`;
+  document.querySelector('.topbar h1').textContent = data.title || 'Client intake pipeline';
+  if (!data.sampleData) {
+    document.querySelector('.chip-demo').remove();
+    document.querySelector('.foot').textContent = 'Every date is written to the client record as they move through intake, so this view keeps itself current.';
+  }
+
+  // Durations for completed steps
+  const stepDays = (c, s) => {
+    if (s < GAP_COUNT) return c.reached >= s + 1 ? (c.dates[s + 1] - c.dates[s]) / DAY : null;
+    return null;
+  };
+  // Counts clients still stuck in a step at their days-waiting-so-far, so a
+  // stall shows up in the median instead of hiding until the client finishes.
+  const stepDaysAll = (c, s) => stepDays(c, s) ?? (c.stepIdx === s && !c.started ? c.waiting : null);
+  const median = arr => {
+    if (!arr.length) return null;
+    const a = [...arr].sort((x, y) => x - y), m = Math.floor(a.length / 2);
+    return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
+  };
+  const fmt = d => d == null ? '–' : d < 1 ? `${Math.round(d * 24)} hrs` : `${d.toFixed(1)} days`;
+  const fmtShort = d => d == null ? '–' : d < 1 ? `${Math.round(d * 24)}h` : `${d.toFixed(1)}d`;
+  const dateStr = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  // State
+  const state = { client: 'all', step: 'all', source: 'All', status: 'All', range: 90, sortK: 'statusRank', sortDir: 1, selected: null };
+
+  // Filters UI
+  $('asof').textContent = `As of ${dateStr(TODAY)}, ${TODAY.getFullYear()}`;
+  $('fClient').innerHTML = '<option value="all">All clients</option>' +
+    [...clients].sort((a, b) => a.name.localeCompare(b.name)).map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('');
+  $('fStep').innerHTML = '<option value="all">All steps</option>' + STEPS.map((s, i) => i < GAP_COUNT || CHECKIN ? `<option value="${i}">${esc(s.label)}</option>` : '').join('');
+  const seg = (el, opts, key) => {
+    el.innerHTML = opts.map(o => `<button type="button" data-v="${o.v}" aria-pressed="false">${o.l}</button>`).join('');
+    el.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      state[key] = key === 'range' ? Number(b.dataset.v) : b.dataset.v; render();
+    });
+  };
+  seg($('fSource'), ['All', ...SOURCES].map(s => ({ v: s, l: s })), 'source');
+  seg($('fStatus'), ['All', 'Stalled', 'On track', 'Started'].map(s => ({ v: s, l: s })), 'status');
+  seg($('fRange'), [{ v: 30, l: '30 days' }, { v: 90, l: '90 days' }, { v: 36500, l: 'All' }], 'range');
+  $('fClient').addEventListener('change', e => { state.client = e.target.value; state.selected = e.target.value === 'all' ? null : Number(e.target.value); render(); });
+  $('fStep').addEventListener('change', e => { state.step = e.target.value; render(); });
+  $('reset').addEventListener('click', () => { Object.assign(state, { client: 'all', step: 'all', source: 'All', status: 'All', range: 90, selected: null }); render(); });
+
+  // Rules popover
+  $('rulesList').innerHTML = STEPS.filter((s, i) => i < GAP_COUNT || CHECKIN).map(s =>
+    `<li>${esc(s.label)} over ${s.target} day${s.target > 1 ? 's' : ''}${s.notify ? `<span class="to">→ ${esc(s.notify)}</span>` : ''}</li>`).join('') +
+    (data.taskRule ? `<li>Onboarding task open over ${Number(data.taskRule.days)} days<span class="to">→ ${esc(data.taskRule.notify || '')}</span></li>` : '');
+  $('rulesBtn').addEventListener('click', () => {
+    const open = !$('rules').classList.contains('open');
+    $('rules').classList.toggle('open', open); $('rulesBtn').setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#rules') && !e.target.closest('#rulesBtn')) { $('rules').classList.remove('open'); $('rulesBtn').setAttribute('aria-expanded', 'false'); }
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('rules').classList.remove('open'); $('rulesBtn').setAttribute('aria-expanded', 'false'); } });
+
+  // Tooltip
+  const tip = $('tip');
+  document.addEventListener('mousemove', e => {
+    const t = e.target.closest('[data-tip]');
+    if (!t) { tip.style.display = 'none'; return; }
+    tip.innerHTML = t.dataset.tip; tip.style.display = 'block';
+    const x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+    const y = Math.min(e.clientY + 14, window.innerHeight - tip.offsetHeight - 8);
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+
+  // Filtering: the population (source, range, client) drives the charts;
+  // step and status narrow the client list and flags on top of that.
+  const population = () => clients.filter(c =>
+    (state.source === 'All' || c.source === state.source) &&
+    (TODAY - c.dates[0]) / DAY <= state.range &&
+    (state.client === 'all' || c.id === Number(state.client)));
+  const narrowed = pop => pop.filter(c =>
+    (state.step === 'all' || c.stepIdx === Number(state.step)) &&
+    (state.status === 'All' || c.status === state.status));
+
+  function render() {
+    for (const [id, key] of [['fSource', 'source'], ['fStatus', 'status'], ['fRange', 'range']])
+      $(id).querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(String(state[key]) === b.dataset.v)));
+    $('fClient').value = state.client; $('fStep').value = state.step;
+
+    const pop = population(), list = narrowed(pop);
+    const parts = [];
+    if (state.client !== 'all') parts.push(clients[Number(state.client)].name);
+    if (state.step !== 'all') parts.push(STEPS[Number(state.step)].label);
+    if (state.source !== 'All') parts.push(state.source);
+    if (state.status !== 'All') parts.push(state.status);
+    parts.push(`first contact in last ${state.range} days`);
+    $('activeFilters').textContent = `Showing: ${parts.join(' · ')}`;
+
+    // KPIs
+    $('kTotal').textContent = list.length;
+    $('kTotalNote').textContent = `${pop.filter(c => c.started).length} of ${pop.length} fully started`;
+    $('kStalled').innerHTML = `${list.filter(c => c.stalled).length}<small>of ${list.length}</small>`;
+    $('kSpeed').textContent = fmt(median(pop.map(c => stepDays(c, 0)).filter(v => v != null)));
+    const totals = pop.filter(c => c.started).map(c => (c.dates[GAP_COUNT] - c.dates[0]) / DAY);
+    $('kTotalTime').textContent = fmt(median(totals));
+    $('kTotalTimeNote').textContent = totals.length ? `Across ${totals.length} started clients` : 'No one has started yet in this view';
+
+    // Gap chart (steps 0-5 have durations; check-in interval is shown in flags)
+    const meds = STEPS.slice(0, GAP_COUNT).map((s, i) => {
+      const vals = pop.map(c => stepDaysAll(c, i)).filter(v => v != null);
+      const waitingNow = pop.filter(c => c.stepIdx === i && !c.started).length;
+      return { i, s, med: median(vals), n: vals.length, waitingNow };
+    });
+    const max = Math.max(8, ...meds.map(m => Math.max(m.med || 0, m.s.target))) * 1.08;
+    const ticks = []; const stepT = max > 16 ? 5 : 2; for (let t = 0; t <= max; t += stepT) ticks.push(t);
+    const pct = v => `${(v / max) * 100}%`;
+    $('gapChart').innerHTML =
+      `<div class="gridlines">${ticks.map(t => `<span style="left:${pct(t)}"></span>`).join('')}</div>` +
+      meds.map(m => {
+        const over = m.med != null && m.med > m.s.target;
+        const focus = state.step !== 'all' && Number(state.step) === m.i;
+        const dim = state.step !== 'all' && !focus;
+        const tipTxt = `<b>${esc(m.s.label)}</b><br>Median ${fmt(m.med)} · target ${m.s.target} day${m.s.target > 1 ? 's' : ''}<br>${m.n} client${m.n === 1 ? '' : 's'}, ${m.waitingNow} still waiting`;
+        return `<div class="gap-row${dim ? ' is-dim' : ''}${focus ? ' is-focus' : ''}">
+          <div class="name" title="${esc(m.s.label)}">${esc(m.s.label)}</div>
+          <div class="track">${m.med != null ? `<div class="bar${over ? ' over' : ''}" style="width:${pct(m.med)}" data-step="${m.i}" data-tip="${esc(tipTxt)}" role="button" tabindex="0" aria-label="${esc(m.s.label)}: median ${fmt(m.med)}, target ${m.s.target} days"></div>` : ''}
+          <div class="target" style="left:${pct(m.s.target)}"></div></div>
+          <div class="val">${over ? '⚠ ' : ''}${fmtShort(m.med)}${over ? ` <span style="color:var(--ink-4)">${(m.med / m.s.target).toFixed(1)}×</span>` : ''}</div>
+        </div>`;
+      }).join('') +
+      `<div class="axis">${ticks.map(t => `<span style="left:${pct(t)}">${t}d</span>`).join('')}</div>`;
+    $('gapChart').querySelectorAll('.bar').forEach(b => {
+      const go = () => { state.step = state.step === b.dataset.step ? 'all' : b.dataset.step; render(); };
+      b.addEventListener('click', go); b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+    const worst = meds.filter(m => m.med != null).sort((a, b) => b.med / b.s.target - a.med / a.s.target)[0];
+    if (worst && worst.med > worst.s.target) {
+      const bySrc = SOURCES.map(src => ({ src, med: median(pop.filter(c => c.source === src).map(c => stepDaysAll(c, worst.i)).filter(v => v != null)) }))
+        .filter(x => x.med != null).sort((a, b) => b.med - a.med);
+      const slow = bySrc[0], fast = bySrc[bySrc.length - 1];
+      $('bottleneck').innerHTML = `<b>Biggest bottleneck: ${esc(worst.s.label.toLowerCase())}.</b> Median ${fmt(worst.med)} against a ${worst.s.target}-day target.` +
+        (state.source === 'All' && slow && fast && slow.src !== fast.src ? ` ${esc(slow.src)} clients wait ${fmt(slow.med)}; ${esc(fast.src.toLowerCase())} clients wait ${fmt(fast.med)}.` : '');
+      $('bottleneck').style.display = '';
+    } else { $('bottleneck').style.display = 'none'; }
+
+    // Flags
+    const flagged = list.filter(c => c.stalled).sort((a, b) => b.waiting / STEPS[b.stepIdx].target - a.waiting / STEPS[a.stepIdx].target);
+    $('flags').innerHTML = flagged.length ? flagged.map(c => {
+      const s = STEPS[c.stepIdx];
+      const openTask = c.stepIdx === ONBOARD ? c.tasks.find(t => !t.done) : null;
+      return `<li data-id="${c.id}" tabindex="0"><span class="ico" aria-hidden="true">⚠</span><div>
+        <div class="who">${esc(c.name)} <span style="color:var(--ink-4);font-weight:400;font-size:12px">· ${esc(c.source)}</span></div>
+        <div class="what">${esc(s.short)}: ${Math.floor(c.waiting)} days (target ${s.target})${openTask ? `. Blocked on “${esc(openTask.name)}” (${esc(openTask.team)})` : ''}</div>
+        ${s.notify ? `<div class="notify">Would notify: ${esc(s.notify)}</div>` : ''}</div></li>`;
+    }).join('') : '<li class="empty" style="display:block;cursor:default">Nothing flagged in this view. Every client is within target.</li>';
+    $('flags').querySelectorAll('li[data-id]').forEach(li => {
+      const go = () => { state.selected = Number(li.dataset.id); render(); $('detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); };
+      li.addEventListener('click', go); li.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+    });
+
+    // Heat table
+    const heatColor = r => r == null ? 'transparent' : r <= 1 ? 'var(--heat-0)' : r <= 1.5 ? 'var(--heat-1)' : r <= 2 ? 'var(--heat-2)' : r <= 3 ? 'var(--heat-3)' : 'var(--heat-4)';
+    const heatPop = clients.filter(c => (TODAY - c.dates[0]) / DAY <= state.range);
+    $('heat').innerHTML = `<thead><tr><th scope="col"></th>${SOURCES.map(s => `<th scope="col">${esc(s)}</th>`).join('')}</tr></thead><tbody>` +
+      STEPS.slice(0, GAP_COUNT).map((s, i) => `<tr><th class="rowh" scope="row">${esc(s.label)}</th>${SOURCES.map(src => {
+        const vals = heatPop.filter(c => c.source === src).map(c => stepDaysAll(c, i)).filter(v => v != null);
+        const m = median(vals);
+        const sel = state.source === src && state.step === String(i);
+        if (m == null) return '<td><button class="na" disabled>–</button></td>';
+        const r = m / s.target;
+        return `<td><button class="${sel ? 'sel' : ''}" style="background:${heatColor(r)}" data-src="${esc(src)}" data-step="${i}" data-tip="${esc(`<b>${esc(src)} · ${esc(s.label)}</b><br>Median ${fmt(m)} (${r.toFixed(1)}× target)<br>${vals.length} clients`)}" aria-label="${esc(src)}, ${esc(s.label)}: median ${fmt(m)}">${fmtShort(m)}</button></td>`;
+      }).join('')}</tr>`).join('') + '</tbody>';
+    $('heat').querySelectorAll('button[data-src]').forEach(b => b.addEventListener('click', () => {
+      const same = state.source === b.dataset.src && state.step === b.dataset.step;
+      state.source = same ? 'All' : b.dataset.src; state.step = same ? 'all' : b.dataset.step; render();
+    }));
+
+    // Funnel
+    const fmax = Math.max(1, pop.length);
+    $('funnel').innerHTML = MILESTONES.map((m, i) => {
+      const n = pop.filter(c => c.reached >= i).length;
+      return `<div class="funnel-row"><div class="name">${esc(m)}</div><div class="track"><div class="fill" style="width:${(n / fmax) * 100}%" data-tip="${esc(`<b>${esc(m)}</b><br>${n} of ${pop.length} clients (${Math.round((n / fmax) * 100)}%)`)}"></div></div><div class="n">${n}</div></div>`;
+    }).join('');
+
+    // Client table
+    const sorted = [...list].sort((a, b) => {
+      const k = state.sortK, x = a[k], y = b[k];
+      const d = typeof x === 'string' ? x.localeCompare(y) : x - y;
+      return (d || b.waiting - a.waiting) * state.sortDir;
+    });
+    document.querySelectorAll('#clients th').forEach(th => th.setAttribute('aria-sort', th.dataset.k === state.sortK ? (state.sortDir === 1 ? 'ascending' : 'descending') : 'none'));
+    $('clientsSub').textContent = `${sorted.length} client${sorted.length === 1 ? '' : 's'}. Click one to see their timeline.`;
+    $('clients').querySelector('tbody').innerHTML = sorted.length ? sorted.map(c => {
+      const cls = c.status === 'Stalled' ? 'stalled' : c.status === 'Started' ? 'done' : 'ok';
+      return `<tr data-id="${c.id}" tabindex="0" class="${state.selected === c.id ? 'sel' : ''}">
+        <td>${esc(c.name)}</td><td>${esc(c.source)}</td><td>${esc(STEPS[c.stepIdx].short)}</td>
+        <td class="mono">${Math.floor(c.waiting)}</td>
+        <td><span class="status ${cls}"><span class="d" aria-hidden="true"></span>${c.status === 'Stalled' ? '⚠ ' : ''}${c.status}</span></td>
+        <td>${esc(c.owner)}</td></tr>`;
+    }).join('') : '<tr><td colspan="6" class="empty">No clients match these filters.</td></tr>';
+    $('clients').querySelectorAll('tbody tr[data-id]').forEach(tr => {
+      const go = () => { state.selected = Number(tr.dataset.id); render(); };
+      tr.addEventListener('click', go); tr.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+    });
+
+    renderDetail(pop);
+  }
+
+  function renderDetail(pop) {
+    const el = $('detail');
+    const c = state.selected != null ? clients[state.selected] : null;
+    if (!c) {
+      el.innerHTML = '<h2>Client timeline</h2><p class="sub">Pick a client from the table or the flags to see every step, how long each took compared to everyone else, and what is blocking them.</p><div class="empty">No client selected</div>';
+      return;
+    }
+    const orgMed = i => median(clients.map(x => stepDays(x, i)).filter(v => v != null));
+    const items = MILESTONES.map((m, i) => {
+      const reached = c.reached >= i;
+      const isWait = !reached && i === c.reached + 1;
+      let gapHtml = '';
+      if (i > 0 && reached) {
+        const d = stepDays(c, i - 1), s = STEPS[i - 1], over = d > s.target;
+        gapHtml = `<div class="gap${over ? ' over' : ''}">Took <b>${fmt(d)}</b>${over ? ' ⚠' : ''} · everyone else: ${fmt(orgMed(i - 1))} · target ${s.target}d</div>`;
+      } else if (isWait) {
+        const s = STEPS[i - 1], over = c.waiting > s.target;
+        gapHtml = `<div class="gap${over ? ' over' : ''}">Waiting <b>${Math.floor(c.waiting)} days</b> so far${over ? ' ⚠' : ''} · target ${s.target}d</div>`;
+      }
+      return `<li><span class="node ${reached ? 'done' : isWait ? 'wait' : 'future'}" aria-hidden="true"></span><div>
+        <div class="step">${esc(m)}</div><div class="when">${reached ? dateStr(c.dates[i]) : isWait ? 'Not yet' : ''}</div>${gapHtml}</div></li>`;
+    });
+    if (c.started && CHECKIN && c.lastCheckin) {
+      const over = c.waiting > CHECKIN.target;
+      items.push(`<li><span class="node ${over ? 'wait' : 'done'}" aria-hidden="true"></span><div><div class="step">Last check-in</div>
+        <div class="when">${dateStr(c.lastCheckin)}</div><div class="gap${over ? ' over' : ''}"><b>${Math.floor(c.waiting)} days</b> ago${over ? ' ⚠' : ''} · target every ${CHECKIN.target}d</div></div></li>`);
+    }
+    const tasksHtml = c.reached >= ONBOARD && c.tasks.length
+      ? `<h2 style="margin-top:18px">Onboarding tasks</h2><p class="sub">Created for each team when onboarding started, all linked to this client.</p><ul class="tasks">${c.tasks.map(t => {
+          const late = !t.done && c.stepIdx === ONBOARD ? Math.floor(c.waiting) : 0;
+          return `<li><span class="box ${t.done ? 'done' : ''}" aria-label="${t.done ? 'Done' : 'Open'}"></span><span>${esc(t.name)}</span><span class="team">${esc(t.team)}</span>${late > TASK_DAYS ? `<span class="late">⚠ open ${late} days</span>` : ''}</li>`;
+        }).join('')}</ul>`
+      : `<p class="sub" style="margin-top:14px">Onboarding tasks are created automatically at “${esc(MILESTONES[ONBOARD])}”.</p>`;
+    el.innerHTML = `<div class="tl-head"><h2>${esc(c.name)}</h2><span class="meta">${esc(c.source)} · first contact ${dateStr(c.dates[0])} · <span class="status ${c.status === 'Stalled' ? 'stalled' : c.status === 'Started' ? 'done' : 'ok'}"><span class="d"></span>${c.status}</span></span></div>
+      <ol class="tl">${items.join('')}</ol>${tasksHtml}`;
+  }
+
+  document.querySelectorAll('#clients th').forEach(th => th.addEventListener('click', () => {
+    if (state.sortK === th.dataset.k) state.sortDir *= -1; else { state.sortK = th.dataset.k; state.sortDir = th.dataset.k === 'waiting' ? -1 : 1; }
+    render();
+  }));
+
+  render();
+})();
+</script>
+</body>
+</html>
