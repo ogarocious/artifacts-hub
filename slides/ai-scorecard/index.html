@@ -173,38 +173,17 @@
         <li><span class="text-terracotta-400">·</span> If it won't pay for itself, I'll tell you</li>
       </ul>
       <div class="mt-8 flex flex-col sm:flex-row gap-3">
-        <a id="ctaAudit" class="btn-primary" href="https://ogarocious.com/ai-audit?src=scorecard">Get the Mini-Audit, $200</a>
-        <a id="ctaBook" class="btn-ghost" href="https://cal.com/ogarocious/15min" target="_blank" rel="noopener">Book a 15-minute call</a>
+        <a id="ctaAudit" class="btn-primary" href="https://cal.com/ogarocious/15min" target="_blank" rel="noopener">Book a 15-minute call about the audit</a>
       </div>
-      <p class="mt-10 font-medium">Or get a copy of these results by email</p>
-      <form class="sendForm mt-8 grid sm:grid-cols-2 gap-3" novalidate>
-        <label class="sr-only" for="aName">Your name</label>
-        <input id="aName" name="name" autocomplete="name" placeholder="Your name" class="field" required>
-        <label class="sr-only" for="aEmail">Work email</label>
-        <input id="aEmail" name="email" type="email" autocomplete="email" placeholder="Work email" class="field" required>
-        <label class="sr-only" for="aOrg">Organization (optional)</label>
-        <input id="aOrg" name="organization" autocomplete="organization" placeholder="Organization (optional)" class="field sm:col-span-2">
-        <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
-        <button type="submit" class="btn-ghost sm:col-span-2 justify-center">Email me my results</button>
-        <p class="formStatus text-sm sm:col-span-2" role="status" aria-live="polite"></p>
-      </form>
+      <p class="mt-10 font-medium">Want a copy of these results? I'll reply with them and a short note on your top opportunity.</p>
+      <p class="mt-4"><a class="mailResults btn-ghost" href="mailto:charles@ogarocious.com">Email me for a copy of these results</a></p>
       <p class="mt-6 text-sm text-meta">See finished work: <a class="text-terracotta-400 underline underline-offset-4" href="/ai-workflow-example/">15 survey responses turned into a ready-to-run plan</a>, or <a class="text-terracotta-400 underline underline-offset-4" href="/proof/">more proof</a>.</p>
     </div>
 
     <div id="slowBox" class="hidden mt-14 rounded-2xl p-7 md:p-10" style="background:#312d23;border:1px solid rgba(245,238,224,0.12)">
       <h3 class="h-display text-2xl md:text-3xl">Come back when a routine starts eating more of your week.</h3>
       <p class="mt-4 text-dimmed leading-relaxed max-w-2xl">Until then, keep your copy of these results, and see what this looks like when it does fit: <a class="text-terracotta-400 underline underline-offset-4" href="/ai-workflow-example/">a finished example</a>.</p>
-      <form class="sendForm mt-8 grid sm:grid-cols-2 gap-3" novalidate>
-        <label class="sr-only" for="sName">Your name</label>
-        <input id="sName" name="name" autocomplete="name" placeholder="Your name" class="field" required>
-        <label class="sr-only" for="sEmail">Work email</label>
-        <input id="sEmail" name="email" type="email" autocomplete="email" placeholder="Work email" class="field" required>
-        <label class="sr-only" for="sOrg">Organization (optional)</label>
-        <input id="sOrg" name="organization" autocomplete="organization" placeholder="Organization (optional)" class="field sm:col-span-2">
-        <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
-        <button type="submit" class="btn-ghost sm:col-span-2 justify-center">Email me my results</button>
-        <p class="formStatus text-sm sm:col-span-2" role="status" aria-live="polite"></p>
-      </form>
+      <p class="mt-4"><a class="mailResults btn-ghost" href="mailto:charles@ogarocious.com">Email me for a copy of these results</a></p>
     </div>
 
     <p class="mt-10 text-sm text-muted leading-relaxed max-w-2xl">This scorecard is a quick self-check, not an audit. Every dollar figure is a rough estimate from your answers. Payback uses the cautious end: your time, the low revenue figure, and half your software spend. Charles Ogar · <a class="underline underline-offset-4" href="mailto:charles@ogarocious.com">charles@ogarocious.com</a></p>
@@ -420,7 +399,8 @@
       value: `${Math.round(v.cautious)}-${Math.round(v.top)}`, payback: Number.isFinite(paybackMonths) ? paybackMonths.toFixed(1) : 'none',
     });
     window.__scorecardPayload = params;
-    document.getElementById('ctaAudit').href = `https://ogarocious.com/ai-audit?src=scorecard&score=${r.total}&top=${r.rec}`;
+    const summary = `My AI Workflow Scorecard: ${r.total}/24, top opportunity: ${r.rec}, estimated yearly cost: ${document.getElementById('rValue').textContent}.`;
+    document.querySelectorAll('.mailResults').forEach(a => { a.href = `mailto:charles@ogarocious.com?subject=${encodeURIComponent('My AI Workflow Scorecard results')}&body=${encodeURIComponent(summary + '\n\nMy name and organization: ')}`; });
 
     const results = document.getElementById('results');
     results.classList.remove('hidden');
