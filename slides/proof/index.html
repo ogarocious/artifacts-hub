@@ -1,148 +1,91 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="noindex, nofollow" />
-<title>Proof · Ogarocious</title>
-<meta name="description" content="What changed for the teams I've built for: before, after, and the numbers. Charles Ogar, AI and automation for small teams." />
-<link rel="canonical" href="https://slides.ogarocious.com/proof/" />
-<meta name="theme-color" content="#1a1410" />
-<meta property="og:site_name" content="Ogarocious" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://slides.ogarocious.com/proof/" />
-<meta property="og:title" content="Proof · Ogarocious" />
-<meta property="og:description" content="What changed for the teams I've built for: before, after, and the numbers." />
-<meta property="og:image" content="https://slides.ogarocious.com/remote-build-work/og.png" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png" />
-
-<!--
-  Public, curated subset of Armature/work-career/brag-sheet.md (private, canonical).
-  Rules: CDL Legal = role, dates, type of work only. UTM figures from Charles's own records;
-  estimates labeled as estimates. Add an entry here only after it exists in the brag sheet.
--->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = { theme: { extend: {
-    colors: { espresso: { 900: '#0f0b08', 800: '#1a1410', 600: '#312d23' }, ivory: { 50: '#f5eee0' }, terracotta: { 400: '#da7f4e', 500: '#d4552b', 600: '#b84421' }, slate: { 400: '#7ba4a5' } },
-    fontFamily: { display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'], sans: ['"Geist"', 'system-ui', 'sans-serif'] },
-  } } }
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><meta name="description" content="What changed for the teams I have built for, quarter by quarter. Charles Ogar, AI and automation for small teams."><link rel="canonical" href="https://slides.ogarocious.com/proof/"><meta property="og:site_name" content="Ogarocious"><meta property="og:type" content="website"><meta property="og:url" content="https://slides.ogarocious.com/proof/"><meta property="og:title" content="Impact Log · Ogarocious"><meta property="og:description" content="What changed for the teams I have built for, quarter by quarter."><meta property="og:image" content="https://slides.ogarocious.com/remote-build-work/og.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/_shared/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/_shared/apple-touch-icon.png">
+<title>Impact Log · Ogarocious</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@300..700&display=swap" rel="stylesheet">
 <style>
-  body { background: #1a1410; color: #f5eee0; font-family: "Geist", system-ui, sans-serif; min-height: 100vh; }
-  .h-display { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; letter-spacing: -0.02em; line-height: 1.06; text-wrap: balance; }
-  .text-dimmed { color: rgba(245, 238, 224, 0.72); }
-  .text-meta { color: rgba(245, 238, 224, 0.60); }
-  .text-muted { color: rgba(245, 238, 224, 0.50); }
-  .tools { color: #7ba4a5; font-weight: 500; }
-  .rule-top { border-top: 1px solid rgba(212, 85, 43, 0.30); }
-  ::selection { background: rgba(212, 85, 43, 0.35); color: #f5eee0; }
-  :focus-visible { outline: 2px solid #d4552b; outline-offset: 3px; border-radius: 4px; }
-  a.link { color: #da7f4e; text-decoration: underline; text-decoration-color: rgba(218,127,78,0.4); text-underline-offset: 4px; }
-  a.link:hover { text-decoration-color: #da7f4e; }
-  .btn-primary { display: inline-flex; align-items: center; background: #d4552b; color: #0f0b08; font-weight: 600; padding: 0.95rem 1.4rem; border-radius: 8px; }
-  .btn-primary:hover { background: #da7f4e; }
-  .label { font-size: 0.875rem; display: block; }
-</style>
-</head>
-<body class="antialiased">
-
-<header class="max-w-4xl mx-auto px-5 md:px-8 pt-6 flex items-center justify-between text-sm">
-  <a href="https://ogarocious.com" class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-terracotta-500"></span><span class="font-display font-bold text-lg">Ogarocious</span></a>
-  <a href="/remote-build-work/" class="text-meta hover:text-ivory-50">Back to the deck</a>
-</header>
-
-<main class="max-w-4xl mx-auto px-5 md:px-8 pb-24">
-  <section class="pt-16 md:pt-24 pb-10">
-    <h1 class="h-display text-5xl md:text-7xl">What changed for the teams I've built for.</h1>
-    <p class="mt-6 text-xl md:text-2xl text-dimmed leading-snug max-w-2xl">Before, after, and the numbers. Where a figure is my estimate rather than a measurement, it says so.</p>
-  </section>
-
-  <!-- Entry -->
-  <article class="rule-top py-12">
-    <p class="text-meta text-sm">Texas workforce nonprofit · ~10 staff · 2025 to 2026 · only technical person</p>
-    <h2 class="h-display text-3xl md:text-4xl mt-2">Mornings went from seven tools to one email</h2>
-    <p class="tools text-sm mt-2">n8n · Notion · Google Calendar · OpenAI</p>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <p class="text-dimmed"><span class="label text-muted">Before</span>Staff opened up to seven tools to piece together their day.</p>
-      <p><span class="label text-terracotta-400">After</span>One personalized AI briefing in every inbox at 6 AM.</p>
-      <p><span class="label text-slate-400">Result</span>About 30 minutes back per person each morning, roughly 1,250 staff hours a year. <span class="text-muted">My estimate.</span></p>
-    </div>
-  </article>
-
-  <article class="rule-top py-12">
-    <p class="text-meta text-sm">Texas workforce nonprofit · May 2026</p>
-    <h2 class="h-display text-3xl md:text-4xl mt-2">Client follow-ups that actually go out</h2>
-    <p class="tools text-sm mt-2">n8n · Notion · Tally · Gmail</p>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <p class="text-dimmed"><span class="label text-muted">Before</span>Weekly check-in emails had failed two runs in a row, with no alert.</p>
-      <p><span class="label text-terracotta-400">After</span>Root cause traced through the run logs and fixed, along with three related bugs.</p>
-      <p><span class="label text-slate-400">Result</span>309 personalized client emails sent in the next weekly cycle, checked against the logs.</p>
-    </div>
-  </article>
-
-  <article class="rule-top py-12">
-    <p class="text-meta text-sm">Texas workforce nonprofit · May 2026</p>
-    <h2 class="h-display text-3xl md:text-4xl mt-2">Client records you can trust</h2>
-    <p class="tools text-sm mt-2">Salesforce · Notion · n8n</p>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <p class="text-dimmed"><span class="label text-muted">Before</span>597 client records, 85% duplicates. Some clients got two or three emails each cycle.</p>
-      <p><span class="label text-terracotta-400">After</span>Duplicates merged field by field, links repaired across three databases, edge cases checked against Salesforce.</p>
-      <p><span class="label text-slate-400">Result</span>313 clean records. One email per client.</p>
-    </div>
-  </article>
-
-  <article class="rule-top py-12">
-    <p class="text-meta text-sm">Texas workforce nonprofit</p>
-    <h2 class="h-display text-3xl md:text-4xl mt-2">Signed documents that file themselves</h2>
-    <p class="tools text-sm mt-2">BoldSign · n8n · Notion · Slack</p>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <p class="text-dimmed"><span class="label text-muted">Before</span>Signed contracts arrived by email and were filed and acted on by hand.</p>
-      <p><span class="label text-terracotta-400">After</span>Each signature is classified, filed to the client's record, and posted to the team.</p>
-      <p><span class="label text-slate-400">Result</span>Filed, with onboarding started, within seconds of signing.</p>
-    </div>
-  </article>
-
-  <article class="rule-top py-12">
-    <p class="text-meta text-sm">Kiz ATX · Aug 2026</p>
-    <h2 class="h-display text-3xl md:text-4xl mt-2">Fifteen survey responses, one clear decision</h2>
-    <p class="tools text-sm mt-2">Tally · Claude · single-page web app</p>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <p class="text-dimmed"><span class="label text-muted">Before</span>Planning workshops meant sifting responses across six tabs.</p>
-      <p><span class="label text-terracotta-400">After</span>One live page with the ratios, scheduling, and budget already worked out.</p>
-      <p><span class="label text-slate-400">Result</span>About 5 hours instead of about 26. <span class="text-muted">My estimate.</span> <a class="link" href="/ai-workflow-example/">See it</a></p>
-    </div>
-  </article>
-
-  <article class="rule-top py-12">
-    <p class="text-meta text-sm">WhereCanWeDance · built and run solo</p>
-    <h2 class="h-display text-3xl md:text-4xl mt-2">Nearly $10,000 in live payments</h2>
-    <p class="tools text-sm mt-2">Rails 8 · React · PostgreSQL · Stripe Connect</p>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <p class="text-dimmed"><span class="label text-muted">What it is</span>Event ticketing with organizer payouts, passes, promo codes, transfers, and QR check-in.</p>
-      <p><span class="label text-terracotta-400">How it runs</span>Deploys, support, and same-day payment fixes, by one person, backed by 5,700+ automated tests.</p>
-      <p><span class="label text-slate-400">Why it matters</span>When renting software stops making sense, I can build and run the tool your team needs. <a class="link" href="https://wherecanwedance.com" target="_blank" rel="noopener">Visit</a></p>
-    </div>
-  </article>
-
-  <article class="rule-top border-b border-terracotta-500/30 py-12">
-    <p class="text-meta text-sm">CDL Legal · Feb to Jul 2026 · monthly contract, fully remote</p>
-    <h2 class="h-display text-3xl md:text-4xl mt-2">A legal-sector team that can update its own website</h2>
-    <p class="tools text-sm mt-2">Strapi · AWS · React · Next.js · Salesforce · Figma</p>
-    <p class="mt-6 text-dimmed max-w-3xl leading-relaxed">Sole technical contributor. Rebuilt the site on Strapi so the team edits its own content, connected the front end to their Salesforce data, and built a component library from Figma designs.</p>
-  </article>
-
-  <section class="pt-16">
-    <h2 class="h-display text-3xl md:text-5xl">See what this could look like for your team.</h2>
-    <p class="mt-4 text-xl text-dimmed max-w-2xl">Take the free scorecard. About 4 minutes, no email needed to see your results.</p>
-    <a class="btn-primary mt-8" href="/ai-scorecard/?src=proof">Take the free scorecard</a>
-    <p class="mt-8 text-meta">Charles Ogar · <a class="link" href="mailto:charles@ogarocious.com">charles@ogarocious.com</a> · <a class="link" href="https://cal.com/ogarocious/15min" target="_blank" rel="noopener">book 15 minutes</a></p>
-  </section>
+  :root { --bg:#1a1410; --deep:#0f0b08; --card:#231c16; --ivory:#f5eee0; --dim:rgba(245,238,224,.72); --meta:rgba(245,238,224,.58);
+          --terra:#d4552b; --terra-l:#da7f4e; --teal:#7ba4a5; --rule:rgba(212,85,43,.28); }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+  body { margin:0; background:var(--bg); color:var(--ivory); font:17px/1.6 "Geist",system-ui,sans-serif; }
+  ::selection { background:rgba(212,85,43,.35); }
+  a { color:var(--terra-l); text-underline-offset:3px; text-decoration-color:rgba(218,127,78,.4); word-break:break-word; }
+  a:hover { text-decoration-color:var(--terra-l); }
+  :focus-visible { outline:2px solid var(--terra); outline-offset:3px; border-radius:4px; }
+  code { font:.86em ui-monospace,SFMono-Regular,monospace; background:rgba(123,164,165,.10); color:#cddad9; padding:.1em .35em; border-radius:4px; }
+  strong { color:var(--ivory); font-weight:600; }
+  .wrap { display:grid; grid-template-columns:260px 1fr; max-width:1280px; margin:0 auto; }
+  aside { position:sticky; top:0; height:100vh; padding:40px 28px; border-right:1px solid rgba(212,85,43,.12); background:var(--deep); }
+  .brand { display:flex; align-items:center; gap:10px; font:700 18px "Bricolage Grotesque",sans-serif; color:var(--ivory); text-decoration:none; }
+  .dot { width:10px; height:10px; border-radius:50%; background:var(--terra); }
+  .private { margin-top:6px; font-size:12px; color:var(--meta); }
+  nav { margin-top:36px; display:flex; flex-direction:column; gap:4px; }
+  nav p { font-size:12px; color:var(--teal); margin:0 0 8px; font-weight:500; }
+  nav a { display:flex; justify-content:space-between; color:var(--dim); text-decoration:none; padding:8px 10px; border-radius:6px; font-size:15px; }
+  nav a:hover { background:rgba(212,85,43,.10); color:var(--ivory); }
+  nav a span { color:var(--meta); font-variant-numeric:tabular-nums; }
+  .stats { margin-top:32px; display:grid; gap:14px; }
+  .stat b { display:block; font:700 30px "Bricolage Grotesque",sans-serif; color:var(--terra); line-height:1; }
+  .stat span { font-size:13px; color:var(--meta); }
+  .side-cta { margin-top:32px; display:grid; gap:10px; font-size:14px; }
+  .btn { display:inline-flex; justify-content:center; background:var(--terra); color:var(--deep); font-weight:600; padding:.75rem 1rem; border-radius:8px; text-decoration:none; }
+  .btn:hover { background:var(--terra-l); }
+  .stamp { position:absolute; bottom:28px; left:28px; right:28px; font-size:12px; color:var(--meta); }
+  main { padding:56px 56px 120px; min-width:0; }
+  h1 { font:700 clamp(40px,5vw,64px)/1.04 "Bricolage Grotesque",sans-serif; letter-spacing:-.02em; margin:0; text-wrap:balance; }
+  .lede { margin:18px 0 0; max-width:62ch; color:var(--dim); }
+  .lede p { margin:.3em 0; }
+  .panel { margin-top:28px; border:1px solid rgba(245,238,224,.10); border-radius:12px; background:var(--card); }
+  .panel summary { cursor:pointer; padding:16px 20px; font:600 18px "Bricolage Grotesque",sans-serif; display:flex; align-items:center; gap:10px; list-style:none; }
+  .panel summary::-webkit-details-marker { display:none; }
+  .panel summary::before { content:"+"; color:var(--terra); width:14px; }
+  .panel[open] summary::before { content:"–"; }
+  .count { margin-left:auto; font:500 13px "Geist",sans-serif; color:var(--meta); }
+  .panel ul { margin:0; padding:0 22px 18px 44px; color:var(--dim); }
+  .panel li { margin:.35em 0; }
+  .quarter { margin-top:72px; scroll-margin-top:24px; }
+  .quarter h2 { font:700 32px/1.1 "Bricolage Grotesque",sans-serif; letter-spacing:-.01em; margin:0 0 22px; padding-bottom:14px; border-bottom:2px solid var(--terra); }
+  .entry { padding:26px 0; border-bottom:1px solid var(--rule); }
+  .entry h3 { font:700 23px/1.2 "Bricolage Grotesque",sans-serif; margin:0 0 14px; text-wrap:balance; }
+  dl { margin:0; display:grid; gap:10px; }
+  .row { display:grid; grid-template-columns:170px 1fr; gap:18px; }
+  dt { color:var(--teal); font-size:14px; font-weight:500; padding-top:2px; }
+  dd { margin:0; color:var(--dim); max-width:72ch; }
+  .row.impact dt { color:var(--terra-l); }
+  .row.impact dd { color:var(--ivory); }
+  .pill { display:inline-block; font-size:12px; font-weight:600; color:var(--deep); background:var(--terra-l); padding:1px 8px; border-radius:999px; margin-right:4px; }
+  .extra, .loose-list { margin:12px 0 0; color:var(--dim); padding-left:20px; }
+  .loose { color:var(--dim); margin:.4em 0; }
+  .closing { margin-top:80px; padding-top:40px; border-top:1px solid var(--rule); }
+  .closing h2 { font:700 clamp(28px,3.5vw,44px)/1.08 "Bricolage Grotesque",sans-serif; margin:0; text-wrap:balance; }
+  .closing p { color:var(--dim); max-width:56ch; }
+  .closing .btn { margin-top:16px; padding:.95rem 1.4rem; }
+  @media (max-width: 860px) {
+    .wrap { grid-template-columns:1fr; }
+    aside { position:static; height:auto; border-right:0; border-bottom:1px solid rgba(212,85,43,.12); padding:24px 20px; }
+    nav { flex-direction:row; flex-wrap:wrap; margin-top:18px; } nav p { width:100%; }
+    .stats { grid-template-columns:repeat(3,1fr); } .stamp { position:static; margin-top:18px; }
+    main { padding:36px 20px 80px; }
+    .row { grid-template-columns:1fr; gap:2px; }
+  }
+</style></head>
+<body><div class="wrap">
+<aside>
+  <a class="brand" href="https://ogarocious.com"><span class="dot"></span>Ogarocious</a>
+  <p class="private">Charles Ogar · impact log</p>
+  <nav aria-label="Quarters"><p>Quarters</p><a href="#2026-q4">2026 Q4<span>1</span></a><a href="#2026-q3">2026 Q3<span>3</span></a><a href="#2026-q2">2026 Q2<span>4</span></a><a href="#2025-q3-2026-q2-ongoing">2025 Q3 – 2026 Q2 (ongoing)<span>3</span></a></nav>
+  <div class="stats"><div class="stat"><b>11</b><span>entries</span></div></div>
+  <div class="side-cta"><a class="btn" href="/ai-scorecard/?src=proof">Take the free scorecard</a><a href="/remote-build-work/">See the deck</a><a href="mailto:charles@ogarocious.com">charles@ogarocious.com</a></div>
+  <p class="stamp">Updated Oct 17, 2026</p>
+</aside>
+<main>
+  <h1>Impact Log</h1>
+  <div class="lede"><p>What changed for the teams I've built for, quarter by quarter. Where a number is my estimate rather than a measurement, it says so.</p></div>
+  
+  <section class="quarter" id="2026-q4"><h2>2026 Q4</h2><article class="entry"><h3>WhereCanWeDance: nearly $10,000 in live payments</h3><dl><div class="row "><dt>Context</dt><dd>Solo-built event ticketing platform for the dance community. Payments via Stripe Connect with organizer payouts, fee splits, refunds, installment plans; passes, promo and access codes, capacity caps, transfers; QR check-in; post-event surveys.</dd></div><div class="row "><dt>Artifacts</dt><dd><a href="https://wherecanwedance.com" target="_blank" rel="noopener">https://wherecanwedance.com</a></dd></div><div class="row impact"><dt>Impact</dt><dd>Nearly $10,000 processed.</dd></div></dl></article></section><section class="quarter" id="2026-q3"><h2>2026 Q3</h2><article class="entry"><h3>Rails World 2026 content (Rails Foundation)</h3><dl><div class="row "><dt>Context</dt><dd>Pitched and produced attendee interview videos and booth sessions for Rails World, Austin, Sep 23–24.</dd></div></dl></article><article class="entry"><h3>Kiz ATX Workshops Signal Deck (first Distill Deck example)</h3><dl><div class="row "><dt>Context</dt><dd>15 interest-form responses scattered across tabs turned into a live decision page with ratio, heatmap, and cohort math.</dd></div><div class="row "><dt>Artifacts</dt><dd><a href="https://slides.ogarocious.com/ai-workflow-example/" target="_blank" rel="noopener">https://slides.ogarocious.com/ai-workflow-example/</a></dd></div><div class="row impact"><dt>Impact</dt><dd>About 5 hours with AI vs about 26 by hand (my estimate). Roughly 150 hours a year for someone running 6–8 of these.</dd></div></dl></article><article class="entry"><h3>CDL Legal: Full-Stack Developer (contract), Feb–Jul 2026</h3><dl><div class="row "><dt>Context</dt><dd>Remote monthly contract, sole technical contributor working with the client's staff and leadership. Website rebuild on Strapi (headless CMS on AWS), React front end integrated with Salesforce data, design system from Figma.</dd></div><div class="row impact"><dt>Impact</dt><dd>Team edits its own site content.</dd></div></dl></article></section><section class="quarter" id="2026-q2"><h2>2026 Q2</h2><article class="entry"><h3>Client follow-up system repair (May 2026)</h3><dl><div class="row "><dt>Context</dt><dd>Weekly client check-in emails had silently failed two scheduled runs in a row with no alert. Traced through n8n execution logs to a TypeError in the day/week detection step; fixed four bugs across the touchpoint workflows.</dd></div><div class="row impact"><dt>Impact</dt><dd>309 personalized emails sent in the next Friday cycle, verified in the logs.</dd></div></dl></article><article class="entry"><h3>Duplicate client cleanup (May 2026)</h3><dl><div class="row "><dt>Context</dt><dd>Three Salesforce → Notion sync runs created duplicates; some clients got 2–3 emails per cycle. Merged with field-level rules, re-pointed relations across 3 databases, resolved edge cases against Salesforce.</dd></div><div class="row impact"><dt>Impact</dt><dd>597 records (85% duplicates) → 313 clean records; 85 relations re-pointed; one email per client.</dd></div></dl></article><article class="entry"><h3>Orientation attendance logger (May 2026)</h3><dl><div class="row "><dt>Context</dt><dd>Staff typed orientation attendance by hand. Slack screenshot → Claude vision → name lookup → attendance records.</dd></div><div class="row impact"><dt>Impact</dt><dd>Replaces 10–15 minutes of manual entry per orientation (measured before).</dd></div></dl></article><article class="entry"><h3>Volunteer hours system (Apr 2026)</h3><dl><div class="row "><dt>Context</dt><dd>Volunteers submit hours through prefilled personal forms; records and Slack posts created automatically.</dd></div></dl></article></section><section class="quarter" id="2025-q3-2026-q2-ongoing"><h2>2025 Q3 – 2026 Q2 (ongoing)</h2><article class="entry"><h3>Morning AI briefing</h3><dl><div class="row "><dt>Context</dt><dd>Staff opened up to seven tools each morning to piece together their day. Daily workflow pulls each person's tasks, sessions, intakes, help desk, projects, and calendar into one personalized email and Slack message at 6 AM.</dd></div><div class="row impact"><dt>Impact</dt><dd>About 30 minutes saved per person per morning (<strong>my estimate</strong>) ≈ 1,250 staff hours a year for ~10 staff ≈ $50,000 at $40/hr.</dd></div></dl></article><article class="entry"><h3>Signed-document lifecycle</h3><dl><div class="row "><dt>Context</dt><dd>Signed contracts arrived by email and were filed and actioned by hand. BoldSign webhook → classify → file to Notion → Slack → onboarding tasks if enrollment.</dd></div><div class="row impact"><dt>Impact</dt><dd>Filed and onboarding started within seconds of signing.</dd></div></dl></article><article class="entry"><h3>Operations system: 38 databases, 50 workflows</h3><dl><div class="row "><dt>Context</dt><dd>Sole technical lead, Aug 2025–Jun 2026, ~10 staff. Replaced disconnected spreadsheets and Salesforce silos with a connected Notion system and 50 n8n workflows.</dd></div><div class="row impact"><dt>Impact</dt><dd>~690 build hours across 21 deliverables.</dd></div></dl></article></section>
+  <section class="closing"><h2>See what this could look like for your team.</h2><p>Take the free scorecard. About 4 minutes, and no email needed to see your results.</p><a class="btn" href="/ai-scorecard/?src=proof">Take the free scorecard</a><p style="margin-top:20px"><a href="https://cal.com/ogarocious/15min" target="_blank" rel="noopener">Or book 15 minutes</a></p></section>
 </main>
-</body>
-</html>
+</div></body></html>
