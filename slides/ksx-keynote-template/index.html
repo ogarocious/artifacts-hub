@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Urban Kiz History Keynote: Test Deck</title>
+<meta name="description" content="Draft test deck for the Kiz Summit Exchange Urban Kiz History Keynote. Slide types, videos and transitions to try.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#080b0f">
+<meta property="og:title" content="Urban Kiz History Keynote: Test Deck">
+<meta property="og:description" content="Draft for Charles + Laurent. Slide types, videos and transitions to try.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://slides.ogarocious.com/ksx-keynote-template/">
+<meta property="og:image" content="https://slides.ogarocious.com/ksx-keynote-template/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face { font-family: "Oriental Chicken"; src: url("assets/fonts/OrientalChicken.ttf"); }
+@font-face { font-family: "Anton"; src: url("assets/fonts/Anton-Regular.ttf"); }
+@font-face { font-family: "Rubik"; font-weight: 400; src: url("assets/fonts/Rubik-Regular.ttf"); }
+@font-face { font-family: "Rubik"; font-weight: 500; src: url("assets/fonts/Rubik-Medium.ttf"); }
+@font-face { font-family: "Rubik"; font-weight: 700; src: url("assets/fonts/Rubik-Bold.ttf"); }
+@font-face { font-family: "Poppins"; font-weight: 600; src: url("assets/fonts/Poppins-SemiBold.ttf"); }
+
+:root {
+  --bg: #080b0f;
+  --raise: #141B24;
+  --gold: #D2A23C;
+  --gold-high: #E9C45A;
+  --crimson: #9E1B1B;
+  --crimson-bright: #C0392B;
+  --ink: #ECEAE4;
+  --label: #AEB4BC;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: #000; overflow: hidden; }
+body { color: var(--ink); font-family: "Rubik", sans-serif; }
+body.idle { cursor: none; }
+
+/* The stage is always 1920x1080 and scaled to fit whatever screen it lands on. */
+#stage {
+  position: absolute; left: 50%; top: 50%;
+  width: 1920px; height: 1080px;
+  transform-origin: 0 0;
+  overflow: hidden; background: var(--bg);
+}
+
+.slide {
+  position: absolute; inset: 0;
+  padding: 96px 120px;
+  visibility: hidden;
+  background: var(--bg);
+}
+.slide.active, .slide.leaving { visibility: visible; }
+.slide.active { z-index: 2; }
+.slide.leaving { z-index: 1; }
+
+/* Background treatments */
+.art { background: url("assets/bg.jpg") center / cover; }
+.art-dim { background: linear-gradient(rgba(8,11,15,.86), rgba(8,11,15,.86)), url("assets/bg.jpg") center / cover; }
+
+/* Type */
+.display { font-family: "Oriental Chicken", "Anton", sans-serif; word-spacing: .35em; text-transform: uppercase; color: var(--gold-high); line-height: 1; font-weight: 400; }
+h2 { font-family: "Anton", sans-serif; font-weight: 400; font-size: 92px; line-height: 1.08; letter-spacing: .01em; color: var(--gold-high); text-transform: uppercase; }
+/* This font has no kerning, so its widest letter gaps are closed by hand. */
+.k { margin-left: -.13em; }
+.eyebrow { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 30px; letter-spacing: .14em; text-transform: uppercase; color: var(--label); margin-bottom: 18px; }
+.head { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 52px; }
+
+.tag {
+  flex: none; display: inline-block;
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 24px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold-high); border: 2px dashed var(--gold); border-radius: 6px; padding: 8px 18px;
+  background: rgba(8,11,15,.75);
+}
+.counter { position: absolute; right: 44px; bottom: 28px; z-index: 5; font-family: "Poppins", sans-serif; font-weight: 600; font-size: 22px; color: var(--label); opacity: .65; pointer-events: none; }
+
+/* Step-by-step reveal */
+.step { transition: opacity .45s ease, transform .45s ease; }
+.step:not(.shown) { opacity: 0; transform: translateY(26px); }
+
+/* Title */
+.title-slide { text-align: center; padding-top: 118px; }
+.title-slide .eyebrow { color: var(--ink); text-shadow: 0 2px 16px #000; }
+.title-slide .display { font-size: 136px; text-shadow: 0 4px 34px #000; }
+.title-slide .who { margin-top: 30px; font-size: 46px; font-weight: 500; text-shadow: 0 2px 16px #000; }
+.ack { position: absolute; left: 0; right: 0; bottom: 36px; text-align: center; font-size: 25px; color: var(--ink); text-shadow: 0 2px 10px #000; }
+
+/* Section divider */
+.divider { text-align: center; padding-top: 150px; }
+.divider .display { font-size: 210px; text-shadow: 0 6px 40px #000; }
+.divider p { margin-top: 28px; font-size: 54px; font-weight: 500; text-shadow: 0 2px 18px #000, 0 0 40px #000; }
+
+/* Timeline */
+.timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; position: relative; padding-top: 58px; }
+.timeline::before { content: ""; position: absolute; left: 0; right: 0; top: 13px; height: 4px; background: linear-gradient(90deg, var(--crimson-bright), var(--gold-high)); }
+.era { position: relative; }
+.era::before { content: ""; position: absolute; top: -58px; left: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--gold-high); }
+.era .when { font-family: "Anton", sans-serif; font-size: 62px; color: var(--ink); line-height: 1.05; }
+.era .what { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 30px; color: var(--gold-high); margin: 12px 0 18px; }
+.era p { font-size: 34px; line-height: 1.32; }
+
+/* Names grid */
+.names { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+.name { display: flex; align-items: center; justify-content: center; height: 150px; text-align: center; padding: 10px; font-family: "Anton", sans-serif; font-size: 50px; letter-spacing: .02em; background: rgba(20,27,36,.92); }
+.name.open { color: var(--gold-high); border: 2px dashed var(--gold); font-family: "Rubik", sans-serif; font-weight: 700; font-size: 38px; background: transparent; }
+
+/* Quote */
+.quote-slide { display: flex; flex-direction: column; justify-content: center; padding: 96px 190px; }
+.quote-slide .tag { position: absolute; right: 120px; top: 96px; }
+blockquote { font-size: 66px; line-height: 1.26; font-weight: 500; }
+blockquote .turn { display: block; margin-top: 38px; color: var(--gold-high); font-weight: 700; font-size: 82px; line-height: 1.15; }
+cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppins", sans-serif; font-weight: 600; font-size: 32px; letter-spacing: .08em; color: var(--label); }
+
+/* Video */
+.video-slide { padding: 34px 150px 0; background: #000; }
+.video-slide .eyebrow { font-size: 25px; margin-bottom: 6px; color: var(--gold-high); }
+.video-title { font-size: 36px; font-weight: 500; margin-bottom: 18px; }
+.player { width: 1620px; height: 860px; margin: 0 auto; background: #05070a; display: block; border: 0; }
+.video-note { position: absolute; left: 150px; bottom: 25px; font-size: 22px; color: var(--label); }
+
+/* Spotlight */
+.spotlight { display: grid; grid-template-columns: 430px 1fr; gap: 80px; align-items: start; }
+.spotlight img { width: 430px; height: 430px; object-fit: cover; border-radius: 50%; border: 6px solid var(--gold-high); margin-top: 8px; }
+.spotlight .aside { margin-top: 32px; text-align: center; font-size: 34px; color: var(--label); }
+.built { list-style: none; }
+.built li { font-size: 46px; line-height: 1.22; padding: 18px 0; border-bottom: 2px solid rgba(233,196,90,.26); }
+.built li small { display: block; font-size: 30px; color: var(--label); margin-top: 3px; }
+
+/* Compare */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+.col { background: rgba(20,27,36,.92); padding: 40px 46px; }
+.col h3 { font-family: "Anton", sans-serif; font-weight: 400; font-size: 64px; margin-bottom: 18px; text-transform: uppercase; }
+.col ul { list-style: none; }
+.col li { font-size: 40px; line-height: 1.26; padding: 15px 0; }
+.col b { color: var(--gold-high); }
+
+/* Open prompt */
+.prompts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 12px; }
+.prompt { height: 500px; padding: 38px; border: 2px dashed var(--gold); background: rgba(8,11,15,.55); }
+.prompt h3 { font-family: "Anton", sans-serif; font-weight: 400; font-size: 62px; text-transform: uppercase; }
+.prompt p { font-size: 34px; color: var(--label); margin-top: 16px; line-height: 1.3; }
+
+/* Q&A */
+.qa { text-align: center; padding-top: 150px; }
+.qa .display { font-size: 200px; text-shadow: 0 6px 40px #000; }
+.qa p { margin-top: 22px; font-size: 56px; font-weight: 500; text-shadow: 0 2px 18px #000, 0 0 40px #000; }
+
+/* Transitions under test */
+.in-fade   { animation: fadeIn .7s ease both; }
+.in-slide  { animation: slideIn .75s cubic-bezier(.22,.8,.22,1) both; }
+.in-moon   { animation: moonIn 1.05s cubic-bezier(.5,0,.2,1) both; }
+.in-rise   { animation: riseIn .9s cubic-bezier(.22,.8,.22,1) both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes moonIn { from { clip-path: circle(0 at 78% 18%); } to { clip-path: circle(135% at 78% 18%); } }
+@keyframes riseIn { from { opacity: 0; transform: scale(1.14); } to { opacity: 1; transform: none; } }
+
+/* Small on-screen message for keyboard feedback */
+#toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 20;
+  background: rgba(8,11,15,.92); color: var(--ink); border: 1px solid var(--gold);
+  border-radius: 8px; padding: 10px 18px; font-size: 16px; opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap;
+}
+#toast.on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .in-fade, .in-slide, .in-moon, .in-rise { animation-duration: .01s; }
+  .step { transition: none; }
+}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1. TITLE -->
+  <section class="slide art title-slide" data-t="fade" data-label="Title">
+    <div class="eyebrow">Kiz Summit Exchange &middot; Kage Edition</div>
+    <h1 class="display">Urban Kiz History<br>Keynote</h1>
+    <div class="who">Charles + Laurent</div>
+    <div class="ack">Funded in part by the Austin Arts, Culture, Music and Entertainment (AACME) Program</div>
+  </section>
+
+  <!-- 2. PAST -->
+  <section class="slide art divider" data-t="moon" data-label="Section divider">
+    <div class="display">Past</div>
+    <p>Before it had a name</p>
+  </section>
+
+  <!-- 3. TIMELINE -->
+  <section class="slide art-dim" data-t="fade" data-label="Timeline">
+    <div class="head">
+      <div><div class="eyebrow">How it got here</div><h2>From Angola to Paris to everywhere</h2></div>
+      <span class="tag">Confirm dates</span>
+    </div>
+    <div class="timeline">
+      <div class="era step"><div class="when">Before 2010</div><div class="what">The roots</div><p>Kizomba from Angola, 1980s. Ghetto Zouk from Rotterdam.</p></div>
+      <div class="era step"><div class="when">2011 to 2014</div><div class="what">The Paris fusion era</div><p>Kizomba 2.0. French Style. New Style. Kizomba Fusion. One movement, many names.</p></div>
+      <div class="era step"><div class="when">May 10, 2015</div><div class="what">The name</div><p>"Urban Kiz" brings the style under one banner.</p></div>
+      <div class="era step"><div class="when">Today</div><div class="what">The flavors</div><p>Elegant. Douceur. Technical Stepping. Lifts &amp; Tricks. Afro Urban Kiz.</p></div>
+    </div>
+  </section>
+
+  <!-- 4. NAMES -->
+  <section class="slide art-dim" data-t="fade" data-label="Names grid">
+    <div class="head">
+      <div><div class="eyebrow">Leads and follows, same size</div><h2>A scene, not a founder</h2></div>
+      <span class="tag">Confirm names + spelling</span>
+    </div>
+    <div class="names">
+      <div class="name step">Laurent</div><div class="name step">Adeline</div><div class="name step">Albir Rojas</div><div class="name step">Curtis</div><div class="name step">Yami</div>
+      <div class="name step">Steffi</div><div class="name step">Sherazade</div><div class="name step">Ennuel</div><div class="name step">Hakima</div><div class="name step">Félicien</div>
+      <div class="name step">Isabelle</div><div class="name step">Enah</div><div class="name step">Carolina</div><div class="name open step">Who's missing?</div>
+    </div>
+  </section>
+
+  <!-- 5. QUOTE -->
+  <section class="slide art-dim quote-slide" data-t="fade" data-label="Big quote">
+    <span class="tag">Laurent to approve</span>
+    <blockquote>
+      "It was people leaving the class, people complaining: we don't dance enough, it's too much theory.
+      <span class="turn step">And then today, everyone wants to be musical."</span>
+    </blockquote>
+    <cite class="step">LAURENT, AUG 14, 2026</cite>
+  </section>
+
+  <!-- 6. VIDEO: YOUTUBE -->
+  <section class="slide video-slide" data-t="fade" data-label="Video: YouTube" data-video="yt">
+    <div class="eyebrow">Video test A &middot; streams from YouTube</div>
+    <div class="video-title">L&amp;A Kizomba: Technical Steps 4 &middot; Evokeez World, 2014</div>
+    <iframe class="player" id="yt" title="L&amp;A Kizomba: Technical Steps 4" allow="autoplay; fullscreen; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div class="video-note">Needs internet. Click to play, starts at 0:45. Then press the right arrow to move on.</div>
+  </section>
+
+  <!-- 7. VIDEO: SAVED CLIP -->
+  <section class="slide video-slide" data-t="fade" data-label="Video: saved clip" data-video="local">
+    <div class="eyebrow">Video test B &middot; saved clip, no YouTube</div>
+    <div class="video-title">Laurent &amp; Adeline &middot; Neo Kizomba Festival 2015 &middot; 30 second cut</div>
+    <video class="player" id="clip" src="assets/clip-laurent-adeline.mp4" preload="auto" controls playsinline></video>
+    <div class="video-note">From the laptop at the studio, this needs no internet. Right arrow plays it, right arrow again moves on.</div>
+  </section>
+
+  <!-- 8. PRESENT -->
+  <section class="slide art divider" data-t="slide" data-label="Section divider">
+    <div class="display">P<span class="k">resent</span></div>
+    <p>Two villages, one summit</p>
+  </section>
+
+  <!-- 9. SPOTLIGHT -->
+  <section class="slide art-dim" data-t="fade" data-label="Instructor spotlight">
+    <div class="head">
+      <div><div class="eyebrow">Instructor spotlight</div><h2>Laurent built stages for other dancers</h2></div>
+      <span class="tag">Confirm details</span>
+    </div>
+    <div class="spotlight">
+      <div>
+        <img src="assets/photos/laurent.jpg" alt="Laurent">
+        <div class="aside">Also DJ Low. Stepped away in 2019, by choice.</div>
+      </div>
+      <ul class="built">
+        <li class="step">Show Your Style<small>20+ editions, created around 2015</small></li>
+        <li class="step">Olympiades of Kizomba<small>Urban, Sensual and Authentic categories</small></li>
+        <li class="step">Online Kizomba School</li>
+        <li class="step">Amazing Follows</li>
+        <li class="step">Kizomba Xperience<small>Disneyland Paris</small></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10. COMPARE -->
+  <section class="slide art-dim" data-t="fade" data-label="Two-column compare">
+    <div class="head">
+      <div><div class="eyebrow">Two villages</div><h2>Paris and Austin</h2></div>
+      <span class="tag">Confirm years</span>
+    </div>
+    <div class="compare">
+      <div class="col paris">
+        <h3>Paris</h3>
+        <ul>
+          <li class="step">A boom before the world knew the name</li>
+          <li class="step">It went international through the salsa festivals</li>
+          <li class="step">Laurent builds Show Your Style and the Olympiades</li>
+        </ul>
+      </div>
+      <div class="col austin">
+        <h3>Austin</h3>
+        <ul>
+          <li class="step"><b>2015:</b> Laurent's first time in the US, at Neo Kizomba</li>
+          <li class="step">Show Your Style and the Olympiades come to Austin</li>
+          <li class="step"><b>2019:</b> the first Urban Kiz Jack &amp; Jill</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. FUTURE -->
+  <section class="slide art divider" data-t="rise" data-label="Section divider">
+    <div class="display">Futu<span class="k">re</span></div>
+    <p>Where does the dance go from here?</p>
+  </section>
+
+  <!-- 12. OPEN PROMPT -->
+  <section class="slide art-dim" data-t="fade" data-label="Open prompt">
+    <div class="head">
+      <div><div class="eyebrow">To fill in on the recording</div><h2>What comes after this week?</h2></div>
+      <span class="tag">Charles + Laurent to write</span>
+    </div>
+    <div class="prompts">
+      <div class="prompt step"><h3>The dance</h3><p>What should Urban Kiz protect, and what should it change?</p></div>
+      <div class="prompt step"><h3>The teaching</h3><p>What should dancers ask of their teachers and themselves?</p></div>
+      <div class="prompt step"><h3>This room</h3><p>What can everyone here take home and do next?</p></div>
+    </div>
+  </section>
+
+  <!-- 13. Q&A -->
+  <section class="slide art qa" data-t="moon" data-label="Q&amp;A">
+    <div class="display">Ques<span class="k">tions</span></div>
+    <p>Vos questions</p>
+    <div class="ack">Funded in part by the Austin Arts, Culture, Music and Entertainment (AACME) Program</div>
+  </section>
+
+</div>
+<div id="toast"></div>
+
+<script>
+(function () {
+  var YT_SRC = "https://www.youtube.com/embed/Q0jayrE3RsA?start=45&rel=0&modestbranding=1&playsinline=1";
+  var TRANSITIONS = ["slide default", "fade", "slide", "moon", "rise"];
+  var stage = document.getElementById("stage");
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var toast = document.getElementById("toast");
+  var yt = document.getElementById("yt");
+  var clip = document.getElementById("clip");
+  var index = 0;
+  var override = 0;
+  var clipStarted = false;
+  var toastTimer, idleTimer, leaveTimer;
+
+  slides.forEach(function (s, i) {
+    var c = document.createElement("div");
+    c.className = "counter";
+    c.textContent = (i + 1) + " / " + slides.length;
+    s.appendChild(c);
+  });
+
+  function fit() {
+    var scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    stage.style.transform = "scale(" + scale + ") translate(-50%, -50%)";
+  }
+
+  function say(text) {
+    toast.textContent = text;
+    toast.classList.add("on");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove("on"); }, 2600);
+  }
+
+  function stepsOf(s) { return Array.prototype.slice.call(s.querySelectorAll(".step")); }
+
+  function stopVideos() {
+    if (yt.getAttribute("src")) yt.removeAttribute("src");
+    clip.pause();
+    clip.currentTime = 0;
+    clipStarted = false;
+  }
+
+  function show(i, showAllSteps, animate) {
+    if (i < 0 || i >= slides.length) return;
+    var prev = slides[index];
+    var next = slides[i];
+    stopVideos();
+    slides.forEach(function (s) { s.classList.remove("in-fade", "in-slide", "in-moon", "in-rise", "leaving"); });
+    if (prev !== next) {
+      prev.classList.remove("active");
+      prev.classList.add("leaving");
+    }
+    stepsOf(next).forEach(function (el) { el.classList.toggle("shown", !!showAllSteps); });
+    next.classList.add("active");
+    if (animate !== false) {
+      var name = override ? TRANSITIONS[override] : next.dataset.t;
+      void next.offsetWidth;
+      next.classList.add("in-" + name);
+    }
+    clearTimeout(leaveTimer);
+    leaveTimer = setTimeout(function () { prev.classList.remove("leaving"); }, 1100);
+    index = i;
+    if (next.dataset.video === "yt") yt.setAttribute("src", YT_SRC);
+    history.replaceState(null, "", "#" + (i + 1));
+  }
+
+  function forward() {
+    var s = slides[index];
+    var hidden = stepsOf(s).filter(function (el) { return !el.classList.contains("shown"); });
+    if (hidden.length) { hidden[0].classList.add("shown"); return; }
+    if (s.dataset.video === "local" && !clipStarted) {
+      clipStarted = true;
+      clip.play().catch(function () { say("The browser blocked playback. Click the video to play."); });
+      return;
+    }
+    show(index + 1);
+  }
+
+  function back() {
+    var shown = stepsOf(slides[index]).filter(function (el) { return el.classList.contains("shown"); });
+    if (shown.length) { shown[shown.length - 1].classList.remove("shown"); return; }
+    show(index - 1, true);
+  }
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(function () { say("Fullscreen was blocked. Use the browser's View menu."); });
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    switch (e.key) {
+      case "ArrowRight": case "ArrowDown": case "PageDown": case " ": case "Enter":
+        e.preventDefault(); forward(); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp": case "Backspace":
+        e.preventDefault(); back(); break;
+      case "Home": show(0); break;
+      case "End": show(slides.length - 1, true); break;
+      case "f": case "F": toggleFullscreen(); break;
+      case "t": case "T":
+        override = (override + 1) % TRANSITIONS.length;
+        say("Transition: " + TRANSITIONS[override]);
+        break;
+    }
+  });
+
+  // No keyboard needed: tap or click the right side to go forward, the left side to go back.
+  stage.addEventListener("click", function (e) {
+    if (e.target === yt || e.target === clip) return;
+    var box = stage.getBoundingClientRect();
+    if (e.clientX - box.left < box.width * 0.33) back();
+    else forward();
+  });
+
+  // Clicking into YouTube would otherwise swallow the arrow keys, so focus comes back to the deck.
+  window.addEventListener("blur", function () {
+    setTimeout(function () {
+      if (document.activeElement === yt) { yt.blur(); window.focus(); }
+    }, 150);
+  });
+
+  document.addEventListener("mousemove", function () {
+    document.body.classList.remove("idle");
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () { document.body.classList.add("idle"); }, 2500);
+  });
+
+  window.addEventListener("resize", fit);
+  fit();
+
+  var start = parseInt(location.hash.slice(1), 10);
+  show(start >= 1 && start <= slides.length ? start - 1 : 0, false, false);
+  say("Right arrow or tap right: next  |  Left arrow or tap left: back  |  F: full screen  |  T: try another transition");
+})();
+</script>
+</body>
+</html>
