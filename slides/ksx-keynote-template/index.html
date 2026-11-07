@@ -207,15 +207,18 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
 .chips .open i { font-style: normal; font-weight: 400; color: var(--gold-high); margin-left: 8px; }
 .player.empty { display: flex; align-items: center; justify-content: center; border: 2px dashed var(--gold); }
 
-/* Style boards: one tile per style, each with a clip that opens full size. */
-.styles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-.style { background: rgba(20,27,36,.92); padding: 32px 30px 34px; display: flex; flex-direction: column; }
-.style h3 { font-family: "Anton", sans-serif; font-weight: 400; font-size: 58px; text-transform: uppercase; line-height: 1.05; }
-.style h3 .fr { display: block; font-size: 30px; margin-top: 4px; }
-.style p { font-size: 29px; line-height: 1.25; color: var(--ink); margin: 18px 0 26px; flex: 1; }
-.style p .fr { display: block; font-size: 25px; margin-top: 8px; }
-.style .clip { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--gold); font-family: "Poppins", sans-serif; font-weight: 600; font-size: 24px; color: var(--gold-high); }
-.style.ready .clip { border-style: solid; background: #05070a; cursor: pointer; font-size: 30px; }
+/* Dance and its music: one row per dance, each clip opens full size. */
+.pairs { display: flex; flex-direction: column; gap: 14px; }
+.pair { display: grid; grid-template-columns: 340px 50px 1fr 236px 236px; gap: 26px; align-items: center; background: rgba(20,27,36,.92); padding: 12px 28px; }
+.pair-dance { font-family: "Anton", sans-serif; font-size: 58px; text-transform: uppercase; line-height: 1; }
+.pair-dance .fr { display: block; font-family: "Rubik", sans-serif; font-size: 26px; text-transform: none; margin-top: 6px; }
+.pair-arrow { font-size: 52px; color: var(--gold-high); text-align: center; }
+.pair-music b { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 36px; color: var(--ink); }
+.pair-music b + .fr { display: block; font-size: 25px; margin-top: 2px; }
+.pair-music p { font-size: 25px; line-height: 1.25; color: var(--label); margin-top: 8px; }
+.pair-music p .fr { display: block; font-size: 22px; margin-top: 2px; }
+.pair .clip { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--gold); font-family: "Poppins", sans-serif; font-weight: 600; font-size: 22px; color: var(--gold-high); }
+.pair .clip.ready { border-style: solid; background: #05070a; cursor: pointer; font-size: 26px; }
 #style-overlay { position: absolute; inset: 0; z-index: 50; display: none; padding: 34px 150px 0; background: #000; }
 #style-overlay.on { display: block; }
 #style-overlay .video-note { cursor: pointer; }
@@ -313,20 +316,6 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
     <p class="places step">Angola &middot; Cape Verde &middot; Guinea-Bissau &middot; São Tomé &middot; Mozambique</p>
   </section>
 
-  <!-- DANCE STYLES -->
-  <section class="slide art-dim bi" data-t="fade" data-label="Dance styles">
-    <div class="head tight">
-      <div><h2>What it looks like</h2><span class="fr" lang="fr">À quoi ça ressemble</span></div>
-      <span class="tag">Pick clips with Laurent</span>
-    </div>
-    <div class="styles">
-      <div class="style step" data-yt="" data-start="0" data-title="Semba"><h3>Semba<span class="fr" lang="fr">La semba</span></h3><p>Angola. Upbeat, playful, social.<span class="fr" lang="fr">L'Angola. Rapide, joueuse, sociale.</span></p><div class="clip">Pick a clip</div></div>
-      <div class="style step" data-yt="" data-start="0" data-title="Passada"><h3>Passada<span class="fr" lang="fr">La passada</span></h3><p>Shared across Portuguese-speaking Africa.<span class="fr" lang="fr">Partagée dans l'Afrique lusophone.</span></p><div class="clip">Pick a clip</div></div>
-      <div class="style step" data-yt="" data-start="0" data-title="Kizomba"><h3>Kizomba<span class="fr" lang="fr">La kizomba</span></h3><p>Angola, 1980s. Close embrace, walking to the music.<span class="fr" lang="fr">L'Angola, années 80. Corps à corps, on marche sur la musique.</span></p><div class="clip">Pick a clip</div></div>
-      <div class="style step" data-yt="" data-start="0" data-title="Urban Kiz"><h3>Urban Kiz<span class="fr" lang="fr">L'Urban Kiz</span></h3><p>Paris, 2010s. Born dancing to Ghetto Zouk.<span class="fr" lang="fr">Paris, années 2010. Née en dansant sur du ghetto zouk.</span></p><div class="clip">Pick a clip</div></div>
-    </div>
-  </section>
-
   <!-- 7. MUSIC -->
   <section class="slide art-dim bi" data-t="fade" data-label="Music">
     <div class="head">
@@ -339,17 +328,41 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
     </div>
   </section>
 
-  <!-- MUSIC STYLES -->
-  <section class="slide art-dim bi" data-t="fade" data-label="Music styles">
+  <!-- DANCE AND ITS MUSIC -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Dance and its music">
     <div class="head tight">
-      <div><h2>What it sounds like</h2><span class="fr" lang="fr">Ce que ça donne à l'oreille</span></div>
-      <span class="tag">Pick clips with Laurent</span>
+      <div><h2>Each dance, and what it was danced to</h2><span class="fr" lang="fr">Chaque danse, et sa musique</span></div>
+      <span class="tag">Laurent to check</span>
     </div>
-    <div class="styles">
-      <div class="style step" data-yt="" data-start="0" data-title="Semba"><h3>Semba<span class="fr" lang="fr">La semba</span></h3><p>Angola. Fast and joyful, guitar-led.<span class="fr" lang="fr">L'Angola. Rapide et joyeuse, portée par la guitare.</span></p><div class="clip">Pick a clip</div></div>
-      <div class="style step" data-yt="" data-start="0" data-title="Zouk"><h3>Zouk<span class="fr" lang="fr">Le zouk</span></h3><p>Guadeloupe and Martinique, 1980s.<span class="fr" lang="fr">La Guadeloupe et la Martinique, années 80.</span></p><div class="clip">Pick a clip</div></div>
-      <div class="style step" data-yt="" data-start="0" data-title="Kizomba"><h3>Kizomba<span class="fr" lang="fr">La kizomba</span></h3><p>Angola, 1980s. Semba slowed down, with zouk in it.<span class="fr" lang="fr">L'Angola, années 80. De la semba ralentie, avec du zouk dedans.</span></p><div class="clip">Pick a clip</div></div>
-      <div class="style step" data-yt="" data-start="0" data-title="Ghetto Zouk"><h3>Ghetto Zouk<span class="fr" lang="fr">Le ghetto zouk</span></h3><p>The diaspora pop Paris danced to.<span class="fr" lang="fr">La pop de la diaspora sur laquelle Paris dansait.</span></p><div class="clip">Pick a clip</div></div>
+    <div class="pairs">
+      <div class="pair step">
+        <div class="pair-dance">Semba<span class="fr" lang="fr">La semba</span></div>
+        <div class="pair-arrow">&rarr;</div>
+        <div class="pair-music"><b>Semba</b><span class="fr" lang="fr">La semba</span><p>Angola. Same name for the dance and the music.<span class="fr" lang="fr">L'Angola. Le même nom pour la danse et la musique.</span></p></div>
+        <div class="clip" data-yt="" data-start="0" data-title="Semba &middot; dance">Dance clip</div>
+        <div class="clip" data-yt="" data-start="0" data-title="Semba &middot; music">Music clip</div>
+      </div>
+      <div class="pair step">
+        <div class="pair-dance">Passada<span class="fr" lang="fr">La passada</span></div>
+        <div class="pair-arrow">&rarr;</div>
+        <div class="pair-music"><b>Zouk + Cape Verdean love songs</b><span class="fr" lang="fr">Zouk + chansons d'amour cap-verdiennes</span><p>A way of dancing, with no music of its own.<span class="fr" lang="fr">Une façon de danser, sans musique à elle.</span></p></div>
+        <div class="clip" data-yt="" data-start="0" data-title="Passada &middot; dance">Dance clip</div>
+        <div class="clip" data-yt="" data-start="0" data-title="Zouk + Cape Verdean love songs &middot; music">Music clip</div>
+      </div>
+      <div class="pair step">
+        <div class="pair-dance">Kizomba<span class="fr" lang="fr">La kizomba</span></div>
+        <div class="pair-arrow">&rarr;</div>
+        <div class="pair-music"><b>Kizomba</b><span class="fr" lang="fr">La kizomba</span><p>Angola, 1980s. Same name for both.<span class="fr" lang="fr">L'Angola, années 80. Le même nom pour les deux.</span></p></div>
+        <div class="clip" data-yt="" data-start="0" data-title="Kizomba &middot; dance">Dance clip</div>
+        <div class="clip" data-yt="" data-start="0" data-title="Kizomba &middot; music">Music clip</div>
+      </div>
+      <div class="pair step">
+        <div class="pair-dance">Urban Kiz<span class="fr" lang="fr">L'Urban Kiz</span></div>
+        <div class="pair-arrow">&rarr;</div>
+        <div class="pair-music"><b>Ghetto Zouk</b><span class="fr" lang="fr">Le ghetto zouk</span><p>Paris, 2010s. Its own music? Still debated.<span class="fr" lang="fr">Paris, années 2010. Sa propre musique ? Encore en débat.</span></p></div>
+        <div class="clip" data-yt="" data-start="0" data-title="Urban Kiz &middot; dance">Dance clip</div>
+        <div class="clip" data-yt="" data-start="0" data-title="Ghetto Zouk &middot; music">Music clip</div>
+      </div>
     </div>
   </section>
 
@@ -627,7 +640,7 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
     <div class="eyebrow">Streams from YouTube</div>
     <div class="video-title" id="style-title"></div>
     <iframe class="player" id="style-yt" title="Style example" allow="autoplay; fullscreen; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-    <div class="video-note" id="style-close">Needs internet. Click anywhere outside the video to go back to the styles.</div>
+    <div class="video-note" id="style-close">Needs internet. Click anywhere outside the video to go back.</div>
   </div>
 
 </div>
@@ -670,11 +683,11 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
 
   function stepsOf(s) { return Array.prototype.slice.call(s.querySelectorAll(".step")); }
 
-  // A tile with a YouTube id in data-yt can be played; empty ones say "Pick a clip".
-  Array.prototype.forEach.call(document.querySelectorAll(".style"), function (t) {
-    if (!t.dataset.yt) return;
-    t.classList.add("ready");
-    t.querySelector(".clip").textContent = "\u25B6 Play";
+  // A clip with a YouTube id in data-yt can be played; empty ones keep their label.
+  Array.prototype.forEach.call(document.querySelectorAll(".clip[data-yt]"), function (c) {
+    if (!c.dataset.yt) return;
+    c.classList.add("ready");
+    c.textContent = "\u25B6 " + c.textContent.replace(" clip", "");
   });
 
   function openStyle(t) {
@@ -775,8 +788,8 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
   // No keyboard needed: tap or click the right side to go forward, the left side to go back.
   stage.addEventListener("click", function (e) {
     if (e.target === yt || e.target === clip) return;
-    var tile = e.target.closest(".style.ready");
-    if (tile && e.target.closest(".clip")) { openStyle(tile); return; }
+    var ready = e.target.closest(".clip.ready");
+    if (ready) { openStyle(ready); return; }
     var box = stage.getBoundingClientRect();
     if (e.clientX - box.left < box.width * 0.33) back();
     else forward();
