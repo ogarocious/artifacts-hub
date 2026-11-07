@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Urban Kiz History Keynote: Test Deck</title>
-<meta name="description" content="Draft test deck for the Kiz Summit Exchange Urban Kiz History Keynote. Slide types, videos and transitions to try.">
+<title>Urban Kiz History Keynote: Draft</title>
+<meta name="description" content="Draft deck for the Kiz Summit Exchange Urban Kiz History Keynote, rebuilt from the Nov 4 session.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#080b0f">
-<meta property="og:title" content="Urban Kiz History Keynote: Test Deck">
-<meta property="og:description" content="Draft for Charles + Laurent. Slide types, videos and transitions to try.">
+<meta property="og:title" content="Urban Kiz History Keynote: Draft">
+<meta property="og:description" content="Draft for Charles + Laurent, rebuilt from the Nov 4 session.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://slides.ogarocious.com/ksx-keynote-template/">
 <meta property="og:image" content="https://slides.ogarocious.com/ksx-keynote-template/og.png">
@@ -165,7 +165,62 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
 .qa .display { font-size: 200px; text-shadow: 0 6px 40px #000; }
 .qa p { margin-top: 22px; font-size: 56px; font-weight: 500; text-shadow: 0 2px 18px #000, 0 0 40px #000; }
 
-/* Transitions under test */
+/* Rebuild from the Nov 4 session: bilingual on every text slide. */
+.divider p .fr { display: block; font-size: 42px; margin-top: 12px; text-shadow: 0 2px 18px #000, 0 0 40px #000; }
+.bi .built li { font-size: 44px; padding: 22px 0; }
+.bi .built li .fr { display: block; font-size: 36px; line-height: 1.24; margin-top: 8px; }
+.bi .col h3 { font-size: 56px; margin-bottom: 8px; }
+.bi .col h3 .fr { display: block; font-size: 32px; margin-top: 4px; }
+.bi .col li { font-size: 36px; padding: 13px 0; }
+.bi .col li .fr { display: block; font-size: 31px; line-height: 1.22; margin-top: 4px; }
+.bi .col b { color: inherit; }
+.bi .prompt { height: 560px; }
+.bi .prompt h3 { font-size: 56px; }
+.bi .prompt h3 .fr { display: block; font-size: 32px; margin-top: 6px; }
+.bi .prompt p { color: var(--ink); font-size: 38px; margin-top: 26px; }
+.bi .prompt p .fr { display: block; font-size: 31px; line-height: 1.24; margin-top: 12px; }
+.bi .prompts.short .prompt { height: auto; min-height: 300px; padding: 30px 34px; }
+.bi .prompts.short .prompt p { margin-top: 16px; font-size: 36px; }
+.bi .stats h3 { font-size: 72px; }
+.bi .line { margin-top: 44px; font-size: 50px; font-weight: 500; line-height: 1.2; text-align: center; }
+.bi .line .fr { display: block; font-size: 37px; line-height: 1.22; margin-top: 10px; }
+.bi .line.left { text-align: left; }
+.quote-slide .line { font-size: 42px; margin-top: 44px; }
+.quote-slide .line .fr { font-size: 33px; }
+.places { margin-top: 20px; font-family: "Poppins", sans-serif; font-weight: 600; font-size: 28px; color: var(--label); }
+.timeline.five { grid-template-columns: repeat(5, 1fr); gap: 26px; }
+.five .era .when { font-size: 50px; }
+.five .era .when .fr { font-size: 31px; }
+.five .era .what { font-size: 27px; }
+.five .era .what .fr { font-size: 25px; }
+.five .era p { font-size: 31px; }
+.five .era p .fr { font-size: 28px; }
+.row-names { margin-top: 46px; }
+.row-names .name { font-size: 42px; }
+.head.tight { margin-bottom: 26px; }
+.roster { margin-bottom: 30px; }
+.roster-label { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 28px; color: var(--ink); margin-bottom: 12px; }
+.roster-label .fr { margin-left: 18px; font-size: 26px; }
+.chips { display: flex; flex-wrap: wrap; gap: 14px; }
+.chips span { font-family: "Anton", sans-serif; font-size: 46px; padding: 12px 26px; background: rgba(20,27,36,.92); }
+.chips .open { font-family: "Rubik", sans-serif; font-weight: 700; font-size: 30px; padding: 20px 24px; background: transparent; border: 2px dashed var(--gold); }
+.chips .open i { font-style: normal; font-weight: 400; color: var(--gold-high); margin-left: 8px; }
+.player.empty { display: flex; align-items: center; justify-content: center; border: 2px dashed var(--gold); }
+
+/* Style boards: one tile per style, each with a clip that opens full size. */
+.styles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+.style { background: rgba(20,27,36,.92); padding: 32px 30px 34px; display: flex; flex-direction: column; }
+.style h3 { font-family: "Anton", sans-serif; font-weight: 400; font-size: 58px; text-transform: uppercase; line-height: 1.05; }
+.style h3 .fr { display: block; font-size: 30px; margin-top: 4px; }
+.style p { font-size: 29px; line-height: 1.25; color: var(--ink); margin: 18px 0 26px; flex: 1; }
+.style p .fr { display: block; font-size: 25px; margin-top: 8px; }
+.style .clip { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--gold); font-family: "Poppins", sans-serif; font-weight: 600; font-size: 24px; color: var(--gold-high); }
+.style.ready .clip { border-style: solid; background: #05070a; cursor: pointer; font-size: 30px; }
+#style-overlay { position: absolute; inset: 0; z-index: 50; display: none; padding: 34px 150px 0; background: #000; }
+#style-overlay.on { display: block; }
+#style-overlay .video-note { cursor: pointer; }
+
+/* Transitions */
 .in-fade   { animation: fadeIn .7s ease both; }
 .in-slide  { animation: slideIn .75s cubic-bezier(.22,.8,.22,1) both; }
 .in-moon   { animation: moonIn 1.05s cubic-bezier(.5,0,.2,1) both; }
@@ -200,144 +255,380 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
     <div class="ack">Funded in part by the Austin Arts, Culture, Music and Entertainment (AACME) Program</div>
   </section>
 
-  <!-- 2. PAST -->
+  <!-- 2. DISCLAIMER -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Disclaimer">
+    <div class="head">
+      <div><h2>What you will hear is what we saw</h2><span class="fr" lang="fr">Ce que vous allez entendre, c'est ce que nous avons vu</span></div>
+    </div>
+    <ul class="built">
+      <li class="step">We were there. Nothing here is invented.<span class="fr" lang="fr">Nous y étions. Rien ici n'est inventé.</span></li>
+      <li class="step">It is our perspective: some of the puzzle pieces, not every angle.<span class="fr" lang="fr">C'est notre point de vue : quelques pièces du puzzle, pas tous les angles.</span></li>
+      <li class="step">Everyone who lived it has their own story.<span class="fr" lang="fr">Chaque personne qui l'a vécu a sa propre histoire.</span></li>
+    </ul>
+  </section>
+
+  <!-- 3. THREE THREADS -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Three threads">
+    <div class="head">
+      <div><h2>Not only a history of dance</h2><span class="fr" lang="fr">Pas seulement une histoire de danse</span></div>
+    </div>
+    <div class="prompts short">
+      <div class="prompt step"><h3>Dance<span class="fr" lang="fr">La danse</span></h3><p>How Paris was dancing<span class="fr" lang="fr">Comment on dansait à Paris</span></p></div>
+      <div class="prompt step"><h3>Music<span class="fr" lang="fr">La musique</span></h3><p>What played at the parties<span class="fr" lang="fr">Ce qui passait en soirée</span></p></div>
+      <div class="prompt step"><h3>Culture<span class="fr" lang="fr">La culture</span></h3><p>Who was in the room, and why<span class="fr" lang="fr">Qui était là, et pourquoi</span></p></div>
+    </div>
+    <p class="line step">"Without those three, Urban Kiz would not exist."<span class="fr" lang="fr">« Sans ces trois-là, l'Urban Kiz n'existerait pas. »</span></p>
+  </section>
+
+  <!-- 4. PAST -->
   <section class="slide art divider" data-t="moon" data-label="Section divider">
     <div class="display">Past</div>
-    <p>Before it had a name</p>
+    <p>Before it had a name<span class="fr" lang="fr">Avant d'avoir un nom</span></p>
   </section>
 
-  <!-- 3. TIMELINE -->
+  <!-- 5. TIMELINE -->
   <section class="slide art-dim bi" data-t="fade" data-label="Timeline">
     <div class="head">
-      <div><h2>From Angola to Paris to everywhere</h2><span class="fr" lang="fr">De l'Angola à Paris, puis partout</span></div>
-      <span class="tag">Confirm dates + French</span>
+      <div><h2>From Portugal to Paris to the world</h2><span class="fr" lang="fr">Du Portugal à Paris, puis au monde entier</span></div>
+      <span class="tag">Confirm dates</span>
     </div>
-    <div class="timeline">
-      <div class="era step"><div class="when">Before 2010<span class="fr" lang="fr">Avant 2010</span></div><div class="what">The roots<span class="fr" lang="fr">Les racines</span></div><p>Kizomba from Angola, 1980s. Ghetto Zouk from Rotterdam.<span class="fr" lang="fr">La kizomba d'Angola, années 1980. Le ghetto zouk de Rotterdam.</span></p></div>
-      <div class="era step"><div class="when">2011 to 2014<span class="fr" lang="fr">2011 à 2014</span></div><div class="what">The Paris fusion era<span class="fr" lang="fr">L'ère de la fusion à Paris</span></div><p>One movement, many names: Kizomba 2.0, French Style, New Style.<span class="fr" lang="fr">Un mouvement, plusieurs noms.</span></p></div>
-      <div class="era step"><div class="when">May 10, 2015<span class="fr" lang="fr">10 mai 2015</span></div><div class="what">The name<span class="fr" lang="fr">Le nom</span></div><p>"Urban Kiz" brings the style under one banner.<span class="fr" lang="fr">« Urban Kiz » réunit le style sous une seule bannière.</span></p></div>
-      <div class="era step"><div class="when">Today<span class="fr" lang="fr">Aujourd'hui</span></div><div class="what">The flavors<span class="fr" lang="fr">Les styles</span></div><p>Elegant. Douceur. Technical Stepping. Lifts &amp; Tricks. Afro Urban Kiz.</p></div>
-    </div>
-  </section>
-
-  <!-- 4. NAMES -->
-  <section class="slide art-dim bi" data-t="fade" data-label="Names grid">
-    <div class="head">
-      <div><h2>A scene, not a founder</h2><span class="fr" lang="fr">Une scène, pas un fondateur</span></div>
-      <span class="tag">Confirm names + French</span>
-    </div>
-    <div class="names">
-      <div class="name step">Laurent</div><div class="name step">Adeline</div><div class="name step">Albir Rojas</div><div class="name step">Curtis</div><div class="name step">Yami</div>
-      <div class="name step">Steffi</div><div class="name step">Sherazade</div><div class="name step">Ennuel</div><div class="name step">Hakima</div><div class="name step">Félicien</div>
-      <div class="name step">Isabelle</div><div class="name step">Enah</div><div class="name step">Carolina</div><div class="name open step"><div>Who's missing?<span class="fr" lang="fr">Qui manque ?</span></div></div>
+    <div class="timeline five">
+      <div class="era step"><div class="when">About 2006<span class="fr" lang="fr">Vers 2006</span></div><div class="what">Kizomba reaches Paris<span class="fr" lang="fr">La kizomba arrive à Paris</span></div><p>Through Portugal, with Angolan and Portuguese teachers.<span class="fr" lang="fr">Par le Portugal, avec des profs angolais et portugais.</span></p></div>
+      <div class="era step"><div class="when">2006 to 2007<span class="fr" lang="fr">2006 à 2007</span></div><div class="what">Salsa festivals<span class="fr" lang="fr">Les festivals de salsa</span></div><p>First Kizomba demos in the salsa and bachata scene.<span class="fr" lang="fr">Premières démos de kizomba dans le milieu salsa-bachata.</span></p></div>
+      <div class="era step"><div class="when">2010 to 2015<span class="fr" lang="fr">2010 à 2015</span></div><div class="what">French style<span class="fr" lang="fr">Le style français</span></div><p>Paris dances to Ghetto Zouk. Then comes the name Urban Kiz.<span class="fr" lang="fr">Paris danse sur du ghetto zouk. Puis vient le nom Urban Kiz.</span></p></div>
+      <div class="era step"><div class="when">2016 to 2017<span class="fr" lang="fr">2016 à 2017</span></div><div class="what">The peak<span class="fr" lang="fr">L'apogée</span></div><p>Parties every night in Paris.<span class="fr" lang="fr">Des soirées tous les soirs à Paris.</span></p></div>
+      <div class="era step"><div class="when">After COVID<span class="fr" lang="fr">Après le COVID</span></div><div class="what">The decline<span class="fr" lang="fr">Le déclin</span></div><p>Events restarted, but many did not survive.<span class="fr" lang="fr">Les événements ont repris, mais beaucoup n'ont pas survécu.</span></p></div>
     </div>
   </section>
 
-  <!-- 5. QUOTE -->
-  <section class="slide art-dim quote-slide bi" data-t="fade" data-label="Big quote">
-    <span class="tag">Laurent to approve quote + French</span>
+  <!-- 6. PASSADA -->
+  <section class="slide art-dim quote-slide bi" data-t="fade" data-label="Passada">
+    <span class="tag">Laurent to approve</span>
     <blockquote>
-      "It was people leaving the class, people complaining: we don't dance enough, it's too much theory.
-      <span class="fr" lang="fr">« Il y avait des gens qui quittaient le cours, des gens qui se plaignaient : on ne danse pas assez, il y a trop de théorie.</span>
-      <span class="turn step">And then today, everyone wants to be musical."<span class="fr" lang="fr">Et aujourd'hui, tout le monde veut être musical. »</span></span>
+      "If Urban Kiz had parents, the father would be Passada."
+      <span class="fr" lang="fr">« Si l'Urban Kiz avait des parents, le père serait la passada. »</span>
     </blockquote>
-    <cite class="step">LAURENT, AUG 14, 2026</cite>
+    <cite>LAURENT</cite>
+    <p class="line left step">A way of dancing shared across Portuguese-speaking Africa, before the names Kizomba and Semba.<span class="fr" lang="fr">Une façon de danser partagée dans l'Afrique lusophone, avant les noms kizomba et semba.</span></p>
+    <p class="places step">Angola &middot; Cape Verde &middot; Guinea-Bissau &middot; São Tomé &middot; Mozambique</p>
   </section>
 
-  <!-- 6. VIDEO: YOUTUBE -->
+  <!-- DANCE STYLES -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Dance styles">
+    <div class="head tight">
+      <div><h2>What it looks like</h2><span class="fr" lang="fr">À quoi ça ressemble</span></div>
+      <span class="tag">Pick clips with Laurent</span>
+    </div>
+    <div class="styles">
+      <div class="style step" data-yt="" data-start="0" data-title="Semba"><h3>Semba<span class="fr" lang="fr">La semba</span></h3><p>Angola. Upbeat, playful, social.<span class="fr" lang="fr">L'Angola. Rapide, joueuse, sociale.</span></p><div class="clip">Pick a clip</div></div>
+      <div class="style step" data-yt="" data-start="0" data-title="Passada"><h3>Passada<span class="fr" lang="fr">La passada</span></h3><p>Shared across Portuguese-speaking Africa.<span class="fr" lang="fr">Partagée dans l'Afrique lusophone.</span></p><div class="clip">Pick a clip</div></div>
+      <div class="style step" data-yt="" data-start="0" data-title="Kizomba"><h3>Kizomba<span class="fr" lang="fr">La kizomba</span></h3><p>Angola, 1980s. Close embrace, walking to the music.<span class="fr" lang="fr">L'Angola, années 80. Corps à corps, on marche sur la musique.</span></p><div class="clip">Pick a clip</div></div>
+      <div class="style step" data-yt="" data-start="0" data-title="Urban Kiz"><h3>Urban Kiz<span class="fr" lang="fr">L'Urban Kiz</span></h3><p>Paris, 2010s. Born dancing to Ghetto Zouk.<span class="fr" lang="fr">Paris, années 2010. Née en dansant sur du ghetto zouk.</span></p><div class="clip">Pick a clip</div></div>
+    </div>
+  </section>
+
+  <!-- 7. MUSIC -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Music">
+    <div class="head">
+      <div><h2>Paris wasn't dancing to Kizomba</h2><span class="fr" lang="fr">Paris ne dansait pas sur de la kizomba</span></div>
+      <span class="tag">Confirm names</span>
+    </div>
+    <p class="line left step">The parties played Ghetto Zouk: pop from the Portuguese-speaking diaspora, made for radio, not for dancers.<span class="fr" lang="fr">Les soirées passaient du ghetto zouk : la pop de la diaspora lusophone, faite pour la radio, pas pour les danseurs.</span></p>
+    <div class="names row-names">
+      <div class="name step">Nelson Freitas</div><div class="name step">Elji</div><div class="name step">Anselmo Ralph</div><div class="name step">Stony</div><div class="name step">Jennifer Dias</div>
+    </div>
+  </section>
+
+  <!-- MUSIC STYLES -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Music styles">
+    <div class="head tight">
+      <div><h2>What it sounds like</h2><span class="fr" lang="fr">Ce que ça donne à l'oreille</span></div>
+      <span class="tag">Pick clips with Laurent</span>
+    </div>
+    <div class="styles">
+      <div class="style step" data-yt="" data-start="0" data-title="Semba"><h3>Semba<span class="fr" lang="fr">La semba</span></h3><p>Angola. Fast and joyful, guitar-led.<span class="fr" lang="fr">L'Angola. Rapide et joyeuse, portée par la guitare.</span></p><div class="clip">Pick a clip</div></div>
+      <div class="style step" data-yt="" data-start="0" data-title="Zouk"><h3>Zouk<span class="fr" lang="fr">Le zouk</span></h3><p>Guadeloupe and Martinique, 1980s.<span class="fr" lang="fr">La Guadeloupe et la Martinique, années 80.</span></p><div class="clip">Pick a clip</div></div>
+      <div class="style step" data-yt="" data-start="0" data-title="Kizomba"><h3>Kizomba<span class="fr" lang="fr">La kizomba</span></h3><p>Angola, 1980s. Semba slowed down, with zouk in it.<span class="fr" lang="fr">L'Angola, années 80. De la semba ralentie, avec du zouk dedans.</span></p><div class="clip">Pick a clip</div></div>
+      <div class="style step" data-yt="" data-start="0" data-title="Ghetto Zouk"><h3>Ghetto Zouk<span class="fr" lang="fr">Le ghetto zouk</span></h3><p>The diaspora pop Paris danced to.<span class="fr" lang="fr">La pop de la diaspora sur laquelle Paris dansait.</span></p><div class="clip">Pick a clip</div></div>
+    </div>
+  </section>
+
+  <!-- 8. VIDEO: TO PICK -->
+  <section class="slide video-slide" data-t="fade" data-label="Video: to pick">
+    <div class="eyebrow">"In my opinion, the beginning of everything." &middot; Laurent</div>
+    <div class="video-title">Stony, Danza Kizomba</div>
+    <div class="player empty"><span class="tag">Pick the video and the moment</span></div>
+  </section>
+
+  <!-- 9. WHY PARIS -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Why Paris">
+    <div class="head">
+      <div><h2>It could only be born in Paris</h2><span class="fr" lang="fr">Elle ne pouvait naître qu'à Paris</span></div>
+    </div>
+    <div class="prompts">
+      <div class="prompt step"><h3>French Caribbean<span class="fr" lang="fr">Les Antilles françaises</span></h3><p>Guadeloupe and Martinique: a community that goes out to dance.<span class="fr" lang="fr">La Guadeloupe et la Martinique : une communauté qui sort danser.</span></p></div>
+      <div class="prompt step"><h3>Cape Verde<span class="fr" lang="fr">Le Cap-Vert</span></h3><p>Many came through Portugal, to Paris, for work.<span class="fr" lang="fr">Beaucoup sont passés par le Portugal, vers Paris, pour travailler.</span></p></div>
+      <div class="prompt step"><h3>Black America<span class="fr" lang="fr">L'Amérique noire</span></h3><p>R&amp;B and hip-hop at every Afro-Caribbean party.<span class="fr" lang="fr">Le R&amp;B et le hip-hop dans chaque soirée afro-caribéenne.</span></p></div>
+    </div>
+  </section>
+
+  <!-- 10. MIGRATION -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Migration">
+    <div class="head">
+      <div><h2>A move that had nothing to do with dance</h2><span class="fr" lang="fr">Un départ qui n'avait rien à voir avec la danse</span></div>
+      <span class="tag">Laurent to approve + confirm dates</span>
+    </div>
+    <ul class="built">
+      <li class="step">1950s and 60s: paid flights from Guadeloupe and Martinique to work in France.<span class="fr" lang="fr">Années 1950 et 60 : des billets payés depuis la Guadeloupe et la Martinique pour venir travailler en France.</span></li>
+      <li class="step">Hospitals, the post office, the administration: the jobs many did not want.<span class="fr" lang="fr">Les hôpitaux, la poste, l'administration : des emplois dont beaucoup ne voulaient pas.</span></li>
+      <li class="step">Laurent's parents moved to Paris for work. He was born there.<span class="fr" lang="fr">Les parents de Laurent sont venus à Paris pour travailler. Il y est né.</span></li>
+    </ul>
+  </section>
+
+  <!-- 11. BLACK AMERICA -->
+  <section class="slide art-dim quote-slide bi" data-t="fade" data-label="Black America">
+    <span class="tag">Laurent to approve</span>
+    <blockquote>
+      "For Black French people, being Black American style was really a compliment."
+      <span class="fr" lang="fr">« Pour les Français noirs, avoir le style afro-américain, c'était vraiment un compliment. »</span>
+    </blockquote>
+    <cite>LAURENT</cite>
+    <p class="line left step">Hip-hop in Korea, India, Taiwan, Argentina. Why does the world copy this story?<span class="fr" lang="fr">Le hip-hop en Corée, en Inde, à Taïwan, en Argentine. Pourquoi le monde copie-t-il cette histoire ?</span></p>
+  </section>
+
+  <!-- 12. TWO ROADS -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Two roads">
+    <div class="head">
+      <div><h2>Two roads into Kizomba</h2><span class="fr" lang="fr">Deux chemins vers la kizomba</span></div>
+      <span class="tag">Confirm names</span>
+    </div>
+    <div class="compare">
+      <div class="col">
+        <h3>Salsa + bachata<span class="fr" lang="fr">Salsa et bachata</span></h3>
+        <ul>
+          <li class="step">Afro Latin Connection: Ricardo and Paula<span class="fr" lang="fr">Afro Latin Connection : Ricardo et Paula</span></li>
+          <li class="step">How Kizomba went around the world<span class="fr" lang="fr">C'est ainsi que la kizomba a fait le tour du monde</span></li>
+          <li class="step">How Charles first learned it, in the US<span class="fr" lang="fr">C'est ainsi que Charles l'a apprise, aux États-Unis</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Afro-Caribbean Paris<span class="fr" lang="fr">Le Paris afro-caribéen</span></h3>
+        <ul>
+          <li class="step">Parties with dancehall, zouk and R&amp;B<span class="fr" lang="fr">Des soirées dancehall, zouk et R&amp;B</span></li>
+          <li class="step">A different vibe, a different way of dancing<span class="fr" lang="fr">Une autre ambiance, une autre façon de danser</span></li>
+          <li class="step">In Laurent's count, 90% of who built Urban Kiz<span class="fr" lang="fr">Selon Laurent, 90 % de ceux qui ont construit l'Urban Kiz</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. ALBIR -->
+  <section class="slide art-dim quote-slide bi" data-t="fade" data-label="Big quote">
+    <span class="tag">Laurent to approve</span>
+    <blockquote>
+      "Albir was the person opening the door, slowly.
+      <span class="fr" lang="fr">« Albir, c'est celui qui a ouvert la porte, doucement.</span>
+      <span class="turn step">Then all the Parisians came and crashed the door."<span class="fr" lang="fr">Puis tous les Parisiens sont arrivés et ont enfoncé la porte. »</span></span>
+    </blockquote>
+    <cite class="step">LAURENT</cite>
+  </section>
+
+  <!-- 14. NAMES -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Names grid">
+    <div class="head tight">
+      <div><h2>A scene, not a founder</h2><span class="fr" lang="fr">Une scène, pas un fondateur</span></div>
+      <span class="tag">Confirm names</span>
+    </div>
+    <div class="roster step">
+      <div class="roster-label">Teaching in Paris before 2010<span class="fr" lang="fr">Ils enseignaient à Paris avant 2010</span></div>
+      <div class="chips"><span>Tony Pirata</span><span>Tekas</span><span>Victor</span><span>Coralie</span><span>Morena</span><span>Petchu</span></div>
+    </div>
+    <div class="roster step">
+      <div class="roster-label">Building the style<span class="fr" lang="fr">Ils ont construit le style</span></div>
+      <div class="chips"><span>Albir Rojas</span><span>Curtis</span><span>Moun</span><span>Enah</span><span>Ennuel</span><span>Simeon</span><span>Laurent</span></div>
+    </div>
+    <div class="roster step">
+      <div class="roster-label">The follows<span class="fr" lang="fr">Les followers</span></div>
+      <div class="chips"><span>Adeline</span><span>Yami</span><span>Steffi</span><span>Sherazade</span><span class="open">Who's missing? <i lang="fr">Qui manque ?</i></span></div>
+    </div>
+  </section>
+
+  <!-- 15. VIDEO: YOUTUBE -->
   <section class="slide video-slide" data-t="fade" data-label="Video: YouTube" data-video="yt">
-    <div class="eyebrow">Video test A &middot; streams from YouTube</div>
+    <div class="eyebrow">Paris era &middot; streams from YouTube</div>
     <div class="video-title">L&amp;A Kizomba: Technical Steps 4 &middot; Evokeez World, 2014</div>
     <iframe class="player" id="yt" title="L&amp;A Kizomba: Technical Steps 4" allow="autoplay; fullscreen; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     <div class="video-note">Needs internet. Click to play, starts at 0:45. Then press the right arrow to move on.</div>
   </section>
 
-  <!-- 7. VIDEO: SAVED CLIP -->
-  <section class="slide video-slide" data-t="fade" data-label="Video: saved clip" data-video="local">
-    <div class="eyebrow">Video test B &middot; saved clip, no YouTube</div>
-    <div class="video-title">Laurent &amp; Adeline &middot; Neo Kizomba Festival 2015 &middot; 30 second cut</div>
-    <video class="player" id="clip" src="assets/clip-laurent-adeline.mp4" preload="auto" controls playsinline></video>
-    <div class="video-note">From the laptop at the studio, this needs no internet. Right arrow plays it, right arrow again moves on.</div>
+  <!-- 16. THE PEAK -->
+  <section class="slide art-dim bi" data-t="fade" data-label="The peak">
+    <div class="head">
+      <div><h2>2016 to 2017: the crazy era</h2><span class="fr" lang="fr">2016 à 2017 : l'époque folle</span></div>
+    </div>
+    <div class="prompts short stats">
+      <div class="prompt step"><h3>Every night<span class="fr" lang="fr">Tous les soirs</span></h3><p>Parties across Paris, Monday to Sunday<span class="fr" lang="fr">Des soirées dans tout Paris, du lundi au dimanche</span></p></div>
+      <div class="prompt step"><h3>Every month<span class="fr" lang="fr">Tous les mois</span></h3><p>Almost: a big festival<span class="fr" lang="fr">Presque : un grand festival</span></p></div>
+      <div class="prompt step"><h3>1,000 to 2,000<span class="fr" lang="fr">1 000 à 2 000</span></h3><p>People at each festival<span class="fr" lang="fr">Personnes à chaque festival</span></p></div>
+    </div>
+    <p class="line step">The goal was never to build Paris. The goal was to go worldwide.<span class="fr" lang="fr">Le but n'a jamais été de construire Paris. Le but, c'était le monde entier.</span></p>
   </section>
 
-  <!-- 8. PRESENT -->
+  <!-- 17. PRESENT -->
   <section class="slide art divider" data-t="slide" data-label="Section divider">
     <div class="display">P<span class="k">resent</span></div>
-    <p>Two villages, one summit</p>
+    <p>Why did Kizomba decline, and not Bachata?<span class="fr" lang="fr">Pourquoi la kizomba a décliné, et pas la bachata ?</span></p>
   </section>
 
-  <!-- 9. SPOTLIGHT -->
-  <section class="slide art-dim" data-t="fade" data-label="Instructor spotlight">
+  <!-- 18. PARIS TODAY -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Paris today">
     <div class="head">
-      <div><div class="eyebrow">Instructor spotlight</div><h2>Laurent built stages for other dancers</h2></div>
-      <span class="tag">Confirm details</span>
+      <div><h2>"Today, two parties in one week is a big week."</h2><span class="fr" lang="fr">« Aujourd'hui, deux soirées dans la semaine, c'est une grosse semaine. »</span></div>
+      <span class="tag">Laurent to approve</span>
     </div>
-    <div class="spotlight">
-      <div>
-        <img src="assets/photos/laurent.jpg" alt="Laurent">
-        <div class="aside">Also DJ Low. Stepped away in 2019, by choice.</div>
-      </div>
-      <ul class="built">
-        <li class="step">Show Your Style<small>20+ editions, created around 2015</small></li>
-        <li class="step">Olympiades of Kizomba<small>Urban, Sensual and Authentic categories</small></li>
-        <li class="step">Online Kizomba School</li>
-        <li class="step">Amazing Follows</li>
-        <li class="step">Kizomba Xperience<small>Disneyland Paris</small></li>
-      </ul>
-    </div>
+    <ul class="built">
+      <li class="step">Saida survived. Search "Kizomba classes Paris" and it comes up first.<span class="fr" lang="fr">Saida a survécu. Cherchez « cours de kizomba Paris » : elle arrive en premier.</span></li>
+      <li class="step">Online Kizomba School still gets sign-ups, because the tutorials still rank.<span class="fr" lang="fr">Online Kizomba School a encore des inscrits, car les tutos restent bien classés.</span></li>
+      <li class="step">New people can only come if they can find you.<span class="fr" lang="fr">Les nouveaux ne peuvent venir que s'ils vous trouvent.</span></li>
+    </ul>
   </section>
 
-  <!-- 10. COMPARE -->
-  <section class="slide art-dim" data-t="fade" data-label="Two-column compare">
+  <!-- 19. NEW DANCERS -->
+  <section class="slide art-dim bi" data-t="fade" data-label="New dancers">
     <div class="head">
-      <div><div class="eyebrow">Two villages</div><h2>Paris and Austin</h2></div>
-      <span class="tag">Confirm years</span>
+      <div><h2>What keeps a dance alive: new dancers, every year</h2><span class="fr" lang="fr">Ce qui garde une danse vivante : de nouveaux danseurs, chaque année</span></div>
     </div>
-    <div class="compare">
-      <div class="col paris">
-        <h3>Paris</h3>
-        <ul>
-          <li class="step">A boom before the world knew the name</li>
-          <li class="step">It went international through the salsa festivals</li>
-          <li class="step">Laurent builds Show Your Style and the Olympiades</li>
-        </ul>
-      </div>
-      <div class="col austin">
-        <h3>Austin</h3>
-        <ul>
-          <li class="step"><b>2015:</b> Laurent's first time in the US, at Neo Kizomba</li>
-          <li class="step">Show Your Style and the Olympiades come to Austin</li>
-          <li class="step"><b>2019:</b> the first Urban Kiz Jack &amp; Jill</li>
-        </ul>
-      </div>
-    </div>
+    <ul class="built">
+      <li class="step">Every community leaks. You have to attract more people than you lose.<span class="fr" lang="fr">Toute communauté perd du monde. Il faut attirer plus de gens qu'on n'en perd.</span></li>
+      <li class="step">Too many demos are made for people who already dance.<span class="fr" lang="fr">Trop de démos sont faites pour ceux qui dansent déjà.</span></li>
+      <li class="step">You can become the biggest artist of the smallest community.<span class="fr" lang="fr">On peut devenir le plus grand artiste de la plus petite communauté.</span></li>
+    </ul>
   </section>
 
-  <!-- 11. FUTURE -->
-  <section class="slide art divider" data-t="rise" data-label="Section divider">
-    <div class="display">Futu<span class="k">re</span></div>
-    <p>Where does the dance go from here?</p>
-  </section>
-
-  <!-- 12. OPEN PROMPT -->
-  <section class="slide art-dim" data-t="fade" data-label="Open prompt">
+  <!-- 20. THREE THREADS TODAY -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Three threads today">
     <div class="head">
-      <div><div class="eyebrow">To fill in on the recording</div><h2>What comes after this week?</h2></div>
-      <span class="tag">Charles + Laurent to write</span>
+      <div><h2>Dance, music, culture, today</h2><span class="fr" lang="fr">Danse, musique, culture, aujourd'hui</span></div>
+      <span class="tag">Our view</span>
     </div>
     <div class="prompts">
-      <div class="prompt step"><h3>The dance</h3><p>What should Urban Kiz protect, and what should it change?</p></div>
-      <div class="prompt step"><h3>The teaching</h3><p>What should dancers ask of their teachers and themselves?</p></div>
-      <div class="prompt step"><h3>This room</h3><p>What can everyone here take home and do next?</p></div>
+      <div class="prompt step"><h3>Dance<span class="fr" lang="fr">La danse</span></h3><p>Does it make a non-dancer want to start?<span class="fr" lang="fr">Donne-t-elle envie de commencer à quelqu'un qui ne danse pas ?</span></p></div>
+      <div class="prompt step"><h3>Music<span class="fr" lang="fr">La musique</span></h3><p>People who didn't dance played Ghetto Zouk. Who plays battle Kiz music?<span class="fr" lang="fr">Des non-danseurs écoutaient du ghetto zouk. Qui écoute la musique de battle kiz ?</span></p></div>
+      <div class="prompt step"><h3>Culture<span class="fr" lang="fr">La culture</span></h3><p>In Paris, that same crowd is moving to Kompa.<span class="fr" lang="fr">À Paris, ce même public se tourne vers le kompa.</span></p></div>
     </div>
   </section>
 
-  <!-- 13. Q&A -->
+  <!-- 21. COMPARE -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Two-column compare">
+    <div class="head">
+      <div><h2>Moves to connect, or moves to execute?</h2><span class="fr" lang="fr">Des mouvements pour se connecter, ou pour exécuter ?</span></div>
+      <span class="tag">Our view</span>
+    </div>
+    <div class="compare">
+      <div class="col">
+        <h3>Bachata</h3>
+        <ul>
+          <li class="step">Even the flashy moves create connection<span class="fr" lang="fr">Même les mouvements spectaculaires créent de la connexion</span></li>
+          <li class="step">Non-dancers listen to the music<span class="fr" lang="fr">Les non-danseurs écoutent la musique</span></li>
+          <li class="step">Still growing since COVID<span class="fr" lang="fr">Toujours en croissance depuis le COVID</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Urban Kiz today<span class="fr" lang="fr">L'Urban Kiz aujourd'hui</span></h3>
+        <ul>
+          <li class="step">The goal is to succeed at the move<span class="fr" lang="fr">Le but, c'est de réussir le mouvement</span></li>
+          <li class="step">Connection comes second<span class="fr" lang="fr">La connexion passe au second plan</span></li>
+          <li class="step">Validation from other dancers<span class="fr" lang="fr">La validation des autres danseurs</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22. PARIS + AUSTIN -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Paris and Austin">
+    <div class="head">
+      <div><h2>Two villages: Paris and Austin</h2><span class="fr" lang="fr">Deux villages : Paris et Austin</span></div>
+      <span class="tag">Not covered Nov 4. Keep?</span>
+    </div>
+    <div class="compare">
+      <div class="col">
+        <h3>Paris</h3>
+        <ul>
+          <li class="step">A boom before the world knew the name<span class="fr" lang="fr">Un boom avant que le monde connaisse le nom</span></li>
+          <li class="step">Laurent builds Show Your Style and the Olympiades<span class="fr" lang="fr">Laurent crée Show Your Style et les Olympiades</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Austin</h3>
+        <ul>
+          <li class="step"><b>2015:</b> Laurent's first time in the US, at Neo Kizomba<span class="fr" lang="fr">2015 : la première fois de Laurent aux États-Unis, à Neo Kizomba</span></li>
+          <li class="step"><b>2019:</b> the first Urban Kiz Jack &amp; Jill<span class="fr" lang="fr">2019 : le premier Jack &amp; Jill d'Urban Kiz</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23. VIDEO: SAVED CLIP -->
+  <section class="slide video-slide" data-t="fade" data-label="Video: saved clip" data-video="local">
+    <div class="eyebrow">Austin, 2015</div>
+    <div class="video-title">Laurent &amp; Adeline &middot; Neo Kizomba Festival 2015 &middot; 30 second cut</div>
+    <video class="player" id="clip" src="assets/clip-laurent-adeline.mp4" preload="auto" controls playsinline></video>
+    <div class="video-note">From the laptop, this needs no internet. Right arrow plays it, right arrow again moves on.</div>
+  </section>
+
+  <!-- 24. FUTURE -->
+  <section class="slide art divider" data-t="rise" data-label="Section divider">
+    <div class="display">Futu<span class="k">re</span></div>
+    <p>More connection<span class="fr" lang="fr">Plus de connexion</span></p>
+  </section>
+
+  <!-- 25. DEFINING URBAN -->
+  <section class="slide art-dim bi" data-t="fade" data-label="Defining Urban Kiz">
+    <div class="head">
+      <div><h2>Urban Kiz doesn't have to disconnect the body</h2><span class="fr" lang="fr">L'Urban Kiz n'a pas à séparer les corps</span></div>
+      <span class="tag">Write this one together</span>
+    </div>
+    <ul class="built">
+      <li class="step">Body to body counts. Even a beginner, on the spot, already creates something.<span class="fr" lang="fr">Le corps à corps compte. Même un débutant, sur place, crée déjà quelque chose.</span></li>
+      <li class="step">Disconnection when the moment needs it. It should not be the purpose.<span class="fr" lang="fr">La déconnexion quand le moment le demande. Elle ne doit pas être le but.</span></li>
+      <li class="step">Bachata, Kompa, Tarraxo: different music, still body to body.<span class="fr" lang="fr">Bachata, kompa, tarraxo : des musiques différentes, toujours le corps à corps.</span></li>
+    </ul>
+  </section>
+
+  <!-- 26. INTENTION -->
+  <section class="slide art-dim quote-slide bi" data-t="fade" data-label="Big quote">
+    <span class="tag">Laurent to approve</span>
+    <blockquote>
+      "They don't like to be manipulated anymore.
+      <span class="fr" lang="fr">« Ils n'aiment plus être manipulés.</span>
+      <span class="turn step">They just want to be led with intention."<span class="fr" lang="fr">Ils veulent simplement être guidés avec l'intention. »</span></span>
+    </blockquote>
+    <cite class="step">LAURENT, ON HIS STUDENTS AT EVOKEEZ</cite>
+  </section>
+
+  <!-- 27. CONCLUSION -->
+  <section class="slide art-dim quote-slide bi" data-t="fade" data-label="Conclusion">
+    <blockquote>
+      How much oxytocin does a cross step release?
+      <span class="fr" lang="fr">Combien d'ocytocine libère un cross step ?</span>
+      <span class="turn step">"If we don't want to die, we need to focus on connection."<span class="fr" lang="fr">« Si on ne veut pas mourir, il faut se concentrer sur la connexion. »</span></span>
+    </blockquote>
+    <cite class="step">LAURENT</cite>
+  </section>
+
+  <!-- 28. Q&A -->
   <section class="slide art qa" data-t="moon" data-label="Q&amp;A">
     <div class="display">Ques<span class="k">tions</span></div>
     <p>Vos questions</p>
     <div class="ack">Funded in part by the Austin Arts, Culture, Music and Entertainment (AACME) Program</div>
   </section>
+
+  <div id="style-overlay">
+    <div class="eyebrow">Streams from YouTube</div>
+    <div class="video-title" id="style-title"></div>
+    <iframe class="player" id="style-yt" title="Style example" allow="autoplay; fullscreen; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div class="video-note" id="style-close">Needs internet. Click anywhere outside the video to go back to the styles.</div>
+  </div>
 
 </div>
 <div id="toast"></div>
@@ -354,12 +645,14 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
   var index = 0;
   var override = 0;
   var clipStarted = false;
+  var overlay = document.getElementById("style-overlay");
+  var styleYt = document.getElementById("style-yt");
   var toastTimer, idleTimer, leaveTimer;
 
   slides.forEach(function (s, i) {
     var c = document.createElement("div");
     c.className = "counter";
-    c.textContent = (i + 1) + " / " + slides.length;
+    c.textContent = (i + 1) + " / " + slides.length + " · French draft";
     s.appendChild(c);
   });
 
@@ -377,7 +670,26 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
 
   function stepsOf(s) { return Array.prototype.slice.call(s.querySelectorAll(".step")); }
 
+  // A tile with a YouTube id in data-yt can be played; empty ones say "Pick a clip".
+  Array.prototype.forEach.call(document.querySelectorAll(".style"), function (t) {
+    if (!t.dataset.yt) return;
+    t.classList.add("ready");
+    t.querySelector(".clip").textContent = "\u25B6 Play";
+  });
+
+  function openStyle(t) {
+    document.getElementById("style-title").textContent = t.dataset.title;
+    styleYt.setAttribute("src", "https://www.youtube.com/embed/" + t.dataset.yt + "?start=" + (t.dataset.start || 0) + "&autoplay=1&rel=0&modestbranding=1&playsinline=1");
+    overlay.classList.add("on");
+  }
+
+  function closeStyle() {
+    if (styleYt.getAttribute("src")) styleYt.removeAttribute("src");
+    overlay.classList.remove("on");
+  }
+
   function stopVideos() {
+    closeStyle();
     if (yt.getAttribute("src")) yt.removeAttribute("src");
     clip.pause();
     clip.currentTime = 0;
@@ -433,6 +745,10 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
 
   document.addEventListener("keydown", function (e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (overlay.classList.contains("on")) {
+      if (e.key === "Escape" || e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); closeStyle(); }
+      return;
+    }
     switch (e.key) {
       case "ArrowRight": case "ArrowDown": case "PageDown": case " ": case "Enter":
         e.preventDefault(); forward(); break;
@@ -448,9 +764,19 @@ cite { display: block; margin-top: 46px; font-style: normal; font-family: "Poppi
     }
   });
 
+  // While a style clip is open, a click anywhere outside the video closes it and does nothing else.
+  // Clicks on the video itself stay inside YouTube and never reach the page.
+  document.addEventListener("click", function (e) {
+    if (!overlay.classList.contains("on")) return;
+    e.stopPropagation();
+    closeStyle();
+  }, true);
+
   // No keyboard needed: tap or click the right side to go forward, the left side to go back.
   stage.addEventListener("click", function (e) {
     if (e.target === yt || e.target === clip) return;
+    var tile = e.target.closest(".style.ready");
+    if (tile && e.target.closest(".clip")) { openStyle(tile); return; }
     var box = stage.getBoundingClientRect();
     if (e.clientX - box.left < box.width * 0.33) back();
     else forward();
