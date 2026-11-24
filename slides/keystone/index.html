@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keystone - Ogarocious</title>
+  <meta name="description" content="Keystone: a read-only X-ray of how a company actually runs. Every automation, who can access what, and where the software money goes, in one dashboard. Sample data." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  /* Diaspora Modern - Ogarocious brand palette */
+  --bg: #0f0b08; --panel: #1a1410; --raise: #221c16;
+  --ink: #f5eee0; --muted: #b5ae9f; --faint: #8f8878;
+  --line: #312d23; --line-strong: #4b4638; --link: #6b6557;
+  --accent: #d4552b; --amber: #c99647; --teal: #7ba4a5;
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  --label: "Bricolage Grotesque", system-ui, sans-serif;
+  --mono: "Inter", -apple-system, Arial, sans-serif;
+  --sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+
+/* ---- App bar ---- */
+.appbar {
+  position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; padding: 16px 32px; background: rgba(15,11,8,.86); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line-strong);
+}
+.brand { display: flex; align-items: baseline; gap: 14px; min-width: 0; }
+.brand .product { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: -.01em; }
+.brand .client { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mainnav { display: flex; gap: 4px; }
+.mainnav button {
+  font-family: var(--label); font-weight: 600; font-size: 14px; letter-spacing: .01em;
+  padding: 8px 15px; border: 0; background: transparent; color: var(--muted); cursor: pointer; border-radius: 7px;
+}
+.mainnav button:hover { color: var(--ink); background: var(--raise); }
+.mainnav button.active { background: var(--ink); color: var(--bg); }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 30px 32px 90px; }
+
+/* ---- Overview ---- */
+.ov-head { margin-bottom: 26px; }
+.ov-title { font-family: var(--display); font-weight: 700; font-size: 40px; letter-spacing: -.02em; margin: 0; }
+.ov-sub { font-family: var(--sans); font-size: 17px; color: var(--muted); margin: 8px 0 0; }
+
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--fa); border-radius: 12px; padding: 18px 20px 20px; }
+.kpi-label { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+.kpi-value { font-family: var(--display); font-weight: 700; font-size: 38px; letter-spacing: -.02em; margin: 8px 0 4px; font-variant-numeric: tabular-nums; }
+.kpi-meta { font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.kpi-meta.bad { color: var(--accent); }
+
+.ov-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 6px 8px 8px; margin-bottom: 28px; }
+.ov-panel-head { display: flex; align-items: baseline; gap: 12px; padding: 16px 18px 12px; border-bottom: 1px solid var(--line); }
+.ov-panel-head h3 { font-family: var(--display); font-weight: 600; font-size: 18px; margin: 0; }
+.ov-panel-meta { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.feed-row { display: flex; align-items: center; gap: 14px; padding: 13px 18px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.feed-row:last-child { border-bottom: 0; }
+.feed-row:hover { background: var(--raise); }
+.layer-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+.feed-main { flex: 1; min-width: 0; }
+.feed-name { font-weight: 700; font-size: 14.5px; display: flex; align-items: center; gap: 9px; }
+.feed-sum { color: var(--muted); font-size: 13px; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.feed-badge { font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; border: 1px solid; }
+.feed-badge.failing { color: var(--accent); border-color: var(--accent); background: rgba(212,85,43,.15); }
+.feed-badge.needs-attention { color: var(--amber); border-color: var(--amber); background: rgba(201,150,71,.15); }
+.feed-layer { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+
+.ov-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ov-card { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--fa); border-radius: 12px; padding: 20px 20px 18px; cursor: pointer; transition: background .12s, transform .12s; }
+.ov-card:hover { background: var(--raise); transform: translateY(-2px); }
+.card-top { display: flex; align-items: baseline; gap: 10px; }
+.card-n { font-family: var(--mono); font-size: 12px; color: var(--fa); font-weight: 600; }
+.card-top h4 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0; }
+.card-blurb { font-size: 13.5px; color: var(--muted); line-height: 1.45; margin: 10px 0 14px; }
+.card-stat { font-family: var(--mono); font-size: 12.5px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.card-attn { color: var(--accent); }
+.card-go { font-family: var(--label); font-weight: 600; font-size: 13px; color: var(--fa); margin-top: 14px; }
+
+/* ---- Layer head ---- */
+.layerhead { display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--line-strong); padding-bottom: 14px; }
+.layerhead h1 { font-family: var(--display); font-weight: 700; font-size: 32px; letter-spacing: -.02em; margin: 0; }
+.layerhead .sub { font-family: var(--sans); font-weight: 500; font-size: 13px; color: var(--muted); }
+.layerhead .sub .attn { color: var(--accent); }
+.spacer { flex: 1; }
+.toggle { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 6px; overflow: hidden; }
+.toggle button { font-family: var(--label); font-size: 13px; font-weight: 600; padding: 7px 14px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.toggle button.active { background: var(--ink); color: var(--bg); }
+
+/* ---- Filter bar ---- */
+.filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0 10px; }
+.filterbar .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin-right: 4px; }
+.chip { font-family: var(--sans); font-size: 12.5px; display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--panel); cursor: pointer; color: var(--ink); user-select: none; }
+.chip .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.chip .ct { color: var(--faint); font-variant-numeric: tabular-nums; }
+.chip.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip.active .ct { color: #55524b; }
+.chip.text { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; padding: 5px 9px; }
+.chip.attn { border-color: var(--accent); color: var(--accent); }
+.chip.attn.active { background: var(--accent); color: var(--bg); }
+.hint { font-size: 12.5px; color: var(--muted); margin: 4px 0 16px; }
+.hint b { color: var(--ink); }
+
+/* ---- System map (Sankey) ---- */
+.mapwrap { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px 16px; position: relative; overflow-x: auto; }
+.mapwrap .route { font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: .05em; padding: 8px 10px 4px; }
+.colhead { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); padding: 2px 14px 10px; }
+svg.sankey { width: 100%; min-width: 620px; display: block; }
+.node rect { cursor: pointer; }
+.node-box { fill: var(--panel); stroke: var(--line-strong); stroke-width: 1; }
+.node-label { font-family: var(--sans); font-size: 13px; fill: var(--ink); dominant-baseline: middle; }
+.node-count { font-family: var(--mono); font-size: 12px; fill: var(--faint); dominant-baseline: middle; }
+.area-label { font-family: var(--sans); font-size: 13.5px; font-weight: 600; fill: var(--ink); dominant-baseline: middle; }
+.link { fill: none; stroke: var(--link); stroke-opacity: .4; transition: stroke-opacity .15s; }
+.link.active { stroke-opacity: .62; }
+.link.faded { stroke-opacity: .05; }
+.node.faded { opacity: .28; }
+.areabox { fill: var(--panel); stroke: var(--line-strong); cursor: pointer; }
+.areabox.focused { fill: var(--ink); }
+.area-label.focused { fill: var(--bg); }
+.area-count.focused { fill: #55524b; }
+
+/* ---- List view ---- */
+.group { margin-top: 26px; }
+.group-head { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--line-strong); padding-bottom: 7px; }
+.group-head h3 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0; }
+.group-head .meta { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; color: var(--muted); }
+.group-head .meta .attn { color: var(--accent); }
+.group-head .cols { margin-left: auto; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.row { display: flex; gap: 14px; padding: 13px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.row:hover { background: var(--raise); }
+.row .main { flex: 1; min-width: 0; }
+.row .name { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 9px; }
+.row .desc { color: var(--muted); font-size: 13.5px; margin-top: 3px; line-height: 1.45; }
+.row .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.sys-pill { display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--raise); white-space: nowrap; }
+.sys-pill .sw { width: 9px; height: 9px; border-radius: 2px; }
+.flow .arrow, .flow .trig { color: var(--faint); }
+.row .right { text-align: right; font-family: var(--mono); font-size: 11px; white-space: nowrap; }
+.row .right .mode { display: inline-block; border: 1px solid var(--line-strong); border-radius: 4px; padding: 1px 6px; letter-spacing: .08em; color: var(--muted); }
+.row .right .last { margin-top: 8px; color: var(--muted); }
+.row .right .last.bad { color: var(--accent); }
+
+/* status badges */
+.badge { font-family: var(--mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; border: 1px solid; }
+.badge.failing { color: var(--accent); border-color: var(--accent); background: rgba(212,85,43,.16); }
+.badge.needs-attention { color: var(--amber); border-color: var(--amber); background: rgba(201,150,71,.15); }
+.badge.not-recorded { color: var(--faint); border-color: var(--line-strong); background: rgba(255,255,255,.03); }
+
+/* ---- Drawer ---- */
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity .18s; z-index: 20; }
+.scrim.open { opacity: 1; pointer-events: auto; }
+.drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(680px, 94vw); background: var(--panel); border-left: 1px solid var(--line-strong); z-index: 21; transform: translateX(100%); transition: transform .22s ease; overflow-y: auto; box-shadow: -18px 0 50px rgba(0,0,0,.45); }
+.drawer.open { transform: translateX(0); }
+.drawer .route { font-family: var(--mono); font-size: 11px; color: var(--faint); background: var(--raise); padding: 9px 22px; border-bottom: 1px solid var(--line); letter-spacing: .04em; }
+.drawer .dbody { padding: 22px 26px 60px; }
+.drawer .close { position: absolute; top: 34px; right: 22px; border: 0; background: transparent; font-size: 22px; color: var(--muted); cursor: pointer; line-height: 1; }
+.drawer .summary { font-family: var(--display); font-weight: 500; font-size: 21px; line-height: 1.35; margin: 6px 44px 14px 0; }
+.drawer .health-line { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.drawer .health-line.bad { color: var(--accent); }
+.dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.dcol h4 { font-family: var(--display); font-weight: 600; font-size: 16px; margin: 0 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 7px; }
+.spec { display: grid; grid-template-columns: 96px 1fr; gap: 5px 10px; font-size: 13px; }
+.spec dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); padding-top: 2px; }
+.spec dd { margin: 0; color: var(--ink); }
+.spec dd.bad { color: var(--accent); }
+.spec ul { margin: 0; padding-left: 16px; }
+.spec ul li { margin-bottom: 4px; }
+.runs { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.runs th { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); font-weight: 500; }
+.runs td { padding: 10px 8px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.runs .st { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--line-strong); border-radius: 4px; }
+.runs .st.failed, .runs .st.admin { color: var(--accent); border-color: var(--accent); background: rgba(212,85,43,.15); }
+.runs .st.overdue, .runs .st.dormant, .runs .st.upcoming { color: var(--amber); border-color: var(--amber); background: rgba(201,150,71,.15); }
+.runs .st.quiet { color: var(--faint); }
+.runs .st.revoked { color: var(--faint); border-color: var(--line-strong); text-decoration: line-through; }
+.runs .st.editor, .runs .st.viewer, .runs .st.paid, .runs .st.member { color: var(--muted); border-color: var(--line-strong); }
+.empty { color: var(--faint); font-size: 13px; font-style: italic; }
+
+.footnote { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin-top: 40px; border-top: 1px solid var(--line); padding-top: 14px; }
+.hidden { display: none !important; }
+
+@media (max-width: 820px) {
+  .appbar { flex-wrap: wrap; gap: 10px; padding: 14px 18px; }
+  .wrap { padding: 22px 18px 70px; }
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .ov-cards { grid-template-columns: 1fr; }
+  .dgrid { grid-template-columns: 1fr; gap: 22px; }
+  .layerhead { flex-wrap: wrap; gap: 8px 14px; }
+}
+
+  </style>
+</head>
+<body>
+  <header class="appbar">
+    <div class="brand">
+      <span class="product">Keystone</span>
+      <span class="client" id="clientName"></span>
+    </div>
+    <nav class="mainnav" id="mainnav">
+      <button data-layer="overview" class="active">Overview</button>
+      <button data-layer="workflows">Workflows</button>
+      <button data-layer="access">Access</button>
+      <button data-layer="spend">Spend</button>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <!-- Overview -->
+    <section id="overview"></section>
+
+    <!-- Drilled layer -->
+    <section id="layer" class="hidden">
+      <div class="layerhead">
+        <h1 id="layerTitle"></h1>
+        <span class="sub" id="summary"></span>
+        <span class="spacer"></span>
+        <div class="toggle" id="viewToggle">
+          <button data-view="map" class="active">Map</button>
+          <button data-view="list">List</button>
+        </div>
+      </div>
+      <div class="filterbar" id="systemFilter"></div>
+      <p class="hint" id="hint"></p>
+      <section id="mapView">
+        <div class="mapwrap">
+          <div class="route" id="mapRoute"></div>
+          <div class="colhead"><span id="colFrom"></span><span id="platformCol"></span><span id="colTo"></span></div>
+          <svg class="sankey" id="sankey"></svg>
+        </div>
+      </section>
+      <section id="listView" class="hidden"></section>
+    </section>
+
+    <div class="footnote">Sample data. Status, access levels, costs and run history are examples.</div>
+  </main>
+
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="route" id="drawerRoute"></div>
+    <button class="close" id="drawerClose" aria-label="Close">×</button>
+    <div class="dbody" id="drawerBody"></div>
+  </aside>
+
+  <script>
+// Combined per-client config for the Ground Truth dashboard.
+// One file per client holds all three layers. Swap this, keep the shell identical.
+
+window.GT = {
+  client: "Brightline Agency (sample)",
+  generatedAt: "2026-11-24",
+  layers: {
+    workflows: {
+  client: "Northwind Studio (sample)",
+  generatedAt: "2026-11-23",
+  platformName: "Foundation",
+
+  // Catalog of outside systems. color drives the swatch everywhere.
+  systems: [
+    { id: "gmail",           name: "Gmail",            color: "#2563eb" },
+    { id: "google-groups",   name: "Google Groups",    color: "#93c5fd" },
+    { id: "google-calendar", name: "Google Calendar",  color: "#0d9488" },
+    { id: "claude",          name: "Claude",           color: "#d97706" },
+    { id: "openai",          name: "OpenAI",           color: "#854d0e" },
+    { id: "granola",         name: "Granola",          color: "#10b981" },
+    { id: "foundation-calls",name: "Foundation Calls", color: "#166534" },
+    { id: "sendgrid",        name: "SendGrid",         color: "#ec4899" },
+    { id: "slack",           name: "Slack",            color: "#6d28d9" },
+    { id: "cloudflare",      name: "Cloudflare",       color: "#f97316" },
+    { id: "1password",       name: "1Password",        color: "#a5b4fc" },
+    { id: "brex",            name: "Brex",             color: "#15803d" },
+    { id: "overflow",        name: "Overflow",         color: "#9d174d" },
+    { id: "website",         name: "Website",          color: "#78350f" },
+    { id: "github",          name: "GitHub",           color: "#111827" }
+  ],
+
+  // Departments / areas of the business (the middle column of the map).
+  areas: [
+    { id: "sales-pipeline",    name: "Sales & pipeline" },
+    { id: "deal-to-delivery",  name: "Deal to delivery" },
+    { id: "agreements",        name: "Agreements" },
+    { id: "engagement",        name: "Engagement access" },
+    { id: "todos-eos",         name: "To-dos & EOS" },
+    { id: "recruiting",        name: "Recruiting" },
+    { id: "finance-marketing", name: "Finance & marketing" },
+    { id: "engineering",       name: "Engineering" }
+  ],
+
+  // The automations are the source of truth. Every view is derived from these.
+  // sources / destinations use a system id, or "foundation" to mean "stays inside".
+  automations: [
+    {
+      id: "pipeline-alerts",
+      name: "Pipeline alert emails",
+      area: "sales-pipeline",
+      summary: "When a deal is created, moves stage, is won or is lost, the sales owners get an email about two minutes later.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/pipeline-alerts" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "failing",
+      channels: ["Email"],
+      effects: [
+        "Emails one alert per deal change",
+        "Waits two minutes so an undone drag sends nothing",
+        "Includes changes the recipients made themselves"
+      ],
+      outsideProduction: "Plan only. Outside Production it counts changes and sends nothing.",
+      runs: [
+        { started: "2026-10-30T10:07:00Z", status: "failed",    tookMs: 1400 },
+        { started: "2026-10-30T10:03:00Z", status: "succeeded", tookMs: 1100 },
+        { started: "2026-10-30T09:20:00Z", status: "succeeded", tookMs: 980 },
+        { started: "2026-10-30T08:15:00Z", status: "succeeded", tookMs: 1200 }
+      ]
+    },
+    {
+      id: "discovery-digest",
+      name: "Discovery digest and call sync alerts",
+      area: "sales-pipeline",
+      summary: "On Monday at 8 AM Eastern the sales owners get last week's discovery digest, and at other hours they get an email only when call sync develops a new problem.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Every hour at :05", type: "schedule", cron: "5 * * * *", detail: "Vercel cron on /api/cron/discovery-digest" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Sends one weekly digest", "Alerts only on a new call-sync problem"],
+      runs: [
+        { started: "2026-10-30T10:05:00Z", status: "succeeded", tookMs: 820 },
+        { started: "2026-10-30T09:05:00Z", status: "quiet",     tookMs: 210 },
+        { started: "2026-10-30T08:05:00Z", status: "succeeded", tookMs: 760 }
+      ]
+    },
+    {
+      id: "deal-check-alerts",
+      name: "Deal check alerts",
+      area: "sales-pipeline",
+      summary: "When today's deal check hasn't finished by 9 AM Central, a request fails or gets stuck, or the Mac runner goes quiet, the sales owners get one email about it.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Daily 9:00 AM CT", type: "schedule", cron: "0 15 * * *", detail: "Vercel cron on /api/cron/deal-check-alerts" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "needs-attention",
+      channels: ["Email"],
+      effects: ["One summary email per day", "Fires only when a check is overdue or stuck"],
+      runs: [
+        { started: "2026-10-30T15:00:00Z", status: "succeeded", tookMs: 640 },
+        { started: "2026-10-29T15:00:00Z", status: "overdue",   tookMs: 0 }
+      ]
+    },
+    {
+      id: "website-leads",
+      name: "Website lead capture",
+      area: "sales-pipeline",
+      summary: "When someone submits the website contact form, Foundation creates a lead, enriches it and assigns an owner by territory.",
+      sources: ["website"],
+      destinations: ["foundation"],
+      trigger: { label: "On form submit", type: "webhook", detail: "Webhook from marketing site" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Creates and enriches a lead", "Routes by territory"],
+      runs: [
+        { started: "2026-10-30T14:12:00Z", status: "succeeded", tookMs: 1300 },
+        { started: "2026-10-30T11:48:00Z", status: "succeeded", tookMs: 1250 }
+      ]
+    },
+    {
+      id: "gmail-inbound-triage",
+      name: "Inbound email triage",
+      area: "sales-pipeline",
+      summary: "Every minute, Foundation reads new sales inbox mail, classifies it and links it to the matching deal.",
+      sources: ["gmail"],
+      destinations: ["foundation"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/inbound-triage" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Classifies inbound mail", "Links it to a deal or creates one"],
+      runs: [
+        { started: "2026-10-30T10:06:00Z", status: "succeeded", tookMs: 540 },
+        { started: "2026-10-30T10:05:00Z", status: "quiet",     tookMs: 180 }
+      ]
+    },
+    {
+      id: "call-enrichment",
+      name: "Call enrichment",
+      area: "engagement",
+      summary: "Every hour, Foundation checks synced calls against the calendars and links them to contacts, companies and deals.",
+      sources: ["google-calendar"],
+      destinations: ["foundation"],
+      trigger: { label: "Every hour", type: "schedule", cron: "0 * * * *", detail: "Vercel cron on /api/cron/call-enrichment" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Matches calls to calendar events", "Links to contacts and deals"],
+      runs: [
+        { started: "2026-10-30T10:00:00Z", status: "succeeded", tookMs: 2100 },
+        { started: "2026-10-30T09:00:00Z", status: "succeeded", tookMs: 1950 }
+      ]
+    },
+    {
+      id: "granola-call-sync",
+      name: "Granola call sync",
+      area: "engagement",
+      summary: "Every minute, Foundation imports new and changed Granola meeting notes as CRM calls.",
+      sources: ["granola"],
+      destinations: ["foundation"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/granola-sync" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Imports Granola notes as calls", "Updates changed notes"],
+      runs: [
+        { started: "2026-10-30T10:07:00Z", status: "succeeded", tookMs: 410 },
+        { started: "2026-10-30T10:06:00Z", status: "succeeded", tookMs: 430 }
+      ]
+    },
+    {
+      id: "call-intelligence",
+      name: "Call intelligence",
+      area: "engagement",
+      summary: "Every minute, Foundation reads newly synced call transcripts with a model and writes a summary and next steps on each call.",
+      sources: ["openai"],
+      destinations: ["openai"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/call-intelligence" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Summarizes each call", "Writes next steps back to the deal"],
+      runs: [
+        { started: "2026-10-30T10:07:00Z", status: "succeeded", tookMs: 3200 },
+        { started: "2026-10-30T10:06:00Z", status: "quiet",     tookMs: 190 }
+      ]
+    },
+    {
+      id: "foundation-calls-upload",
+      name: "Foundation Calls upload",
+      area: "engagement",
+      summary: "When someone records a call in the Foundation Calls app, its transcript and notes upload to Foundation as a shared call.",
+      sources: ["foundation-calls"],
+      destinations: ["foundation"],
+      trigger: { label: "On recording finished", type: "event", detail: "Foundation Calls app uploads through MCP" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "not-recorded",
+      channels: [],
+      effects: ["Uploads transcript and notes", "Creates a shared call record"],
+      runs: []
+    },
+    {
+      id: "agreement-signature",
+      name: "Agreement signature request",
+      area: "agreements",
+      summary: "When someone sends an agreement for signature, Foundation emails the client a signing link.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "On agreement sent", type: "event", detail: "Triggered when a user sends an agreement" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Emails a signing link to the client"],
+      runs: [
+        { started: "2026-10-30T09:41:00Z", status: "succeeded", tookMs: 720 }
+      ]
+    },
+    {
+      id: "agreement-signed",
+      name: "Client signed an agreement",
+      area: "agreements",
+      summary: "When the client signs, Foundation marks the plan accepted, snapshots it, syncs the deal dates and tells the team.",
+      sources: ["foundation"],
+      destinations: ["slack", "sendgrid"],
+      trigger: { label: "On signature", type: "event", detail: "Triggered on client signature" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Slack", "Email"],
+      effects: ["Marks the plan accepted", "Snapshots the agreement", "Notifies the team in Slack"],
+      runs: [
+        { started: "2026-10-30T09:12:00Z", status: "succeeded", tookMs: 1500 }
+      ]
+    },
+    {
+      id: "agreement-completed",
+      name: "Agreement completed",
+      area: "agreements",
+      summary: "When the company countersigns, Foundation emails everyone the fully signed agreement.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "On countersign", type: "event", detail: "Triggered on company countersignature" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Emails the signed agreement to all parties"],
+      runs: [
+        { started: "2026-10-30T09:14:00Z", status: "succeeded", tookMs: 660 }
+      ]
+    },
+    {
+      id: "agreement-email-retries",
+      name: "Agreement email retries",
+      area: "agreements",
+      summary: "Every minute, Foundation retries any agreement email that has not gone out yet and expires lapsed signing links.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/agreement-retries" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Retries unsent agreement email", "Expires lapsed signing links"],
+      runs: [
+        { started: "2026-10-30T10:07:00Z", status: "quiet", tookMs: 150 }
+      ]
+    },
+    {
+      id: "todo-assignment-notice",
+      name: "To-do assignment notice",
+      area: "todos-eos",
+      summary: "When someone assigns or reassigns a to-do to another person, that person gets an in-app notice, an email and a push notification.",
+      sources: ["foundation"],
+      destinations: ["sendgrid", "slack"],
+      trigger: { label: "On assignment", type: "event", detail: "Triggered when a to-do is assigned" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email", "Slack", "Push"],
+      effects: ["Sends an in-app notice", "Emails the assignee", "Pushes a notification"],
+      runs: [
+        { started: "2026-10-30T08:52:00Z", status: "succeeded", tookMs: 540 }
+      ]
+    },
+    {
+      id: "deal-to-github-archive",
+      name: "Won deal archive",
+      area: "deal-to-delivery",
+      summary: "When a deal is won, Foundation writes a delivery brief and saves it to the GitHub project so engineering can pick it up.",
+      sources: ["foundation"],
+      destinations: ["github"],
+      trigger: { label: "On deal won", type: "event", detail: "Triggered when a deal moves to Won" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Writes a delivery brief", "Commits it to the GitHub project"],
+      runs: [
+        { started: "2026-10-30T07:30:00Z", status: "succeeded", tookMs: 2400 }
+      ]
+    },
+    {
+      id: "new-hire-access",
+      name: "New hire access requests",
+      area: "recruiting",
+      summary: "Once an offer is signed, Foundation creates access requests by role and adds the person to the right Google Groups and 1Password vaults.",
+      sources: ["foundation"],
+      destinations: ["1password", "google-groups"],
+      trigger: { label: "On offer signed", type: "event", detail: "Triggered when an offer is signed" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Creates role-based access requests", "Adds to Google Groups and 1Password"],
+      runs: [
+        { started: "2026-10-29T16:20:00Z", status: "succeeded", tookMs: 1800 }
+      ]
+    },
+    {
+      id: "candidate-followup",
+      name: "Candidate follow-up",
+      area: "recruiting",
+      summary: "Each weekday, Foundation emails candidates who are waiting on a next step so none of them go quiet.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Weekdays 7:00 AM", type: "schedule", cron: "0 13 * * 1-5", detail: "Vercel cron on /api/cron/candidate-followup" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Emails waiting candidates", "Flags stalled candidates for a human"],
+      runs: [
+        { started: "2026-10-30T13:00:00Z", status: "succeeded", tookMs: 900 }
+      ]
+    },
+    {
+      id: "expense-sync",
+      name: "Expense sync",
+      area: "finance-marketing",
+      summary: "Every night, Foundation pulls new Brex transactions, categorizes them and flags anything over policy for review.",
+      sources: ["brex"],
+      destinations: ["foundation"],
+      trigger: { label: "Daily 2:00 AM", type: "schedule", cron: "0 8 * * *", detail: "Vercel cron on /api/cron/expense-sync" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Imports and categorizes Brex transactions", "Flags over-policy spend"],
+      runs: [
+        { started: "2026-10-30T08:00:00Z", status: "succeeded", tookMs: 3100 }
+      ]
+    },
+    {
+      id: "weekly-metrics",
+      name: "Weekly metrics report",
+      area: "finance-marketing",
+      summary: "Every Monday, Foundation builds the weekly metrics report with a model and emails it to the leadership group.",
+      sources: ["foundation"],
+      destinations: ["claude", "gmail"],
+      trigger: { label: "Mondays 6:00 AM", type: "schedule", cron: "0 12 * * 1", detail: "Vercel cron on /api/cron/weekly-metrics" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Writes the weekly report with a model", "Emails it to leadership"],
+      runs: [
+        { started: "2026-10-30T12:00:00Z", status: "succeeded", tookMs: 5200 }
+      ]
+    },
+    {
+      id: "incident-watch",
+      name: "Edge incident watch",
+      area: "engineering",
+      summary: "Every five minutes, Foundation checks Cloudflare for edge errors and posts a Slack alert when error rates spike.",
+      sources: ["cloudflare"],
+      destinations: ["slack"],
+      trigger: { label: "Every 5 minutes", type: "schedule", cron: "*/5 * * * *", detail: "Vercel cron on /api/cron/incident-watch" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Slack"],
+      effects: ["Watches Cloudflare error rates", "Posts a Slack alert on a spike"],
+      runs: [
+        { started: "2026-10-30T10:05:00Z", status: "quiet",     tookMs: 230 },
+        { started: "2026-10-30T10:00:00Z", status: "succeeded", tookMs: 410 }
+      ]
+    }
+  ]
+},
+
+    access: {
+  client: "Brightline Agency (sample)",
+  generatedAt: "2026-11-24",
+  platformName: "Brightline",
+
+  // ---- copy: the wording of this map. Swap this and the whole UI re-speaks. ----
+  copy: {
+    title: "Access",
+    itemNoun: "people",
+    attnVerb: "need review",
+    attnChip: "Needs review",
+    colFrom: "People",
+    colTo: "Can access",
+    filterLabel: "People & tools",
+    viewMap: "Access map",
+    viewList: "List",
+    generatedLabel: "as of",
+    routeBase: "/access",
+    focusVerb: "linked to",
+    areaVerb: "sit in",
+    hintIdle: "Thicker line, more people share it. Click a <b>tool</b> for its access register, a <b>person</b> for their profile, or a chip to filter.",
+    emptyList: "No one matches this focus.",
+    listCols: "status · last active",
+    noRunLabel: "No activity",
+    modeLive: "ACTIVE",
+    modePlan: "OFFBOARD",
+    modeLiveFull: "Active",
+    modePlanFull: "Offboarding",
+    drawerLeft: "Identity",
+    drawerRight: "Access log",
+    specTrigger: "Role",
+    specRunsOn: "Team",
+    specMode: "Status",
+    specHealth: "Risk",
+    specEffects: "Access notes",
+    specChannels: "Auth",
+    specFlow: "Reaches",
+    runsCols: ["System", "Access", "Last used"],
+    noRuns: "No access on record.",
+    health: {
+      ok: "Access in order",
+      failing: "Revoke now · still provisioned after leaving",
+      "needs-attention": "Needs review",
+      "not-recorded": "No activity recorded"
+    },
+    badge: { failing: "revoke", "needs-attention": "review", "not-recorded": "no data" },
+
+    // system drawer: click a tool to see how it is accessed and who holds it
+    sysDrawerLeft: "Admin register",
+    sysDrawerRight: "Who has access",
+    sysAccessCols: ["Person", "Access", "Last used"],
+    sysAccessMany: "people have access",
+    sysAccessOne: "person has access",
+    sysMember: "member",
+    sysRegister: [
+      { key: "domain",   label: "Domain" },
+      { key: "auth",     label: "Auth" },
+      { key: "vault",    label: "Credentials" },
+      { key: "owner",    label: "Owner" },
+      { key: "rotation", label: "Rotation" },
+      { key: "phone",    label: "Phone" }
+    ]
+  },
+
+  // ---- catalog of nodes. People sit on the left, tools on the right. ----
+  // Tools carry the admin register (domain, auth, vault, owner, rotation, phone).
+  // app.js only reads id/name/color today; the rest is ready for the system drawer.
+  systems: [
+    // people (left column)
+    { id: "maya-chen",    name: "Maya Chen",    color: "#d4552b", kind: "person", role: "Founder / CEO",     team: "Leadership",  joined: "2019-02-01" },
+    { id: "priya-nair",   name: "Priya Nair",   color: "#c99647", kind: "person", role: "Operations Lead",   team: "Operations",  joined: "2021-06-14" },
+    { id: "ruth-adler",   name: "Ruth Adler",   color: "#b8843d", kind: "person", role: "Bookkeeper",        team: "Operations",  joined: "2022-09-05" },
+    { id: "lena-ross",    name: "Lena Ross",    color: "#7ba4a5", kind: "person", role: "Design Lead",       team: "Design",      joined: "2020-11-02" },
+    { id: "theo-kim",     name: "Theo Kim",     color: "#4a6b4e", kind: "person", role: "Engineering Lead",  team: "Engineering", joined: "2020-03-16" },
+    { id: "jonas-weber",  name: "Jonas Weber",  color: "#4a6b4e", kind: "person", role: "Engineer",          team: "Engineering", joined: "2023-01-09" },
+    { id: "amara-okafor", name: "Amara Okafor", color: "#e85d3c", kind: "person", role: "Marketing Manager", team: "Marketing",   joined: "2022-04-18" },
+    { id: "sam-ortiz",    name: "Sam Ortiz",    color: "#8f8878", kind: "person", role: "Contractor",        team: "Marketing",   joined: "2026-08-01" },
+    { id: "devon-pierce", name: "Devon Pierce", color: "#6b6557", kind: "person", role: "Engineer (former)", team: "Engineering", joined: "2021-10-11" },
+
+    // tools (right column) -- admin register fields included
+    { id: "google-workspace", name: "Google Workspace", color: "#2563eb", kind: "tool", domain: "admin.google.com",       auth: "SSO root + 2FA", vault: "1Password - Ops vault",     owner: "Maya Chen",  rotation: "Rotated 90 days", phone: "none" },
+    { id: "slack",            name: "Slack",            color: "#6d28d9", kind: "tool", domain: "brightline.slack.com",    auth: "Google SSO",     vault: "1Password - Ops vault",     owner: "Priya Nair", rotation: "SSO, no shared pw", phone: "none" },
+    { id: "figma",            name: "Figma",            color: "#0d9488", kind: "tool", domain: "figma.com/brightline",    auth: "Google SSO",     vault: "1Password - Design vault",  owner: "Lena Ross",  rotation: "SSO, no shared pw", phone: "none" },
+    { id: "github",           name: "GitHub",           color: "#111827", kind: "tool", domain: "github.com/brightline",   auth: "SSO + 2FA keys", vault: "1Password - Eng vault",     owner: "Theo Kim",   rotation: "Keys per person",  phone: "none" },
+    { id: "stripe",           name: "Stripe",           color: "#635bff", kind: "tool", domain: "dashboard.stripe.com",    auth: "SSO + 2FA",      vault: "1Password - Finance vault", owner: "Priya Nair", rotation: "Rotated 90 days",  phone: "+1 512 555 0142" },
+    { id: "quickbooks",       name: "QuickBooks",       color: "#15803d", kind: "tool", domain: "qbo.intuit.com",          auth: "Password + 2FA", vault: "1Password - Finance vault", owner: "Ruth Adler", rotation: "Rotated 180 days", phone: "+1 512 555 0142" },
+    { id: "hubspot",          name: "HubSpot",          color: "#ec4899", kind: "tool", domain: "app.hubspot.com",         auth: "Google SSO",     vault: "1Password - Marketing vault", owner: "Amara Okafor", rotation: "SSO, no shared pw", phone: "none" },
+    { id: "notion",           name: "Notion",           color: "#78350f", kind: "tool", domain: "notion.so/brightline",    auth: "Google SSO",     vault: "1Password - Ops vault",     owner: "Priya Nair", rotation: "SSO, no shared pw", phone: "none" },
+    { id: "aws",              name: "AWS",              color: "#f97316", kind: "tool", domain: "console.aws.amazon.com",  auth: "IAM + 2FA",      vault: "1Password - Eng vault",     owner: "Theo Kim",   rotation: "Keys per person",  phone: "none" },
+    { id: "webflow",          name: "Webflow",          color: "#9d174d", kind: "tool", domain: "webflow.com/brightline",  auth: "Google SSO",     vault: "1Password - Marketing vault", owner: "Amara Okafor", rotation: "SSO, no shared pw", phone: "none" },
+    { id: "onepassword",      name: "1Password",        color: "#a5b4fc", kind: "tool", domain: "brightline.1password.com", auth: "Account key + 2FA", vault: "The vault itself",       owner: "Maya Chen",  rotation: "Master per person", phone: "none" }
+  ],
+
+  // ---- teams (the middle column of the map) ----
+  areas: [
+    { id: "leadership",  name: "Leadership" },
+    { id: "operations",  name: "Operations" },
+    { id: "design",      name: "Design" },
+    { id: "engineering", name: "Engineering" },
+    { id: "marketing",   name: "Marketing" }
+  ],
+
+  // ---- the records are people. Every view is derived from these. ----
+  // sources = [personId]. destinations = the tools that person can reach.
+  automations: [
+    {
+      id: "maya-chen",
+      name: "Maya Chen",
+      area: "leadership",
+      summary: "Founder and CEO. Owner or admin on almost everything, including the root Google Workspace and the password vault.",
+      sources: ["maya-chen"],
+      destinations: ["google-workspace", "slack", "stripe", "quickbooks", "hubspot", "notion", "aws", "onepassword"],
+      trigger: { label: "Founder / CEO", type: "role", detail: "Joined Feb 2019" },
+      runsOn: "Leadership",
+      mode: "live",
+      health: "ok",
+      channels: ["Google SSO", "2FA on"],
+      effects: ["Super admin on Google Workspace", "Admin on Stripe, QuickBooks and AWS", "Can add or remove any member", "Holds the 1Password owner seat"],
+      runs: [
+        { label: "Google Workspace", status: "admin",  started: "2026-11-23T18:00:00Z" },
+        { label: "1Password",        status: "admin",  started: "2026-11-23T17:30:00Z" },
+        { label: "Stripe",           status: "admin",  started: "2026-11-20T15:10:00Z" },
+        { label: "Slack",            status: "editor", started: "2026-11-24T09:05:00Z" }
+      ]
+    },
+    {
+      id: "priya-nair",
+      name: "Priya Nair",
+      area: "operations",
+      summary: "Runs operations. Admin on the billing tools. Has not opened Stripe in 74 days, so that admin seat is worth a second look.",
+      sources: ["priya-nair"],
+      destinations: ["google-workspace", "slack", "stripe", "quickbooks", "notion", "onepassword"],
+      trigger: { label: "Operations Lead", type: "role", detail: "Joined Jun 2021" },
+      runsOn: "Operations",
+      mode: "live",
+      health: "needs-attention",
+      channels: ["Google SSO", "2FA on"],
+      effects: ["Admin on Stripe (billing)", "Admin on QuickBooks", "No Stripe login in 74 days", "Owns the Ops 1Password vault"],
+      runs: [
+        { label: "Stripe",     status: "dormant", started: "2026-09-11T14:00:00Z" },
+        { label: "QuickBooks", status: "admin",   started: "2026-11-18T16:20:00Z" },
+        { label: "Notion",     status: "editor",  started: "2026-11-24T08:40:00Z" },
+        { label: "Slack",      status: "editor",  started: "2026-11-24T09:10:00Z" }
+      ]
+    },
+    {
+      id: "ruth-adler",
+      name: "Ruth Adler",
+      area: "operations",
+      summary: "Bookkeeper. Day-to-day access to the finance tools and the shared operations space.",
+      sources: ["ruth-adler"],
+      destinations: ["quickbooks", "slack", "google-workspace", "notion", "onepassword"],
+      trigger: { label: "Bookkeeper", type: "role", detail: "Joined Sep 2022" },
+      runsOn: "Operations",
+      mode: "live",
+      health: "ok",
+      channels: ["Google SSO", "2FA on"],
+      effects: ["Admin on QuickBooks", "Viewer on the finance Notion space"],
+      runs: [
+        { label: "QuickBooks", status: "admin",  started: "2026-11-24T07:50:00Z" },
+        { label: "Notion",     status: "viewer", started: "2026-11-21T10:00:00Z" },
+        { label: "Slack",      status: "editor", started: "2026-11-24T09:02:00Z" }
+      ]
+    },
+    {
+      id: "lena-ross",
+      name: "Lena Ross",
+      area: "design",
+      summary: "Design lead. Owns the Figma org and the design side of the website.",
+      sources: ["lena-ross"],
+      destinations: ["figma", "slack", "google-workspace", "notion", "webflow"],
+      trigger: { label: "Design Lead", type: "role", detail: "Joined Nov 2020" },
+      runsOn: "Design",
+      mode: "live",
+      health: "ok",
+      channels: ["Google SSO", "2FA on"],
+      effects: ["Admin on Figma", "Editor on Webflow"],
+      runs: [
+        { label: "Figma",   status: "admin",  started: "2026-11-24T08:30:00Z" },
+        { label: "Webflow", status: "editor", started: "2026-11-22T13:15:00Z" },
+        { label: "Slack",   status: "editor", started: "2026-11-24T09:00:00Z" }
+      ]
+    },
+    {
+      id: "theo-kim",
+      name: "Theo Kim",
+      area: "engineering",
+      summary: "Engineering lead. Admin on the code and infrastructure tools.",
+      sources: ["theo-kim"],
+      destinations: ["github", "aws", "slack", "google-workspace", "notion"],
+      trigger: { label: "Engineering Lead", type: "role", detail: "Joined Mar 2020" },
+      runsOn: "Engineering",
+      mode: "live",
+      health: "ok",
+      channels: ["GitHub SSO", "2FA keys"],
+      effects: ["Admin on GitHub org", "Admin on AWS", "Holds the Eng 1Password vault keys"],
+      runs: [
+        { label: "GitHub", status: "admin",  started: "2026-11-24T08:10:00Z" },
+        { label: "AWS",    status: "admin",  started: "2026-11-23T22:40:00Z" },
+        { label: "Slack",  status: "editor", started: "2026-11-24T09:04:00Z" }
+      ]
+    },
+    {
+      id: "jonas-weber",
+      name: "Jonas Weber",
+      area: "engineering",
+      summary: "Engineer. Standard developer access to the code and cloud tools.",
+      sources: ["jonas-weber"],
+      destinations: ["github", "aws", "slack", "google-workspace"],
+      trigger: { label: "Engineer", type: "role", detail: "Joined Jan 2023" },
+      runsOn: "Engineering",
+      mode: "live",
+      health: "ok",
+      channels: ["GitHub SSO", "2FA keys"],
+      effects: ["Editor on GitHub", "Scoped AWS role (no billing)"],
+      runs: [
+        { label: "GitHub", status: "editor", started: "2026-11-24T08:20:00Z" },
+        { label: "AWS",    status: "editor", started: "2026-11-23T19:05:00Z" },
+        { label: "Slack",  status: "editor", started: "2026-11-24T09:06:00Z" }
+      ]
+    },
+    {
+      id: "amara-okafor",
+      name: "Amara Okafor",
+      area: "marketing",
+      summary: "Marketing manager. Owns HubSpot and the marketing side of the website.",
+      sources: ["amara-okafor"],
+      destinations: ["hubspot", "webflow", "slack", "google-workspace", "figma"],
+      trigger: { label: "Marketing Manager", type: "role", detail: "Joined Apr 2022" },
+      runsOn: "Marketing",
+      mode: "live",
+      health: "ok",
+      channels: ["Google SSO", "2FA on"],
+      effects: ["Admin on HubSpot", "Admin on Webflow", "Viewer in Figma"],
+      runs: [
+        { label: "HubSpot", status: "admin",  started: "2026-11-24T08:05:00Z" },
+        { label: "Webflow", status: "admin",  started: "2026-11-23T14:30:00Z" },
+        { label: "Figma",   status: "viewer", started: "2026-11-19T11:00:00Z" }
+      ]
+    },
+    {
+      id: "sam-ortiz",
+      name: "Sam Ortiz",
+      area: "marketing",
+      summary: "Contractor on the fall campaign. Access was set up fast and has no end date, and the Figma seat is a shared login with no 2FA.",
+      sources: ["sam-ortiz"],
+      destinations: ["figma", "slack", "webflow", "hubspot"],
+      trigger: { label: "Contractor", type: "role", detail: "Started Aug 2026" },
+      runsOn: "Marketing",
+      mode: "live",
+      health: "needs-attention",
+      channels: ["Shared Figma login", "No 2FA"],
+      effects: ["Editor in Figma and Webflow", "No access end date set", "On a shared seat, not a named account"],
+      runs: [
+        { label: "Figma",   status: "editor", started: "2026-11-23T16:45:00Z" },
+        { label: "Webflow", status: "editor", started: "2026-11-22T12:10:00Z" },
+        { label: "HubSpot", status: "viewer", started: "2026-11-17T15:30:00Z" },
+        { label: "Slack",   status: "editor", started: "2026-11-24T08:55:00Z" }
+      ]
+    },
+    {
+      id: "devon-pierce",
+      name: "Devon Pierce",
+      area: "engineering",
+      summary: "Left the company on Nov 1. Still has active admin access to GitHub and AWS, plus Slack and email. No deprovision ticket was filed.",
+      sources: ["devon-pierce"],
+      destinations: ["github", "aws", "slack", "google-workspace"],
+      trigger: { label: "Engineer (former)", type: "role", detail: "Left Nov 1, 2026" },
+      runsOn: "Engineering",
+      mode: "plan",
+      health: "failing",
+      channels: ["Google SSO still active", "2FA on"],
+      effects: ["Still admin on GitHub and AWS", "Slack and email accounts still active", "No deprovision ticket filed", "Last seen after the departure date"],
+      runs: [
+        { label: "AWS",              status: "admin",   started: "2026-10-31T23:40:00Z" },
+        { label: "GitHub",           status: "admin",   started: "2026-10-30T18:20:00Z" },
+        { label: "Google Workspace", status: "editor",  started: "2026-11-02T08:15:00Z" },
+        { label: "Slack",            status: "editor",  started: "2026-11-01T17:05:00Z" }
+      ]
+    }
+  ]
+},
+
+    spend: {
+  client: "Brightline Agency (sample)",
+  generatedAt: "2026-11-24",
+  platformName: "Brightline",
+
+  // ---- copy: the wording of this map. money:true makes totals read as dollars. ----
+  copy: {
+    title: "Spend",
+    itemNoun: "subscriptions",
+    attnVerb: "need review",
+    attnChip: "Needs review",
+    colFrom: "Owner",
+    colTo: "Tool / vendor",
+    filterLabel: "Owners & tools",
+    viewMap: "Spend map",
+    viewList: "List",
+    generatedLabel: "as of",
+    routeBase: "/spend",
+    money: true,
+    perLabel: "/mo",
+    focusVerb: "billed under",
+    areaVerb: "sit in",
+    hintIdle: "Thicker line, more money. Click a <b>tool</b> for its billing detail, an <b>owner</b> to filter theirs, or a <b>category</b> below.",
+    emptyList: "No subscriptions match this focus.",
+    listCols: "status · last charge",
+    noRunLabel: "No charges",
+    modeLive: "ACTIVE",
+    modePlan: "UNUSED",
+    modeLiveFull: "In use",
+    modePlanFull: "Unused",
+    drawerLeft: "Subscription",
+    drawerRight: "Billing history",
+    specTrigger: "Cost",
+    specRunsOn: "Category",
+    specMode: "Status",
+    specHealth: "Flag",
+    specEffects: "Notes",
+    specChannels: "Billed to",
+    specFlow: "Owner path",
+    runsCols: ["Date", "Status", "Amount"],
+    noRuns: "No charges on record.",
+    health: {
+      ok: "In use",
+      failing: "Cancel candidate · auto-renews, no owner, unused",
+      "needs-attention": "Review",
+      "not-recorded": "No activity"
+    },
+    badge: { failing: "cancel", "needs-attention": "review", "not-recorded": "no data" }
+  },
+
+  // ---- catalog of nodes. Owners sit on the left, tools on the right. ----
+  systems: [
+    // owners (left column)
+    { id: "maya-chen",    name: "Maya Chen",    color: "#d4552b", kind: "person" },
+    { id: "priya-nair",   name: "Priya Nair",   color: "#c99647", kind: "person" },
+    { id: "ruth-adler",   name: "Ruth Adler",   color: "#b8843d", kind: "person" },
+    { id: "lena-ross",    name: "Lena Ross",    color: "#7ba4a5", kind: "person" },
+    { id: "theo-kim",     name: "Theo Kim",     color: "#4a6b4e", kind: "person" },
+    { id: "amara-okafor", name: "Amara Okafor", color: "#e85d3c", kind: "person" },
+    { id: "unassigned",   name: "No owner",     color: "#6b6557", kind: "person" },
+
+    // tools / vendors (right column) -- id matches the subscription record id
+    { id: "aws",              name: "AWS",              color: "#f97316", kind: "tool" },
+    { id: "hubspot",          name: "HubSpot",          color: "#ec4899", kind: "tool" },
+    { id: "google-workspace", name: "Google Workspace", color: "#2563eb", kind: "tool" },
+    { id: "slack",            name: "Slack",            color: "#6d28d9", kind: "tool" },
+    { id: "adobe",            name: "Adobe CC",         color: "#9d174d", kind: "tool" },
+    { id: "quickbooks",       name: "QuickBooks",       color: "#15803d", kind: "tool" },
+    { id: "dropbox",          name: "Dropbox",          color: "#2563eb", kind: "tool" },
+    { id: "notion",           name: "Notion",           color: "#78350f", kind: "tool" },
+    { id: "vercel",           name: "Vercel",           color: "#111827", kind: "tool" },
+    { id: "github",           name: "GitHub",           color: "#111827", kind: "tool" },
+    { id: "1password",        name: "1Password",        color: "#a5b4fc", kind: "tool" },
+    { id: "zoom",             name: "Zoom",             color: "#0d9488", kind: "tool" },
+    { id: "figma",            name: "Figma",            color: "#10b981", kind: "tool" },
+    { id: "webflow",          name: "Webflow",          color: "#9d174d", kind: "tool" },
+    { id: "linear",           name: "Linear",           color: "#854d0e", kind: "tool" },
+    { id: "calendly",         name: "Calendly",         color: "#166534", kind: "tool" }
+  ],
+
+  // ---- categories (middle column) ----
+  areas: [
+    { id: "engineering", name: "Engineering" },
+    { id: "sales-mktg",  name: "Sales & marketing" },
+    { id: "design",      name: "Design" },
+    { id: "collab",      name: "Collaboration" },
+    { id: "finance-ops", name: "Finance & ops" }
+  ],
+
+  // ---- the records are subscriptions. weight = monthly cost in dollars. ----
+  // sources = [ownerId]. destinations = [toolId == record id].
+  automations: [
+    {
+      id: "aws", name: "AWS", area: "engineering", weight: 1250,
+      summary: "Cloud hosting and infrastructure. The single biggest line item by far.",
+      sources: ["theo-kim"], destinations: ["aws"],
+      trigger: { label: "$1,250 / mo", type: "cost", detail: "$15,000 / year" },
+      runsOn: "Engineering", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Usage-based, trending up 8% this quarter", "Renews monthly, no contract", "Last reviewed 5 months ago"],
+      runs: [
+        { started: "2026-11-01T06:00:00Z", status: "paid", note: "$1,250.00" },
+        { started: "2026-10-01T06:00:00Z", status: "paid", note: "$1,158.00" },
+        { started: "2026-09-01T06:00:00Z", status: "paid", note: "$1,090.00" }
+      ]
+    },
+    {
+      id: "hubspot", name: "HubSpot", area: "sales-mktg", weight: 450,
+      summary: "Marketing and CRM platform. Second largest cost, owned by marketing.",
+      sources: ["amara-okafor"], destinations: ["hubspot"],
+      trigger: { label: "$450 / mo", type: "cost", detail: "$5,400 / year" },
+      runsOn: "Sales & marketing", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Marketing Hub Pro, 5 seats", "Renews Jan 14 (annual)", "Last opened today"],
+      runs: [
+        { started: "2026-11-14T06:00:00Z", status: "paid", note: "$450.00" },
+        { started: "2026-10-14T06:00:00Z", status: "paid", note: "$450.00" },
+        { started: "2026-09-14T06:00:00Z", status: "paid", note: "$450.00" }
+      ]
+    },
+    {
+      id: "google-workspace", name: "Google Workspace", area: "collab", weight: 180,
+      summary: "Email, docs and calendar for the whole team.",
+      sources: ["maya-chen"], destinations: ["google-workspace"],
+      trigger: { label: "$180 / mo", type: "cost", detail: "$2,160 / year" },
+      runsOn: "Collaboration", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Business Standard, 12 seats", "Renews monthly", "Last opened today"],
+      runs: [
+        { started: "2026-11-02T06:00:00Z", status: "paid", note: "$180.00" },
+        { started: "2026-10-02T06:00:00Z", status: "paid", note: "$180.00" }
+      ]
+    },
+    {
+      id: "slack", name: "Slack", area: "collab", weight: 120,
+      summary: "Team messaging. Paid per active user.",
+      sources: ["priya-nair"], destinations: ["slack"],
+      trigger: { label: "$120 / mo", type: "cost", detail: "$1,440 / year" },
+      runsOn: "Collaboration", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Pro plan, 12 active users", "Renews monthly", "Last opened today"],
+      runs: [
+        { started: "2026-11-03T06:00:00Z", status: "paid", note: "$120.00" },
+        { started: "2026-10-03T06:00:00Z", status: "paid", note: "$120.00" }
+      ]
+    },
+    {
+      id: "adobe", name: "Adobe CC", area: "design", weight: 90,
+      summary: "Creative Cloud for design. Overlaps with Figma for most day-to-day work, so the two seats are worth a look.",
+      sources: ["lena-ross"], destinations: ["adobe"],
+      trigger: { label: "$90 / mo", type: "cost", detail: "$1,080 / year" },
+      runsOn: "Design", mode: "live", health: "needs-attention",
+      channels: ["Brex ••4821"],
+      effects: ["2 seats, 1 active in the last 30 days", "Overlaps with Figma for UI work", "Renews Feb 2 (annual)"],
+      runs: [
+        { started: "2026-11-02T06:00:00Z", status: "paid", note: "$90.00" },
+        { started: "2026-10-02T06:00:00Z", status: "paid", note: "$90.00" }
+      ]
+    },
+    {
+      id: "quickbooks", name: "QuickBooks", area: "finance-ops", weight: 90,
+      summary: "Accounting and bookkeeping.",
+      sources: ["ruth-adler"], destinations: ["quickbooks"],
+      trigger: { label: "$90 / mo", type: "cost", detail: "$1,080 / year" },
+      runsOn: "Finance & ops", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Plus plan", "Renews monthly", "Last opened yesterday"],
+      runs: [
+        { started: "2026-11-05T06:00:00Z", status: "paid", note: "$90.00" },
+        { started: "2026-10-05T06:00:00Z", status: "paid", note: "$90.00" }
+      ]
+    },
+    {
+      id: "dropbox", name: "Dropbox", area: "collab", weight: 75,
+      summary: "File storage set up years ago. Nobody owns it, no one has signed in for 90 days, and it auto-renews in 6 days.",
+      sources: ["unassigned"], destinations: ["dropbox"],
+      trigger: { label: "$75 / mo", type: "cost", detail: "$900 / year" },
+      runsOn: "Collaboration", mode: "plan", health: "failing",
+      channels: ["Brex ••4821"],
+      effects: ["No owner on file", "No sign-in in 90 days", "Auto-renews in 6 days", "Files likely duplicated in Google Drive"],
+      runs: [
+        { started: "2026-11-30T06:00:00Z", status: "upcoming", note: "$75.00" },
+        { started: "2026-10-30T06:00:00Z", status: "paid", note: "$75.00" },
+        { started: "2026-09-30T06:00:00Z", status: "paid", note: "$75.00" }
+      ]
+    },
+    {
+      id: "notion", name: "Notion", area: "collab", weight: 64,
+      summary: "Docs and wiki for the team.",
+      sources: ["priya-nair"], destinations: ["notion"],
+      trigger: { label: "$64 / mo", type: "cost", detail: "$768 / year" },
+      runsOn: "Collaboration", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Plus plan, 8 members", "Renews monthly", "Last opened today"],
+      runs: [
+        { started: "2026-11-04T06:00:00Z", status: "paid", note: "$64.00" },
+        { started: "2026-10-04T06:00:00Z", status: "paid", note: "$64.00" }
+      ]
+    },
+    {
+      id: "vercel", name: "Vercel", area: "engineering", weight: 60,
+      summary: "Front-end hosting and deploys.",
+      sources: ["theo-kim"], destinations: ["vercel"],
+      trigger: { label: "$60 / mo", type: "cost", detail: "$720 / year" },
+      runsOn: "Engineering", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Pro plan, 3 seats", "Renews monthly", "Last deploy 2 days ago"],
+      runs: [
+        { started: "2026-11-06T06:00:00Z", status: "paid", note: "$60.00" },
+        { started: "2026-10-06T06:00:00Z", status: "paid", note: "$60.00" }
+      ]
+    },
+    {
+      id: "github", name: "GitHub", area: "engineering", weight: 84,
+      summary: "Code hosting for the engineering team.",
+      sources: ["theo-kim"], destinations: ["github"],
+      trigger: { label: "$84 / mo", type: "cost", detail: "$1,008 / year" },
+      runsOn: "Engineering", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Team plan, 6 seats", "Renews monthly", "Last push today"],
+      runs: [
+        { started: "2026-11-07T06:00:00Z", status: "paid", note: "$84.00" },
+        { started: "2026-10-07T06:00:00Z", status: "paid", note: "$84.00" }
+      ]
+    },
+    {
+      id: "1password", name: "1Password", area: "finance-ops", weight: 56,
+      summary: "Password manager and shared vaults.",
+      sources: ["maya-chen"], destinations: ["1password"],
+      trigger: { label: "$56 / mo", type: "cost", detail: "$672 / year" },
+      runsOn: "Finance & ops", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Business plan, 14 seats", "Renews monthly", "Last opened today"],
+      runs: [
+        { started: "2026-11-08T06:00:00Z", status: "paid", note: "$56.00" },
+        { started: "2026-10-08T06:00:00Z", status: "paid", note: "$56.00" }
+      ]
+    },
+    {
+      id: "zoom", name: "Zoom", area: "collab", weight: 45,
+      summary: "Video calls. 10 seats paid for, only 2 used in the last month.",
+      sources: ["ruth-adler"], destinations: ["zoom"],
+      trigger: { label: "$45 / mo", type: "cost", detail: "$540 / year" },
+      runsOn: "Collaboration", mode: "plan", health: "needs-attention",
+      channels: ["Brex ••4821"],
+      effects: ["10 seats, 2 active in the last 30 days", "Most calls moved to Google Meet", "Renews monthly"],
+      runs: [
+        { started: "2026-11-09T06:00:00Z", status: "paid", note: "$45.00" },
+        { started: "2026-10-09T06:00:00Z", status: "paid", note: "$45.00" }
+      ]
+    },
+    {
+      id: "figma", name: "Figma", area: "design", weight: 45,
+      summary: "Interface design and prototyping.",
+      sources: ["lena-ross"], destinations: ["figma"],
+      trigger: { label: "$45 / mo", type: "cost", detail: "$540 / year" },
+      runsOn: "Design", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["3 editor seats", "Renews monthly", "Last opened today"],
+      runs: [
+        { started: "2026-11-10T06:00:00Z", status: "paid", note: "$45.00" },
+        { started: "2026-10-10T06:00:00Z", status: "paid", note: "$45.00" }
+      ]
+    },
+    {
+      id: "webflow", name: "Webflow", area: "sales-mktg", weight: 39,
+      summary: "Marketing website builder.",
+      sources: ["amara-okafor"], destinations: ["webflow"],
+      trigger: { label: "$39 / mo", type: "cost", detail: "$468 / year" },
+      runsOn: "Sales & marketing", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["Site plan", "Renews monthly", "Last edit 3 days ago"],
+      runs: [
+        { started: "2026-11-11T06:00:00Z", status: "paid", note: "$39.00" },
+        { started: "2026-10-11T06:00:00Z", status: "paid", note: "$39.00" }
+      ]
+    },
+    {
+      id: "linear", name: "Linear", area: "engineering", weight: 32,
+      summary: "Issue tracking for engineering.",
+      sources: ["theo-kim"], destinations: ["linear"],
+      trigger: { label: "$32 / mo", type: "cost", detail: "$384 / year" },
+      runsOn: "Engineering", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["4 seats", "Renews monthly", "Last opened today"],
+      runs: [
+        { started: "2026-11-12T06:00:00Z", status: "paid", note: "$32.00" },
+        { started: "2026-10-12T06:00:00Z", status: "paid", note: "$32.00" }
+      ]
+    },
+    {
+      id: "calendly", name: "Calendly", area: "sales-mktg", weight: 20,
+      summary: "Scheduling links for sales calls.",
+      sources: ["amara-okafor"], destinations: ["calendly"],
+      trigger: { label: "$20 / mo", type: "cost", detail: "$240 / year" },
+      runsOn: "Sales & marketing", mode: "live", health: "ok",
+      channels: ["Brex ••4821"],
+      effects: ["2 seats", "Renews monthly", "Last booking yesterday"],
+      runs: [
+        { started: "2026-11-13T06:00:00Z", status: "paid", note: "$20.00" },
+        { started: "2026-10-13T06:00:00Z", status: "paid", note: "$20.00" }
+      ]
+    }
+  ]
+}
+  }
+};
+
+  </script>
+  <script>
+/* Ground Truth dashboard shell. One config (window.GT) with three layers.
+   The Overview rolls up all layers; each layer runs the same map/list/drawer engine. */
+(function () {
+  const GT = window.GT;
+  const LAYERS = GT.layers;
+  const META = {
+    workflows: { nav: "Workflows", title: "What runs",          accent: "#7ba4a5",
+      blurb: "Every automation, what sets it off, and what is quietly broken." },
+    access:    { nav: "Access",    title: "Who can get in",      accent: "#d4552b",
+      blurb: "Who can touch what, and who still holds keys they should not." },
+    spend:     { nav: "Spend",     title: "Where the money goes", accent: "#c99647",
+      blurb: "Where the software money goes, and what nobody opens." }
+  };
+  const ORDER = ["workflows", "access", "spend"];
+
+  // ---- per-layer runtime (set by useLayer) ----
+  let DATA, C, PLATFORM, ROUTE, NOUN, ATTN, sysById, areaById;
+  let active = "overview";
+  const state = { view: "map", focusSystem: null, focusArea: null, attnOnly: false };
+
+  const wt = a => (a.weight != null ? a.weight : 1);
+  const fmtVal = n => C && C.money ? "$" + Math.round(n).toLocaleString() : String(n);
+  const ext = arr => (arr || []).filter(x => x !== "foundation");
+  const touches = (a, id) => a.sources.includes(id) || a.destinations.includes(id);
+  const isInternal = a => ext(a.sources).length === 0 && ext(a.destinations).length === 0;
+  const needsAttn = a => a.health === "failing" || a.health === "needs-attention";
+  const sysColor = id => (sysById[id] && sysById[id].color) || "#9a948a";
+  const sysName = id => (sysById[id] && sysById[id].name) || id;
+
+  function useLayer(key) {
+    DATA = LAYERS[key];
+    C = DATA.copy || {};
+    PLATFORM = DATA.platformName || "Foundation";
+    ROUTE = C.routeBase || "/workflows";
+    NOUN = C.itemNoun || "workflows";
+    ATTN = C.attnVerb || "need attention";
+    sysById = Object.fromEntries(DATA.systems.map(s => [s.id, s]));
+    areaById = Object.fromEntries(DATA.areas.map(a => [a.id, a]));
+    state.view = "map"; state.focusSystem = null; state.focusArea = null; state.attnOnly = false;
+  }
+
+  // ---- layer stats for the overview ----
+  function statFor(key) {
+    const d = LAYERS[key];
+    const autos = d.automations;
+    const attn = autos.filter(a => a.health === "failing" || a.health === "needs-attention").length;
+    const failing = autos.filter(a => a.health === "failing").length;
+    const money = d.copy && d.copy.money;
+    const total = money ? autos.reduce((s, a) => s + (a.weight != null ? a.weight : 1), 0) : null;
+    const tools = new Set();
+    autos.forEach(a => (a.destinations || []).forEach(x => { if (x !== "foundation") tools.add(x); }));
+    return { count: autos.length, attn, failing, total, tools: tools.size, money };
+  }
+
+  // ---------- Overview ----------
+  function renderOverview() {
+    const host = document.getElementById("overview");
+    host.innerHTML = "";
+    const wf = statFor("workflows"), ac = statFor("access"), sp = statFor("spend");
+    const totalAttn = wf.attn + ac.attn + sp.attn;
+
+    const head = el("div", "ov-head");
+    head.appendChild(el("h1", "ov-title", "The X-ray"));
+    head.appendChild(el("p", "ov-sub", "Everything your company can't see about itself, in one place."));
+    host.appendChild(head);
+
+    // KPI tiles
+    const kpis = el("div", "kpis");
+    kpis.appendChild(kpi("Automations running", String(wf.count), wf.failing ? wf.failing + " failing" : "all healthy", wf.failing ? "bad" : "", META.workflows.accent));
+    kpis.appendChild(kpi("People with access", String(ac.count), ac.tools + " systems", "", META.access.accent));
+    kpis.appendChild(kpi("Software spend", "$" + sp.total.toLocaleString() + "/mo", sp.count + " subscriptions", "", META.spend.accent));
+    kpis.appendChild(kpi("Needs attention", String(totalAttn), "across all 3 layers", totalAttn ? "bad" : "", "#d4552b"));
+    host.appendChild(kpis);
+
+    // Needs-attention feed
+    const feedWrap = el("div", "ov-panel");
+    const fh = el("div", "ov-panel-head");
+    fh.appendChild(el("h3", null, "Needs attention"));
+    fh.appendChild(el("span", "ov-panel-meta", totalAttn + " across every layer"));
+    feedWrap.appendChild(fh);
+
+    const items = [];
+    ORDER.forEach(key => {
+      LAYERS[key].automations.filter(a => a.health === "failing" || a.health === "needs-attention")
+        .forEach(a => items.push({ key, a }));
+    });
+    items.sort((x, y) => (x.a.health === "failing" ? 0 : 1) - (y.a.health === "failing" ? 0 : 1));
+    items.slice(0, 6).forEach(({ key, a }) => {
+      const row = el("div", "feed-row");
+      row.appendChild(dot(META[key].accent));
+      const main = el("div", "feed-main");
+      const nm = el("div", "feed-name");
+      nm.appendChild(document.createTextNode(a.name));
+      nm.appendChild(el("span", "feed-badge " + a.health, (a.health === "failing" ? "urgent" : "review")));
+      main.appendChild(nm);
+      main.appendChild(el("div", "feed-sum", a.summary));
+      row.appendChild(main);
+      row.appendChild(el("span", "feed-layer", META[key].nav));
+      row.onclick = () => openFrom(key, a.id);
+      feedWrap.appendChild(row);
+    });
+    host.appendChild(feedWrap);
+
+    // Drill cards
+    const cards = el("div", "ov-cards");
+    ORDER.forEach((key, i) => {
+      const s = statFor(key);
+      const card = el("div", "ov-card");
+      card.style.setProperty("--fa", META[key].accent);
+      const top = el("div", "card-top");
+      top.appendChild(el("span", "card-n", "0" + (i + 1)));
+      top.appendChild(el("h4", null, META[key].title));
+      card.appendChild(top);
+      card.appendChild(el("p", "card-blurb", META[key].blurb));
+      const stat = el("div", "card-stat");
+      const lc = LAYERS[key].copy || {};
+      if (s.money) stat.textContent = "$" + s.total.toLocaleString() + "/mo · " + s.count + " subscriptions";
+      else stat.textContent = s.count + " " + (lc.itemNoun || "items");
+      if (s.attn) { const b = el("span", "card-attn"); b.textContent = " · " + s.attn + " " + (lc.attnVerb || "need attention"); stat.appendChild(b); }
+      card.appendChild(stat);
+      card.appendChild(el("div", "card-go", "Open " + META[key].nav + "  →"));
+      card.onclick = () => setActive(key);
+      cards.appendChild(card);
+    });
+    host.appendChild(cards);
+  }
+
+  function kpi(label, value, meta, cls, accent) {
+    const t = el("div", "kpi");
+    t.style.setProperty("--fa", accent);
+    t.appendChild(el("div", "kpi-label", label));
+    t.appendChild(el("div", "kpi-value", value));
+    t.appendChild(el("div", "kpi-meta" + (cls ? " " + cls : ""), meta));
+    return t;
+  }
+  function dot(c) { const d = el("span", "layer-dot"); d.style.background = c; return d; }
+  function openFrom(key, id) { setActive(key); const rec = DATA.automations.find(a => a.id === id); if (rec) openDrawer(rec); }
+
+  // ---------- nav + top-level show ----------
+  function setActive(key) { active = key; closeDrawer(); show(); window.scrollTo(0, 0); }
+  function show() {
+    [...document.querySelectorAll("#mainnav button")].forEach(b => b.classList.toggle("active", b.dataset.layer === active));
+    const onOverview = active === "overview";
+    document.getElementById("overview").classList.toggle("hidden", !onOverview);
+    document.getElementById("layer").classList.toggle("hidden", onOverview);
+    if (onOverview) { renderOverview(); return; }
+    useLayer(active);
+    document.getElementById("layerTitle").textContent = META[active].title;
+    renderLayerBody();
+  }
+
+  // ---------- derived graph (per active layer) ----------
+  function buildGraph() {
+    const linkMap = new Map();
+    DATA.automations.forEach(a => {
+      ext(a.sources).forEach(s => addLink("src:" + s, "area:" + a.area, s, a));
+      ext(a.destinations).forEach(d => addLink("area:" + a.area, "dst:" + d, d, a));
+    });
+    function addLink(from, to, system, a) {
+      const k = from + "|" + to;
+      if (!linkMap.has(k)) linkMap.set(k, { from, to, system, value: 0, autos: [] });
+      const l = linkMap.get(k); l.value += wt(a); l.autos.push(a);
+    }
+    const links = [...linkMap.values()];
+    const sumW = arr => arr.reduce((s, a) => s + wt(a), 0);
+    const srcIds = DATA.systems.map(s => s.id).filter(id => DATA.automations.some(a => ext(a.sources).includes(id)));
+    const dstIds = DATA.systems.map(s => s.id).filter(id => DATA.automations.some(a => ext(a.destinations).includes(id)));
+    const areaIds = DATA.areas.map(a => a.id).filter(id => DATA.automations.some(x => x.area === id));
+    const col0 = srcIds.map(id => ({ key: "src:" + id, kind: "system", id, label: sysName(id), color: sysColor(id), count: sumW(DATA.automations.filter(a => ext(a.sources).includes(id))) }));
+    const col1 = areaIds.map(id => ({ key: "area:" + id, kind: "area", id, label: areaById[id].name, count: sumW(DATA.automations.filter(a => a.area === id)) }));
+    const col2 = dstIds.map(id => ({ key: "dst:" + id, kind: "system", id, label: sysName(id), color: sysColor(id), count: sumW(DATA.automations.filter(a => ext(a.destinations).includes(id))) }));
+    return { col0, col1, col2, links };
+  }
+  function focusedKeys() {
+    if (state.focusSystem && state.focusSystem !== "__internal__") return ["src:" + state.focusSystem, "dst:" + state.focusSystem];
+    if (state.focusArea) return ["area:" + state.focusArea];
+    return null;
+  }
+  function focusCount() {
+    if (state.focusSystem === "__internal__") return DATA.automations.filter(isInternal).length;
+    if (state.focusSystem) return DATA.automations.filter(a => touches(a, state.focusSystem)).length;
+    if (state.focusArea) return DATA.automations.filter(a => a.area === state.focusArea).length;
+    return 0;
+  }
+
+  function renderFilter() {
+    const wrap = document.getElementById("systemFilter");
+    wrap.innerHTML = "";
+    wrap.appendChild(el("span", "lbl", C.filterLabel || "Systems"));
+    const all = chip("All", null, state.focusSystem === null && state.focusArea === null && !state.attnOnly, "text");
+    all.onclick = () => { state.focusSystem = null; state.focusArea = null; state.attnOnly = false; renderLayerBody(); };
+    wrap.appendChild(all);
+    DATA.systems.forEach(s => {
+      const tc = DATA.automations.filter(a => touches(a, s.id)).length;
+      if (!tc) return;
+      const c = chip(s.name, tc, state.focusSystem === s.id);
+      c.querySelector(".sw").style.background = s.color;
+      c.onclick = () => toggleSystem(s.id);
+      wrap.appendChild(c);
+    });
+    const attn = DATA.automations.filter(needsAttn).length;
+    const ca = chip(C.attnChip || "Needs attention", attn, state.attnOnly, "attn");
+    ca.onclick = () => { state.attnOnly = !state.attnOnly; renderLayerBody(); };
+    wrap.appendChild(ca);
+  }
+  function toggleSystem(id) { state.focusArea = null; state.focusSystem = state.focusSystem === id ? null : id; renderLayerBody(); }
+  function chip(text, count, act, extra) {
+    const c = el("span", "chip" + (act ? " active" : "") + (extra ? " " + extra : ""));
+    if (!extra || extra === "attn") { const sw = el("span", "sw"); if (!extra) c.appendChild(sw); }
+    c.appendChild(document.createTextNode(text));
+    if (count != null) c.appendChild(el("span", "ct", String(count)));
+    return c;
+  }
+  function renderHint() {
+    const h = document.getElementById("hint");
+    const route = document.getElementById("mapRoute");
+    if (state.focusSystem === "__internal__") { h.innerHTML = `<b>${focusCount()}</b> ${NOUN} stay inside ${PLATFORM}.`; route.textContent = ROUTE + "/map"; }
+    else if (state.focusSystem) { h.innerHTML = `<b>${focusCount()}</b> ${NOUN} ${C.focusVerb || "connect to"} ${sysName(state.focusSystem)}. Everything else is faded.`; route.textContent = ROUTE + "/map"; }
+    else if (state.focusArea) { h.innerHTML = `<b>${focusCount()}</b> ${NOUN} ${C.areaVerb || "run in"} ${areaById[state.focusArea].name}.`; route.textContent = ROUTE + "/map"; }
+    else { h.innerHTML = C.hintIdle || `Thicker line, more ${NOUN}. Click a node above or a group below.`; route.textContent = ROUTE + "/map"; }
+    document.getElementById("platformCol").textContent = PLATFORM;
+  }
+  function renderMap() {
+    const g = buildGraph();
+    const svg = document.getElementById("sankey");
+    svg.innerHTML = "";
+    const W = Math.max(620, svg.clientWidth || (svg.parentElement.clientWidth - 20) || 1120);
+    const BOX_H = 30, GAP = 14, PAD_TOP = 10;
+    const colH = n => n * BOX_H + (n - 1) * GAP;
+    const H = Math.max(colH(g.col0.length), colH(g.col1.length), colH(g.col2.length)) + PAD_TOP * 2;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.height = H + "px";
+    const SYS_W = 168, AREA_W = 180;
+    const x = { 0: 0, 1: (W - AREA_W) / 2, 2: W - SYS_W };
+    const colW = { 0: SYS_W, 1: AREA_W, 2: SYS_W };
+    const pos = {};
+    [g.col0, g.col1, g.col2].forEach((col, ci) => {
+      const total = colH(col.length);
+      let y = PAD_TOP + (H - PAD_TOP * 2 - total) / 2;
+      col.forEach(n => { pos[n.key] = { x0: x[ci], x1: x[ci] + colW[ci], y0: y, cy: y + BOX_H / 2, w: colW[ci] }; y += BOX_H + GAP; });
+    });
+    const fkeys = focusedKeys();
+    const maxV = Math.max(1, ...g.links.map(l => l.value));
+    const widthFor = v => 1.5 + (v / maxV) * 20;
+    const activeNodeKeys = new Set();
+    g.links.forEach(l => {
+      const a = pos[l.from], b = pos[l.to]; if (!a || !b) return;
+      const act = fkeys ? (fkeys.includes(l.from) || fkeys.includes(l.to)) : false;
+      if (act) { activeNodeKeys.add(l.from); activeNodeKeys.add(l.to); }
+      const faded = fkeys && !act;
+      const path = svgEl("path", { class: "link" + (faded ? " faded" : (act ? " active" : "")), d: hbez(a.x1, a.cy, b.x0, b.cy), "stroke-width": widthFor(l.value) });
+      if (act) path.setAttribute("stroke", l.color);
+      svg.appendChild(path);
+    });
+    [g.col0, g.col1, g.col2].forEach(col => col.forEach(n => {
+      const p = pos[n.key];
+      const focusedNode = fkeys && fkeys.includes(n.key);
+      const connected = !fkeys || focusedNode || activeNodeKeys.has(n.key);
+      const grp = svgEl("g", { class: "node" + (connected ? "" : " faded"), style: "cursor:pointer" });
+      const isArea = n.kind === "area";
+      grp.appendChild(svgEl("rect", { x: p.x0, y: p.y0, width: p.w, height: BOX_H, rx: 5, class: isArea ? ("areabox" + (focusedNode ? " focused" : "")) : "node-box" }));
+      if (!isArea) {
+        grp.appendChild(svgEl("rect", { x: p.x0 + 11, y: p.cy - 5, width: 10, height: 10, rx: 2, fill: n.color }));
+        grp.appendChild(text(p.x0 + 28, p.cy, n.label, "node-label"));
+        grp.appendChild(text(p.x1 - 12, p.cy, fmtVal(n.count), "node-count", "end"));
+      } else {
+        grp.appendChild(text(p.x0 + 14, p.cy, n.label, "area-label" + (focusedNode ? " focused" : "")));
+        grp.appendChild(text(p.x1 - 12, p.cy, fmtVal(n.count), "node-count area-count" + (focusedNode ? " focused" : ""), "end"));
+      }
+      grp.onclick = () => {
+        if (isArea) { state.focusSystem = null; state.focusArea = state.focusArea === n.id ? null : n.id; renderLayerBody(); return; }
+        const rec = DATA.automations.find(a => a.id === n.id);
+        if (rec) { openDrawer(rec); return; }
+        if (hasRegister(n.id)) { openSystemDrawer(n.id); return; }
+        toggleSystem(n.id);
+      };
+      svg.appendChild(grp);
+    }));
+  }
+  function hbez(x0, y0, x1, y1) { const mx = (x0 + x1) / 2; return `M${x0},${y0} C${mx},${y0} ${mx},${y1} ${x1},${y1}`; }
+
+  function renderList() {
+    const host = document.getElementById("listView");
+    host.innerHTML = "";
+    let pool = DATA.automations.slice();
+    if (state.focusSystem) pool = pool.filter(a => touches(a, state.focusSystem));
+    else if (state.focusArea) pool = pool.filter(a => a.area === state.focusArea);
+    if (state.attnOnly) pool = pool.filter(needsAttn);
+    if (!pool.length) { host.appendChild(el("p", "empty", C.emptyList || "Nothing matches this focus.")); return; }
+    DATA.areas.forEach(area => {
+      const rows = pool.filter(a => a.area === area.id); if (!rows.length) return;
+      const attn = rows.filter(needsAttn).length;
+      const group = el("div", "group");
+      const head = el("div", "group-head");
+      head.appendChild(el("h3", null, area.name));
+      const meta = el("span", "meta");
+      const totalTxt = C.money ? ` · ${fmtVal(rows.reduce((s, a) => s + wt(a), 0))}${C.perLabel || ""}` : "";
+      meta.innerHTML = `${rows.length} ${NOUN}${totalTxt}` + (attn ? ` · <span class="attn">${attn} ${ATTN}</span>` : "");
+      head.appendChild(meta);
+      head.appendChild(el("span", "cols", C.listCols || "status"));
+      group.appendChild(head);
+      rows.forEach(a => group.appendChild(listRow(a)));
+      host.appendChild(group);
+    });
+  }
+  function listRow(a) {
+    const row = el("div", "row");
+    const main = el("div", "main");
+    const name = el("div", "name");
+    name.appendChild(document.createTextNode(a.name));
+    if (a.health !== "ok") name.appendChild(badge(a.health));
+    main.appendChild(name);
+    main.appendChild(el("div", "desc", a.summary));
+    main.appendChild(flowLine(a));
+    row.appendChild(main);
+    const right = el("div", "right");
+    right.appendChild(el("span", "mode", a.mode === "live" ? (C.modeLive || "LIVE") : (C.modePlan || "PLAN")));
+    const lr = lastRun(a);
+    right.appendChild(el("div", "last" + (lr.bad ? " bad" : ""), lr.text));
+    row.appendChild(right);
+    row.onclick = () => openDrawer(a);
+    return row;
+  }
+  function flowLine(a) {
+    const f = el("div", "flow");
+    const es = ext(a.sources), ed = ext(a.destinations);
+    es.forEach(s => f.appendChild(sysPill(s)));
+    if (es.length) f.appendChild(el("span", "arrow", "→"));
+    f.appendChild(document.createTextNode(PLATFORM));
+    if (ed.length) { f.appendChild(el("span", "arrow", "→")); ed.forEach(d => f.appendChild(sysPill(d))); }
+    f.appendChild(el("span", "trig", "·  " + a.trigger.label));
+    return f;
+  }
+  function sysPill(id) { const p = el("span", "sys-pill"); const sw = el("span", "sw"); sw.style.background = sysColor(id); p.appendChild(sw); p.appendChild(document.createTextNode(sysName(id))); return p; }
+  function lastRun(a) {
+    if (!a.runs || !a.runs.length) return { text: C.noRunLabel || "Not recorded", bad: false };
+    const r = a.runs[0];
+    const t = new Date(r.started).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+    const bad = ["failed", "overdue", "revoked", "dormant"].includes(r.status);
+    return { text: `${r.label ? r.label + " · " : ""}${t} · ${cap(r.status)}`, bad };
+  }
+
+  function openDrawer(a) {
+    document.getElementById("drawerRoute").textContent = ROUTE + "/" + a.id;
+    const body = document.getElementById("drawerBody"); body.innerHTML = "";
+    body.appendChild(el("p", "summary", a.summary));
+    if (a.health !== "ok") { const hl = el("p", "health-line" + (a.health === "failing" ? " bad" : "")); hl.appendChild(badge(a.health)); hl.appendChild(document.createTextNode(" " + healthText(a))); body.appendChild(hl); }
+    const grid = el("div", "dgrid");
+    const left = el("div", "dcol");
+    left.appendChild(el("h4", null, C.drawerLeft || "How it works"));
+    const dl = el("dl", "spec");
+    spec(dl, C.specTrigger || "Trigger", triggerNode(a.trigger));
+    if (C.money && a.runs && a.runs.length) {
+      const up = a.runs.find(r => r.status === "upcoming");
+      let nd, na;
+      if (up) { nd = new Date(up.started); na = up.note; }
+      else { nd = new Date(a.runs[0].started); nd.setMonth(nd.getMonth() + 1); na = a.runs[0].note; }
+      spec(dl, C.specRenews || "Next charge", textNode(nd.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) + "  ·  " + (na || "")));
+    }
+    spec(dl, C.specRunsOn || "Runs on", textNode(a.runsOn));
+    spec(dl, C.specMode || "Mode", textNode(a.mode === "live" ? (C.modeLiveFull || "Live") : (C.modePlanFull || "Plan only")));
+    if (a.outsideProduction) spec(dl, C.specOutside || "Outside prod", textNode(a.outsideProduction));
+    spec(dl, C.specHealth || "Health", textNode(healthText(a), a.health === "failing"));
+    if (a.effects && a.effects.length) { const ul = el("ul"); a.effects.forEach(e => ul.appendChild(el("li", null, e))); spec(dl, C.specEffects || "Effects", ul); }
+    if (a.channels && a.channels.length) spec(dl, C.specChannels || "Channels", textNode(a.channels.join(", ")));
+    spec(dl, C.specFlow || "Data flow", dataFlowNode(a));
+    left.appendChild(dl);
+    const right = el("div", "dcol");
+    right.appendChild(el("h4", null, C.drawerRight || "Runs"));
+    right.appendChild(runsTable(a));
+    grid.appendChild(left); grid.appendChild(right);
+    body.appendChild(grid);
+    openDrawerEl();
+  }
+  function hasRegister(id) { const s = sysById[id]; return !!(C.sysRegister && s && C.sysRegister.some(f => s[f.key])); }
+  function openSystemDrawer(id) {
+    const s = sysById[id]; if (!s) return;
+    document.getElementById("drawerRoute").textContent = ROUTE + "/system/" + id;
+    const body = document.getElementById("drawerBody"); body.innerHTML = "";
+    body.appendChild(el("p", "summary", s.name));
+    const order = { admin: 0, dormant: 1, editor: 2, viewer: 3, member: 4, revoked: 5 };
+    const lvl = p => { const r = (p.runs || []).find(x => x.label === s.name); const k = r ? r.status : "member"; return order[k] != null ? order[k] : 9; };
+    const holders = DATA.automations.filter(a => (a.destinations || []).includes(id)).sort((a, b) => lvl(a) - lvl(b));
+    const sub = el("p", "health-line"); sub.textContent = holders.length + " " + (holders.length === 1 ? (C.sysAccessOne || "person has access") : (C.sysAccessMany || "people have access")); body.appendChild(sub);
+    const grid = el("div", "dgrid");
+    const left = el("div", "dcol"); left.appendChild(el("h4", null, C.sysDrawerLeft || "Admin register"));
+    const dl = el("dl", "spec"); (C.sysRegister || []).forEach(f => spec(dl, f.label, textNode(s[f.key] || "-"))); left.appendChild(dl);
+    const right = el("div", "dcol"); right.appendChild(el("h4", null, C.sysDrawerRight || "Who has access")); right.appendChild(accessTable(holders, s));
+    grid.appendChild(left); grid.appendChild(right); body.appendChild(grid);
+    openDrawerEl();
+  }
+  function accessTable(holders, s) {
+    if (!holders.length) return el("p", "empty", "No one has access.");
+    const tbl = el("table", "runs"); const thead = el("tr");
+    (C.sysAccessCols || ["Person", "Access", "Last used"]).forEach(h => thead.appendChild(el("th", null, h))); tbl.appendChild(thead);
+    holders.forEach(p => {
+      const r = (p.runs || []).find(x => x.label === s.name); const level = r ? r.status : (C.sysMember || "member");
+      const tr = el("tr");
+      tr.appendChild(el("td", null, p.name));
+      const td = el("td"); td.appendChild(el("span", "st " + level, cap(level))); tr.appendChild(td);
+      tr.appendChild(el("td", null, r ? new Date(r.started).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "-"));
+      tbl.appendChild(tr);
+    });
+    return tbl;
+  }
+  function openDrawerEl() { document.getElementById("drawer").classList.add("open"); document.getElementById("drawer").setAttribute("aria-hidden", "false"); document.getElementById("scrim").classList.add("open"); }
+  function closeDrawer() { const d = document.getElementById("drawer"); if (!d) return; d.classList.remove("open"); d.setAttribute("aria-hidden", "true"); const s = document.getElementById("scrim"); if (s) s.classList.remove("open"); }
+  function triggerNode(t) { const d = el("span"); d.appendChild(document.createTextNode(t.label)); if (t.detail) { d.appendChild(document.createElement("br")); const s = el("span"); s.style.cssText = "color:var(--faint);font-family:var(--label);font-size:11px"; s.textContent = t.detail; d.appendChild(s); } return d; }
+  function dataFlowNode(a) { const d = el("span", "flow"); d.style.marginTop = "0"; const es = ext(a.sources), ed = ext(a.destinations); es.forEach(s => d.appendChild(sysPill(s))); if (es.length) d.appendChild(el("span", "arrow", "→")); d.appendChild(document.createTextNode(PLATFORM)); if (ed.length) { d.appendChild(el("span", "arrow", "→")); ed.forEach(x => d.appendChild(sysPill(x))); } return d; }
+  function runsTable(a) {
+    if (!a.runs || !a.runs.length) return el("p", "empty", C.noRuns || "No runs recorded yet.");
+    const tbl = el("table", "runs"); const thead = el("tr");
+    (C.runsCols || ["Started", "Status", "Took"]).forEach(h => thead.appendChild(el("th", null, h))); tbl.appendChild(thead);
+    a.runs.forEach(r => {
+      const tr = el("tr");
+      const dateStr = new Date(r.started).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+      tr.appendChild(el("td", null, r.label || dateStr));
+      const td = el("td"); td.appendChild(el("span", "st " + r.status, cap(r.status))); tr.appendChild(td);
+      tr.appendChild(el("td", null, r.label ? dateStr : (r.tookMs ? fmtMs(r.tookMs) : (r.note || "-"))));
+      tbl.appendChild(tr);
+    });
+    return tbl;
+  }
+  function healthText(a) { const m = C.health || { ok: "Healthy", failing: "Failing", "needs-attention": "Needs attention", "not-recorded": "No runs yet" }; return m[a.health] || a.health; }
+  function badge(h) { const label = (C.badge && C.badge[h]) || h.replace("-", " "); return el("span", "badge " + h, label); }
+  function spec(dl, k, v) { dl.appendChild(el("dt", null, k)); const dd = el("dd"); dd.appendChild(v); dl.appendChild(dd); }
+  function textNode(t, bad) { const s = el("span", bad ? "bad" : null); s.textContent = t; return s; }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function fmtMs(ms) { return ms >= 1000 ? (ms / 1000).toFixed(1) + " s" : ms + " ms"; }
+  function el(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function svgEl(tag, attrs) { const e = document.createElementNS("http://www.w3.org/2000/svg", tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function text(x, y, str, cls, anchor) { const t = svgEl("text", { x, y, class: cls, "text-anchor": anchor || "start" }); t.textContent = str; return t; }
+
+  function renderLayerBody() {
+    const cf = document.getElementById("colFrom"); if (cf) cf.textContent = C.colFrom || "Data comes from";
+    const ct = document.getElementById("colTo"); if (ct) ct.textContent = C.colTo || "Data goes to";
+    document.getElementById("summary").innerHTML =
+      `<span>${DATA.automations.length} ${NOUN}</span>` +
+      (C.money ? ` · <span>${fmtVal(DATA.automations.reduce((s, a) => s + wt(a), 0))}${C.perLabel || ""}</span>` : "") +
+      ` · <span class="attn">${DATA.automations.filter(needsAttn).length} ${ATTN}</span>`;
+    renderFilter(); renderHint();
+    const mapOn = state.view === "map";
+    document.getElementById("mapView").classList.toggle("hidden", !mapOn);
+    document.getElementById("listView").classList.toggle("hidden", mapOn);
+    if (mapOn) renderMap(); else renderList();
+    [...document.querySelectorAll("#viewToggle button")].forEach(b => b.classList.toggle("active", b.dataset.view === state.view));
+  }
+
+  // ---- events ----
+  document.getElementById("mainnav").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setActive(b.dataset.layer); });
+  document.getElementById("viewToggle").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; state.view = b.dataset.view; renderLayerBody(); });
+  document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+  document.getElementById("scrim").addEventListener("click", closeDrawer);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+  window.addEventListener("resize", () => { if (active !== "overview" && state.view === "map") renderMap(); });
+
+  document.getElementById("clientName").textContent = GT.client + "  ·  as of " + GT.generatedAt;
+  show();
+})();
+
+  </script>
+</body>
+</html>
