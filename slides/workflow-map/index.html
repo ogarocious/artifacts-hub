@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Workflow map - Ogarocious</title>
+<meta name="description" content="A read-only map of every automation a company runs: where data comes from, which team it serves, where it goes, plus status and run history. Sample data." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Diaspora Modern - Ogarocious brand palette */
+  --bg: #0f0b08;          /* deep espresso base */
+  --panel: #1a1410;       /* surface */
+  --raise: #221c16;       /* raised surface / hover */
+  --ink: #f5eee0;         /* warm ivory, primary text */
+  --muted: #b5ae9f;       /* dimmed text */
+  --faint: #8f8878;       /* faintest text */
+  --line: #312d23;
+  --line-strong: #4b4638;
+  --link: #6b6557;
+  --accent: #d4552b;      /* terracotta signature */
+  --amber: #c99647;       /* ochre, dance pillar (needs-attention) */
+  --display: "Space Grotesk", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app { max-width: 1200px; margin: 0 auto; padding: 28px 32px 80px; }
+
+/* ---- Header ---- */
+.topbar { display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--line-strong); padding-bottom: 14px; }
+.topbar h1 { font-family: var(--display); font-weight: 600; font-size: 34px; letter-spacing: -0.02em; margin: 0; }
+.topbar .sub { font-family: var(--sans); font-weight: 500; font-size: 13px; letter-spacing: 0.01em; color: var(--muted); }
+.topbar .sub .attn { color: var(--accent); }
+.spacer { flex: 1; }
+
+.toggle { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 6px; overflow: hidden; }
+.toggle button {
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  padding: 7px 14px; border: 0; background: transparent; color: var(--muted); cursor: pointer;
+}
+.toggle button.active { background: var(--ink); color: var(--bg); }
+
+.client-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; color: var(--faint); margin-top: 6px; }
+
+/* ---- Filter bar ---- */
+.filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0 10px; }
+.filterbar .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin-right: 4px; }
+.chip {
+  font-family: var(--sans); font-size: 12.5px; display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 10px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--panel);
+  cursor: pointer; color: var(--ink); user-select: none; transition: background .12s, border-color .12s, opacity .12s;
+}
+.chip .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.chip .ct { color: var(--faint); font-variant-numeric: tabular-nums; }
+.chip.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip.active .ct { color: #55524b; }
+.chip.dim { opacity: .4; }
+.chip.text { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; padding: 5px 9px; }
+.chip.attn { border-color: var(--accent); color: var(--accent); }
+.chip.attn.active { background: var(--accent); color: var(--bg); }
+
+.hint { font-size: 12.5px; color: var(--muted); margin: 4px 0 16px; }
+.hint b { color: var(--ink); }
+
+/* ---- System map (Sankey) ---- */
+.mapwrap { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px 16px; position: relative; overflow-x: auto; }
+.mapwrap .route { font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: .05em; padding: 8px 10px 4px; }
+.colhead { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); padding: 2px 14px 10px; }
+svg.sankey { width: 100%; min-width: 620px; display: block; }
+.node rect { cursor: pointer; }
+.node-box { fill: var(--panel); stroke: var(--line-strong); stroke-width: 1; }
+.node-label { font-family: var(--sans); font-size: 13px; fill: var(--ink); dominant-baseline: middle; }
+.node-count { font-family: var(--mono); font-size: 12px; fill: var(--faint); dominant-baseline: middle; }
+.area-label { font-family: var(--sans); font-size: 13.5px; font-weight: 600; fill: var(--ink); dominant-baseline: middle; }
+.link { fill: none; stroke: var(--link); stroke-opacity: .4; transition: stroke-opacity .15s; }
+.link.active { stroke-opacity: .62; }
+.link.faded { stroke-opacity: .05; }
+.node.faded { opacity: .28; }
+.areabox { fill: var(--panel); stroke: var(--line-strong); cursor: pointer; }
+.areabox.focused { fill: var(--ink); }
+.area-label.focused { fill: var(--bg); }
+.area-count.focused { fill: #55524b; }
+
+/* ---- List view ---- */
+.group { margin-top: 26px; }
+.group-head { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--line-strong); padding-bottom: 7px; }
+.group-head h3 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0; }
+.group-head .meta { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; color: var(--muted); }
+.group-head .meta .attn { color: var(--accent); }
+.group-head .cols { margin-left: auto; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+
+.row { display: flex; gap: 14px; padding: 13px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.row:hover { background: var(--raise); }
+.row .main { flex: 1; min-width: 0; }
+.row .name { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 9px; }
+.row .desc { color: var(--muted); font-size: 13.5px; margin-top: 3px; line-height: 1.45; }
+.row .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.sys-pill { display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--raise); white-space: nowrap; }
+.sys-pill .sw { width: 9px; height: 9px; border-radius: 2px; }
+.flow .arrow { color: var(--faint); }
+.flow .trig { color: var(--faint); }
+.row .right { text-align: right; font-family: var(--mono); font-size: 11px; white-space: nowrap; }
+.row .right .mode { display: inline-block; border: 1px solid var(--line-strong); border-radius: 4px; padding: 1px 6px; letter-spacing: .08em; color: var(--muted); }
+.row .right .last { margin-top: 8px; color: var(--muted); }
+.row .right .last.bad { color: var(--accent); }
+
+/* status badges */
+.badge { font-family: var(--mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; border: 1px solid; }
+.badge.failing { color: var(--accent); border-color: var(--accent); background: rgba(212,85,43,.16); }
+.badge.needs-attention { color: var(--amber); border-color: var(--amber); background: rgba(201,150,71,.15); }
+.badge.not-recorded { color: var(--faint); border-color: var(--line-strong); background: rgba(255,255,255,.03); }
+
+/* ---- Detail drawer ---- */
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity .18s; z-index: 20; }
+.scrim.open { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; top: 0; right: 0; height: 100%; width: min(680px, 94vw);
+  background: var(--panel); border-left: 1px solid var(--line-strong); z-index: 21;
+  transform: translateX(100%); transition: transform .22s ease; overflow-y: auto; box-shadow: -18px 0 50px rgba(0,0,0,.45);
+}
+.drawer.open { transform: translateX(0); }
+.drawer .route { font-family: var(--mono); font-size: 11px; color: var(--faint); background: var(--raise); padding: 9px 22px; border-bottom: 1px solid var(--line); letter-spacing: .04em; }
+.drawer .dbody { padding: 22px 26px 60px; }
+.drawer .close { position: absolute; top: 34px; right: 22px; border: 0; background: transparent; font-size: 22px; color: var(--muted); cursor: pointer; line-height: 1; }
+.drawer .summary { font-family: var(--display); font-weight: 500; font-size: 21px; line-height: 1.35; margin: 6px 44px 14px 0; }
+.drawer .health-line { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.drawer .health-line.bad { color: var(--accent); }
+.dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.dcol h4 { font-family: var(--display); font-weight: 600; font-size: 16px; margin: 0 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 7px; }
+.spec { display: grid; grid-template-columns: 96px 1fr; gap: 5px 10px; font-size: 13px; }
+.spec dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); padding-top: 2px; }
+.spec dd { margin: 0; color: var(--ink); }
+.spec dd.bad { color: var(--accent); }
+.spec ul { margin: 0; padding-left: 16px; }
+.spec ul li { margin-bottom: 4px; }
+.runs { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.runs th { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); font-weight: 400; }
+.runs td { padding: 10px 8px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.runs .st { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--line-strong); border-radius: 4px; }
+.runs .st.failed { color: var(--accent); border-color: var(--accent); background: rgba(212,85,43,.16); }
+.runs .st.overdue { color: var(--amber); border-color: var(--amber); background: rgba(201,150,71,.15); }
+.runs .st.quiet { color: var(--faint); }
+.empty { color: var(--faint); font-size: 13px; font-style: italic; }
+
+.footnote { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin-top: 40px; border-top: 1px solid var(--line); padding-top: 14px; }
+
+.hidden { display: none !important; }
+
+/* ---- Mobile ---- */
+@media (max-width: 720px) {
+  .app { padding: 18px 16px 60px; }
+  .topbar { flex-wrap: wrap; gap: 8px 14px; }
+  .topbar h1 { font-size: 27px; }
+  .topbar .sub { order: 3; width: 100%; }
+  .toggle { margin-left: auto; }
+  .dgrid { grid-template-columns: 1fr; gap: 22px; }
+  .drawer .summary { margin-right: 36px; font-size: 19px; }
+  .group-head { flex-wrap: wrap; }
+  .group-head .cols { display: none; }
+  .row .right { font-size: 10.5px; }
+}
+</style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>Workflows</h1>
+      <span class="sub" id="summary"></span>
+      <span class="spacer"></span>
+      <div class="toggle" id="viewToggle">
+        <button data-view="map" class="active">System map</button>
+        <button data-view="list">List</button>
+      </div>
+    </header>
+    <div class="client-tag" id="clientTag"></div>
+    <div class="filterbar" id="systemFilter"></div>
+    <p class="hint" id="hint"></p>
+    <section id="mapView">
+      <div class="mapwrap">
+        <div class="route" id="mapRoute">/workflows/map</div>
+        <div class="colhead"><span>Data comes from</span><span id="platformCol"></span><span>Data goes to</span></div>
+        <svg class="sankey" id="sankey"></svg>
+      </div>
+    </section>
+    <section id="listView" class="hidden"></section>
+    <div class="footnote">Sample data. Workflow status, run history and connections are examples.</div>
+  </div>
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="route" id="drawerRoute"></div>
+    <button class="close" id="drawerClose" aria-label="Close">&times;</button>
+    <div class="dbody" id="drawerBody"></div>
+  </aside>
+  <script>
+// Per-client dataset. This is the ONLY file that changes per client.
+// Swap this file, keep index.html / app.js / styles.css identical.
+// Loaded as a <script> so it works by double-clicking index.html (no server, no CORS).
+
+window.WORKFLOWS = {
+  client: "Northwind Studio (sample)",
+  generatedAt: "2026-11-23",
+  platformName: "Foundation",
+
+  // Catalog of outside systems. color drives the swatch everywhere.
+  systems: [
+    { id: "gmail",           name: "Gmail",            color: "#2563eb" },
+    { id: "google-groups",   name: "Google Groups",    color: "#93c5fd" },
+    { id: "google-calendar", name: "Google Calendar",  color: "#0d9488" },
+    { id: "claude",          name: "Claude",           color: "#d97706" },
+    { id: "openai",          name: "OpenAI",           color: "#854d0e" },
+    { id: "granola",         name: "Granola",          color: "#10b981" },
+    { id: "foundation-calls",name: "Foundation Calls", color: "#166534" },
+    { id: "sendgrid",        name: "SendGrid",         color: "#ec4899" },
+    { id: "slack",           name: "Slack",            color: "#6d28d9" },
+    { id: "cloudflare",      name: "Cloudflare",       color: "#f97316" },
+    { id: "1password",       name: "1Password",        color: "#a5b4fc" },
+    { id: "brex",            name: "Brex",             color: "#15803d" },
+    { id: "overflow",        name: "Overflow",         color: "#9d174d" },
+    { id: "website",         name: "Website",          color: "#78350f" },
+    { id: "github",          name: "GitHub",           color: "#111827" }
+  ],
+
+  // Departments / areas of the business (the middle column of the map).
+  areas: [
+    { id: "sales-pipeline",    name: "Sales & pipeline" },
+    { id: "deal-to-delivery",  name: "Deal to delivery" },
+    { id: "agreements",        name: "Agreements" },
+    { id: "engagement",        name: "Engagement access" },
+    { id: "todos-eos",         name: "To-dos & EOS" },
+    { id: "recruiting",        name: "Recruiting" },
+    { id: "finance-marketing", name: "Finance & marketing" },
+    { id: "engineering",       name: "Engineering" }
+  ],
+
+  // The automations are the source of truth. Every view is derived from these.
+  // sources / destinations use a system id, or "foundation" to mean "stays inside".
+  automations: [
+    {
+      id: "pipeline-alerts",
+      name: "Pipeline alert emails",
+      area: "sales-pipeline",
+      summary: "When a deal is created, moves stage, is won or is lost, the sales owners get an email about two minutes later.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/pipeline-alerts" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "failing",
+      channels: ["Email"],
+      effects: [
+        "Emails one alert per deal change",
+        "Waits two minutes so an undone drag sends nothing",
+        "Includes changes the recipients made themselves"
+      ],
+      outsideProduction: "Plan only. Outside Production it counts changes and sends nothing.",
+      runs: [
+        { started: "2026-10-30T10:07:00Z", status: "failed",    tookMs: 1400 },
+        { started: "2026-10-30T10:03:00Z", status: "succeeded", tookMs: 1100 },
+        { started: "2026-10-30T09:20:00Z", status: "succeeded", tookMs: 980 },
+        { started: "2026-10-30T08:15:00Z", status: "succeeded", tookMs: 1200 }
+      ]
+    },
+    {
+      id: "discovery-digest",
+      name: "Discovery digest and call sync alerts",
+      area: "sales-pipeline",
+      summary: "On Monday at 8 AM Eastern the sales owners get last week's discovery digest, and at other hours they get an email only when call sync develops a new problem.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Every hour at :05", type: "schedule", cron: "5 * * * *", detail: "Vercel cron on /api/cron/discovery-digest" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Sends one weekly digest", "Alerts only on a new call-sync problem"],
+      runs: [
+        { started: "2026-10-30T10:05:00Z", status: "succeeded", tookMs: 820 },
+        { started: "2026-10-30T09:05:00Z", status: "quiet",     tookMs: 210 },
+        { started: "2026-10-30T08:05:00Z", status: "succeeded", tookMs: 760 }
+      ]
+    },
+    {
+      id: "deal-check-alerts",
+      name: "Deal check alerts",
+      area: "sales-pipeline",
+      summary: "When today's deal check hasn't finished by 9 AM Central, a request fails or gets stuck, or the Mac runner goes quiet, the sales owners get one email about it.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Daily 9:00 AM CT", type: "schedule", cron: "0 15 * * *", detail: "Vercel cron on /api/cron/deal-check-alerts" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "needs-attention",
+      channels: ["Email"],
+      effects: ["One summary email per day", "Fires only when a check is overdue or stuck"],
+      runs: [
+        { started: "2026-10-30T15:00:00Z", status: "succeeded", tookMs: 640 },
+        { started: "2026-10-29T15:00:00Z", status: "overdue",   tookMs: 0 }
+      ]
+    },
+    {
+      id: "website-leads",
+      name: "Website lead capture",
+      area: "sales-pipeline",
+      summary: "When someone submits the website contact form, Foundation creates a lead, enriches it and assigns an owner by territory.",
+      sources: ["website"],
+      destinations: ["foundation"],
+      trigger: { label: "On form submit", type: "webhook", detail: "Webhook from marketing site" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Creates and enriches a lead", "Routes by territory"],
+      runs: [
+        { started: "2026-10-30T14:12:00Z", status: "succeeded", tookMs: 1300 },
+        { started: "2026-10-30T11:48:00Z", status: "succeeded", tookMs: 1250 }
+      ]
+    },
+    {
+      id: "gmail-inbound-triage",
+      name: "Inbound email triage",
+      area: "sales-pipeline",
+      summary: "Every minute, Foundation reads new sales inbox mail, classifies it and links it to the matching deal.",
+      sources: ["gmail"],
+      destinations: ["foundation"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/inbound-triage" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Classifies inbound mail", "Links it to a deal or creates one"],
+      runs: [
+        { started: "2026-10-30T10:06:00Z", status: "succeeded", tookMs: 540 },
+        { started: "2026-10-30T10:05:00Z", status: "quiet",     tookMs: 180 }
+      ]
+    },
+    {
+      id: "call-enrichment",
+      name: "Call enrichment",
+      area: "engagement",
+      summary: "Every hour, Foundation checks synced calls against the calendars and links them to contacts, companies and deals.",
+      sources: ["google-calendar"],
+      destinations: ["foundation"],
+      trigger: { label: "Every hour", type: "schedule", cron: "0 * * * *", detail: "Vercel cron on /api/cron/call-enrichment" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Matches calls to calendar events", "Links to contacts and deals"],
+      runs: [
+        { started: "2026-10-30T10:00:00Z", status: "succeeded", tookMs: 2100 },
+        { started: "2026-10-30T09:00:00Z", status: "succeeded", tookMs: 1950 }
+      ]
+    },
+    {
+      id: "granola-call-sync",
+      name: "Granola call sync",
+      area: "engagement",
+      summary: "Every minute, Foundation imports new and changed Granola meeting notes as CRM calls.",
+      sources: ["granola"],
+      destinations: ["foundation"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/granola-sync" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Imports Granola notes as calls", "Updates changed notes"],
+      runs: [
+        { started: "2026-10-30T10:07:00Z", status: "succeeded", tookMs: 410 },
+        { started: "2026-10-30T10:06:00Z", status: "succeeded", tookMs: 430 }
+      ]
+    },
+    {
+      id: "call-intelligence",
+      name: "Call intelligence",
+      area: "engagement",
+      summary: "Every minute, Foundation reads newly synced call transcripts with a model and writes a summary and next steps on each call.",
+      sources: ["openai"],
+      destinations: ["openai"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/call-intelligence" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Summarizes each call", "Writes next steps back to the deal"],
+      runs: [
+        { started: "2026-10-30T10:07:00Z", status: "succeeded", tookMs: 3200 },
+        { started: "2026-10-30T10:06:00Z", status: "quiet",     tookMs: 190 }
+      ]
+    },
+    {
+      id: "foundation-calls-upload",
+      name: "Foundation Calls upload",
+      area: "engagement",
+      summary: "When someone records a call in the Foundation Calls app, its transcript and notes upload to Foundation as a shared call.",
+      sources: ["foundation-calls"],
+      destinations: ["foundation"],
+      trigger: { label: "On recording finished", type: "event", detail: "Foundation Calls app uploads through MCP" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "not-recorded",
+      channels: [],
+      effects: ["Uploads transcript and notes", "Creates a shared call record"],
+      runs: []
+    },
+    {
+      id: "agreement-signature",
+      name: "Agreement signature request",
+      area: "agreements",
+      summary: "When someone sends an agreement for signature, Foundation emails the client a signing link.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "On agreement sent", type: "event", detail: "Triggered when a user sends an agreement" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Emails a signing link to the client"],
+      runs: [
+        { started: "2026-10-30T09:41:00Z", status: "succeeded", tookMs: 720 }
+      ]
+    },
+    {
+      id: "agreement-signed",
+      name: "Client signed an agreement",
+      area: "agreements",
+      summary: "When the client signs, Foundation marks the plan accepted, snapshots it, syncs the deal dates and tells the team.",
+      sources: ["foundation"],
+      destinations: ["slack", "sendgrid"],
+      trigger: { label: "On signature", type: "event", detail: "Triggered on client signature" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Slack", "Email"],
+      effects: ["Marks the plan accepted", "Snapshots the agreement", "Notifies the team in Slack"],
+      runs: [
+        { started: "2026-10-30T09:12:00Z", status: "succeeded", tookMs: 1500 }
+      ]
+    },
+    {
+      id: "agreement-completed",
+      name: "Agreement completed",
+      area: "agreements",
+      summary: "When the company countersigns, Foundation emails everyone the fully signed agreement.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "On countersign", type: "event", detail: "Triggered on company countersignature" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Emails the signed agreement to all parties"],
+      runs: [
+        { started: "2026-10-30T09:14:00Z", status: "succeeded", tookMs: 660 }
+      ]
+    },
+    {
+      id: "agreement-email-retries",
+      name: "Agreement email retries",
+      area: "agreements",
+      summary: "Every minute, Foundation retries any agreement email that has not gone out yet and expires lapsed signing links.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/agreement-retries" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Retries unsent agreement email", "Expires lapsed signing links"],
+      runs: [
+        { started: "2026-10-30T10:07:00Z", status: "quiet", tookMs: 150 }
+      ]
+    },
+    {
+      id: "todo-assignment-notice",
+      name: "To-do assignment notice",
+      area: "todos-eos",
+      summary: "When someone assigns or reassigns a to-do to another person, that person gets an in-app notice, an email and a push notification.",
+      sources: ["foundation"],
+      destinations: ["sendgrid", "slack"],
+      trigger: { label: "On assignment", type: "event", detail: "Triggered when a to-do is assigned" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email", "Slack", "Push"],
+      effects: ["Sends an in-app notice", "Emails the assignee", "Pushes a notification"],
+      runs: [
+        { started: "2026-10-30T08:52:00Z", status: "succeeded", tookMs: 540 }
+      ]
+    },
+    {
+      id: "deal-to-github-archive",
+      name: "Won deal archive",
+      area: "deal-to-delivery",
+      summary: "When a deal is won, Foundation writes a delivery brief and saves it to the GitHub project so engineering can pick it up.",
+      sources: ["foundation"],
+      destinations: ["github"],
+      trigger: { label: "On deal won", type: "event", detail: "Triggered when a deal moves to Won" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Writes a delivery brief", "Commits it to the GitHub project"],
+      runs: [
+        { started: "2026-10-30T07:30:00Z", status: "succeeded", tookMs: 2400 }
+      ]
+    },
+    {
+      id: "new-hire-access",
+      name: "New hire access requests",
+      area: "recruiting",
+      summary: "Once an offer is signed, Foundation creates access requests by role and adds the person to the right Google Groups and 1Password vaults.",
+      sources: ["foundation"],
+      destinations: ["1password", "google-groups"],
+      trigger: { label: "On offer signed", type: "event", detail: "Triggered when an offer is signed" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Creates role-based access requests", "Adds to Google Groups and 1Password"],
+      runs: [
+        { started: "2026-10-29T16:20:00Z", status: "succeeded", tookMs: 1800 }
+      ]
+    },
+    {
+      id: "candidate-followup",
+      name: "Candidate follow-up",
+      area: "recruiting",
+      summary: "Each weekday, Foundation emails candidates who are waiting on a next step so none of them go quiet.",
+      sources: ["foundation"],
+      destinations: ["sendgrid"],
+      trigger: { label: "Weekdays 7:00 AM", type: "schedule", cron: "0 13 * * 1-5", detail: "Vercel cron on /api/cron/candidate-followup" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Emails waiting candidates", "Flags stalled candidates for a human"],
+      runs: [
+        { started: "2026-10-30T13:00:00Z", status: "succeeded", tookMs: 900 }
+      ]
+    },
+    {
+      id: "expense-sync",
+      name: "Expense sync",
+      area: "finance-marketing",
+      summary: "Every night, Foundation pulls new Brex transactions, categorizes them and flags anything over policy for review.",
+      sources: ["brex"],
+      destinations: ["foundation"],
+      trigger: { label: "Daily 2:00 AM", type: "schedule", cron: "0 8 * * *", detail: "Vercel cron on /api/cron/expense-sync" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: [],
+      effects: ["Imports and categorizes Brex transactions", "Flags over-policy spend"],
+      runs: [
+        { started: "2026-10-30T08:00:00Z", status: "succeeded", tookMs: 3100 }
+      ]
+    },
+    {
+      id: "weekly-metrics",
+      name: "Weekly metrics report",
+      area: "finance-marketing",
+      summary: "Every Monday, Foundation builds the weekly metrics report with a model and emails it to the leadership group.",
+      sources: ["foundation"],
+      destinations: ["claude", "gmail"],
+      trigger: { label: "Mondays 6:00 AM", type: "schedule", cron: "0 12 * * 1", detail: "Vercel cron on /api/cron/weekly-metrics" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Email"],
+      effects: ["Writes the weekly report with a model", "Emails it to leadership"],
+      runs: [
+        { started: "2026-10-30T12:00:00Z", status: "succeeded", tookMs: 5200 }
+      ]
+    },
+    {
+      id: "incident-watch",
+      name: "Edge incident watch",
+      area: "engineering",
+      summary: "Every five minutes, Foundation checks Cloudflare for edge errors and posts a Slack alert when error rates spike.",
+      sources: ["cloudflare"],
+      destinations: ["slack"],
+      trigger: { label: "Every 5 minutes", type: "schedule", cron: "*/5 * * * *", detail: "Vercel cron on /api/cron/incident-watch" },
+      runsOn: "Foundation",
+      mode: "live",
+      health: "ok",
+      channels: ["Slack"],
+      effects: ["Watches Cloudflare error rates", "Posts a Slack alert on a spike"],
+      runs: [
+        { started: "2026-10-30T10:05:00Z", status: "quiet",     tookMs: 230 },
+        { started: "2026-10-30T10:00:00Z", status: "succeeded", tookMs: 410 }
+      ]
+    }
+  ]
+};
+  </script>
+  <script>
+/* Workflow map demo. Everything renders from window.WORKFLOWS (data.js). */
+(function () {
+  const DATA = window.WORKFLOWS;
+  const PLATFORM = DATA.platformName || "Foundation";
+  const sysById = Object.fromEntries(DATA.systems.map(s => [s.id, s]));
+  const areaById = Object.fromEntries(DATA.areas.map(a => [a.id, a]));
+  const sysColor = id => (sysById[id] && sysById[id].color) || "#9a948a";
+  const sysName = id => (sysById[id] && sysById[id].name) || id;
+
+  const ext = arr => (arr || []).filter(x => x !== "foundation");
+  const touches = (a, id) => a.sources.includes(id) || a.destinations.includes(id);
+  const isInternal = a => ext(a.sources).length === 0 && ext(a.destinations).length === 0;
+  const needsAttn = a => a.health === "failing" || a.health === "needs-attention";
+
+  const state = { view: "map", focusSystem: null, focusArea: null, attnOnly: false };
+
+  // ---------- derived: sankey nodes + links ----------
+  function buildGraph() {
+    const linkMap = new Map(); // "from|to" -> {from,to,system,value,autos}
+    DATA.automations.forEach(a => {
+      ext(a.sources).forEach(s => addLink("src:" + s, "area:" + a.area, s, a));
+      ext(a.destinations).forEach(d => addLink("area:" + a.area, "dst:" + d, d, a));
+    });
+    function addLink(from, to, system, a) {
+      const k = from + "|" + to;
+      if (!linkMap.has(k)) linkMap.set(k, { from, to, system, value: 0, autos: [] });
+      const l = linkMap.get(k); l.value++; l.autos.push(a);
+    }
+    const links = [...linkMap.values()];
+
+    const srcIds = DATA.systems.map(s => s.id).filter(id => DATA.automations.some(a => ext(a.sources).includes(id)));
+    const dstIds = DATA.systems.map(s => s.id).filter(id => DATA.automations.some(a => ext(a.destinations).includes(id)));
+    const areaIds = DATA.areas.map(a => a.id).filter(id => DATA.automations.some(x => x.area === id));
+
+    const col0 = srcIds.map(id => ({ key: "src:" + id, kind: "system", id, label: sysName(id), color: sysColor(id),
+      count: DATA.automations.filter(a => ext(a.sources).includes(id)).length }));
+    const col1 = areaIds.map(id => ({ key: "area:" + id, kind: "area", id, label: areaById[id].name,
+      count: DATA.automations.filter(a => a.area === id).length }));
+    const col2 = dstIds.map(id => ({ key: "dst:" + id, kind: "system", id, label: sysName(id), color: sysColor(id),
+      count: DATA.automations.filter(a => ext(a.destinations).includes(id)).length }));
+    return { col0, col1, col2, links };
+  }
+
+  // ---------- focus helpers ----------
+  function focusedKeys() {
+    if (state.focusSystem && state.focusSystem !== "__internal__") return ["src:" + state.focusSystem, "dst:" + state.focusSystem];
+    if (state.focusArea) return ["area:" + state.focusArea];
+    return null;
+  }
+  function focusCount() {
+    if (state.focusSystem === "__internal__") return DATA.automations.filter(isInternal).length;
+    if (state.focusSystem) return DATA.automations.filter(a => touches(a, state.focusSystem)).length;
+    if (state.focusArea) return DATA.automations.filter(a => a.area === state.focusArea).length;
+    return 0;
+  }
+
+  // ---------- system filter chips ----------
+  function renderFilter() {
+    const wrap = document.getElementById("systemFilter");
+    wrap.innerHTML = "";
+    const lbl = el("span", "lbl", "Systems");
+    wrap.appendChild(lbl);
+
+    const all = chip("All", null, state.focusSystem === null && state.focusArea === null && !state.attnOnly, "text");
+    all.onclick = () => { state.focusSystem = null; state.focusArea = null; state.attnOnly = false; render(); };
+    wrap.appendChild(all);
+
+    DATA.systems.forEach(s => {
+      const tc = DATA.automations.filter(a => touches(a, s.id)).length;
+      if (!tc) return;
+      const c = chip(s.name, tc, state.focusSystem === s.id);
+      c.querySelector(".sw").style.background = s.color;
+      c.onclick = () => { toggleSystem(s.id); };
+      wrap.appendChild(c);
+    });
+
+    const intCount = DATA.automations.filter(isInternal).length;
+    if (intCount) {
+      const ci = chip("Inside " + PLATFORM, intCount, state.focusSystem === "__internal__", "text");
+      ci.onclick = () => { toggleSystem("__internal__"); };
+      wrap.appendChild(ci);
+    }
+
+    const attn = DATA.automations.filter(needsAttn).length;
+    const ca = chip("Needs attention", attn, state.attnOnly, "attn");
+    ca.onclick = () => { state.attnOnly = !state.attnOnly; render(); };
+    wrap.appendChild(ca);
+  }
+  function toggleSystem(id) {
+    state.focusArea = null;
+    state.focusSystem = state.focusSystem === id ? null : id;
+    render();
+  }
+  function chip(text, count, active, extra) {
+    const c = el("span", "chip" + (active ? " active" : "") + (extra ? " " + extra : ""));
+    if (!extra || extra === "attn") { const sw = el("span", "sw"); if (!extra) c.appendChild(sw); }
+    c.appendChild(document.createTextNode(text));
+    if (count != null) c.appendChild(el("span", "ct", String(count)));
+    return c;
+  }
+
+  // ---------- hint ----------
+  function renderHint() {
+    const h = document.getElementById("hint");
+    const route = document.getElementById("mapRoute");
+    if (state.focusSystem === "__internal__") {
+      h.innerHTML = `<b>${focusCount()}</b> workflows stay inside ${PLATFORM} and have no lines.`;
+      route.textContent = "/workflows/map?focus=internal";
+    } else if (state.focusSystem) {
+      h.innerHTML = `<b>${focusCount()}</b> workflows connect to ${sysName(state.focusSystem)}. Everything else is faded.`;
+      route.textContent = "/workflows/map?focus=system:" + state.focusSystem;
+    } else if (state.focusArea) {
+      h.innerHTML = `<b>${focusCount()}</b> workflows run in ${areaById[state.focusArea].name}. Thicker line, more workflows.`;
+      route.textContent = "/workflows/map?focus=area:" + state.focusArea;
+    } else {
+      h.innerHTML = `Thicker line, more workflows. Click a <b>system</b> above or a <b>department</b> below to see what it touches.`;
+      route.textContent = "/workflows/map";
+    }
+    document.getElementById("platformCol").textContent = PLATFORM;
+  }
+
+  // ---------- Sankey (custom uniform-box layout) ----------
+  function renderMap() {
+    const g = buildGraph();
+    const svg = document.getElementById("sankey");
+    svg.innerHTML = "";
+    const W = Math.max(620, svg.clientWidth || (svg.parentElement.clientWidth - 20) || 1120);
+    const BOX_H = 30, GAP = 14, PAD_TOP = 10;
+    const colH = n => n * BOX_H + (n - 1) * GAP;
+    const H = Math.max(colH(g.col0.length), colH(g.col1.length), colH(g.col2.length)) + PAD_TOP * 2;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    svg.style.height = H + "px";
+
+    const SYS_W = 168, AREA_W = 180;
+    const x = { 0: 0, 1: (W - AREA_W) / 2, 2: W - SYS_W };
+    const colW = { 0: SYS_W, 1: AREA_W, 2: SYS_W };
+
+    const pos = {}; // key -> {x0,x1,cy}
+    [g.col0, g.col1, g.col2].forEach((col, ci) => {
+      const total = colH(col.length);
+      let y = PAD_TOP + (H - PAD_TOP * 2 - total) / 2;
+      col.forEach(n => {
+        pos[n.key] = { x0: x[ci], x1: x[ci] + colW[ci], y0: y, cy: y + BOX_H / 2, w: colW[ci], node: n };
+        y += BOX_H + GAP;
+      });
+    });
+
+    const fkeys = focusedKeys();
+    const maxV = Math.max(1, ...g.links.map(l => l.value));
+    const widthFor = v => 1.5 + (v / maxV) * 20;
+
+    // links first (under boxes)
+    const activeNodeKeys = new Set();
+    g.links.forEach(l => {
+      const a = pos[l.from], b = pos[l.to];
+      if (!a || !b) return;
+      const active = fkeys ? (fkeys.includes(l.from) || fkeys.includes(l.to)) : false;
+      if (active) { activeNodeKeys.add(l.from); activeNodeKeys.add(l.to); }
+      const faded = fkeys && !active;
+      const path = svgEl("path", {
+        class: "link" + (faded ? " faded" : (active ? " active" : "")),
+        d: hbez(a.x1, a.cy, b.x0, b.cy),
+        "stroke-width": widthFor(l.value)
+      });
+      if (active) path.setAttribute("stroke", l.color);
+      svg.appendChild(path);
+    });
+
+    // boxes
+    [g.col0, g.col1, g.col2].forEach(col => {
+      col.forEach(n => {
+        const p = pos[n.key];
+        const focusedNode = fkeys && fkeys.includes(n.key);
+        const connected = !fkeys || focusedNode || activeNodeKeys.has(n.key);
+        const grp = svgEl("g", { class: "node" + (connected ? "" : " faded"), style: "cursor:pointer" });
+
+        const isArea = n.kind === "area";
+        const rect = svgEl("rect", {
+          x: p.x0, y: p.y0, width: p.w, height: BOX_H, rx: 5,
+          class: isArea ? ("areabox" + (focusedNode ? " focused" : "")) : "node-box"
+        });
+        grp.appendChild(rect);
+
+        if (!isArea) {
+          grp.appendChild(svgEl("rect", { x: p.x0 + 11, y: p.cy - 5, width: 10, height: 10, rx: 2, fill: n.color }));
+          grp.appendChild(text(p.x0 + 28, p.cy, n.label, "node-label"));
+          grp.appendChild(text(p.x1 - 12, p.cy, String(n.count), "node-count", "end"));
+        } else {
+          grp.appendChild(text(p.x0 + 14, p.cy, n.label, "area-label" + (focusedNode ? " focused" : "")));
+          grp.appendChild(text(p.x1 - 12, p.cy, String(n.count), "node-count area-count" + (focusedNode ? " focused" : ""), "end"));
+        }
+
+        grp.onclick = () => {
+          if (isArea) { state.focusSystem = null; state.focusArea = state.focusArea === n.id ? null : n.id; }
+          else { toggleSystem(n.id); return; }
+          render();
+        };
+        svg.appendChild(grp);
+      });
+    });
+  }
+
+  function hbez(x0, y0, x1, y1) {
+    const mx = (x0 + x1) / 2;
+    return `M${x0},${y0} C${mx},${y0} ${mx},${y1} ${x1},${y1}`;
+  }
+
+  // ---------- List ----------
+  function renderList() {
+    const host = document.getElementById("listView");
+    host.innerHTML = "";
+    let pool = DATA.automations.slice();
+    if (state.focusSystem === "__internal__") pool = pool.filter(isInternal);
+    else if (state.focusSystem) pool = pool.filter(a => touches(a, state.focusSystem));
+    else if (state.focusArea) pool = pool.filter(a => a.area === state.focusArea);
+    if (state.attnOnly) pool = pool.filter(needsAttn);
+
+    if (!pool.length) { host.appendChild(el("p", "empty", "No workflows match this focus.")); return; }
+
+    DATA.areas.forEach(area => {
+      const rows = pool.filter(a => a.area === area.id);
+      if (!rows.length) return;
+      const attn = rows.filter(needsAttn).length;
+      const group = el("div", "group");
+      const head = el("div", "group-head");
+      head.appendChild(el("h3", null, area.name));
+      const meta = el("span", "meta");
+      meta.innerHTML = `${rows.length} workflows` + (attn ? ` · <span class="attn">${attn} need attention</span>` : "");
+      head.appendChild(meta);
+      head.appendChild(el("span", "cols", "mode · last run"));
+      group.appendChild(head);
+      rows.forEach(a => group.appendChild(listRow(a)));
+      host.appendChild(group);
+    });
+  }
+
+  function listRow(a) {
+    const row = el("div", "row");
+    const main = el("div", "main");
+    const name = el("div", "name");
+    name.appendChild(document.createTextNode(a.name));
+    if (a.health !== "ok") name.appendChild(badge(a.health));
+    main.appendChild(name);
+    main.appendChild(el("div", "desc", a.summary));
+    main.appendChild(flowLine(a));
+    row.appendChild(main);
+
+    const right = el("div", "right");
+    right.appendChild(el("span", "mode", a.mode === "live" ? "LIVE" : "PLAN"));
+    const lr = lastRun(a);
+    const last = el("div", "last" + (lr.bad ? " bad" : ""), lr.text);
+    right.appendChild(last);
+    row.appendChild(right);
+
+    row.onclick = () => openDrawer(a);
+    return row;
+  }
+
+  function flowLine(a) {
+    const f = el("div", "flow");
+    const es = ext(a.sources), ed = ext(a.destinations);
+    es.forEach(s => f.appendChild(sysPill(s)));
+    if (es.length) f.appendChild(el("span", "arrow", "→"));
+    f.appendChild(document.createTextNode(PLATFORM));
+    if (ed.length) { f.appendChild(el("span", "arrow", "→")); ed.forEach(d => f.appendChild(sysPill(d))); }
+    f.appendChild(el("span", "trig", "·  " + a.trigger.label));
+    return f;
+  }
+
+  function sysPill(id) {
+    const p = el("span", "sys-pill");
+    const sw = el("span", "sw"); sw.style.background = sysColor(id);
+    p.appendChild(sw); p.appendChild(document.createTextNode(sysName(id)));
+    return p;
+  }
+
+  function lastRun(a) {
+    if (!a.runs || !a.runs.length) return { text: "Not recorded", bad: false };
+    const r = a.runs[0];
+    const d = new Date(r.started);
+    const t = d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+    const bad = r.status === "failed" || r.status === "overdue";
+    return { text: `${t} · ${cap(r.status)}`, bad };
+  }
+
+  // ---------- Drawer ----------
+  function openDrawer(a) {
+    document.getElementById("drawerRoute").textContent = "/workflows/" + a.id;
+    const body = document.getElementById("drawerBody");
+    body.innerHTML = "";
+    body.appendChild(el("p", "summary", a.summary));
+    if (a.health !== "ok") {
+      const hl = el("p", "health-line" + (a.health === "failing" ? " bad" : ""));
+      hl.appendChild(badge(a.health));
+      hl.appendChild(document.createTextNode(" " + healthText(a)));
+      body.appendChild(hl);
+    }
+
+    const grid = el("div", "dgrid");
+    // left: how it works
+    const left = el("div", "dcol");
+    left.appendChild(el("h4", null, "How it works"));
+    const dl = el("dl", "spec");
+    spec(dl, "Trigger", triggerNode(a.trigger));
+    spec(dl, "Runs on", textNode(a.runsOn));
+    spec(dl, "Mode", textNode(a.mode === "live" ? "Live" : "Plan only"));
+    if (a.outsideProduction) spec(dl, "Outside prod", textNode(a.outsideProduction));
+    spec(dl, "Health", textNode(healthText(a), a.health === "failing"));
+    if (a.effects && a.effects.length) { const ul = el("ul"); a.effects.forEach(e => ul.appendChild(el("li", null, e))); spec(dl, "Effects", ul); }
+    if (a.channels && a.channels.length) spec(dl, "Channels", textNode(a.channels.join(", ")));
+    spec(dl, "Data flow", dataFlowNode(a));
+    left.appendChild(dl);
+
+    // right: runs
+    const right = el("div", "dcol");
+    right.appendChild(el("h4", null, "Runs"));
+    right.appendChild(runsTable(a));
+
+    grid.appendChild(left); grid.appendChild(right);
+    body.appendChild(grid);
+
+    document.getElementById("drawer").classList.add("open");
+    document.getElementById("drawer").setAttribute("aria-hidden", "false");
+    document.getElementById("scrim").classList.add("open");
+  }
+  function closeDrawer() {
+    document.getElementById("drawer").classList.remove("open");
+    document.getElementById("drawer").setAttribute("aria-hidden", "true");
+    document.getElementById("scrim").classList.remove("open");
+  }
+  function triggerNode(t) {
+    const d = el("span"); d.appendChild(document.createTextNode(t.label));
+    if (t.detail) { d.appendChild(document.createElement("br")); const s = el("span"); s.style.color = "var(--faint)"; s.style.fontFamily = "var(--mono)"; s.style.fontSize = "11px"; s.textContent = t.detail; d.appendChild(s); }
+    return d;
+  }
+  function dataFlowNode(a) {
+    const d = el("span", "flow"); d.style.marginTop = "0";
+    const es = ext(a.sources), ed = ext(a.destinations);
+    es.forEach(s => d.appendChild(sysPill(s)));
+    if (es.length) d.appendChild(el("span", "arrow", "→"));
+    d.appendChild(document.createTextNode(PLATFORM));
+    if (ed.length) { d.appendChild(el("span", "arrow", "→")); ed.forEach(x => d.appendChild(sysPill(x))); }
+    return d;
+  }
+  function runsTable(a) {
+    if (!a.runs || !a.runs.length) return el("p", "empty", "No runs recorded yet.");
+    const tbl = el("table", "runs");
+    const thead = el("tr");
+    ["Started", "Status", "Took"].forEach(h => thead.appendChild(el("th", null, h)));
+    tbl.appendChild(thead);
+    a.runs.forEach(r => {
+      const tr = el("tr");
+      const d = new Date(r.started);
+      tr.appendChild(el("td", null, d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })));
+      const td = el("td"); td.appendChild(el("span", "st " + r.status, cap(r.status))); tr.appendChild(td);
+      tr.appendChild(el("td", null, r.tookMs ? fmtMs(r.tookMs) : "-"));
+      tbl.appendChild(tr);
+    });
+    return tbl;
+  }
+
+  // ---------- helpers ----------
+  function healthText(a) {
+    return { ok: "Healthy", failing: "Failing · the last run failed", "needs-attention": "Needs attention", "not-recorded": "No runs recorded yet" }[a.health] || a.health;
+  }
+  function badge(h) { return el("span", "badge " + h, h.replace("-", " ")); }
+  function spec(dl, k, valueNode) { dl.appendChild(el("dt", null, k)); const dd = el("dd"); dd.appendChild(valueNode); dl.appendChild(dd); }
+  function textNode(t, bad) { const s = el("span", bad ? "bad" : null); s.textContent = t; return s; }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function fmtMs(ms) { return ms >= 1000 ? (ms / 1000).toFixed(1) + " s" : ms + " ms"; }
+  function el(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function svgEl(tag, attrs) { const e = document.createElementNS("http://www.w3.org/2000/svg", tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function text(x, y, str, cls, anchor) { const t = svgEl("text", { x, y, class: cls, "text-anchor": anchor || "start" }); t.textContent = str; return t; }
+
+  // ---------- top-level render ----------
+  function render() {
+    document.getElementById("summary").innerHTML =
+      `<span>${DATA.automations.length} automations</span> · <span class="attn">${DATA.automations.filter(needsAttn).length} need attention</span>`;
+    document.getElementById("clientTag").textContent = DATA.client + "  ·  generated " + DATA.generatedAt;
+    renderFilter();
+    renderHint();
+    const mapOn = state.view === "map";
+    document.getElementById("mapView").classList.toggle("hidden", !mapOn);
+    document.getElementById("listView").classList.toggle("hidden", mapOn);
+    if (mapOn) renderMap(); else renderList();
+    [...document.querySelectorAll("#viewToggle button")].forEach(b => b.classList.toggle("active", b.dataset.view === state.view));
+  }
+
+  // events
+  document.getElementById("viewToggle").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return; state.view = b.dataset.view; render();
+  });
+  document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+  document.getElementById("scrim").addEventListener("click", closeDrawer);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+  window.addEventListener("resize", () => { if (state.view === "map") renderMap(); });
+
+  render();
+})();
+  </script>
+</body>
+</html>
