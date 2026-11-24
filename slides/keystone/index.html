@@ -49,8 +49,9 @@ html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: v
 .ov-sub { font-family: var(--sans); font-size: 17px; color: var(--muted); margin: 8px 0 0; }
 
 .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
-.kpi { background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--fa); border-radius: 12px; padding: 18px 20px 20px; }
-.kpi-label { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px 20px; }
+.kpi-label { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); display: flex; align-items: center; gap: 8px; }
+.kpi-label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--fa); flex: none; }
 .kpi-value { font-family: var(--display); font-weight: 700; font-size: 38px; letter-spacing: -.02em; margin: 8px 0 4px; font-variant-numeric: tabular-nums; }
 .kpi-meta { font-family: var(--sans); font-size: 13px; color: var(--muted); }
 .kpi-meta.bad { color: var(--accent); }
@@ -72,8 +73,8 @@ html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: v
 .feed-layer { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
 
 .ov-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.ov-card { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--fa); border-radius: 12px; padding: 20px 20px 18px; cursor: pointer; transition: background .12s, transform .12s; }
-.ov-card:hover { background: var(--raise); transform: translateY(-2px); }
+.ov-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px 20px 18px; cursor: pointer; transition: background .12s, transform .12s, border-color .12s; }
+.ov-card:hover { background: var(--raise); transform: translateY(-2px); border-color: var(--fa); }
 .card-top { display: flex; align-items: baseline; gap: 10px; }
 .card-n { font-family: var(--mono); font-size: 12px; color: var(--fa); font-weight: 600; }
 .card-top h4 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0; }
@@ -248,7 +249,7 @@ svg.sankey { width: 100%; min-width: 620px; display: block; }
   </aside>
 
   <script>
-// Combined per-client config for the Ground Truth dashboard.
+// Combined per-client config for the Keystone dashboard.
 // One file per client holds all three layers. Swap this, keep the shell identical.
 
 window.GT = {
@@ -276,7 +277,8 @@ window.GT = {
     { id: "brex",            name: "Brex",             color: "#15803d" },
     { id: "overflow",        name: "Overflow",         color: "#9d174d" },
     { id: "website",         name: "Website",          color: "#78350f" },
-    { id: "github",          name: "GitHub",           color: "#111827" }
+    { id: "github",          name: "GitHub",           color: "#111827" },
+    { id: "internal",        name: "Internal",         color: "#6b6557" }
   ],
 
   // Departments / areas of the business (the middle column of the map).
@@ -299,7 +301,7 @@ window.GT = {
       name: "Pipeline alert emails",
       area: "sales-pipeline",
       summary: "When a deal is created, moves stage, is won or is lost, the sales owners get an email about two minutes later.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["sendgrid"],
       trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/pipeline-alerts" },
       runsOn: "Foundation",
@@ -324,7 +326,7 @@ window.GT = {
       name: "Discovery digest and call sync alerts",
       area: "sales-pipeline",
       summary: "On Monday at 8 AM Eastern the sales owners get last week's discovery digest, and at other hours they get an email only when call sync develops a new problem.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["sendgrid"],
       trigger: { label: "Every hour at :05", type: "schedule", cron: "5 * * * *", detail: "Vercel cron on /api/cron/discovery-digest" },
       runsOn: "Foundation",
@@ -343,7 +345,7 @@ window.GT = {
       name: "Deal check alerts",
       area: "sales-pipeline",
       summary: "When today's deal check hasn't finished by 9 AM Central, a request fails or gets stuck, or the Mac runner goes quiet, the sales owners get one email about it.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["sendgrid"],
       trigger: { label: "Daily 9:00 AM CT", type: "schedule", cron: "0 15 * * *", detail: "Vercel cron on /api/cron/deal-check-alerts" },
       runsOn: "Foundation",
@@ -466,7 +468,7 @@ window.GT = {
       name: "Agreement signature request",
       area: "agreements",
       summary: "When someone sends an agreement for signature, Foundation emails the client a signing link.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["sendgrid"],
       trigger: { label: "On agreement sent", type: "event", detail: "Triggered when a user sends an agreement" },
       runsOn: "Foundation",
@@ -483,7 +485,7 @@ window.GT = {
       name: "Client signed an agreement",
       area: "agreements",
       summary: "When the client signs, Foundation marks the plan accepted, snapshots it, syncs the deal dates and tells the team.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["slack", "sendgrid"],
       trigger: { label: "On signature", type: "event", detail: "Triggered on client signature" },
       runsOn: "Foundation",
@@ -500,7 +502,7 @@ window.GT = {
       name: "Agreement completed",
       area: "agreements",
       summary: "When the company countersigns, Foundation emails everyone the fully signed agreement.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["sendgrid"],
       trigger: { label: "On countersign", type: "event", detail: "Triggered on company countersignature" },
       runsOn: "Foundation",
@@ -517,7 +519,7 @@ window.GT = {
       name: "Agreement email retries",
       area: "agreements",
       summary: "Every minute, Foundation retries any agreement email that has not gone out yet and expires lapsed signing links.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["sendgrid"],
       trigger: { label: "Every minute", type: "schedule", cron: "* * * * *", detail: "Vercel cron on /api/cron/agreement-retries" },
       runsOn: "Foundation",
@@ -534,7 +536,7 @@ window.GT = {
       name: "To-do assignment notice",
       area: "todos-eos",
       summary: "When someone assigns or reassigns a to-do to another person, that person gets an in-app notice, an email and a push notification.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["sendgrid", "slack"],
       trigger: { label: "On assignment", type: "event", detail: "Triggered when a to-do is assigned" },
       runsOn: "Foundation",
@@ -551,7 +553,7 @@ window.GT = {
       name: "Won deal archive",
       area: "deal-to-delivery",
       summary: "When a deal is won, Foundation writes a delivery brief and saves it to the GitHub project so engineering can pick it up.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["github"],
       trigger: { label: "On deal won", type: "event", detail: "Triggered when a deal moves to Won" },
       runsOn: "Foundation",
@@ -568,7 +570,7 @@ window.GT = {
       name: "New hire access requests",
       area: "recruiting",
       summary: "Once an offer is signed, Foundation creates access requests by role and adds the person to the right Google Groups and 1Password vaults.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["1password", "google-groups"],
       trigger: { label: "On offer signed", type: "event", detail: "Triggered when an offer is signed" },
       runsOn: "Foundation",
@@ -585,7 +587,7 @@ window.GT = {
       name: "Candidate follow-up",
       area: "recruiting",
       summary: "Each weekday, Foundation emails candidates who are waiting on a next step so none of them go quiet.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["sendgrid"],
       trigger: { label: "Weekdays 7:00 AM", type: "schedule", cron: "0 13 * * 1-5", detail: "Vercel cron on /api/cron/candidate-followup" },
       runsOn: "Foundation",
@@ -619,7 +621,7 @@ window.GT = {
       name: "Weekly metrics report",
       area: "finance-marketing",
       summary: "Every Monday, Foundation builds the weekly metrics report with a model and emails it to the leadership group.",
-      sources: ["foundation"],
+      sources: ["internal"],
       destinations: ["claude", "gmail"],
       trigger: { label: "Mondays 6:00 AM", type: "schedule", cron: "0 12 * * 1", detail: "Vercel cron on /api/cron/weekly-metrics" },
       runsOn: "Foundation",
@@ -1462,8 +1464,8 @@ window.GT = {
     const h = document.getElementById("hint");
     const route = document.getElementById("mapRoute");
     if (state.focusSystem === "__internal__") { h.innerHTML = `<b>${focusCount()}</b> ${NOUN} stay inside ${PLATFORM}.`; route.textContent = ROUTE + "/map"; }
-    else if (state.focusSystem) { h.innerHTML = `<b>${focusCount()}</b> ${NOUN} ${C.focusVerb || "connect to"} ${sysName(state.focusSystem)}. Everything else is faded.`; route.textContent = ROUTE + "/map"; }
-    else if (state.focusArea) { h.innerHTML = `<b>${focusCount()}</b> ${NOUN} ${C.areaVerb || "run in"} ${areaById[state.focusArea].name}.`; route.textContent = ROUTE + "/map"; }
+    else if (state.focusSystem) { h.innerHTML = `<b>${focusCount()}</b> ${NOUN} ${C.focusVerb || "connect to"} ${sysName(state.focusSystem)}. <b>Click it again</b> to open.`; route.textContent = ROUTE + "/map"; }
+    else if (state.focusArea) { h.innerHTML = `<b>${focusCount()}</b> ${NOUN} ${C.areaVerb || "run in"} ${areaById[state.focusArea].name}. <b>Click it again</b> to open.`; route.textContent = ROUTE + "/map"; }
     else { h.innerHTML = C.hintIdle || `Thicker line, more ${NOUN}. Click a node above or a group below.`; route.textContent = ROUTE + "/map"; }
     document.getElementById("platformCol").textContent = PLATFORM;
   }
@@ -1514,11 +1516,15 @@ window.GT = {
         grp.appendChild(text(p.x1 - 12, p.cy, fmtVal(n.count), "node-count area-count" + (focusedNode ? " focused" : ""), "end"));
       }
       grp.onclick = () => {
-        if (isArea) { state.focusSystem = null; state.focusArea = state.focusArea === n.id ? null : n.id; renderLayerBody(); return; }
-        const rec = DATA.automations.find(a => a.id === n.id);
+        if (isArea) {
+          if (state.focusArea === n.id) { openListDrawer({ areaId: n.id }); return; } // 2nd click
+          state.focusSystem = null; state.focusArea = n.id; renderLayerBody(); return; // 1st click: focus
+        }
+        if (state.focusSystem !== n.id) { toggleSystem(n.id); return; }               // 1st click: focus
+        const rec = DATA.automations.find(a => a.id === n.id);                          // 2nd click: open
         if (rec) { openDrawer(rec); return; }
         if (hasRegister(n.id)) { openSystemDrawer(n.id); return; }
-        toggleSystem(n.id);
+        openListDrawer({ systemId: n.id });
       };
       svg.appendChild(grp);
     }));
@@ -1648,6 +1654,30 @@ window.GT = {
       tbl.appendChild(tr);
     });
     return tbl;
+  }
+  function openListDrawer(opts) {
+    const body = document.getElementById("drawerBody"); body.innerHTML = "";
+    let title, pool;
+    if (opts.systemId) { title = sysName(opts.systemId); pool = DATA.automations.filter(a => touches(a, opts.systemId)); document.getElementById("drawerRoute").textContent = ROUTE + "/system/" + opts.systemId; }
+    else { title = areaById[opts.areaId].name; pool = DATA.automations.filter(a => a.area === opts.areaId); document.getElementById("drawerRoute").textContent = ROUTE + "/area/" + opts.areaId; }
+    body.appendChild(el("p", "summary", title));
+    const attn = pool.filter(needsAttn).length;
+    const hl = el("p", "health-line" + (attn ? " bad" : ""));
+    hl.textContent = pool.length + " " + NOUN + (attn ? "  ·  " + attn + " " + ATTN : "");
+    body.appendChild(hl);
+    const wrap = el("div"); wrap.style.marginTop = "6px";
+    pool.forEach(a => {
+      const row = el("div", "row");
+      const main = el("div", "main");
+      const nm = el("div", "name"); nm.appendChild(document.createTextNode(a.name)); if (a.health !== "ok") nm.appendChild(badge(a.health));
+      main.appendChild(nm); main.appendChild(el("div", "desc", a.summary)); main.appendChild(flowLine(a));
+      row.appendChild(main);
+      row.onclick = () => openDrawer(a);
+      wrap.appendChild(row);
+    });
+    if (!pool.length) wrap.appendChild(el("p", "empty", "Nothing here yet."));
+    body.appendChild(wrap);
+    openDrawerEl();
   }
   function openDrawerEl() { document.getElementById("drawer").classList.add("open"); document.getElementById("drawer").setAttribute("aria-hidden", "false"); document.getElementById("scrim").classList.add("open"); }
   function closeDrawer() { const d = document.getElementById("drawer"); if (!d) return; d.classList.remove("open"); d.setAttribute("aria-hidden", "true"); const s = document.getElementById("scrim"); if (s) s.classList.remove("open"); }
